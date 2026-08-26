@@ -68,6 +68,7 @@ function currentEvents() {
 
 function persistEvents(events) {
     localStorage.setItem(EVENTS_KEY, JSON.stringify({ events }));
+    fileEvents = events.slice();
 }
 
 let fileEvents = null;
