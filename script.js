@@ -194,11 +194,15 @@ if (eventsData.length > 0) {
 
 const realSlides = Array.from(track.children);
 const slideCount = realSlides.length;
-if (slideCount === 0) return;
+
+if (slideCount === 0) {
+    const eventsSection = document.getElementById('events');
+    if (eventsSection) eventsSection.style.display = 'none';
+}
 
 /* Build dots dynamically based on actual event count */
 const dots = [];
-if (dotsContainer) {
+if (dotsContainer && slideCount > 0) {
     dotsContainer.innerHTML = '';
     for (let i = 0; i < slideCount; i++) {
         const dot = document.createElement('button');
