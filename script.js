@@ -271,28 +271,29 @@ dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index
 carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
 carousel.addEventListener('mouseleave', startAutoplay);
 
-let touchStart = 0;
-let touchStartY = 0;
+let pointerStart = 0;
+let pointerStartY = 0;
 let isSwiping = false;
 
-carousel.addEventListener('touchstart', (event) => {
-    touchStart = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
+carousel.addEventListener('pointerdown', (event) => {
+    pointerStart = event.clientX;
+    pointerStartY = event.clientY;
     isSwiping = false;
+    carousel.setPointerCapture(event.pointerId);
 }, { passive: true });
 
-carousel.addEventListener('touchmove', (event) => {
-    const diffX = Math.abs(event.touches[0].clientX - touchStart);
-    const diffY = Math.abs(event.touches[0].clientY - touchStartY);
+carousel.addEventListener('pointermove', (event) => {
+    const diffX = Math.abs(event.clientX - pointerStart);
+    const diffY = Math.abs(event.clientY - pointerStartY);
     if (diffX > diffY && diffX > 10) {
         isSwiping = true;
         event.preventDefault();
     }
 }, { passive: false });
 
-carousel.addEventListener('touchend', (event) => {
+carousel.addEventListener('pointerup', (event) => {
     if (!isSwiping) return;
-    const difference = event.changedTouches[0].clientX - touchStart;
+    const difference = event.clientX - pointerStart;
     if (Math.abs(difference) > 20) step(difference < 0 ? 1 : -1);
 });
 

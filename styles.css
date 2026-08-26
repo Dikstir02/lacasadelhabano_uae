@@ -905,8 +905,8 @@ select:focus-visible {
 }
 
 @keyframes brand-loop {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: translate3d(0, 0, 0); -webkit-transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); -webkit-transform: translate3d(-50%, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
