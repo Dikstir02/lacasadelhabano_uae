@@ -900,23 +900,21 @@ select:focus-visible {
     display: flex;
     flex-shrink: 0;
     padding-right: 40px;
+    align-items: center;
 }
 
-.brand-name {
-    flex: 0 0 auto;
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--ink);
-    border-bottom: 1px dashed rgba(75, 44, 30, .35);
-    padding: 16px 40px 16px 0;
-    margin-right: 40px;
-    white-space: nowrap;
-    transition: padding .2s ease, color .2s ease;
+.brand-logo {
+    height: 32px;
+    width: auto;
+    margin-right: 48px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: opacity .2s ease, transform .2s ease;
 }
 
-.brand-name:hover {
-    padding-left: .55rem;
-    color: var(--red);
+.brand-logo:hover {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 @keyframes brand-loop {
@@ -939,10 +937,9 @@ select:focus-visible {
     .brands-track {
         animation-duration: 10s;
     }
-    .brand-name {
-        font-size: 18px;
-        padding: 12px 20px 12px 0;
-        margin-right: 20px;
+    .brand-logo {
+        height: 24px;
+        margin-right: 32px;
     }
 }
 
