@@ -188,27 +188,13 @@ if (eventsData.length > 0) {
         '</article>'
     )).join('');
 } else {
-    /* No events at all – hide the whole section */
     const eventsSection = document.getElementById('events');
     if (eventsSection) eventsSection.style.display = 'none';
 }
 
 const realSlides = Array.from(track.children);
 const slideCount = realSlides.length;
-
-/* Clone the first and last slides so prev/next wraps around seamlessly */
-const headClone = realSlides[0].cloneNode(true);
-const tailClone = realSlides[slideCount - 1].cloneNode(true);
-headClone.setAttribute('aria-hidden', 'true');
-tailClone.setAttribute('aria-hidden', 'true');
-track.appendChild(headClone);
-track.insertBefore(tailClone, realSlides[0]);
-
-const slides = Array.from(track.children);   /* real slides + 2 clones */
-let position = 1;        /* physical position within the track (clones included) */
-let currentSlide = 0;    /* logical slide index driving the dots */
-let isMoving = false;
-let autoplay;
+if (slideCount === 0) return;
 
 /* Build dots dynamically based on actual event count */
 const dots = [];
@@ -219,66 +205,62 @@ if (dotsContainer) {
         dot.type = 'button';
         dot.className = 'event-dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', 'Show event ' + (i + 1) + ' of ' + slideCount);
-        dot.addEventListener('click', () => showSlide(i));
+        dot.addEventListener('click', () => goToSlide(i));
         dotsContainer.appendChild(dot);
         dots.push(dot);
     }
 }
 
-/* Translate the track to the current position; animate=false snaps instantly */
-function render(animate = true) {
-    if (!animate) track.style.transition = 'none';
-    track.style.transform = 'translate3d(' + (-position * carousel.clientWidth) + 'px, 0, 0)';
-    track.style.webkitTransform = 'translate3d(' + (-position * carousel.clientWidth) + 'px, 0, 0)';
-    if (!animate) {
-        void track.offsetWidth;   /* flush styles so the snap is never animated */
-        track.style.transition = '';
-        track.style.webkitTransition = '';
-    }
+let currentSlide = 0;
+let isMoving = false;
+let autoplay;
+
+function getCarouselWidth() {
+    return carousel ? carousel.clientWidth : 0;
 }
 
 function updateDots() {
     dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
 }
 
-/* After a slide finishes, silently jump off any clone onto its real twin */
-track.addEventListener('transitionend', (event) => {
-    if (event.target !== track || !isMoving) return;
-    if (position === slides.length - 1) {           /* resting on head clone */
-        position = 1;
-        currentSlide = 0;
-        render(false);
-    } else if (position === 0) {                    /* resting on tail clone */
-        position = slideCount;
-        currentSlide = slideCount - 1;
-        render(false);
+function render(animate = true) {
+    if (!carousel || !track) return;
+    const w = getCarouselWidth();
+    if (w === 0) return;
+    if (!animate) {
+        track.style.transition = 'none';
+        track.style.webkitTransition = 'none';
     }
-    isMoving = false;
-});
-
-/* Move one slide forward (delta=1) or backward (delta=-1) */
-function step(delta) {
-    if (isMoving) return;
-    isMoving = true;
-    position += delta;
-    currentSlide = (((position - 1) % slideCount) + slideCount) % slideCount;
-    updateDots();
-    render();
+    const x = -currentSlide * w;
+    track.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+    track.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+    if (!animate) {
+        void track.offsetWidth;
+        track.style.transition = '';
+        track.style.webkitTransition = '';
+    }
 }
 
-/* Jump straight to a slide via the dots */
-function showSlide(index) {
+function goToSlide(index) {
     if (isMoving || index === currentSlide) return;
+    if (index < 0 || index >= slideCount) return;
     isMoving = true;
-    position = index + 1;
     currentSlide = index;
     updateDots();
-    render();
+    render(true);
+    setTimeout(() => { isMoving = false; }, 700);
+}
+
+function step(delta) {
+    let next = currentSlide + delta;
+    if (next >= slideCount) next = 0;
+    if (next < 0) next = slideCount - 1;
+    goToSlide(next);
 }
 
 function startAutoplay() {
     clearInterval(autoplay);
-    autoplay = setInterval(() => step(1), 6000);
+    autoplay = setInterval(() => step(1), 5000);
 }
 
 document.getElementById('next-event').addEventListener('click', () => step(1));
@@ -286,11 +268,6 @@ document.getElementById('prev-event').addEventListener('click', () => step(-1));
 
 carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
 carousel.addEventListener('mouseleave', startAutoplay);
-
-carousel.addEventListener('touchstart', () => clearInterval(autoplay), { passive: true });
-carousel.addEventListener('touchend', () => {
-    setTimeout(startAutoplay, 1000);
-}, { passive: true });
 
 let touchStart = 0;
 let touchStartY = 0;
@@ -300,6 +277,7 @@ carousel.addEventListener('touchstart', (event) => {
     touchStart = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
     isSwiping = false;
+    clearInterval(autoplay);
 }, { passive: true });
 
 carousel.addEventListener('touchmove', (event) => {
@@ -311,9 +289,13 @@ carousel.addEventListener('touchmove', (event) => {
 }, { passive: true });
 
 carousel.addEventListener('touchend', (event) => {
-    if (!isSwiping) return;
+    if (!isSwiping) {
+        startAutoplay();
+        return;
+    }
     const difference = event.changedTouches[0].clientX - touchStart;
-    if (Math.abs(difference) > 20) step(difference < 0 ? 1 : -1);
+    if (Math.abs(difference) > 30) step(difference < 0 ? 1 : -1);
+    startAutoplay();
 });
 
 window.addEventListener('resize', () => render(false));
@@ -492,3 +474,34 @@ if (chatForm && chatInput) {
         }
     });
 }
+
+/* ===== BRAND MARQUEE JS FALLBACK ===== */
+
+(function initBrandMarquee() {
+    const track = document.querySelector('.brands-track');
+    if (!track) return;
+
+    /* If CSS animation is running, no need for JS fallback */
+    const computed = window.getComputedStyle(track);
+    if (computed.animationName !== 'none') return;
+
+    let pos = 0;
+    const speed = 0.6; /* px per frame */
+    let raf;
+
+    function animate() {
+        pos -= speed;
+        const half = track.scrollWidth / 2;
+        if (pos <= -half) pos = 0;
+        track.style.transform = 'translate3d(' + pos + 'px, 0, 0)';
+        track.style.webkitTransform = 'translate3d(' + pos + 'px, 0, 0)';
+        raf = requestAnimationFrame(animate);
+    }
+
+    track.addEventListener('mouseenter', () => cancelAnimationFrame(raf));
+    track.addEventListener('mouseleave', () => { raf = requestAnimationFrame(animate); });
+    track.addEventListener('touchstart', () => cancelAnimationFrame(raf), { passive: true });
+    track.addEventListener('touchend', () => { raf = requestAnimationFrame(animate); }, { passive: true });
+
+    raf = requestAnimationFrame(animate);
+})();

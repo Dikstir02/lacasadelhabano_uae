@@ -877,15 +877,13 @@ select:focus-visible {
 .brands-marquee {
     margin-top: 48px;
     overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .brands-track {
     display: flex;
+    width: max-content;
+    -webkit-animation: brand-loop 28s linear infinite;
     animation: brand-loop 28s linear infinite;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
@@ -897,7 +895,6 @@ select:focus-visible {
 .brands-set {
     display: flex;
     flex-shrink: 0;
-    min-width: 100vw;
     padding-right: 40px;
 }
 
@@ -919,8 +916,13 @@ select:focus-visible {
 }
 
 @keyframes brand-loop {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { -webkit-transform: translateX(0); transform: translateX(0); }
+    to { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+}
+
+@-webkit-keyframes brand-loop {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -932,8 +934,6 @@ select:focus-visible {
 @media (max-width: 767px) {
     .brands-track {
         animation-duration: 10s;
-        -webkit-mask-image: none;
-        mask-image: none;
     }
     .brand-name {
         font-size: 18px;
