@@ -272,10 +272,23 @@ carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
 carousel.addEventListener('mouseleave', startAutoplay);
 
 let touchStart = 0;
-carousel.addEventListener('touchstart', (event) => { touchStart = event.touches[0].clientX; }, { passive: true });
+let touchStartY = 0;
+carousel.addEventListener('touchstart', (event) => {
+    touchStart = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}, { passive: true });
+
+carousel.addEventListener('touchmove', (event) => {
+    const diffX = Math.abs(event.touches[0].clientX - touchStart);
+    const diffY = Math.abs(event.touches[0].clientY - touchStartY);
+    if (diffX > diffY && diffX > 10) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
 carousel.addEventListener('touchend', (event) => {
     const difference = event.changedTouches[0].clientX - touchStart;
-    if (Math.abs(difference) > 45) step(difference < 0 ? 1 : -1);
+    if (Math.abs(difference) > 30) step(difference < 0 ? 1 : -1);
 });
 
 window.addEventListener('resize', () => render(false));

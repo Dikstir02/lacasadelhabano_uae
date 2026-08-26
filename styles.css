@@ -737,7 +737,7 @@ select:focus-visible {
 .event-carousel {
     margin-top: 44px;
     overflow: hidden;
-    touch-action: pan-y;
+    touch-action: pan-y pinch-zoom;
 }
 
 .event-track {
@@ -910,6 +910,17 @@ select:focus-visible {
 @media (prefers-reduced-motion: reduce) {
     .brands-track {
         animation: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .brands-track {
+        animation-duration: 18s;
+    }
+    .brand-name {
+        font-size: 18px;
+        padding: 12px 20px 12px 0;
+        margin-right: 20px;
     }
 }
 
@@ -1464,7 +1475,10 @@ select.form-input {
         text-align: center;
     }
 
-    /* Inline-block bordered pill (.stamp) is positioned by its parent's text-align */
+    .hero-description {
+        margin-top: 40px;
+    }
+
     .hero-content .stamp.hero-kicker {
         display: inline-block;
         margin-left: auto;
@@ -1475,7 +1489,7 @@ select.form-input {
     .hero-actions {
         align-items: center;
         justify-content: center;
-        margin-top: 48px;
+        margin-top: 56px;
     }
 
     .hero-scroll-text {
