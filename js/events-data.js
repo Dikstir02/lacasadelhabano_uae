@@ -26,5 +26,12 @@ window.LCDH_EVENTS = [
     "title": "132",
     "copy": "123",
     "date": "123"
+  },
+  {
+    "image": "https://cdn.pixabay.com/audio/2026/02/24/00-12-33-504_200x200.jpeg",
+    "category": "UPCOMING EVENT",
+    "title": "HABANOS NIGHT",
+    "copy": "123123123123sdasdasdasdasd",
+    "date": "DUBAI JBR"
   }
 ];
