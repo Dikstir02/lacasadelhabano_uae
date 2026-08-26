@@ -1472,7 +1472,6 @@ select.form-input {
     .hero-logo,
     .hero-title,
     .hero-description {
-        margin-top: 40px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
@@ -1492,7 +1491,6 @@ select.form-input {
     .hero-actions {
         align-items: center;
         justify-content: center;
-        margin-top: 56px;
     }
 
     .hero-scroll-text {
