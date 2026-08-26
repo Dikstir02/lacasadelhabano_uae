@@ -249,16 +249,16 @@ $('#restore-btn').addEventListener('click', async () => {
     showStatus('Original events restored ✓');
 });
 
-$('#export-btn').addEventListener('click', () => {
-    const events = loadEvents() || DEFAULT_EVENTS;
+$('#export-btn').addEventListener('click', async () => {
+    const events = currentEvents();
     const jsContent = 'window.LCDH_EVENTS = ' + JSON.stringify(events, null, 2) + ';\n';
-    const blob = new Blob([jsContent], { type: 'application/javascript' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'events-data.js';
-    link.click();
-    URL.revokeObjectURL(link.href);
-    showStatus('Downloaded events-data.js — upload to /js/ on your server');
+    try {
+        await navigator.clipboard.writeText(jsContent);
+        showStatus('Copied to clipboard ✓');
+    } catch (error) {
+        console.error('Copy failed:', error);
+        showStatus('Copy failed — please copy manually', true);
+    }
 });
 
 /* ===== render ===== */
