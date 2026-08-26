@@ -737,7 +737,7 @@ select:focus-visible {
 .event-carousel {
     margin-top: 44px;
     overflow: hidden;
-    touch-action: pan-y;
+    touch-action: none;
     user-select: none;
 }
 
@@ -773,6 +773,12 @@ select:focus-visible {
     object-fit: cover;
 }
 
+@media (max-width: 767px) {
+    .event-slide img {
+        height: 220px;
+    }
+}
+
 @media (min-width: 1024px) {
     .event-slide img {
         height: 480px;
@@ -784,6 +790,12 @@ select:focus-visible {
     flex-direction: column;
     justify-content: center;
     padding: 32px;
+}
+
+@media (max-width: 767px) {
+    .event-content {
+        padding: 24px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -871,9 +883,11 @@ select:focus-visible {
 
 .brands-track {
     display: flex;
-    width: max-content;
     animation: brand-loop 28s linear infinite;
-    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .brands-track:hover {
@@ -905,8 +919,8 @@ select:focus-visible {
 }
 
 @keyframes brand-loop {
-    from { transform: translate3d(0, 0, 0); -webkit-transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-50%, 0, 0); -webkit-transform: translate3d(-50%, 0, 0); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -918,6 +932,8 @@ select:focus-visible {
 @media (max-width: 767px) {
     .brands-track {
         animation-duration: 10s;
+        -webkit-mask-image: none;
+        mask-image: none;
     }
     .brand-name {
         font-size: 18px;
