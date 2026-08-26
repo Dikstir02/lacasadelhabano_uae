@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Casa del Habano UAE</title>
+    <meta name="description" content="The home of premium Habanos in the UAE. La Casa del Habano UAE – a taste of Havana, made for the UAE.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23102d36'/><text x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23e7c889' text-anchor='middle'>H</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+    <body>
+    <!-- ===== AGE GATE (21+) ===== -->
+    <div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-hidden="true">
+        <div class="age-gate-card">
+            <img src="logo.svg" alt="La Casa del Habano UAE" class="age-gate-logo">
+            <p class="age-gate-kicker">AGE RESTRICTION</p>
+            <h2 class="age-gate-title" id="age-gate-title">ARE YOU OVER 21?</h2>
+            <p class="age-gate-copy">This website is intended for adults aged 21 and over only.<br>Please enter your date of birth to continue.</p>
+            <form id="age-gate-form" novalidate>
+                <div class="dob-row" aria-label="Date of birth">
+                    <input id="dob-day" class="dob-input" type="text" inputmode="numeric" maxlength="2" placeholder="DD" autocomplete="bday-day" aria-label="Day of birth">
+                    <span class="dob-sep" aria-hidden="true">/</span>
+                    <input id="dob-month" class="dob-input" type="text" inputmode="numeric" maxlength="2" placeholder="MM" autocomplete="bday-month" aria-label="Month of birth">
+                    <span class="dob-sep" aria-hidden="true">/</span>
+                    <input id="dob-year" class="dob-input dob-input-year" type="text" inputmode="numeric" maxlength="4" placeholder="YYYY" autocomplete="bday-year" aria-label="Year of birth">
+                </div>
+                <button type="submit" class="btn-casa btn-coral age-gate-btn">ENTER SITE</button>
+            </form>
+            <p class="age-gate-error" id="age-gate-error" role="alert"></p>
+        </div>
+    </div>
+    <script>
+    /* Shows the age gate synchronously BEFORE the rest of the page renders,
+       so visitors only ever see the gate on their first visit.
+       Verification lives in sessionStorage: it expires once the visitor
+       exits (closes the tab/browser), so every new visit asks again.
+       (Key matches script.js.) */
+    (function () {
+        var verified = false;
+        try {
+            verified = !!sessionStorage.getItem('lcdh_age_verified');
+        } catch (error) { /* storage unavailable */ }
+        if (!verified) {
+            document.getElementById('age-gate').classList.add('visible');
+            document.body.classList.add('age-gate-open');
+        }
+    })();
+    </script>
+
+    <!-- ===== BACKGROUND AUDIO ===== -->
+    <audio id="bg-audio" preload="auto" loop muted playsinline>
+        <source src="https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3" type="audio/mpeg">
+    </audio>
+    <button id="audio-toggle" aria-label="Unmute background music" title="Toggle background music" style="position:fixed;bottom:20px;left:20px;z-index:1000;background:rgba(16,45,54,0.8);border:1px solid rgba(231,200,137,0.5);color:#e7c889;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all 0.3s ease;">
+        <span class="audio-icon">🔊</span>
+    </button>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header" id="siteHeader">
+        <nav aria-label="Main navigation" class="nav-container">
+            <a href="#home" aria-label="La Casa del Habano UAE home" class="nav-logo">
+                <img src="logo.svg" alt="La Casa del Habano" class="logo-image">
+            </a>
+            <div class="desktop-nav">
+                <a class="nav-link" href="#home">HOME</a>
+                <a class="nav-link" href="#heritage">HERITAGE</a>
+                <a class="nav-link" href="#experience">THE EXPERIENCE</a>
+                <a class="nav-link" href="#contact">CONTACT</a>
+                <a class="btn-casa nav-cta" href="#locations">PLAN YOUR VISIT</a>
+            </div>
+            <button id="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" class="menu-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <aside id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation">
+        <div class="mobile-menu-top">
+            <img src="logo.svg" alt="La Casa del Habano" class="mobile-logo-image">
+            <button id="menu-close" type="button" aria-label="Close navigation menu" class="menu-close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <a class="display" href="#home">Home</a>
+            <a class="display" href="#heritage">Heritage</a>
+            <a class="display" href="#experience">The Experience</a>
+            <a class="display" href="#locations">Locations</a>
+            <a class="display" href="#contact">Contact</a>
+        </nav>
+    </aside>
+
+    <main>
+        <!-- ===== HERO ===== -->
+        <section id="home" class="hero">
+            <img class="hero-bg-img" src="https://images.pexels.com/photos/5944420/pexels-photo-5944420.jpeg" alt="Cigar lounge with warm amber light" loading="eager">
+            <div class="hero-overlay" aria-hidden="true"></div>
+            <div class="hero-sun" aria-hidden="true"></div>
+            <div class="hero-content">
+                <p class="stamp hero-kicker">CUBAN HERITAGE · UAE HOSPITALITY</p>
+                <div class="hero-inner">
+                    <p class="hero-logo display">LA CASA DEL HABANO UAE</p>
+                    <h1 class="hero-title display">A TASTE OF HAVANA, MADE FOR THE UAE.</h1>
+                    <p class="hero-description">Discover the craft, colour and unhurried ritual of exceptional Habanos in a house inspired by Cuba's enduring spirit.</p>
+                    <div class="hero-actions">
+                        <a href="#heritage" class="btn-casa btn-coral">DISCOVER OUR HERITAGE</a>
+                        <a href="#locations" class="btn-casa btn-outline">FIND YOUR CASA</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#heritage" class="hero-scroll" aria-label="Scroll to next section">
+                <span class="hero-scroll-line" aria-hidden="true"></span>
+                <span class="hero-scroll-text">FOLLOW THE RHYTHM</span>
+    </a>
+        </section>
+<!-- ===== TILE RULE ===== -->
+        <div class="tile-rule" aria-hidden="true"></div>
+
+        <!-- ===== HERITAGE ===== -->
+        <section id="heritage" class="section paper-grain">
+            <div class="container heritage-grid">
+                <div class="reveal heritage-media">
+                    <div class="heritage-frame" aria-hidden="true"></div>
+                    <img src="https://images.pexels.com/photos/37224648/pexels-photo-37224648.jpeg" alt="Tobacco leaves drying in a Cuban barn" loading="lazy">
+                </div>
+                <div class="reveal">
+                    <p class="eyebrow">FROM LEAF TO LEGACY</p>
+                    <h2 class="section-title">CUBAN SOUL. TRUE HABANO CRAFT.</h2>
+                    <p class="section-copy">La Casa del Habano celebrates more than a cigar. It is a meeting place for stories, expertise and the patient art of enjoying the moment.</p>
+                    <p class="section-copy">From the tobacco landscapes of Cuba to our Casas in Dubai and Abu Dhabi, every detail honours authenticity, care and the pleasure of good company.</p>
+                    <a href="#contact" class="btn-casa btn-blue">START A CONVERSATION →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EXPERIENCE ===== -->
+        <section id="experience" class="section section-blue">
+            <div class="container">
+                <div class="reveal section-head">
+                    <p class="eyebrow eyebrow-gold">THE CASA EXPERIENCE</p>
+                    <h2 class="section-title section-title-cream">A LITTLE HAVANA IN EVERY DETAIL.</h2>
+                    <p class="section-sub cream">A considered world of flavour, knowledge and unmistakable Cuban character.</p>
+                </div>
+                <div class="experience-grid">
+                    <article class="experience-card reveal">
+                        <div class="experience-img"><img src="https://images.pexels.com/photos/38027071/pexels-photo-38027071.jpeg" alt="Premium Habanos selection" loading="lazy"></div>
+                        <div class="experience-body">
+                            <p class="experience-number display">01</p>
+                            <h3 class="experience-title display">PREMIUM HABANOS</h3>
+                            <p class="experience-copy">A curated collection from Cuba's most storied cigar houses.</p>
+                        </div>
+                    </article>
+                    <article class="experience-card reveal">
+                        <div class="experience-img"><img src="https://images.pexels.com/photos/1637114/pexels-photo-1637114.jpeg" alt="Expert advice on Habanos" loading="lazy"></div>
+                        <div class="experience-body">
+                            <p class="experience-number display">02</p>
+                            <h3 class="experience-title display">EXPERT GUIDANCE</h3>
+                            <p class="experience-copy">Personal recommendations, whether it is your first discovery or favourite ritual.</p>
+                        </div>
+                    </article>
+                    <article class="experience-card reveal">
+                        <div class="experience-img"><img src="https://images.pexels.com/photos/3975066/pexels-photo-3975066.jpeg" alt="Humidor care" loading="lazy"></div>
+                        <div class="experience-body">
+                            <p class="experience-number display">03</p>
+                            <h3 class="experience-title display">HUMIDOR CARE</h3>
+                            <p class="experience-copy">Meticulous conservation creates the ideal environment for every Habano.</p>
+                        </div>
+                    </article>
+                    <article class="experience-card reveal">
+                        <div class="experience-img"><img src="https://images.pexels.com/photos/11311205/pexels-photo-11311205.jpeg" alt="Casa lounge hospitality" loading="lazy"></div>
+                        <div class="experience-body">
+                            <p class="experience-number display">04</p>
+                            <h3 class="experience-title display">LOUNGE HOSPITALITY</h3>
+                            <p class="experience-copy">Relaxed, welcoming spaces for conversation, connection and a well-earned pause.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+<!-- ===== EVENTS ===== -->
+        <section id="events" class="section section-red">
+            <div class="container">
+                <div class="events-header">
+                    <div class="reveal">
+                        <p class="eyebrow eyebrow-gold">NIGHTS AT THE CASA</p>
+                        <h2 class="section-title section-title-cream">RHYTHM, RUM &amp; REMEMBRANCE.</h2>
+                        <p class="section-sub cream">Gatherings shaped by craft, music and the warm pulse of Havana.</p>
+                    </div>
+                    <div class="events-arrows" aria-hidden="true">
+                        <button id="prev-event" type="button" aria-label="Previous event">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                        </button>
+                        <button id="next-event" type="button" aria-label="Next event">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="event-carousel" class="event-carousel">
+                    <div id="event-track" class="event-track">
+                        <article class="event-slide active">
+                            <img src="https://images.pexels.com/photos/33731258/pexels-photo-33731258.jpeg" alt="Live music night at the Casa" loading="lazy">
+                            <div class="event-content">
+                                <p class="event-category">LIVE AT THE CASA</p>
+                                <h3 class="event-title display">SON CUBANO SESSIONS</h3>
+                                <p class="event-copy">An intimate night of cigar culture, live guitar and easy conversation under warm lights.</p>
+                                <p class="event-date">DUBAI · PRIVATE INVITATION</p>
+                                <a href="#contact" class="event-link">ENQUIRE ABOUT EVENTS →</a>
+                            </div>
+                        </article>
+                        <article class="event-slide">
+                            <img src="https://images.pexels.com/photos/28539666/pexels-photo-28539666.jpeg" alt="Havana Club rum with a fine Habano" loading="lazy">
+                            <div class="event-content">
+                                <p class="event-category">PAIRING EVENING</p>
+                                <h3 class="event-title display">THE RITUAL OF RUM</h3>
+                                <p class="event-copy">A slow exploration of flavour, aroma and the classic companions to a fine Habano.</p>
+                                <p class="event-date">ABU DHABI · MEMBERS' NIGHT</p>
+                                <a href="#contact" class="event-link">ENQUIRE ABOUT EVENTS →</a>
+                            </div>
+                        </article>
+                        <article class="event-slide">
+                            <img src="https://images.pexels.com/photos/15161546/pexels-photo-15161546.jpeg" alt="Golden hour gathering at the Casa" loading="lazy">
+                            <div class="event-content">
+                                <p class="event-category">THE CASA TABLE</p>
+                                <h3 class="event-title display">GOLDEN HOUR GATHERING</h3>
+                                <p class="event-copy">A relaxed evening of shared tables, bright cocktails and old Havana spirit.</p>
+                                <p class="event-date">UAE · BY INVITATION</p>
+                                <a href="#contact" class="event-link">ENQUIRE ABOUT EVENTS →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div id="event-dots" class="event-dots" role="tablist" aria-label="Event slides">
+                    <button type="button" class="event-dot active" aria-label="Show first event"></button>
+                    <button type="button" class="event-dot" aria-label="Show second event"></button>
+                    <button type="button" class="event-dot" aria-label="Show third event"></button>
+                </div>
+            </div>
+        </section>
+<!-- ===== BRANDS ===== -->
+        <section id="brands" class="section paper-grain">
+            <div class="container">
+                <p class="eyebrow">CUBA'S ICONIC HOUSES</p>
+                <h2 class="section-title">THE WORLD OF HABANOS.</h2>
+                <p class="section-copy">Discover the legendary names behind Cuba's most celebrated cigars.</p>
+                <div class="brands-marquee" aria-label="Featured Habanos brands">
+                    <div class="brands-track">
+                        <div class="brands-set">
+                            <p class="brand-name display">COHIBA</p>
+                            <p class="brand-name display">MONTECRISTO</p>
+                            <p class="brand-name display">ROMEO Y JULIETA</p>
+                            <p class="brand-name display">PARTAGÁS</p>
+                            <p class="brand-name display">H. UPMANN</p>
+                            <p class="brand-name display">HOYO DE MONTERREY</p>
+                            <p class="brand-name display">TRINIDAD</p>
+                            <p class="brand-name display">SAN CRISTÓBAL</p>
+                        </div>
+                        <div class="brands-set" aria-hidden="true">
+                            <p class="brand-name display">COHIBA</p>
+                            <p class="brand-name display">MONTECRISTO</p>
+                            <p class="brand-name display">ROMEO Y JULIETA</p>
+                            <p class="brand-name display">PARTAGÁS</p>
+                            <p class="brand-name display">H. UPMANN</p>
+                            <p class="brand-name display">HOYO DE MONTERREY</p>
+                            <p class="brand-name display">TRINIDAD</p>
+                            <p class="brand-name display">SAN CRISTÓBAL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- ===== LOCATIONS ===== -->
+        <section id="locations" class="section section-leaf">
+            <div class="container">
+                <p class="eyebrow eyebrow-gold">THREE CASAS, ONE SPIRIT</p>
+                <h2 class="section-title section-title-cream">FIND YOUR CASA.</h2>
+                <p class="section-sub cream">Your closest invitation to an exceptional Habano experience.</p>
+                <div class="locations-grid">
+                    <article class="location-card">
+                        <div class="location-img"><img src="https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg" alt="City Walk Casa" loading="lazy"></div>
+                        <div class="location-body">
+                            <p class="location-city">DUBAI</p>
+                            <h3 class="location-title display">CITY WALK</h3>
+                            <p class="location-copy">A colourful, contemporary Casa in the heart of City Walk.</p>
+                            <hr class="location-rule" aria-hidden="true">
+                            <p class="location-address">City Walk, Dubai, United Arab Emirates</p>
+                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
+                            <button type="button" data-location="City Walk — Dubai" data-map-url="https://maps.app.goo.gl/KonTfdo48PyqwFJo8" class="location-contact">CONTACT LOCATION →</button>
+                        </div>
+                    </article>
+                    <article class="location-card">
+                        <div class="location-img"><img src="https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg" alt="JBR Casa" loading="lazy"></div>
+                        <div class="location-body">
+                            <p class="location-city">DUBAI</p>
+                            <h3 class="location-title display">JBR</h3>
+                            <p class="location-copy">A relaxed cigar destination close to the vibrant JBR waterfront.</p>
+                            <hr class="location-rule" aria-hidden="true">
+                            <p class="location-address">The Walk, Jumeirah Beach Residence, Dubai</p>
+                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
+                            <button type="button" data-location="JBR — Dubai" data-map-url="https://maps.app.goo.gl/SEFQf9YabRu11QU6A" class="location-contact">CONTACT LOCATION →</button>
+                        </div>
+                    </article>
+                    <article class="location-card">
+                        <div class="location-img"><img src="https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg" alt="Abu Dhabi Mall Casa" loading="lazy"></div>
+                        <div class="location-body">
+                            <p class="location-city">ABU DHABI</p>
+                            <h3 class="location-title display">ABU DHABI MALL</h3>
+                            <p class="location-copy">A refined Casa for discovering Cuban tradition in the capital.</p>
+                            <hr class="location-rule" aria-hidden="true">
+                            <p class="location-address">Abu Dhabi Mall, Abu Dhabi, United Arab Emirates</p>
+                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
+                            <button type="button" data-location="Abu Dhabi Mall — Abu Dhabi" data-map-url="https://maps.app.goo.gl/787X3kXX6VPw44zs8" class="location-contact">CONTACT LOCATION →</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+<!-- ===== CONTACT ===== -->
+        <section id="contact" class="section section-navy">
+            <div class="container contact-grid">
+                <div class="reveal">
+                    <p class="eyebrow eyebrow-gold">COME SAY HOLA</p>
+                    <h2 class="section-title section-title-cream">YOUR TABLE AT THE CASA AWAITS.</h2>
+                    <p class="section-copy cream">For a visit, a product enquiry or an evening with your guests, our team will be delighted to help.</p>
+                    <div class="contact-links">
+                        <a href="https://wa.me/971542137706" target="_blank" rel="noopener noreferrer" class="contact-link">WHATSAPP — CHAT WITH THE CASA</a>
+                        <a href="mailto:info@lacasadelhabano.ae" class="contact-link">EMAIL — INFO@LACASADELHABANO.AE</a>
+                        <a href="https://instagram.com/lacasadelhabano_uae" target="_blank" rel="noopener noreferrer" class="contact-link">INSTAGRAM — FOLLOW OUR STORY</a>
+                    </div>
+                </div>
+                <form id="enquiry-form" novalidate class="contact-form">
+                    <div>
+                        <label for="name">NAME</label>
+                        <input id="name" class="form-input" type="text" required>
+                    </div>
+                    <div>
+                        <label for="email">EMAIL</label>
+                        <input id="email" class="form-input" type="email" required>
+                    </div>
+                    <div>
+                        <label for="phone">PHONE</label>
+                        <input id="phone" class="form-input" type="tel" required>
+                    </div>
+                    <div>
+                        <label for="location">PREFERRED LOCATION</label>
+                        <select id="location" class="form-input" required>
+                                                        <option value="" disabled selected>Select a location</option>
+                            <option>City Walk — Dubai</option>
+                            <option>JBR — Dubai</option>
+                            <option>Abu Dhabi Mall — Abu Dhabi</option>
+                        </select>
+                    </div>
+                    <div class="form-span-2">
+                        <label for="message">MESSAGE</label>
+                        <textarea id="message" class="form-input form-textarea" required></textarea>
+                    </div>
+                    <div class="form-span-2">
+                        <button id="submit-button" type="submit" class="btn-casa btn-coral">SEND ENQUIRY</button>
+                        <p id="form-status" class="form-status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+<!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <img src="logo.svg" alt="La Casa del Habano UAE" class="footer-logo-image">
+                <p class="footer-statement">The home of premium Habanos in the UAE, with a little Havana soul.</p>
+            </div>
+            <div>
+                <p class="footer-heading">NAVIGATION</p>
+                <nav class="footer-nav">
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#experience" class="footer-link">The Experience</a>
+                    <a href="#events" class="footer-link">Casa Events</a>
+                    <a href="#locations" class="footer-link">Our Locations</a>
+                </nav>
+            </div>
+            <div>
+                <p class="footer-heading">LOCATIONS</p>
+                <p class="footer-list">City Walk<br>JBR<br>Abu Dhabi Mall</p>
+            </div>
+            <div>
+                <p class="footer-heading">CONTACT</p>
+                <a href="mailto:info@lacasadelhabano.ae" class="footer-link">info@lacasadelhabano.ae</a>
+                <a href="https://wa.me/9715066008888" target="_blank" rel="noopener noreferrer" class="footer-link">Chat on WhatsApp</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 La Casa del Habano UAE. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP CHATBOT POPUP ===== -->
+    <div id="whatsapp-chatbot" class="whatsapp-chatbot" role="dialog" aria-labelledby="chatbot-title" aria-hidden="true">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            </div>
+            <div class="chatbot-header-info">
+                <h3 id="chatbot-title">La Casa del Habano</h3>
+                <p class="chatbot-subtitle"><span class="chatbot-status-dot"></span>Typically replies within an hour</p>
+            </div>
+            <button id="chatbot-close" type="button" aria-label="Close chat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message message-bot">Hello! 👋 Welcome to La Casa del Habano UAE.&#10;Type your message below and we'll continue the chat on WhatsApp.</div>
+        </div>
+        <form id="chatbot-form" class="chatbot-input-area">
+            <textarea id="chatbot-input" placeholder="Type your message…" rows="1" maxlength="1000" aria-label="Type your message"></textarea>
+            <button id="chatbot-send" type="submit" aria-label="Send message">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+        </form>
+    </div>
+
+
+    <!-- ===== FLOATING WHATSAPP ===== -->
+    <a id="whatsapp-widget" href="https://wa.me/971542137706" target="_blank" rel="noopener noreferrer" aria-label="Chat with La Casa del Habano UAE on WhatsApp" aria-haspopup="dialog" aria-controls="whatsapp-chatbot" aria-expanded="false" class="whatsapp-float">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+    </a>
+
+    <script src="js/events-data.js"></script>
+    <script src="script.js"></script>
+    <script src="audio.js"></script>
+</body>
+</html>
+
+

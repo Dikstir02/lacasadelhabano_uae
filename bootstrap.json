@@ -1,0 +1,7745 @@
+{
+ "base": {
+  "A?": "B",
+  "L": false,
+  "N": false,
+  "E": "c801d978e76219df69158863d26f846d4613953d",
+  "j": "1741264",
+  "K": 1787669322,
+  "F": {
+   "A?": "B"
+  },
+  "G": "CLIENT_FULL",
+  "I": "A",
+  "O": {
+   "A?": "B"
+  },
+  "M": "/_online",
+  "U": [],
+  "V": [],
+  "a": {
+   "K": "export_website",
+   "H": {}
+  },
+  "d": {
+   "A": "wss://www.canva.com/_stream",
+   "B": {
+    "F": "export_website"
+   },
+   "C": 8388608
+  },
+  "b": {
+   "A?": "H",
+   "C": {
+    "a": "WEB"
+   },
+   "D": {
+    "a": "WEB",
+    "c": "en"
+   },
+   "E": {},
+   "P": [],
+   "Q": [],
+   "R": false,
+   "S": false
+  }
+ },
+ "page": {
+  "A": {
+   "B": {
+    "A?": "B",
+    "A": 1366,
+    "B": 768,
+    "C": "D"
+   },
+   "C": {
+    "A": 1366,
+    "B": 768,
+    "C": "D"
+   },
+   "Q": [],
+   "R": [],
+   "P": "en",
+   "D": "La Casa del Habano UAE",
+   "F": [],
+   "d": {},
+   "G": {},
+   "Y": {},
+   "a": [],
+   "b": [],
+   "V": [],
+   "W": [],
+   "A": [
+    {
+     "A?": "i",
+     "a": "PB0Zf6SR7j7vNc3y",
+     "R": false,
+     "S": false,
+     "U": false,
+     "Q": {},
+     "W": [],
+     "X": [],
+     "H": [],
+     "L": {},
+     "C": {
+      "A": 1366,
+      "B": 768,
+      "C": "D"
+     },
+     "w": {
+      "A": [
+       {
+        "C": "#ffffff",
+        "D": 0,
+        "F": false,
+        "J": false,
+        "G": false,
+        "H": false
+       }
+      ],
+      "B": []
+     },
+     "r": [],
+     "E": [
+      {
+       "5": {},
+       "A?": "BC",
+       "A": 0,
+       "B": 0,
+       "D": 1366,
+       "C": 768,
+       "E": 0,
+       "F": 0,
+       "BD": [],
+       "BE": [],
+       "BA": [],
+       "BB": [],
+       "Q": false,
+       "S": false,
+       "P": [],
+       "T": {},
+       "W": {},
+       "_": "LB5DW1nXxzqLw7hR",
+       "b": 1366,
+       "a": 768,
+       "z": {
+        "A": {
+         "A": "w:KS5H9iEEh",
+         "B": 1
+        },
+        "B": {}
+       },
+       "y": {
+        "A": {
+         "A?": "O",
+         "A": {
+          "A": {
+           "A?": "S",
+           "A": {
+            "A": "https://canva-hosted-embed.com/codelet/DP_cb1e902f583848dcb384dbec83cd9450/ch2zrywnnb0f9k15",
+            "B": 0,
+            "C": "F"
+           }
+          },
+          "B": {
+           "A?": "O",
+           "A": {
+            "__page-root": {
+             "A?": "O",
+             "A": {
+              "E": {
+               "A?": "P",
+               "A": {
+                "C": "#102d36",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              }
+             }
+            },
+            "about-copy-1": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "La Casa del Habano celebrates more than a cigar. It is a meeting place for stories, expertise and the patient art of enjoying the moment."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#1e2926",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "about-copy-2": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "From the tobacco landscapes of Cuba to our Casas in Dubai and Abu Dhabi, every detail honours authenticity, care and the pleasure of good company."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#1e2926",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "about-cta": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "START A CONVERSATION →"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "E": {
+               "A?": "P",
+               "A": {
+                "C": "#175d70",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "about-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "FROM LEAF TO LEGACY"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#a9362c",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "about-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/37224648/pexels-photo-37224648.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "An elderly woman sorts fresh tobacco leaves inside a barn in Viñales, Cuba, capturing traditional farming techniques."
+              }
+             }
+            },
+            "about-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CUBAN SOUL. TRUE HABANO CRAFT."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#1e2926",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "brands-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Discover the legendary names behind Cuba's most celebrated cigars."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#1e2926",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "brands-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CUBA'S ICONIC HOUSES"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#a9362c",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "brands-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THE WORLD OF HABANOS."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#1e2926",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "contact-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "For a visit, a product enquiry or an evening with your guests, our team will be delighted to help."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "contact-email": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "EMAIL — INFO@LACASADELHABANO.AE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "contact-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "COME SAY HOLA"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "contact-instagram": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "INSTAGRAM — FOLLOW OUR STORY"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "contact-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "YOUR TABLE AT THE CASA AWAITS."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "contact-whatsapp": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "WHATSAPP — CHAT WITH THE CASA"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-1-category": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LIVE AT THE CASA"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-1-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "An intimate night of cigar culture, live guitar and easy conversation under warm lights."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-1-date": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "DUBAI · PRIVATE INVITATION"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-1-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/33731258/pexels-photo-33731258.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Cozy cafe in Mar del Plata with live guitar music performance, rich ambiance."
+              }
+             }
+            },
+            "event-1-link": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ENQUIRE ABOUT EVENTS →"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-1-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "SON CUBANO SESSIONS"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "event-2-category": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "PAIRING EVENING"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-2-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A slow exploration of flavour, aroma and the classic companions to a fine Habano."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-2-date": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ABU DHABI · MEMBERS' NIGHT"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-2-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/28539666/pexels-photo-28539666.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Close-up of Havana Club rum bottle with shot glass on wooden surface."
+              }
+             }
+            },
+            "event-2-link": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ENQUIRE ABOUT EVENTS →"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-2-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THE RITUAL OF RUM"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "event-3-category": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THE CASA TABLE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-3-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A relaxed evening of shared tables, bright cocktails and old Havana spirit."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-3-date": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "UAE · BY INVITATION"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-3-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/15161546/pexels-photo-15161546.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Two vibrant cocktails on a bar counter showcasing a sophisticated nightlife atmosphere."
+              }
+             }
+            },
+            "event-3-link": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ENQUIRE ABOUT EVENTS →"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "event-3-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "GOLDEN HOUR GATHERING"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "events-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "NIGHTS AT THE CASA"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "events-subtitle": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Gatherings shaped by craft, music and the warm pulse of Havana."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "events-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "RHYTHM, RUM & REMEMBRANCE."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "experience-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THE CASA EXPERIENCE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "experience-subtitle": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A considered world of flavour, knowledge and unmistakable Cuban character."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "experience-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A LITTLE HAVANA IN EVERY DETAIL."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "footer-contact-heading": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CONTACT"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-copyright": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "© 2026 La Casa del Habano UAE. All Rights Reserved."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-email": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "info@lacasadelhabano.ae"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-events": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Casa Events"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-experience": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "The Experience"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-home": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Home"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-location-list": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "City Walk\nJBR\nAbu Dhabi Mall"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-locations": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Our Locations"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-locations-heading": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LOCATIONS"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-logo": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LA CASA DEL HABANO UAE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-nav-heading": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "NAVIGATION"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-statement": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "The home of premium Habanos in the UAE, with a little Havana soul."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "footer-whatsapp": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Chat on WhatsApp"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "header-logo": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LA CASA DEL HABANO"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-description": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Discover the craft, colour and unhurried ritual of exceptional Habanos in a house inspired by Cuba's enduring spirit."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/5944420/pexels-photo-5944420.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "A detailed close-up shot of a hand lighting a cigar in a dark setting."
+              }
+             }
+            },
+            "hero-kicker": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CUBAN HERITAGE · UAE HOSPITALITY"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-logo": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LA CASA DEL HABANO UAE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-primary": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "DISCOVER OUR HERITAGE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "E": {
+               "A?": "P",
+               "A": {
+                "C": "#db6246",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-secondary": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "FIND YOUR CASA"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "E": {
+               "A?": "P",
+               "A": {
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "hero-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A TASTE OF HAVANA, MADE FOR THE UAE."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 32
+              }
+             }
+            },
+            "label-email": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "EMAIL"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "label-location": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "PREFERRED LOCATION"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "label-message": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "MESSAGE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "label-name": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "NAME"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "label-phone": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "PHONE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-1-address": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "City Walk, Dubai, United Arab Emirates"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-1-city": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "DUBAI"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-1-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A colourful, contemporary Casa in the heart of City Walk."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-1-hours": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Please contact the Casa for current opening hours."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-1-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Stunning view of illuminated skyscrapers reflecting on water at Dubai Mall waterfront."
+              }
+             }
+            },
+            "location-1-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CITY WALK"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "location-2-address": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "The Walk, Jumeirah Beach Residence, Dubai"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-2-city": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "DUBAI"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-2-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A relaxed cigar destination close to the vibrant JBR waterfront."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-2-hours": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Please contact the Casa for current opening hours."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-2-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Stunning view of Dubai's skyscrapers along the marina with yachts and beachgoers."
+              }
+             }
+            },
+            "location-2-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "JBR"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "location-3-address": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Abu Dhabi Mall, Abu Dhabi, United Arab Emirates"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-3-city": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ABU DHABI"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-3-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A refined Casa for discovering Cuban tradition in the capital."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-3-hours": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Please contact the Casa for current opening hours."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "location-3-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Stunning view of the opulent interior architecture in the Emirates Palace, Abu Dhabi."
+              }
+             }
+            },
+            "location-3-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "ABU DHABI MALL"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "locations-eyebrow": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THREE CASAS, ONE SPIRIT"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "locations-subtitle": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Your closest invitation to an exceptional Habano experience."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "locations-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "FIND YOUR CASA."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 24
+              }
+             }
+            },
+            "mobile-contact": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Contact"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "mobile-experience": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "The Experience"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "mobile-heritage": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Heritage"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "mobile-home": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Home"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "mobile-locations": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Locations"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "mobile-logo": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LA CASA DEL HABANO"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "nav-contact": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "CONTACT"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "nav-experience": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "THE EXPERIENCE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "nav-heritage": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "HERITAGE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "nav-home": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "HOME"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "nav-visit": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "PLAN YOUR VISIT"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "E": {
+               "A?": "P",
+               "A": {
+                "C": "#db6246",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "scroll-label": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "FOLLOW THE RHYTHM"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-1-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "A curated collection from Cuba's most storied cigar houses."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-1-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/38027071/pexels-photo-38027071.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Skilled Cuban artisan rolling cigars by hand in a traditional workshop, showcasing craftsmanship."
+              }
+             }
+            },
+            "service-1-number": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "01"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-1-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "PREMIUM HABANOS"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "service-2-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Personal recommendations, whether it is your first discovery or favourite ritual."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-2-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/1637114/pexels-photo-1637114.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Close-up of premium Cuban cigars in a wooden humidor box, showcasing luxury and craftsmanship."
+              }
+             }
+            },
+            "service-2-number": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "02"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-2-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "EXPERT GUIDANCE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "service-3-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Meticulous conservation creates the ideal environment for every Habano."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-3-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/3975066/pexels-photo-3975066.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "From above closeup of wooden box with narrow rectangular sections with ribbed surface for cigars near table with pile of raw tobacco products in factory"
+              }
+             }
+            },
+            "service-3-number": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "03"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-3-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "HUMIDOR CARE"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "service-4-copy": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "Relaxed, welcoming spaces for conversation, connection and a well-earned pause."
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-4-image": {
+             "A?": "O",
+             "A": {
+              "I": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 1
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 1
+                  },
+                  "B": {
+                   "A?": "A",
+                   "A": "https://images.pexels.com/photos/11311205/pexels-photo-11311205.jpeg"
+                  }
+                 }
+                }
+               }
+              },
+              "J": {
+               "A?": "A",
+               "A": "Cozy hanging rattan chair with cushion, surrounded by tropical plants and soft lighting."
+              }
+             }
+            },
+            "service-4-number": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "04"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#e7c889",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            },
+            "service-4-title": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "LOUNGE HOSPITALITY"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "semibold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 19
+              }
+             }
+            },
+            "submit-button": {
+             "A?": "O",
+             "A": {
+              "A": {
+               "A?": "A",
+               "A": "SEND ENQUIRY"
+              },
+              "D": {
+               "A?": "O",
+               "A": {
+                "k": {
+                 "A?": "D",
+                 "A": 2
+                },
+                "v": {
+                 "A?": "O",
+                 "A": {
+                  "A": {
+                   "A?": "D",
+                   "A": 2
+                  },
+                  "B": {
+                   "A?": "S",
+                   "A": {
+                    "A": "YAFdJhem5V8",
+                    "B": 1,
+                    "C": "B"
+                   }
+                  }
+                 }
+                }
+               }
+              },
+              "E": {
+               "A?": "P",
+               "A": {
+                "C": "#db6246",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "F": {
+               "A?": "P",
+               "A": {
+                "C": "#f8e7c7",
+                "D": 0,
+                "F": false,
+                "J": false,
+                "G": false,
+                "H": false
+               }
+              },
+              "G": {
+               "A?": "A",
+               "A": "bold"
+              },
+              "H": {
+               "A?": "A",
+               "A": "normal"
+              },
+              "K": {
+               "A?": "C",
+               "A": 16
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       },
+       "BH": {}
+      }
+     ],
+     "I": []
+    }
+   ],
+   "I": []
+  },
+  "Z": {
+   "A?": "E",
+   "M": "en",
+   "e": false,
+   "g": [
+    {
+     "A?": "A",
+     "K": "PB0Zf6SR7j7vNc3y",
+     "L": "",
+     "O": "La Casa del Habano UAE",
+     "e": {
+      "A": true
+     }
+    }
+   ]
+  },
+  "I": {
+   "A": [
+    {
+     "A": "YACgEZ1cb1Q",
+     "B": 0,
+     "C": "Arimo",
+     "D": [
+      {
+       "style": "BOLD_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/0803f40e19a074a5520c2746a6ba3c95.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 237588
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 2048,
+         "yMin": -771,
+         "yMax": 2109
+        },
+        "hhea": {
+         "ascender": 1854,
+         "descender": -434,
+         "lineGap": 67
+        },
+        "os2": {
+         "sTypoAscender": 1491,
+         "sTypoDescender": -431,
+         "sTypoLineGap": 307,
+         "usWinAscent": 1854,
+         "usWinDescent": 434,
+         "fsSelection": 33
+        }
+       }
+      },
+      {
+       "style": "BOLD",
+       "files": [
+        {
+         "url": "_assets/fonts/b07201e0e9fc452103c1c0345b0e7c1d.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 234660
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 2048,
+         "yMin": -771,
+         "yMax": 2116
+        },
+        "hhea": {
+         "ascender": 1854,
+         "descender": -434,
+         "lineGap": 67
+        },
+        "os2": {
+         "sTypoAscender": 1491,
+         "sTypoDescender": -431,
+         "sTypoLineGap": 307,
+         "usWinAscent": 1854,
+         "usWinDescent": 434,
+         "fsSelection": 32
+        }
+       }
+      },
+      {
+       "style": "ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/711f50b3a8c00bb7e2e05ef85f982cb6.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 240584
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 2048,
+         "yMin": -621,
+         "yMax": 2077
+        },
+        "hhea": {
+         "ascender": 1854,
+         "descender": -434,
+         "lineGap": 67
+        },
+        "os2": {
+         "sTypoAscender": 1491,
+         "sTypoDescender": -425,
+         "sTypoLineGap": 307,
+         "usWinAscent": 1854,
+         "usWinDescent": 434,
+         "fsSelection": 1
+        }
+       }
+      },
+      {
+       "style": "REGULAR",
+       "files": [
+        {
+         "url": "_assets/fonts/834f64ff415fb8f4f5d92d8fd40507e9.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 234332
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 2048,
+         "yMin": -621,
+         "yMax": 2007
+        },
+        "hhea": {
+         "ascender": 1854,
+         "descender": -434,
+         "lineGap": 67
+        },
+        "os2": {
+         "sTypoAscender": 1491,
+         "sTypoDescender": -431,
+         "sTypoLineGap": 307,
+         "usWinAscent": 1854,
+         "usWinDescent": 434,
+         "fsSelection": 64
+        }
+       }
+      }
+     ],
+     "E": false
+    },
+    {
+     "A": "YAFdJhem5V8",
+     "B": 1,
+     "C": "Playfair Display",
+     "D": [
+      {
+       "style": "BOLD",
+       "files": [
+        {
+         "url": "_assets/fonts/8ee12c835c4dc6d6d4f0f3f418e22d0d.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 90692
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 160
+        }
+       }
+      },
+      {
+       "style": "ULTRA_BOLD",
+       "files": [
+        {
+         "url": "_assets/fonts/ec2613145796ba9f7e95c69c40c6fc19.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 90428
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 192
+        }
+       }
+      },
+      {
+       "style": "ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/b13d69694f0122da640e59bc600857e7.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 79732
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 129
+        }
+       }
+      },
+      {
+       "style": "HEAVY_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/582720d908234b34bc6bc6f5431866f1.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 79300
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 129
+        }
+       }
+      },
+      {
+       "style": "ULTRA_BOLD_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/587a4af3c5ad08b8668711234ef5c3a2.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 83980
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 129
+        }
+       }
+      },
+      {
+       "style": "SEMI_BOLD",
+       "files": [
+        {
+         "url": "_assets/fonts/1320bdf8a0a42153b13dfc70b758286b.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 90652
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 192
+        }
+       }
+      },
+      {
+       "style": "MEDIUM",
+       "files": [
+        {
+         "url": "_assets/fonts/e2efd86ef4394e975ccf2b9c2f92187d.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 89928
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 192
+        }
+       }
+      },
+      {
+       "style": "REGULAR",
+       "files": [
+        {
+         "url": "_assets/fonts/ff9886dcdabfbc446fbd01801ec0141f.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 84616
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 192
+        }
+       }
+      },
+      {
+       "style": "SEMI_BOLD_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/74d557b55c68cd65482276ce698d7509.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 84652
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 129
+        }
+       }
+      },
+      {
+       "style": "BOLD_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/4c936cbd672497ea46bf0510414e24bc.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 84684
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 161
+        }
+       }
+      },
+      {
+       "style": "MEDIUM_ITALICS",
+       "files": [
+        {
+         "url": "_assets/fonts/e59b37510266a3d3b3bd754c05410f0c.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 84312
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1153
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 129
+        }
+       }
+      },
+      {
+       "style": "HEAVY",
+       "files": [
+        {
+         "url": "_assets/fonts/d4ce338591afd5883402aab5b77fc8c8.woff",
+         "format": "WOFF",
+         "unicodeRanges": [],
+         "sizeBytes": 87196
+        }
+       ],
+       "subsettedFiles": [],
+       "scriptSubsetFiles": [],
+       "metadata": {
+        "head": {
+         "unitsPerEm": 1000,
+         "yMin": -241,
+         "yMax": 1159
+        },
+        "hhea": {
+         "ascender": 1082,
+         "descender": -251,
+         "lineGap": 0
+        },
+        "os2": {
+         "sTypoAscender": 1082,
+         "sTypoDescender": -251,
+         "sTypoLineGap": 0,
+         "usWinAscent": 1159,
+         "usWinDescent": 251,
+         "fsSelection": 192
+        }
+       }
+      }
+     ],
+     "E": false
+    }
+   ],
+   "B": [],
+   "C": [],
+   "D": [],
+   "E": [
+    {
+     "A": "https://canva-hosted-embed.com/codelet/DP_cb1e902f583848dcb384dbec83cd9450/ch2zrywnnb0f9k15",
+     "Q": false,
+     "B": "Canva",
+     "D": 1787669321711,
+     "E": "<iframe src=\"_assets/remote/embed/codelet/ch2zrywnnb0f9k15/index.html\" width=\"1366\" height=\"768\" frameborder=\"0\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox\" style=\"width:100%;height:100%;border:0\"></iframe>",
+     "F": 1366,
+     "G": 768
+    }
+   ],
+   "I": [],
+   "F": [],
+   "H": [],
+   "G": []
+  },
+  "B": [
+   {
+    "A": "YACgEZ1cb1Q",
+    "B": 0,
+    "C": "Arimo",
+    "D": [
+     {
+      "style": "BOLD_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/0803f40e19a074a5520c2746a6ba3c95.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 237588
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 2048,
+        "yMin": -771,
+        "yMax": 2109
+       },
+       "hhea": {
+        "ascender": 1854,
+        "descender": -434,
+        "lineGap": 67
+       },
+       "os2": {
+        "sTypoAscender": 1491,
+        "sTypoDescender": -431,
+        "sTypoLineGap": 307,
+        "usWinAscent": 1854,
+        "usWinDescent": 434,
+        "fsSelection": 33
+       }
+      }
+     },
+     {
+      "style": "BOLD",
+      "files": [
+       {
+        "url": "_assets/fonts/b07201e0e9fc452103c1c0345b0e7c1d.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 234660
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 2048,
+        "yMin": -771,
+        "yMax": 2116
+       },
+       "hhea": {
+        "ascender": 1854,
+        "descender": -434,
+        "lineGap": 67
+       },
+       "os2": {
+        "sTypoAscender": 1491,
+        "sTypoDescender": -431,
+        "sTypoLineGap": 307,
+        "usWinAscent": 1854,
+        "usWinDescent": 434,
+        "fsSelection": 32
+       }
+      }
+     },
+     {
+      "style": "ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/711f50b3a8c00bb7e2e05ef85f982cb6.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 240584
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 2048,
+        "yMin": -621,
+        "yMax": 2077
+       },
+       "hhea": {
+        "ascender": 1854,
+        "descender": -434,
+        "lineGap": 67
+       },
+       "os2": {
+        "sTypoAscender": 1491,
+        "sTypoDescender": -425,
+        "sTypoLineGap": 307,
+        "usWinAscent": 1854,
+        "usWinDescent": 434,
+        "fsSelection": 1
+       }
+      }
+     },
+     {
+      "style": "REGULAR",
+      "files": [
+       {
+        "url": "_assets/fonts/834f64ff415fb8f4f5d92d8fd40507e9.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 234332
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 2048,
+        "yMin": -621,
+        "yMax": 2007
+       },
+       "hhea": {
+        "ascender": 1854,
+        "descender": -434,
+        "lineGap": 67
+       },
+       "os2": {
+        "sTypoAscender": 1491,
+        "sTypoDescender": -431,
+        "sTypoLineGap": 307,
+        "usWinAscent": 1854,
+        "usWinDescent": 434,
+        "fsSelection": 64
+       }
+      }
+     }
+    ],
+    "E": false
+   },
+   {
+    "A": "YAFdJhem5V8",
+    "B": 1,
+    "C": "Playfair Display",
+    "D": [
+     {
+      "style": "BOLD",
+      "files": [
+       {
+        "url": "_assets/fonts/8ee12c835c4dc6d6d4f0f3f418e22d0d.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 90692
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 160
+       }
+      }
+     },
+     {
+      "style": "ULTRA_BOLD",
+      "files": [
+       {
+        "url": "_assets/fonts/ec2613145796ba9f7e95c69c40c6fc19.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 90428
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 192
+       }
+      }
+     },
+     {
+      "style": "ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/b13d69694f0122da640e59bc600857e7.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 79732
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 129
+       }
+      }
+     },
+     {
+      "style": "HEAVY_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/582720d908234b34bc6bc6f5431866f1.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 79300
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 129
+       }
+      }
+     },
+     {
+      "style": "ULTRA_BOLD_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/587a4af3c5ad08b8668711234ef5c3a2.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 83980
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 129
+       }
+      }
+     },
+     {
+      "style": "SEMI_BOLD",
+      "files": [
+       {
+        "url": "_assets/fonts/1320bdf8a0a42153b13dfc70b758286b.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 90652
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 192
+       }
+      }
+     },
+     {
+      "style": "MEDIUM",
+      "files": [
+       {
+        "url": "_assets/fonts/e2efd86ef4394e975ccf2b9c2f92187d.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 89928
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 192
+       }
+      }
+     },
+     {
+      "style": "REGULAR",
+      "files": [
+       {
+        "url": "_assets/fonts/ff9886dcdabfbc446fbd01801ec0141f.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 84616
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 192
+       }
+      }
+     },
+     {
+      "style": "SEMI_BOLD_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/74d557b55c68cd65482276ce698d7509.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 84652
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 129
+       }
+      }
+     },
+     {
+      "style": "BOLD_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/4c936cbd672497ea46bf0510414e24bc.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 84684
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 161
+       }
+      }
+     },
+     {
+      "style": "MEDIUM_ITALICS",
+      "files": [
+       {
+        "url": "_assets/fonts/e59b37510266a3d3b3bd754c05410f0c.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 84312
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1153
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 129
+       }
+      }
+     },
+     {
+      "style": "HEAVY",
+      "files": [
+       {
+        "url": "_assets/fonts/d4ce338591afd5883402aab5b77fc8c8.woff",
+        "format": "WOFF",
+        "unicodeRanges": [],
+        "sizeBytes": 87196
+       }
+      ],
+      "subsettedFiles": [],
+      "scriptSubsetFiles": [],
+      "metadata": {
+       "head": {
+        "unitsPerEm": 1000,
+        "yMin": -241,
+        "yMax": 1159
+       },
+       "hhea": {
+        "ascender": 1082,
+        "descender": -251,
+        "lineGap": 0
+       },
+       "os2": {
+        "sTypoAscender": 1082,
+        "sTypoDescender": -251,
+        "sTypoLineGap": 0,
+        "usWinAscent": 1159,
+        "usWinDescent": 251,
+        "fsSelection": 192
+       }
+      }
+     }
+    ],
+    "E": false
+   }
+  ],
+  "E": [],
+  "F": [],
+  "G": [],
+  "H": [
+   {
+    "A": "https://canva-hosted-embed.com/codelet/DP_cb1e902f583848dcb384dbec83cd9450/ch2zrywnnb0f9k15",
+    "Q": false,
+    "B": "Canva",
+    "D": 1787669321711,
+    "E": "<iframe src=\"_assets/remote/embed/codelet/ch2zrywnnb0f9k15/index.html\" width=\"1366\" height=\"768\" frameborder=\"0\" sandbox=\"allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox\" style=\"width:100%;height:100%;border:0\"></iframe>",
+    "F": 1366,
+    "G": 768
+   }
+  ],
+  "S": [],
+  "K": {},
+  "Q": {
+   "A": false,
+   "B": true,
+   "M": true
+  },
+  "R": false,
+  "W": false,
+  "U": true,
+  "V": true,
+  "X": true,
+  "Y": {
+   "A": false
+  }
+ },
+ "ui": {
+  "N": false,
+  "A": true,
+  "B": "A",
+  "C": false,
+  "D": false,
+  "H": false,
+  "K": "A",
+  "J": false,
+  "P": false
+ }
+}

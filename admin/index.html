@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Events Admin · La Casa del Habano UAE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- ===== LOGIN ===== -->
+    <div class="login-wrap" id="login-view">
+        <form class="login-card" id="login-form">
+            <p class="brand-mark">LCDH</p>
+            <h1 class="login-title">Events Admin</h1>
+            <p class="login-sub">La Casa del Habano UAE · restricted area</p>
+            <label class="field-label" for="password">Password</label>
+            <input type="password" id="password" autocomplete="current-password" placeholder="Enter admin password" required>
+            <button type="submit" class="btn btn-primary btn-block">Unlock panel</button>
+            <p class="login-error" id="login-error" role="alert"></p>
+        </form>
+    </div>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <div id="admin-view" class="hidden">
+        <header class="topbar">
+            <div>
+                <p class="topbar-brand">LA CASA DEL HABANO <span>· Events Admin</span></p>
+                <p class="topbar-sub" id="events-count"></p>
+            </div>
+            <div class="topbar-actions">
+                <a class="btn btn-ghost" href="../index.html#events" target="_blank" rel="noopener">View site ↗</a>
+                <button type="button" class="btn btn-ghost" id="export-btn">Download events-data.js</button>
+                <button type="button" class="btn btn-danger-ghost" id="restore-btn">Restore defaults</button>
+                <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <!-- FORM -->
+            <section class="card">
+                <h2 class="card-title" id="form-title">Add new event</h2>
+                <form id="event-form">
+                    <label class="field-label" for="f-image">Image URL *</label>
+                    <input type="url" id="f-image" placeholder="https://…/photo.jpg" required>
+                    <div class="preview-box"><img id="image-preview" alt="Preview of event image" class="hidden"></div>
+
+                    <div class="form-row">
+                        <div>
+                            <label class="field-label" for="f-category">Category tag</label>
+                            <input type="text" id="f-category" placeholder="e.g. LIVE AT THE CASA">
+                        </div>
+                        <div>
+                            <label class="field-label" for="f-date">Date · Location line</label>
+                            <input type="text" id="f-date" placeholder="e.g. DUBAI · PRIVATE INVITATION">
+                        </div>
+                    </div>
+
+                    <label class="field-label" for="f-title">Title *</label>
+                    <input type="text" id="f-title" placeholder="e.g. SON CUBANO SESSIONS" required>
+
+                    <label class="field-label" for="f-copy">Description</label>
+                    <textarea id="f-copy" rows="3" placeholder="Short invitation copy shown on the slide"></textarea>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="save-btn">Save event</button>
+                        <button type="button" class="btn btn-ghost hidden" id="cancel-edit-btn">Cancel edit</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- LIST -->
+            <section class="card">
+                <h2 class="card-title">Current events</h2>
+                <div id="event-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="status-toast" id="status-toast" role="status"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
