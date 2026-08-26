@@ -161,7 +161,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 /* ===== EVENT CAROUSEL (smooth sliding track) ===== */
 const carousel = document.getElementById('event-carousel');
 const track = document.getElementById('event-track');
-const dots = Array.from(document.querySelectorAll('.event-dot'));
+const dotsContainer = document.getElementById('event-dots');
 
 /* ===== RECENT EVENTS CONTENT (managed via /admin, exported to js/events-data.js) ===== */
 
@@ -209,6 +209,21 @@ let position = 1;        /* physical position within the track (clones included)
 let currentSlide = 0;    /* logical slide index driving the dots */
 let isMoving = false;
 let autoplay;
+
+/* Build dots dynamically based on actual event count */
+const dots = [];
+if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'event-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Show event ' + (i + 1) + ' of ' + slideCount);
+        dot.addEventListener('click', () => showSlide(i));
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+    }
+}
 
 /* Translate the track to the current position; animate=false snaps instantly */
 function render(animate = true) {
@@ -266,7 +281,6 @@ function startAutoplay() {
 
 document.getElementById('next-event').addEventListener('click', () => step(1));
 document.getElementById('prev-event').addEventListener('click', () => step(-1));
-dots.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index)));
 
 carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
 carousel.addEventListener('mouseleave', startAutoplay);
