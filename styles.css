@@ -737,7 +737,8 @@ select:focus-visible {
 .event-carousel {
     margin-top: 44px;
     overflow: hidden;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-y;
+    user-select: none;
 }
 
 .event-track {
@@ -872,6 +873,7 @@ select:focus-visible {
     display: flex;
     width: max-content;
     animation: brand-loop 28s linear infinite;
+    will-change: transform;
 }
 
 .brands-track:hover {
@@ -915,7 +917,7 @@ select:focus-visible {
 
 @media (max-width: 767px) {
     .brands-track {
-        animation-duration: 18s;
+        animation-duration: 10s;
     }
     .brand-name {
         font-size: 18px;
@@ -1470,13 +1472,14 @@ select.form-input {
     .hero-logo,
     .hero-title,
     .hero-description {
+        margin-top: 40px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
     }
 
-    .hero-description {
-        margin-top: 40px;
+    #heritage .btn-casa {
+        margin-top: 28px;
     }
 
     .hero-content .stamp.hero-kicker {

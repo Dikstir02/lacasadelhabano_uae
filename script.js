@@ -273,22 +273,27 @@ carousel.addEventListener('mouseleave', startAutoplay);
 
 let touchStart = 0;
 let touchStartY = 0;
+let isSwiping = false;
+
 carousel.addEventListener('touchstart', (event) => {
     touchStart = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
+    isSwiping = false;
 }, { passive: true });
 
 carousel.addEventListener('touchmove', (event) => {
     const diffX = Math.abs(event.touches[0].clientX - touchStart);
     const diffY = Math.abs(event.touches[0].clientY - touchStartY);
     if (diffX > diffY && diffX > 10) {
+        isSwiping = true;
         event.preventDefault();
     }
 }, { passive: false });
 
 carousel.addEventListener('touchend', (event) => {
+    if (!isSwiping) return;
     const difference = event.changedTouches[0].clientX - touchStart;
-    if (Math.abs(difference) > 30) step(difference < 0 ? 1 : -1);
+    if (Math.abs(difference) > 20) step(difference < 0 ? 1 : -1);
 });
 
 window.addEventListener('resize', () => render(false));
