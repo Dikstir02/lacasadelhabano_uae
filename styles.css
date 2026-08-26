@@ -1698,3 +1698,28 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     .dob-input { width: 48px; }
     .dob-input-year { width: 74px; }
 }
+
+/* ===== AUDIO TOGGLE ===== */
+
+#audio-toggle {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+}
+
+#audio-toggle .audio-icon {
+    pointer-events: none;
+}
+
+#audio-toggle[aria-label="Unmute background music"] {
+    animation: audio-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes audio-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(231, 200, 137, .35); }
+    50% { box-shadow: 0 0 0 10px rgba(231, 200, 137, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #audio-toggle[aria-label="Unmute background music"] {
+        animation: none;
+    }
+}
