@@ -737,6 +737,7 @@ select:focus-visible {
 .event-carousel {
     margin-top: 44px;
     overflow: hidden;
+    touch-action: pan-y;
 }
 
 .event-track {
@@ -1474,6 +1475,11 @@ select.form-input {
     .hero-actions {
         align-items: center;
         justify-content: center;
+        margin-top: 48px;
+    }
+
+    .hero-scroll-text {
+        display: none;
     }
 
     /* Centered scroll indicator */
