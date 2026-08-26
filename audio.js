@@ -73,4 +73,13 @@
             await tryPlay(false);
         }
     });
+
+    document.body.addEventListener('click', async (e) => {
+        if (audio.muted || audio.paused) {
+            audio.muted = false;
+            await tryPlay(false);
+            updateToggle();
+            isReady = true;
+        }
+    }, { once: true });
 })();
