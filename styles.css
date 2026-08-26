@@ -597,6 +597,10 @@ select:focus-visible {
     }
 }
 
+#heritage .btn-casa {
+    margin-top: 32px;
+}
+
 .heritage-media {
     position: relative;
 }
