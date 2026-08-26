@@ -70,6 +70,29 @@ function persistEvents(events) {
     localStorage.setItem(EVENTS_KEY, JSON.stringify({ events }));
 }
 
+let fileEvents = null;
+
+async function loadFileEvents() {
+    try {
+        const resp = await fetch('../js/events-data.js', { cache: 'no-store' });
+        if (!resp.ok) return null;
+        const text = await resp.text();
+        const match = text.match(/window\.LCDH_EVENTS\s*=\s*(\[[\s\S]*?\])\s*;?/);
+        if (!match) return null;
+        const parsed = JSON.parse(match[1]);
+        return Array.isArray(parsed) ? parsed : null;
+    } catch (error) {
+        console.warn('Could not load events-data.js:', error);
+        return null;
+    }
+}
+
+function currentEvents() {
+    if (fileEvents && fileEvents.length > 0) return fileEvents.slice();
+    const stored = loadEvents();
+    return stored && stored.length > 0 ? stored : DEFAULT_EVENTS.slice();
+}
+
 let statusTimer;
 function showStatus(message) {
     const toast = $('#status-toast');
@@ -88,7 +111,7 @@ $('#login-form').addEventListener('submit', async (formEvent) => {
         const attempt = await sha256(passwordInput.value);
         if (attempt === ADMIN_HASH) {
             sessionStorage.setItem(SESSION_KEY, '1');
-            openAdmin();
+            await openAdmin();
         } else {
             $('#login-error').textContent = 'Incorrect password. Try again.';
             passwordInput.select();
@@ -104,9 +127,10 @@ $('#logout-btn').addEventListener('click', () => {
     location.reload();
 });
 
-function openAdmin() {
+async function openAdmin() {
     $('#login-view').classList.add('hidden');
     $('#admin-view').classList.remove('hidden');
+    fileEvents = await loadFileEvents();
     renderList();
 }
 
@@ -216,9 +240,10 @@ $('#event-list').addEventListener('click', (clickEvent) => {
 
 /* ===== topbar actions ===== */
 
-$('#restore-btn').addEventListener('click', () => {
+$('#restore-btn').addEventListener('click', async () => {
     if (!confirm('Discard all saved changes and restore the original three events?')) return;
     localStorage.removeItem(EVENTS_KEY);
+    fileEvents = await loadFileEvents();
     clearForm();
     renderList();
     showStatus('Original events restored ✓');
@@ -322,4 +347,8 @@ eventList.addEventListener('dragend', () => {
 
 /* ===== boot ===== */
 
-if (sessionStorage.getItem(SESSION_KEY) === '1') openAdmin();
+if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    (async () => {
+        await openAdmin();
+    })();
+}
