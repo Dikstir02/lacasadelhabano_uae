@@ -33,5 +33,12 @@ window.LCDH_EVENTS = [
     "title": "HABANOS NIGHT",
     "copy": "123123123123sdasdasdasdasd",
     "date": "DUBAI JBR"
+  },
+  {
+    "image": "https://scontent.ffjr8-1.fna.fbcdn.net/v/t39.30808-6/555621234_2234262170334798_445424687395176848_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1920&ctp=s1920x1920&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=wVTYf9fP2EkQ7kNvwEXi7yI&_nc_oc=AdrL1wDbvFb-XZRIEctufHVdLoOEEH6t2CXy5TqmrZe8v3l4KAHc-iAlzf24fbM3MgovQSFKxeoLRNm8x7gURBVm&_nc_zt=23&_nc_ht=scontent.ffjr8-1.fna&_nc_gid=ccNNPXf9ym5cAqPFwAMPGg&_nc_ss=7b2a8&oh=00_AQGSBED-jBMwDMZH5N5L9wt5O3oKHBGn5BjA24NQQ7bZ2Q&oe=6A93D563",
+    "category": "123",
+    "title": "dextter",
+    "copy": "asddsads",
+    "date": "DUBAI JBR"
   }
 ];
