@@ -886,8 +886,8 @@ select:focus-visible {
 .brands-track {
     display: flex;
     width: max-content;
-    -webkit-animation: brand-loop 28s linear infinite;
-    animation: brand-loop 28s linear infinite;
+    -webkit-animation: brand-loop 60s linear infinite;
+    animation: brand-loop 60s linear infinite;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }
@@ -935,7 +935,7 @@ select:focus-visible {
 
 @media (max-width: 767px) {
     .brands-track {
-        animation-duration: 10s;
+        animation-duration: 35s;
     }
     .brand-logo {
         height: 80px;
