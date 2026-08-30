@@ -1,8 +1,8 @@
 window.LCDH_SETTINGS = {
   "contact": {
-    "email": "info@lacasadelhabano.ae",
+    "email": "lacasadelhabano@gmail.com",
     "whatsapp": "971542137706",
-    "whatsappBot": "9715066008888",
+    "whatsappBot": "971542137706",
     "instagram": "https://instagram.com/lacasadelhabano_uae"
   },
   "audio": {
