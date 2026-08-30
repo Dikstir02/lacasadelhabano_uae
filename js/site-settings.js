@@ -13,7 +13,7 @@ window.LCDH_SETTINGS = {
       "label": "City Walk — Dubai",
       "name": "City Walk",
       "city": "DUBAI",
-      "title": "CITY WALK",
+      "title": "La Casa del Habano City Walk",
       "copy": "A colourful, contemporary Casa in the heart of City Walk.",
       "address": "City Walk, Dubai, United Arab Emirates",
       "hours": "Please contact the Casa for current opening hours.",
