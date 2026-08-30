@@ -960,23 +960,91 @@ select:focus-visible {
 
 /* ===== LOCATIONS ===== */
 
+/* --- Desktop: clickable Casa list beside interactive map --- */
 .locations-layout {
+    display: none;
     margin-top: 56px;
-    display: grid;
-    gap: 32px;
 }
 
 @media (min-width: 1024px) {
     .locations-layout {
-        grid-template-columns: 1fr 1.35fr;
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
         align-items: stretch;
+        gap: 40px;
     }
 }
 
+/* --- Mobile: photo-card style (original look) --- */
+.locations-grid {
+    margin-top: 56px;
+    display: grid;
+    gap: 24px;
+}
+
+@media (min-width: 1024px) {
+    .locations-grid {
+        display: none;
+    }
+}
+
+.location-card {
+    background: var(--navy);
+    border: 1px solid rgba(248, 231, 199, .42);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 38px -18px rgba(7, 20, 25, .6);
+}
+
+.location-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.location-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .55s ease;
+}
+
+.location-card:hover .location-img img {
+    transform: scale(1.06);
+}
+
+.location-body {
+    padding: 24px;
+}
+
+.location-contact {
+    margin-top: 20px;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--sand);
+    text-transform: uppercase;
+    transition: color .2s ease;
+}
+
+.location-contact:hover {
+    color: var(--cream);
+}
+
+/* --- Desktop clickable rows (compact) --- */
 .location-links {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .location-link {
@@ -986,7 +1054,7 @@ select:focus-visible {
     background: var(--navy);
     border: 1px solid rgba(248, 231, 199, .42);
     border-radius: var(--radius-md);
-    padding: 26px 28px;
+    padding: 16px 22px;
     cursor: pointer;
     font-family: inherit;
     color: var(--cream);
@@ -1046,7 +1114,7 @@ select:focus-visible {
 }
 
 .location-rule {
-    margin: 20px 0;
+    margin: 16px 0;
     border: 0;
     height: 1px;
     background: rgba(231, 200, 137, .4);
@@ -1067,7 +1135,7 @@ select:focus-visible {
 
 .map-wrap {
     position: relative;
-    min-height: 480px;
+    min-height: 380px;
 }
 
 .locations-map {
@@ -1075,19 +1143,12 @@ select:focus-visible {
     z-index: 1;
     width: 100%;
     height: 100%;
-    min-height: 480px;
+    min-height: 380px;
     border: 1px solid rgba(248, 231, 199, .45);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy);
     box-shadow: 0 30px 60px -24px rgba(7, 20, 25, .6);
-}
-
-@media (max-width: 767px) {
-    .map-wrap,
-    .locations-map {
-        min-height: 360px;
-    }
 }
 
 /* Leaflet map theming to match the site */

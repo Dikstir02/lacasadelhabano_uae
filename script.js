@@ -318,6 +318,10 @@ startAutoplay();
     const links = Array.prototype.slice.call(document.querySelectorAll('.location-link'));
     if (!mapEl) return;
 
+    /* The map + list layout only exists on desktop (≥1024px); on mobile we keep the
+       original photo-card style, so the interactive map should not initialize. */
+    if (window.matchMedia && !window.matchMedia('(min-width: 1024px)').matches) return;
+
     /* If Leaflet failed to load, fall back to plain direction links */
     if (typeof L === 'undefined') {
         mapEl.innerHTML =
@@ -430,6 +434,20 @@ startAutoplay();
         setTimeout(() => map.invalidateSize(), 400);
     }
 })();
+
+/* ===== MOBILE LOCATION CARDS - CONTACT LOCATION BUTTONS ===== */
+/* On mobile the original photo-card style is shown; each card's button opens
+   the Casa in Google Maps and pre-selects it in the contact form. */
+document.querySelectorAll('.location-contact').forEach(button => {
+    button.addEventListener('click', () => {
+        const locationInput = document.getElementById('location');
+        if (locationInput) locationInput.value = button.dataset.location;
+        const mapUrl = button.dataset.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(button.dataset.location + ', United Arab Emirates');
+        window.open(mapUrl, '_blank', 'noopener,noreferrer');
+        const contactSection = document.getElementById('contact');
+        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    });
+});
 
 /* ===== CONTACT FORM ===== */
 const form = document.getElementById('enquiry-form');
