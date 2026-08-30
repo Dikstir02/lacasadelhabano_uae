@@ -434,10 +434,17 @@ function loadSettingsFromStorage() {
 }
 
 function currentSettings() {
-    if (fileSettings && fileSettings.contact) return cloneSettings(fileSettings);
-    const stored = loadSettingsFromStorage();
-    if (stored) return cloneSettings(stored);
-    return cloneSettings(DEFAULT_SETTINGS);
+    let base = null;
+    if (fileSettings && fileSettings.contact) base = fileSettings;
+    else base = loadSettingsFromStorage() || DEFAULT_SETTINGS;
+
+    /* Always return the full shape (contact/audio/locations) so editing
+       never crashes or silently blanks fields, even when the source is partial. */
+    const merged = cloneSettings(DEFAULT_SETTINGS);
+    if (base.contact) Object.assign(merged.contact, base.contact);
+    if (base.audio) Object.assign(merged.audio, base.audio);
+    if (Array.isArray(base.locations)) merged.locations = base.locations;
+    return merged;
 }
 
 function buildSettingsFile(settings) {
@@ -449,9 +456,11 @@ async function loadFileSettings() {
         const resp = await fetch('../js/site-settings.js', { cache: 'no-store' });
         if (!resp.ok) return null;
         const text = await resp.text();
-        const match = text.match(/window\.LCDH_SETTINGS\s*=\s*(\{[\s\S]*?\})\s*;?/);
-        if (!match) return null;
-        const parsed = JSON.parse(match[1]);
+        const marker = 'window.LCDH_SETTINGS =';
+        const idx = text.indexOf(marker);
+        if (idx === -1) return null;
+        const jsonText = text.slice(idx + marker.length).trim().replace(/;\s*$/, '');
+        const parsed = JSON.parse(jsonText);
         return parsed && parsed.contact ? parsed : null;
     } catch (error) {
         console.warn('Could not load site-settings.js:', error);
@@ -506,7 +515,12 @@ function settingsFormHtml(settings) {
 }
 
 function readSettingsFromForm() {
-    const val = (id) => ($(id) ? $(id).value.trim() : '');
+    /* NOTE: the '#' prefix is required — document.querySelector('s-email')
+       is a `<s-email>` element-type selector and matches nothing. */
+    const val = (id) => {
+        const el = $('#' + id);
+        return el ? el.value.trim() : '';
+    };
     const settings = currentSettings();
 
     settings.contact.email = val('s-email');
@@ -546,7 +560,14 @@ $('#settings-save-btn').addEventListener('click', () => {
 });
 
 $('#settings-export-btn').addEventListener('click', async () => {
-    const settings = readSettingsFromForm();
+    /* If the form failed to render, fall back to the known data rather than
+       exporting blank values. */
+    let settings;
+    if ($('#settings-forms') && $('#settings-forms').querySelector('input')) {
+        settings = readSettingsFromForm();
+    } else {
+        settings = currentSettings();
+    }
     try {
         await navigator.clipboard.writeText(buildSettingsFile(settings));
         showStatus('Copied site-settings.js ✓');
@@ -571,5 +592,6 @@ document.querySelectorAll('.tab-btn').forEach((btn) => {
         document.querySelectorAll('.tab-btn').forEach((b) => b.classList.toggle('active', b === btn));
         $('#panel-events').classList.toggle('hidden', btn.dataset.panel !== 'events');
         $('#panel-settings').classList.toggle('hidden', btn.dataset.panel !== 'settings');
+        if (btn.dataset.panel === 'settings') renderSettingsForm();
     });
 });
