@@ -977,14 +977,14 @@ select:focus-visible {
 
 /* --- Mobile: photo-card style (original look) --- */
 .locations-grid {
+    display: none;
     margin-top: 56px;
-    display: grid;
     gap: 24px;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1023.98px) {
     .locations-grid {
-        display: none;
+        display: grid;
     }
 }
 
