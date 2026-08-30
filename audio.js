@@ -7,6 +7,14 @@
     const audio = document.getElementById('bg-audio');
     if (!audio) return;
 
+    /* The background music comes from js/site-settings.js (managed via /admin). */
+    const musicUrl = window.LCDH_SETTINGS && window.LCDH_SETTINGS.audio && window.LCDH_SETTINGS.audio.url;
+    const sourceEl = audio.querySelector('source');
+    if (musicUrl && sourceEl) {
+        sourceEl.src = musicUrl;
+        audio.load();
+    }
+
     let isReady = false;
 
     audio.volume = 0.3;

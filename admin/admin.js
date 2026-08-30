@@ -132,7 +132,9 @@ async function openAdmin() {
     $('#login-view').classList.add('hidden');
     $('#admin-view').classList.remove('hidden');
     fileEvents = await loadFileEvents();
+    fileSettings = await loadFileSettings();
     renderList();
+    renderSettingsForm();
 }
 
 /* ===== form ===== */
@@ -353,3 +355,221 @@ if (sessionStorage.getItem(SESSION_KEY) === '1') {
         await openAdmin();
     })();
 }
+
+/* =========================================================
+   SITE SETTINGS MODULE — basic information for the live site
+   Same workflow as events: save locally → copy site-settings.js
+   ========================================================= */
+
+const SETTINGS_KEY = 'lcdh_settings_v1';
+
+const DEFAULT_SETTINGS = {
+    contact: {
+        email: 'info@lacasadelhabano.ae',
+        whatsapp: '971542137706',
+        whatsappBot: '9715066008888',
+        instagram: 'https://instagram.com/lacasadelhabano_uae'
+    },
+    audio: {
+        url: 'https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3'
+    },
+    locations: [
+        {
+            label: 'City Walk — Dubai',
+            name: 'City Walk',
+            city: 'DUBAI',
+            title: 'CITY WALK',
+            copy: 'A colourful, contemporary Casa in the heart of City Walk.',
+            address: 'City Walk, Dubai, United Arab Emirates',
+            hours: 'Please contact the Casa for current opening hours.',
+            mapsUrl: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8',
+            lat: 25.2056,
+            lng: 55.2570,
+            image: 'https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg'
+        },
+        {
+            label: 'JBR — Dubai',
+            name: 'JBR',
+            city: 'DUBAI',
+            title: 'JBR',
+            copy: 'A relaxed cigar destination close to the vibrant JBR waterfront.',
+            address: 'The Walk, Jumeirah Beach Residence, Dubai',
+            hours: 'Please contact the Casa for current opening hours.',
+            mapsUrl: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A',
+            lat: 25.0795,
+            lng: 55.1400,
+            image: 'https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg'
+        },
+        {
+            label: 'Abu Dhabi Mall — Abu Dhabi',
+            name: 'Abu Dhabi Mall',
+            city: 'ABU DHABI',
+            title: 'ABU DHABI MALL',
+            copy: 'A refined Casa for discovering Cuban tradition in the capital.',
+            address: 'Abu Dhabi Mall, Abu Dhabi, United Arab Emirates',
+            hours: 'Please contact the Casa for current opening hours.',
+            mapsUrl: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8',
+            lat: 24.5006,
+            lng: 54.3961,
+            image: 'https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg'
+        }
+    ]
+};
+
+let fileSettings = null;
+
+function cloneSettings(settings) {
+    return JSON.parse(JSON.stringify(settings));
+}
+
+function loadSettingsFromStorage() {
+    try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return parsed && parsed.settings && parsed.settings.contact ? parsed.settings : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function currentSettings() {
+    if (fileSettings && fileSettings.contact) return cloneSettings(fileSettings);
+    const stored = loadSettingsFromStorage();
+    if (stored) return cloneSettings(stored);
+    return cloneSettings(DEFAULT_SETTINGS);
+}
+
+function buildSettingsFile(settings) {
+    return 'window.LCDH_SETTINGS = ' + JSON.stringify(settings, null, 2) + ';\n';
+}
+
+async function loadFileSettings() {
+    try {
+        const resp = await fetch('../js/site-settings.js', { cache: 'no-store' });
+        if (!resp.ok) return null;
+        const text = await resp.text();
+        const match = text.match(/window\.LCDH_SETTINGS\s*=\s*(\{[\s\S]*?\})\s*;?/);
+        if (!match) return null;
+        const parsed = JSON.parse(match[1]);
+        return parsed && parsed.contact ? parsed : null;
+    } catch (error) {
+        console.warn('Could not load site-settings.js:', error);
+        return null;
+    }
+}
+
+function settingsFormHtml(settings) {
+    const c = settings.contact || {};
+    const a = settings.audio || {};
+    const locs = Array.isArray(settings.locations) ? settings.locations : [];
+
+    const textIn = (name, value, placeholder) =>
+        '<input type="text" id="' + name + '" value="' + escapeHtml(value) + '" placeholder="' + escapeHtml(placeholder || '') + '">';
+    const urlIn = (name, value, placeholder) =>
+        '<input type="url" id="' + name + '" value="' + escapeHtml(value) + '" placeholder="' + escapeHtml(placeholder || '') + '">';
+    const label = (text) => '<span class="field-label">' + text + '</span>';
+
+    let html = '<div class="settings-block">';
+    html += '<h3 class="settings-block-title">Contact details</h3>';
+    html += '<div class="field-grid">';
+    html += '<div>' + label('Email address') + textIn('s-email', c.email, 'info@…') + '</div>';
+    html += '<div>' + label('WhatsApp number') + textIn('s-whatsapp', c.whatsapp, '971…') + '</div>';
+    html += '<div>' + label('WhatsApp bot redirect number') + textIn('s-whatsapp-bot', c.whatsappBot, '971…') + '</div>';
+    html += '<div>' + label('Instagram link') + urlIn('s-instagram', c.instagram, 'https://instagram.com/…') + '</div>';
+    html += '</div></div>';
+
+    html += '<div class="settings-block">';
+    html += '<h3 class="settings-block-title">Background music</h3>';
+    html += '<div class="field-grid">';
+    html += '<div>' + label('Music file URL') + urlIn('s-audio-url', a.url, 'https://…/audio.mp3') + '</div>';
+    html += '</div></div>';
+
+    locs.forEach((loc, i) => {
+        html += '<div class="settings-block">';
+        html += '<h3 class="settings-block-title">Location ' + (i + 1) + (loc.title ? ' — ' + escapeHtml(loc.title) : '') + '</h3>';
+        html += '<div class="field-grid">';
+        html += '<div>' + label('Label &middot; shown in forms &amp; links') + textIn('s-loc-' + i + '-label', loc.label) + '</div>';
+        html += '<div>' + label('Short name') + textIn('s-loc-' + i + '-name', loc.name) + '</div>';
+        html += '<div>' + label('City / emirate label') + textIn('s-loc-' + i + '-city', loc.city) + '</div>';
+        html += '<div>' + label('Title') + textIn('s-loc-' + i + '-title', loc.title) + '</div>';
+        html += '<div class="field-span-2">' + label('Description') + textIn('s-loc-' + i + '-copy', loc.copy) + '</div>';
+        html += '<div class="field-span-2">' + label('Address') + textIn('s-loc-' + i + '-address', loc.address) + '</div>';
+        html += '<div class="field-span-2">' + label('Opening hours') + textIn('s-loc-' + i + '-hours', loc.hours) + '</div>';
+        html += '<div class="field-span-2">' + label('Google Maps link') + urlIn('s-loc-' + i + '-mapsurl', loc.mapsUrl) + '</div>';
+        html += '<div>' + label('Latitude') + textIn('s-loc-' + i + '-lat', loc.lat) + '</div>';
+        html += '<div>' + label('Longitude') + textIn('s-loc-' + i + '-lng', loc.lng) + '</div>';
+        html += '</div></div>';
+    });
+
+    return html;
+}
+
+function readSettingsFromForm() {
+    const val = (id) => ($(id) ? $(id).value.trim() : '');
+    const settings = currentSettings();
+
+    settings.contact.email = val('s-email');
+    settings.contact.whatsapp = val('s-whatsapp');
+    settings.contact.whatsappBot = val('s-whatsapp-bot');
+    settings.contact.instagram = val('s-instagram');
+    settings.audio.url = val('s-audio-url');
+
+    settings.locations.forEach((loc, i) => {
+        loc.label = val('s-loc-' + i + '-label');
+        loc.name = val('s-loc-' + i + '-name');
+        loc.city = val('s-loc-' + i + '-city');
+        loc.title = val('s-loc-' + i + '-title');
+        loc.copy = val('s-loc-' + i + '-copy');
+        loc.address = val('s-loc-' + i + '-address');
+        loc.hours = val('s-loc-' + i + '-hours');
+        loc.mapsUrl = val('s-loc-' + i + '-mapsurl');
+        loc.lat = Number(val('s-loc-' + i + '-lat')) || 0;
+        loc.lng = Number(val('s-loc-' + i + '-lng')) || 0;
+    });
+
+    return settings;
+}
+
+function renderSettingsForm() {
+    const wrap = $('#settings-forms');
+    if (!wrap) return;
+    wrap.innerHTML = settingsFormHtml(currentSettings());
+}
+
+/* ===== settings actions ===== */
+
+$('#settings-save-btn').addEventListener('click', () => {
+    const settings = readSettingsFromForm();
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ settings }));
+    showStatus('Settings saved ✓ — now copy site-settings.js');
+});
+
+$('#settings-export-btn').addEventListener('click', async () => {
+    const settings = readSettingsFromForm();
+    try {
+        await navigator.clipboard.writeText(buildSettingsFile(settings));
+        showStatus('Copied site-settings.js ✓');
+    } catch (error) {
+        console.error('Copy failed:', error);
+        showStatus('Copy failed — please copy manually', true);
+    }
+});
+
+$('#settings-restore-btn').addEventListener('click', async () => {
+    if (!confirm('Discard saved settings and restore the originals?')) return;
+    localStorage.removeItem(SETTINGS_KEY);
+    fileSettings = await loadFileSettings();
+    renderSettingsForm();
+    showStatus('Settings restored ✓');
+});
+
+/* ===== admin tabs ===== */
+
+document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach((b) => b.classList.toggle('active', b === btn));
+        $('#panel-events').classList.toggle('hidden', btn.dataset.panel !== 'events');
+        $('#panel-settings').classList.toggle('hidden', btn.dataset.panel !== 'settings');
+    });
+});

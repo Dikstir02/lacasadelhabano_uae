@@ -306,3 +306,85 @@ textarea { resize: vertical; }
     .topbar { padding: 18px 20px; }
     .layout { padding: 22px 20px 70px; }
 }
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    gap: 4px;
+    padding: 14px 32px 0;
+    border-bottom: 1px solid var(--line);
+    background: rgba(11, 33, 41, .4);
+}
+
+@media (max-width: 900px) {
+    .tabs { padding: 14px 20px 0; }
+}
+
+.tab-btn {
+    background: none;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    color: var(--cream);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    cursor: pointer;
+    opacity: .6;
+    transition: opacity .2s ease, background .2s ease;
+}
+
+.tab-btn:hover { opacity: .9; }
+
+.tab-btn.active {
+    opacity: 1;
+    background: rgba(16, 45, 54, .9);
+    border-color: var(--line);
+    border-top: 2px solid var(--coral);
+}
+
+/* ===== SETTINGS ===== */
+.settings-hint {
+    font-size: 12.5px;
+    line-height: 1.6;
+    opacity: .7;
+    margin-bottom: 10px;
+}
+
+.settings-hint code {
+    background: rgba(231, 200, 137, .15);
+    border: 1px solid rgba(231, 200, 137, .35);
+    padding: 1px 6px;
+    font-size: 12px;
+}
+
+.settings-block {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+}
+
+.settings-block:first-of-type { border-top: 0; }
+
+.settings-block-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--gold);
+}
+
+.field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 18px;
+}
+
+.field-grid .field-span-2 { grid-column: span 2; }
+
+@media (max-width: 640px) {
+    .field-grid { grid-template-columns: 1fr; }
+    .field-grid .field-span-2 { grid-column: span 1; }
+}

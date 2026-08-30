@@ -192,6 +192,88 @@ if (eventsData.length > 0) {
     if (eventsSection) eventsSection.style.display = 'none';
 }
 
+/* ===== SITE SETTINGS (managed via /admin → js/site-settings.js) ===== */
+/* The live site renders its contact details, locations and music from
+   window.LCDH_SETTINGS so every page load reflects the latest export. */
+const SETTINGS = (window.LCDH_SETTINGS && typeof window.LCDH_SETTINGS === 'object')
+    ? window.LCDH_SETTINGS
+    : { contact: {}, audio: {}, locations: [] };
+
+function applySiteSettings() {
+    const c = SETTINGS.contact || {};
+    const locs = Array.isArray(SETTINGS.locations) ? SETTINGS.locations : [];
+
+    const setLink = (id, href, text) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (href) el.href = href;
+        if (text) el.textContent = text;
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+    };
+
+    /* Contact + footer links */
+    if (c.whatsapp) setLink('contact-wa', 'https://wa.me/' + c.whatsapp);
+    if (c.whatsappBot) setLink('footer-whatsapp', 'https://wa.me/' + c.whatsappBot);
+    if (c.instagram) setLink('contact-ig', c.instagram);
+    if (c.email) {
+        setLink('contact-email', 'mailto:' + c.email, 'EMAIL — ' + String(c.email).toUpperCase());
+        setLink('footer-email', 'mailto:' + c.email, c.email);
+    }
+    const widget = document.getElementById('whatsapp-widget');
+    if (widget && c.whatsapp) widget.href = 'https://wa.me/' + c.whatsapp;
+
+    /* Footer locations list */
+    const footerLocs = document.getElementById('footer-locations');
+    if (footerLocs && locs.length) {
+        footerLocs.innerHTML = locs.map((l) => escapeHtml(l.name || l.title)).join('<br>');
+    }
+
+    /* Contact form location dropdown */
+    const locSelect = document.getElementById('location');
+    if (locSelect && locs.length) {
+        locSelect.innerHTML =
+            '<option value="" disabled selected>Select a location</option>' +
+            locs.map((l) => '<option value="' + escapeHtml(l.label) + '">' + escapeHtml(l.label) + '</option>').join('');
+    }
+
+    /* Desktop clickable list */
+    const linksWrap = document.getElementById('location-links');
+    if (linksWrap && locs.length) {
+        linksWrap.innerHTML = locs.map((loc) =>
+            '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '">' +
+                '<span class="location-link-top">' +
+                    '<span class="location-city">' + escapeHtml(loc.city) + '</span>' +
+                    '<span class="location-link-arrow" aria-hidden="true">→</span>' +
+                '</span>' +
+                '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
+                '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
+            '</button>'
+        ).join('');
+    }
+
+    /* Mobile photo-card style */
+    const gridWrap = document.getElementById('locations-grid');
+    if (gridWrap && locs.length) {
+        gridWrap.innerHTML = locs.map((loc) =>
+            '<article class="location-card">' +
+                '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
+                '<div class="location-body">' +
+                    '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
+                    '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
+                    '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
+                    '<hr class="location-rule" aria-hidden="true">' +
+                    '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
+                    '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
+                    '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact">CONTACT LOCATION →</button>' +
+                '</div>' +
+            '</article>'
+        ).join('');
+    }
+}
+
+applySiteSettings();
+
 const realSlides = Array.from(track.children);
 const slideCount = realSlides.length;
 
@@ -335,35 +417,21 @@ startAutoplay();
         return;
     }
 
-    const LOCATIONS = {
-        'City Walk — Dubai': {
-            lat: 25.2056,
-            lng: 55.2570,
-            name: 'City Walk',
-            city: 'DUBAI',
-            address: 'City Walk, Dubai, United Arab Emirates',
-            hours: 'Please contact the Casa for current opening hours.',
-            directions: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8'
-        },
-        'JBR — Dubai': {
-            lat: 25.0795,
-            lng: 55.1400,
-            name: 'JBR',
-            city: 'DUBAI',
-            address: 'The Walk, Jumeirah Beach Residence, Dubai',
-            hours: 'Please contact the Casa for current opening hours.',
-            directions: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A'
-        },
-        'Abu Dhabi Mall — Abu Dhabi': {
-            lat: 24.5006,
-            lng: 54.3961,
-            name: 'Abu Dhabi Mall',
-            city: 'ABU DHABI',
-            address: 'Abu Dhabi Mall, Abu Dhabi, United Arab Emirates',
-            hours: 'Please contact the Casa for current opening hours.',
-            directions: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8'
-        }
-    };
+    /* Locations come from js/site-settings.js (managed via /admin) */
+    const settingsLocs = Array.isArray(SETTINGS.locations) ? SETTINGS.locations : [];
+    const LOCATIONS = {};
+    settingsLocs.forEach(function (item) {
+        if (!item || !item.label) return;
+        LOCATIONS[item.label] = {
+            lat: Number(item.lat) || 0,
+            lng: Number(item.lng) || 0,
+            name: item.name || item.title || item.label,
+            city: item.city || '',
+            address: item.address || '',
+            hours: item.hours || '',
+            directions: item.mapsUrl || ''
+        };
+    });
 
     const map = L.map(mapEl, {
         scrollWheelZoom: false,
@@ -498,7 +566,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ===== WHATSAPP CHATBOT WIDGET ===== */
-const WA_NUMBER = '971542137706';
+const WA_NUMBER = (SETTINGS.contact && SETTINGS.contact.whatsapp) ? SETTINGS.contact.whatsapp : '971542137706';
 const chatWidget = document.getElementById('whatsapp-widget');
 const chatPanel = document.getElementById('whatsapp-chatbot');
 const chatClose = document.getElementById('chatbot-close');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Events Admin · La Casa del Habano UAE</title>
+    <title>Site Admin · La Casa del Habano UAE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
     <div class="login-wrap" id="login-view">
         <form class="login-card" id="login-form">
             <p class="brand-mark">LCDH</p>
-            <h1 class="login-title">Events Admin</h1>
+            <h1 class="login-title">Site Admin</h1>
             <p class="login-sub">La Casa del Habano UAE · restricted area</p>
             <label class="field-label" for="password">Password</label>
             <input type="password" id="password" autocomplete="current-password" placeholder="Enter admin password" required>
@@ -29,7 +29,7 @@
     <div id="admin-view" class="hidden">
         <header class="topbar">
             <div>
-                <p class="topbar-brand">LA CASA DEL HABANO <span>· Events Admin</span></p>
+                <p class="topbar-brand">LA CASA DEL HABANO <span>· Site Admin</span></p>
                 <p class="topbar-sub" id="events-count"></p>
             </div>
             <div class="topbar-actions">
@@ -40,6 +40,12 @@
             </div>
         </header>
 
+        <nav class="tabs" aria-label="Admin sections">
+            <button type="button" class="tab-btn active" data-panel="events">Events</button>
+            <button type="button" class="tab-btn" data-panel="settings">Site Settings</button>
+        </nav>
+
+        <div id="panel-events">
         <main class="layout">
             <!-- FORM -->
             <section class="card">
@@ -79,6 +85,22 @@
                 <div id="event-list"></div>
             </section>
         </main>
+        </div>
+
+        <div id="panel-settings" class="hidden">
+        <main class="layout">
+            <section class="card">
+                <h2 class="card-title">Site Settings</h2>
+                <p class="settings-hint">These settings power the live website and are exported to <code>js/site-settings.js</code> — same workflow as events.</p>
+                <div id="settings-forms"></div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" id="settings-save-btn">Save settings</button>
+                    <button type="button" class="btn btn-ghost" id="settings-export-btn">Copy site-settings.js</button>
+                    <button type="button" class="btn btn-danger-ghost" id="settings-restore-btn">Restore defaults</button>
+                </div>
+            </section>
+        </main>
+        </div>
     </div>
 
     <div class="status-toast" id="status-toast" role="status"></div>

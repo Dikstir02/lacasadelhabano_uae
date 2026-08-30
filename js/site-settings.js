@@ -1,0 +1,57 @@
+/* =========================================================
+   LA CASA DEL HABANO UAE — Site Settings
+   Managed via /admin (Site Settings tab) and exported here.
+   The live site reads window.LCDH_SETTINGS on every load.
+   ========================================================= */
+window.LCDH_SETTINGS = {
+  "contact": {
+    "email": "info@lacasadelhabano.ae",
+    "whatsapp": "971542137706",
+    "whatsappBot": "9715066008888",
+    "instagram": "https://instagram.com/lacasadelhabano_uae"
+  },
+  "audio": {
+    "url": "https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3"
+  },
+  "locations": [
+    {
+      "label": "City Walk — Dubai",
+      "name": "City Walk",
+      "city": "DUBAI",
+      "title": "CITY WALK",
+      "copy": "A colourful, contemporary Casa in the heart of City Walk.",
+      "address": "City Walk, Dubai, United Arab Emirates",
+      "hours": "Please contact the Casa for current opening hours.",
+      "mapsUrl": "https://maps.app.goo.gl/KonTfdo48PyqwFJo8",
+      "lat": 25.2056,
+      "lng": 55.257,
+      "image": "https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg"
+    },
+    {
+      "label": "JBR — Dubai",
+      "name": "JBR",
+      "city": "DUBAI",
+      "title": "JBR",
+      "copy": "A relaxed cigar destination close to the vibrant JBR waterfront.",
+      "address": "The Walk, Jumeirah Beach Residence, Dubai",
+      "hours": "Please contact the Casa for current opening hours.",
+      "mapsUrl": "https://maps.app.goo.gl/SEFQf9YabRu11QU6A",
+      "lat": 25.0795,
+      "lng": 55.14,
+      "image": "https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg"
+    },
+    {
+      "label": "Abu Dhabi Mall — Abu Dhabi",
+      "name": "Abu Dhabi Mall",
+      "city": "ABU DHABI",
+      "title": "ABU DHABI MALL",
+      "copy": "A refined Casa for discovering Cuban tradition in the capital.",
+      "address": "Abu Dhabi Mall, Abu Dhabi, United Arab Emirates",
+      "hours": "Please contact the Casa for current opening hours.",
+      "mapsUrl": "https://maps.app.goo.gl/787X3kXX6VPw44zs8",
+      "lat": 24.5006,
+      "lng": 54.3961,
+      "image": "https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg"
+    }
+  ]
+};
