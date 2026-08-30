@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23102d36'/><text x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23e7c889' text-anchor='middle'>H</text></svg>">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -310,43 +311,45 @@
                 <p class="eyebrow eyebrow-gold">THREE CASAS, ONE SPIRIT</p>
                 <h2 class="section-title section-title-cream">FIND YOUR CASA.</h2>
                 <p class="section-sub cream">Your closest invitation to an exceptional Habano experience.</p>
-                <div class="locations-grid">
-                    <article class="location-card">
-                        <div class="location-img"><img src="https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg" alt="City Walk Casa" loading="lazy"></div>
-                        <div class="location-body">
-                            <p class="location-city">DUBAI</p>
+                <div class="locations-layout">
+                    <div class="location-links reveal" role="group" aria-label="Choose a Casa location to see it on the map">
+                        <button type="button" class="location-link" data-location="City Walk — Dubai" data-map-url="https://maps.app.goo.gl/KonTfdo48PyqwFJo8">
+                            <span class="location-link-top">
+                                <span class="location-city">DUBAI</span>
+                                <span class="location-link-arrow" aria-hidden="true">→</span>
+                            </span>
                             <h3 class="location-title display">CITY WALK</h3>
                             <p class="location-copy">A colourful, contemporary Casa in the heart of City Walk.</p>
                             <hr class="location-rule" aria-hidden="true">
-                            <p class="location-address">City Walk, Dubai, United Arab Emirates</p>
-                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
-                            <button type="button" data-location="City Walk — Dubai" data-map-url="https://maps.app.goo.gl/KonTfdo48PyqwFJo8" class="location-contact">CONTACT LOCATION →</button>
-                        </div>
-                    </article>
-                    <article class="location-card">
-                        <div class="location-img"><img src="https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg" alt="JBR Casa" loading="lazy"></div>
-                        <div class="location-body">
-                            <p class="location-city">DUBAI</p>
+                            <span class="location-address">City Walk, Dubai, United Arab Emirates</span>
+                            <span class="location-hours">Please contact the Casa for current opening hours.</span>
+                        </button>
+                        <button type="button" class="location-link" data-location="JBR — Dubai" data-map-url="https://maps.app.goo.gl/SEFQf9YabRu11QU6A">
+                            <span class="location-link-top">
+                                <span class="location-city">DUBAI</span>
+                                <span class="location-link-arrow" aria-hidden="true">→</span>
+                            </span>
                             <h3 class="location-title display">JBR</h3>
                             <p class="location-copy">A relaxed cigar destination close to the vibrant JBR waterfront.</p>
                             <hr class="location-rule" aria-hidden="true">
-                            <p class="location-address">The Walk, Jumeirah Beach Residence, Dubai</p>
-                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
-                            <button type="button" data-location="JBR — Dubai" data-map-url="https://maps.app.goo.gl/SEFQf9YabRu11QU6A" class="location-contact">CONTACT LOCATION →</button>
-                        </div>
-                    </article>
-                    <article class="location-card">
-                        <div class="location-img"><img src="https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg" alt="Abu Dhabi Mall Casa" loading="lazy"></div>
-                        <div class="location-body">
-                            <p class="location-city">ABU DHABI</p>
+                            <span class="location-address">The Walk, Jumeirah Beach Residence, Dubai</span>
+                            <span class="location-hours">Please contact the Casa for current opening hours.</span>
+                        </button>
+                        <button type="button" class="location-link" data-location="Abu Dhabi Mall — Abu Dhabi" data-map-url="https://maps.app.goo.gl/787X3kXX6VPw44zs8">
+                            <span class="location-link-top">
+                                <span class="location-city">ABU DHABI</span>
+                                <span class="location-link-arrow" aria-hidden="true">→</span>
+                            </span>
                             <h3 class="location-title display">ABU DHABI MALL</h3>
                             <p class="location-copy">A refined Casa for discovering Cuban tradition in the capital.</p>
                             <hr class="location-rule" aria-hidden="true">
-                            <p class="location-address">Abu Dhabi Mall, Abu Dhabi, United Arab Emirates</p>
-                            <p class="location-hours">Please contact the Casa for current opening hours.</p>
-                            <button type="button" data-location="Abu Dhabi Mall — Abu Dhabi" data-map-url="https://maps.app.goo.gl/787X3kXX6VPw44zs8" class="location-contact">CONTACT LOCATION →</button>
-                        </div>
-                    </article>
+                            <span class="location-address">Abu Dhabi Mall, Abu Dhabi, United Arab Emirates</span>
+                            <span class="location-hours">Please contact the Casa for current opening hours.</span>
+                        </button>
+                    </div>
+                    <div class="map-wrap reveal">
+                        <div id="locations-map" class="locations-map" role="region" aria-label="Map of La Casa del Habano locations"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -459,6 +462,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
     </a>
 
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/events-data.js"></script>
     <script src="script.js"></script>
     <script src="audio.js"></script>

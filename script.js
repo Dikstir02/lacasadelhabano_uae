@@ -312,17 +312,124 @@ updateDots();
 render(false);
 startAutoplay();
 
-/* ===== LOCATION CONTACT BUTTONS ===== */
-document.querySelectorAll('.location-contact').forEach(button => {
-    button.addEventListener('click', () => {
-        const locationInput = document.getElementById('location');
-        if (locationInput) locationInput.value = button.dataset.location;
-        const mapUrl = button.dataset.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(button.dataset.location + ', United Arab Emirates');
-        window.open(mapUrl, '_blank', 'noopener,noreferrer');
-        const contactSection = document.getElementById('contact');
-        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+/* ===== LOCATIONS MAP (Leaflet + OpenStreetMap) ===== */
+(function initLocationsMap() {
+    const mapEl = document.getElementById('locations-map');
+    const links = Array.prototype.slice.call(document.querySelectorAll('.location-link'));
+    if (!mapEl) return;
+
+    /* If Leaflet failed to load, fall back to plain direction links */
+    if (typeof L === 'undefined') {
+        mapEl.innerHTML =
+            '<div class="locations-map-fallback">' +
+            '<p>Map unavailable. Open a Casa directly:</p>' +
+            links.map(function (link) {
+                const url = link.dataset.mapUrl || 'https://www.google.com/maps';
+                return '<a class="locations-map-fallback-link" href="' + url + '" target="_blank" rel="noopener noreferrer">' + link.dataset.location + '</a>';
+            }).join('') +
+            '</div>';
+        return;
+    }
+
+    const LOCATIONS = {
+        'City Walk — Dubai': {
+            lat: 25.2056,
+            lng: 55.2570,
+            name: 'City Walk',
+            city: 'DUBAI',
+            address: 'City Walk, Dubai, United Arab Emirates',
+            hours: 'Please contact the Casa for current opening hours.',
+            directions: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8'
+        },
+        'JBR — Dubai': {
+            lat: 25.0795,
+            lng: 55.1400,
+            name: 'JBR',
+            city: 'DUBAI',
+            address: 'The Walk, Jumeirah Beach Residence, Dubai',
+            hours: 'Please contact the Casa for current opening hours.',
+            directions: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A'
+        },
+        'Abu Dhabi Mall — Abu Dhabi': {
+            lat: 24.5006,
+            lng: 54.3961,
+            name: 'Abu Dhabi Mall',
+            city: 'ABU DHABI',
+            address: 'Abu Dhabi Mall, Abu Dhabi, United Arab Emirates',
+            hours: 'Please contact the Casa for current opening hours.',
+            directions: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8'
+        }
+    };
+
+    const map = L.map(mapEl, {
+        scrollWheelZoom: false,
+        zoomControl: true,
+        attributionControl: true
     });
-});
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const allKeys = Object.keys(LOCATIONS);
+
+    allKeys.forEach(function (key) {
+        const loc = LOCATIONS[key];
+        loc.marker = L.marker([loc.lat, loc.lng], {
+            icon: L.divIcon({
+                className: 'location-marker',
+                html: '<span class="location-pin"></span>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 18],
+                popupAnchor: [0, -24]
+            }),
+            title: loc.name,
+            riseOnHover: true
+        }).addTo(map);
+
+        loc.marker.bindPopup(
+            '<span class="lp-kicker">' + loc.city + '</span>' +
+            '<span class="lp-title">' + loc.name + '</span>' +
+            '<span class="lp-address">' + loc.address + '</span>' +
+            '<span class="lp-hours">' + loc.hours + '</span>' +
+            '<a class="lp-link" href="' + loc.directions + '" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>',
+            { closeButton: true, className: 'location-popup' }
+        );
+
+        loc.marker.on('click', () => activate(key, false));
+    });
+
+    /* Show all three Casas at once initially, then zoom on selection */
+    map.fitBounds(allKeys.map(function (key) {
+        return [LOCATIONS[key].lat, LOCATIONS[key].lng];
+    }), { padding: [48, 48] });
+
+    function activate(key, pan) {
+        const loc = LOCATIONS[key];
+        if (!loc) return;
+        links.forEach(function (link) {
+            link.classList.toggle('active', link.dataset.location === key);
+        });
+        if (pan !== false) map.flyTo([loc.lat, loc.lng], 15, { duration: 1.1 });
+        loc.marker.openPopup();
+    }
+
+    links.forEach(function (link) {
+        link.addEventListener('click', () => {
+            activate(link.dataset.location, true);
+            /* Also pre-select this Casa in the contact form */
+            const locationInput = document.getElementById('location');
+            if (locationInput) locationInput.value = link.dataset.location;
+        });
+    });
+
+    /* Re-measure the map once everything is laid out (reveal animations etc.) */
+    if (map.invalidateSize) {
+        window.addEventListener('load', () => map.invalidateSize());
+        setTimeout(() => map.invalidateSize(), 400);
+    }
+})();
 
 /* ===== CONTACT FORM ===== */
 const form = document.getElementById('enquiry-form');
