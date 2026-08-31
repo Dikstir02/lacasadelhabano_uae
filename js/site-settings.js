@@ -1,8 +1,8 @@
 window.LCDH_SETTINGS = {
   "contact": {
     "email": "lacasadelhabano@gmail.com",
-    "whatsapp": "971542137706",
-    "whatsappBot": "971542137706",
+    "whatsapp": "971558002731",
+    "whatsappBot": "971558002731",
     "instagram": "https://instagram.com/lacasadelhabano_uae"
   },
   "audio": {
@@ -13,7 +13,7 @@ window.LCDH_SETTINGS = {
       "label": "City Walk — Dubai",
       "name": "City Walk",
       "city": "DUBAI",
-      "title": "La Casa del Habano City Walk",
+      "title": "LCDH City Walk",
       "copy": "A colourful, contemporary Casa in the heart of City Walk.",
       "address": "City Walk, Dubai, United Arab Emirates",
       "hours": "Please contact the Casa for current opening hours.",
@@ -26,7 +26,7 @@ window.LCDH_SETTINGS = {
       "label": "JBR — Dubai",
       "name": "JBR",
       "city": "DUBAI",
-      "title": "La Casa del Habano JBR",
+      "title": "LCDH JBR",
       "copy": "A relaxed cigar destination close to the vibrant JBR waterfront.",
       "address": "The Walk, Jumeirah Beach Residence, Dubai",
       "hours": "Please contact the Casa for current opening hours.",
@@ -39,7 +39,7 @@ window.LCDH_SETTINGS = {
       "label": "Abu Dhabi Mall — Abu Dhabi",
       "name": "Abu Dhabi Mall",
       "city": "ABU DHABI",
-      "title": "La Casa del Habano Abu Dhabi Mall",
+      "title": "LCDH Abu Dhabi Mall",
       "copy": "A refined Casa for discovering Cuban tradition in the capital.",
       "address": "Abu Dhabi Mall, Abu Dhabi, United Arab Emirates",
       "hours": "Please contact the Casa for current opening hours.",
