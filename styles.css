@@ -630,7 +630,7 @@ select:focus-visible {
 }
 
 .section-navy {
-    background: var(--brand-red-dark);    /* Contact             */
+    background: var(--brand-red-dark);    /* About Us            */
 }
 
 /* ===== HERITAGE ===== */
@@ -1316,103 +1316,175 @@ select:focus-visible {
 .locations-map-fallback-link:hover {
     color: var(--cream);
 }
-/* ===== CONTACT ===== */
+/* ===== ABOUT US ===== */
 
-.contact-grid {
+.about-grid {
     display: grid;
-    gap: 56px;
+    gap: 48px;
+    align-items: center;
 }
 
 @media (min-width: 1024px) {
-    .contact-grid {
-        grid-template-columns: .8fr 1.2fr;
+    .about-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
     }
 }
 
-.contact-links {
-    margin-top: 40px;
+#about .section-copy + .section-copy {
+    margin-top: 18px;
+}
+
+.about-sign {
+    margin-top: 28px;
+    font-size: 30px;
+    font-style: italic;
+    color: var(--sand);
+}
+
+.about-actions {
+    margin-top: 32px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
 }
 
-.contact-link {
-    display: block;
-    font-size: 17px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    color: var(--sand);
-    text-decoration: none;
-    transition: color .2s ease;
-}
-
-.contact-link:hover {
+.btn-outline-light {
+    background: transparent;
+    border: 2px solid rgba(244, 239, 228, .65);
     color: var(--cream);
 }
 
-.contact-form {
-    display: grid;
-    gap: 32px 32px;
+.btn-outline-light:hover {
+    background: rgba(244, 239, 228, .12);
+    border-color: var(--cream);
 }
 
-@media (min-width: 640px) {
-    .contact-form {
-        grid-template-columns: repeat(2, 1fr);
+.about-media {
+    position: relative;
+}
+
+.about-frame {
+    position: absolute;
+    left: -12px;
+    top: -12px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid rgba(167, 153, 110, .8);
+    border-radius: var(--radius-lg);
+}
+
+.about-img-main {
+    position: relative;
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: 0 28px 50px -20px rgba(46, 1, 9, .6);
+}
+
+@media (min-width: 1024px) {
+    .about-img-main {
+        height: 520px;
     }
 }
 
-.form-span-2 {
-    grid-column: 1 / -1;
+.about-badge {
+    position: absolute;
+    left: 20px;
+    bottom: -24px;
+    background: var(--cream);
+    color: var(--brand-red-dark);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    box-shadow: 0 20px 40px -16px rgba(46, 1, 9, .55);
+    max-width: 280px;
 }
 
-.contact-form label {
-    display: block;
-    margin-bottom: 16px;
+.about-badge-kicker {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    color: var(--brand-red);
+}
+
+.about-badge-title {
+    margin-top: 6px;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.about-pillars {
+    margin-top: 88px;
+    display: grid;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .about-pillars {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.about-card {
+    border: 1px solid rgba(244, 239, 228, .35);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    background: rgba(244, 239, 228, .05);
+    transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-7px);
+    background: rgba(244, 239, 228, .1);
+    box-shadow: 0 24px 40px -18px rgba(46, 1, 9, .55);
+}
+
+.about-number {
+    font-size: 30px;
+    color: var(--sand);
+}
+
+.about-card-title {
+    margin-top: 12px;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: "Playfair Display", Georgia, serif;
+    color: var(--cream);
+}
+
+.about-card-copy {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(244, 239, 228, .85);
+}
+
+.about-stats {
+    margin-top: 56px;
+    display: grid;
+    gap: 24px;
+    border-top: 1px solid rgba(244, 239, 228, .25);
+    padding-top: 40px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.about-stat-value {
+    font-size: clamp(40px, 5vw, 56px);
+    color: var(--cream);
+}
+
+.about-stat-label {
+    margin-top: 8px;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: .13em;
-    color: var(--cream);
-    text-transform: uppercase;
-}
-
-.form-input {
-    width: 100%;
-    border: 0;
-    border-bottom: 2px solid rgba(244, 239, 228, .52);
-    border-radius: 0;
-    background: transparent;
-    padding: .7rem 0;
-    color: var(--cream);
-    font: 400 14px "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--sand);
-}
-
-.form-input::placeholder {
-    color: rgba(244, 239, 228, .62);
-}
-
-.form-input option {
-    background: var(--navy);
-}
-
-select.form-input {
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-.form-textarea {
-    min-height: 7rem;
-    resize: vertical;
-}
-
-.form-status {
-    margin-top: 16px;
-    font-size: 17px;
+    letter-spacing: .16em;
     color: var(--sand);
 }
 
@@ -1832,25 +1904,21 @@ select.form-input {
         text-align: center;
     }
 
-    /* --- Contact section --- */
-    .contact-grid > .reveal {
+    /* --- About section --- */
+    .about-grid > .reveal {
         text-align: center;
     }
 
-    .contact-links {
-        align-items: center;
+    .about-actions {
+        justify-content: center;
     }
 
-    .contact-form label {
-        display: block;
-        text-align: center;
+    .about-badge {
+        left: 50%;
+        transform: translateX(-50%);
     }
 
-    .form-span-2 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+    .about-sign {
         text-align: center;
     }
 

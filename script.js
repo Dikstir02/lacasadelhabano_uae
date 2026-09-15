@@ -503,56 +503,58 @@ startAutoplay();
     }
 })();
 
-/* ===== MOBILE LOCATION CARDS - CONTACT LOCATION BUTTONS ===== */
+/* ===== MOBILE LOCATION CARDS - LOCATION BUTTONS ===== */
 /* On mobile the original photo-card style is shown; each card's button opens
-   the Casa in Google Maps and pre-selects it in the contact form. */
+   the Casa in Google Maps. */
 document.querySelectorAll('.location-contact').forEach(button => {
     button.addEventListener('click', () => {
-        const locationInput = document.getElementById('location');
-        if (locationInput) locationInput.value = button.dataset.location;
         const mapUrl = button.dataset.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(button.dataset.location + ', United Arab Emirates');
         window.open(mapUrl, '_blank', 'noopener,noreferrer');
-        const contactSection = document.getElementById('contact');
-        if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-/* ===== CONTACT FORM ===== */
+/* ===== ENQUIRY FORM (only when present) ===== */
+/* The About Us section replaced the old contact/enquiry form. Guard everything
+   so removing the form can never throw and break the scripts below it. */
 const form = document.getElementById('enquiry-form');
 const statusEl = document.getElementById('form-status');
 const submitButton = document.getElementById('submit-button');
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+if (form && statusEl && submitButton) {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    if (!form.checkValidity()) {
-        statusEl.textContent = 'Please complete all fields correctly.';
-        form.reportValidity();
-        return;
-    }
+        if (!form.checkValidity()) {
+            statusEl.textContent = 'Please complete all fields correctly.';
+            form.reportValidity();
+            return;
+        }
 
-    submitButton.disabled = true;
-    statusEl.textContent = 'Sending your enquiry…';
+        submitButton.disabled = true;
+        statusEl.textContent = 'Sending your enquiry…';
 
-    const data = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        location: document.getElementById('location').value,
-        message: document.getElementById('message').value.trim(),
-        submitted_at: new Date().toISOString()
-    };
+        const data = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            location: document.getElementById('location').value,
+            message: document.getElementById('message').value.trim(),
+            submitted_at: new Date().toISOString()
+        };
 
-    /* Static demo submission. In production, POST the payload or
-       forward it (e.g. WhatsApp / a backend / an API route). */
-    setTimeout(() => {
-        submitButton.disabled = false;
-        statusEl.textContent = 'Gracias — your enquiry has been received.';
-        form.reset();
-    }, 600);
+        /* Static demo submission. In production, POST the payload or
+           forward it (e.g. WhatsApp / a backend / an API route). */
+        setTimeout(() => {
+            submitButton.disabled = false;
+            statusEl.textContent = 'Gracias — your enquiry has been received.';
+            form.reset();
+        }, 600);
 
-    console.log('Enquiry payload:', data);
-});
+        console.log('Enquiry payload:', data);
+    });
+}
 
 /* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
