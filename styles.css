@@ -2,19 +2,51 @@
    LA CASA DEL HABANO UAE
    Reference-aligned stylesheet
    Fonts: DM Sans (body) · Playfair Display (display)
+
+   ---------------------------------------------------------
+   LA CASA DEL HABANO BRAND PALETTE
+   ---------------------------------------------------------
+     HABANO RED      #98012D   primary   · CTAs, rules, accents
+     HABANO GOLD     #A7996E   secondary · foil lines, borders,
+                                           numerals, small copy
+     TOBACCO BROWN   #7B3900   tertiary  · large warm surfaces
+     HABANO BLACK    #211E1F   base      · page ground & copy
+   ---------------------------------------------------------
+   The shades/tints below are mixed from those four colours
+   only, so every surface on the site stays on-palette.
+   Contrast is AA-checked: gold copy on brown/red grounds
+   uses the gold tint, never straight Habano Red on black.
    ========================================================= */
 
 :root {
-    --navy: #102d36;
-    --blue: #175d70;
-    --cream: #f8e7c7;
-    --sand: #e7c889;
-    --red: #a9362c;
-    --coral: #db6246;
-    --leaf: #58714a;
-    --tobacco: #4b2c1e;
-    --ink: #1e2926;
-    --gold: #d6a544;
+    /* --- Core brand colours (do not alter) --- */
+    --brand-red: #98012d;
+    --brand-gold: #a7996e;
+    --brand-brown: #7b3900;
+    --brand-black: #211e1f;
+
+    /* --- Brand shades (large surfaces) --- */
+    --brand-red-deep: #6b0120;
+    --brand-brown-deep: #4e2400;
+    --brand-black-deep: #161314;
+
+    /* --- Brand tints (paper surfaces & copy on dark) --- */
+    --brand-ivory: #f4efe4;
+    --brand-gold-tint: #d7d1be;
+    --brand-red-tint: #e5bfca;
+
+    /* --- Semantic aliases (used by every rule below) --- */
+    --navy: var(--brand-black);          /* dark surface: body, cards, panels   */
+    --navy-deep: var(--brand-black-deep);
+    --blue: var(--brand-brown);          /* warm secondary surface              */
+    --cream: var(--brand-ivory);         /* paper surface & light copy          */
+    --sand: var(--brand-gold);           /* gold accents, rules, borders        */
+    --gold-copy: var(--brand-gold-tint); /* gold copy on brown/red grounds      */
+    --red: var(--brand-red);             /* signature Habano Red surface        */
+    --coral: var(--brand-red);           /* CTAs (legacy name, now brand red)   */
+    --ink: var(--brand-black-deep);      /* deepest surface / copy on paper     */
+    --gold: var(--brand-gold);
+
     --vh: 1vh;
     --radius-sm: 10px;
     --radius-md: 16px;
@@ -57,9 +89,10 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Habano Red selection, ivory text */
 ::selection {
-    background: var(--coral);
-    color: #fff;
+    background: var(--brand-red);
+    color: var(--cream);
 }
 
 a:focus-visible,
@@ -124,7 +157,7 @@ select:focus-visible {
 }
 
 .eyebrow-gold {
-    color: var(--sand);
+    color: var(--gold-copy);
 }
 
 .section-title {
@@ -187,7 +220,7 @@ select:focus-visible {
 
 .btn-casa:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 30px -12px rgba(7, 20, 25, .55);
+    box-shadow: 0 16px 30px -12px rgba(22, 19, 20, .55);
 }
 
 .btn-coral {
@@ -218,7 +251,7 @@ select:focus-visible {
 }
 
 .site-header.scrolled {
-    background: rgba(7, 20, 25, .985);
+    background: rgba(22, 19, 20, .985);
     box-shadow: 0 5px 18px rgba(0, 0, 0, .38);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -250,7 +283,7 @@ select:focus-visible {
 .logo-bar {
     width: 8px;
     height: 32px;
-    background: var(--coral);
+    background: var(--sand);
     border-radius: 3px;
     flex-shrink: 0;
 }
@@ -294,7 +327,7 @@ select:focus-visible {
     bottom: -7px;
     width: 0;
     height: 2px;
-    background: var(--coral);
+    background: var(--sand);
     transition: width .25s ease;
 }
 
@@ -306,6 +339,12 @@ select:focus-visible {
 .nav-cta {
     background: var(--coral);
     color: var(--cream);
+}
+
+/* Primary CTAs deepen to the shaded Habano Red on hover */
+.btn-coral:hover,
+.nav-cta:hover {
+    background: var(--brand-red-deep);
 }
 
 .menu-button {
@@ -407,7 +446,7 @@ select:focus-visible {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: #0a1417;
+    background: var(--brand-black-deep);
 }
 
 .hero-bg-img {
@@ -418,22 +457,24 @@ select:focus-visible {
     object-fit: cover;
 }
 
+/* Habano Black fading into a Habano Red glow over the photo */
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg,
-        rgba(16, 45, 54, .86),
-        rgba(16, 45, 54, .35) 54%,
-        rgba(169, 54, 44, .46));
+        rgba(33, 30, 31, .88),
+        rgba(33, 30, 31, .38) 54%,
+        rgba(152, 1, 45, .5));
 }
 
+/* Brand-gold warmth behind the hero copy */
 .hero-sun {
     width: 460px;
     height: 460px;
     border-radius: 50%;
-    background: #e6a548;
+    background: var(--brand-gold);
     filter: blur(1px);
-    opacity: .52;
+    opacity: .5;
     position: absolute;
     right: -130px;
     top: 12%;
@@ -492,7 +533,7 @@ select:focus-visible {
     font-weight: 600;
     line-height: 1;
     color: var(--cream);
-    text-shadow: 2px 3px 0 rgba(169, 54, 44, .55), 0 14px 34px rgba(0, 0, 0, .35);
+    text-shadow: 2px 3px 0 rgba(152, 1, 45, .55), 0 14px 34px rgba(0, 0, 0, .35);
 }
 
 @media (min-width: 640px) {
@@ -555,37 +596,39 @@ select:focus-visible {
 
 /* ===== TILE RULE ===== */
 
+/* Repeating Habano Red · Ivory · Tobacco Brown tile band */
 .tile-rule {
     height: 12px;
     width: 100%;
     background: repeating-linear-gradient(90deg,
-        var(--red) 0 22px,
+        var(--brand-red) 0 22px,
         var(--cream) 22px 28px,
-        var(--blue) 28px 50px,
+        var(--brand-brown) 28px 50px,
         var(--cream) 50px 56px);
 }
 /* ===== SECTION BACKGROUNDS ===== */
 
+/* Ivory paper with Tobacco Brown specks (Habano Gold tint base) */
 .paper-grain {
-    background-color: var(--cream);
-    background-image: radial-gradient(rgba(75, 44, 30, .13) .7px, transparent .8px);
+    background-color: var(--brand-ivory);
+    background-image: radial-gradient(rgba(123, 57, 0, .14) .7px, transparent .8px);
     background-size: 7px 7px;
 }
 
 .section-blue {
-    background: var(--blue);
+    background: var(--brand-brown);
 }
 
 .section-red {
-    background: var(--red);
+    background: var(--brand-red);
 }
 
 .section-leaf {
-    background: var(--leaf);
+    background: var(--brand-brown-deep);
 }
 
 .section-navy {
-    background: var(--navy);
+    background: var(--brand-black);
 }
 
 /* ===== HERITAGE ===== */
@@ -617,7 +660,7 @@ select:focus-visible {
     top: -12px;
     width: 100%;
     height: 100%;
-    border: 3px solid rgba(219, 98, 70, .85);
+    border: 3px solid rgba(152, 1, 45, .85);
     border-radius: var(--radius-lg);
 }
 
@@ -627,7 +670,7 @@ select:focus-visible {
     height: 430px;
     object-fit: cover;
     border-radius: var(--radius-md);
-    box-shadow: 0 28px 50px -20px rgba(30, 41, 38, .5);
+    box-shadow: 0 28px 50px -20px rgba(22, 19, 20, .5);
 }
 
 @media (min-width: 1024px) {
@@ -661,7 +704,7 @@ select:focus-visible {
 }
 
 .experience-card {
-    border: 1px solid rgba(248, 231, 199, .45);
+    border: 1px solid rgba(244, 239, 228, .45);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
@@ -669,8 +712,8 @@ select:focus-visible {
 
 .experience-card:hover {
     transform: translateY(-7px);
-    background: rgba(248, 231, 199, .1);
-    box-shadow: 0 24px 40px -18px rgba(7, 20, 25, .55);
+    background: rgba(244, 239, 228, .1);
+    box-shadow: 0 24px 40px -18px rgba(22, 19, 20, .55);
 }
 
 .experience-img {
@@ -747,7 +790,7 @@ select:focus-visible {
 }
 
 .events-arrows button:hover {
-    background: rgba(248, 231, 199, .1);
+    background: rgba(244, 239, 228, .1);
 }
 
 .event-carousel {
@@ -771,7 +814,7 @@ select:focus-visible {
     background: var(--navy);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 30px 60px -24px rgba(7, 20, 25, .6);
+    box-shadow: 0 30px 60px -24px rgba(22, 19, 20, .6);
 }
 
 @media (max-width: 767px) {
@@ -827,7 +870,7 @@ select:focus-visible {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: .15em;
-    color: var(--sand);
+    color: var(--gold-copy);
     text-transform: uppercase;
 }
 
@@ -851,7 +894,7 @@ select:focus-visible {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: .12em;
-    color: var(--sand);
+    color: var(--gold-copy);
     text-transform: uppercase;
 }
 
@@ -867,7 +910,7 @@ select:focus-visible {
 
 .event-link:hover {
     text-decoration: underline;
-    color: var(--sand);
+    color: var(--gold-copy);
 }
 
 .event-dots {
@@ -889,7 +932,7 @@ select:focus-visible {
 
 .event-dot.active {
     width: 35px;
-    background: var(--coral);
+    background: var(--cream);
 }
 /* ===== BRANDS MARQUEE ===== */
 
@@ -990,7 +1033,7 @@ select:focus-visible {
 
 .location-card {
     background: var(--navy);
-    border: 1px solid rgba(248, 231, 199, .42);
+    border: 1px solid rgba(244, 239, 228, .42);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease;
@@ -998,7 +1041,7 @@ select:focus-visible {
 
 .location-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 38px -18px rgba(7, 20, 25, .6);
+    box-shadow: 0 20px 38px -18px rgba(22, 19, 20, .6);
 }
 
 .location-img {
@@ -1052,7 +1095,7 @@ select:focus-visible {
     width: 100%;
     text-align: left;
     background: var(--navy);
-    border: 1px solid rgba(248, 231, 199, .42);
+    border: 1px solid rgba(244, 239, 228, .42);
     border-radius: var(--radius-md);
     padding: 16px 22px;
     cursor: pointer;
@@ -1063,14 +1106,14 @@ select:focus-visible {
 
 .location-link:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 38px -18px rgba(7, 20, 25, .6);
-    border-color: rgba(231, 200, 137, .7);
+    box-shadow: 0 20px 38px -18px rgba(22, 19, 20, .6);
+    border-color: rgba(167, 153, 110, .8);
 }
 
 .location-link.active {
-    background: rgba(7, 20, 25, .55);
+    background: rgba(22, 19, 20, .55);
     border-color: var(--sand);
-    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(7, 20, 25, .6);
+    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(22, 19, 20, .6);
 }
 
 .location-link-top {
@@ -1082,7 +1125,7 @@ select:focus-visible {
 
 .location-link-arrow {
     font-size: 20px;
-    color: var(--coral);
+    color: var(--sand);
     transition: transform .3s ease;
 }
 
@@ -1117,7 +1160,7 @@ select:focus-visible {
     margin: 16px 0;
     border: 0;
     height: 1px;
-    background: rgba(231, 200, 137, .4);
+    background: rgba(167, 153, 110, .55);
 }
 
 .location-address,
@@ -1144,11 +1187,11 @@ select:focus-visible {
     width: 100%;
     height: 100%;
     min-height: 380px;
-    border: 1px solid rgba(248, 231, 199, .45);
+    border: 1px solid rgba(244, 239, 228, .45);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy);
-    box-shadow: 0 30px 60px -24px rgba(7, 20, 25, .6);
+    box-shadow: 0 30px 60px -24px rgba(22, 19, 20, .6);
 }
 
 /* Leaflet map theming to match the site */
@@ -1176,7 +1219,7 @@ select:focus-visible {
 .location-popup .leaflet-popup-content-wrapper {
     background: var(--navy);
     color: var(--cream);
-    border: 1px solid rgba(231, 200, 137, .55);
+    border: 1px solid rgba(167, 153, 110, .7);
     border-radius: var(--radius-md);
     box-shadow: 0 18px 40px -14px rgba(0, 0, 0, .6);
 }
@@ -1205,7 +1248,7 @@ select:focus-visible {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .15em;
-    color: var(--coral);
+    color: var(--sand);
     text-transform: uppercase;
 }
 
@@ -1236,13 +1279,13 @@ select:focus-visible {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .12em;
-    color: var(--coral);
+    color: var(--sand);
     text-decoration: none;
     text-transform: uppercase;
 }
 
 .lp-link:hover {
-    color: var(--sand);
+    color: var(--cream);
 }
 
 .locations-map-fallback {
@@ -1333,7 +1376,7 @@ select:focus-visible {
 .form-input {
     width: 100%;
     border: 0;
-    border-bottom: 2px solid rgba(248, 231, 199, .52);
+    border-bottom: 2px solid rgba(244, 239, 228, .52);
     border-radius: 0;
     background: transparent;
     padding: .7rem 0;
@@ -1347,7 +1390,7 @@ select:focus-visible {
 }
 
 .form-input::placeholder {
-    color: rgba(248, 231, 199, .5);
+    color: rgba(244, 239, 228, .5);
 }
 
 .form-input option {
@@ -1457,7 +1500,7 @@ select.form-input {
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(248, 231, 199, .2);
+    border-top: 1px solid rgba(244, 239, 228, .2);
     padding: 24px 0;
     text-align: center;
 }
@@ -1592,8 +1635,8 @@ select.form-input {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: #0d2130;
-    background-image: radial-gradient(rgba(231, 200, 137, .06) 1px, transparent 1px);
+    background: var(--navy-deep);
+    background-image: radial-gradient(rgba(167, 153, 110, .1) 1px, transparent 1px);
     background-size: 12px 12px;
 }
 
@@ -1609,7 +1652,7 @@ select.form-input {
 
 .message-bot {
     align-self: flex-start;
-    background: #17394a;
+    background: #332e30;
     color: var(--cream);
     border-bottom-left-radius: 4px;
 }
@@ -1649,7 +1692,7 @@ select.form-input {
     gap: 10px;
     padding: 12px;
     background: var(--ink);
-    border-top: 1px solid rgba(231, 200, 137, .18);
+    border-top: 1px solid rgba(167, 153, 110, .25);
 }
 
 #chatbot-input {
@@ -1657,7 +1700,7 @@ select.form-input {
     resize: none;
     border: 0;
     outline: none;
-    background: rgba(248, 231, 199, .08);
+    background: rgba(244, 239, 228, .08);
     color: var(--cream);
     font-family: inherit;
     font-size: 14px;
@@ -1668,7 +1711,7 @@ select.form-input {
 }
 
 #chatbot-input::placeholder {
-    color: rgba(248, 231, 199, .45);
+    color: rgba(244, 239, 228, .45);
 }
 
 #chatbot-send {
@@ -1844,7 +1887,7 @@ select.form-input {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: #071419;
+    background: var(--brand-black-deep);
 }
 
 .age-gate.visible { display: flex; }
@@ -1858,7 +1901,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     width: 100%;
     max-width: 440px;
     background: var(--navy);
-    border: 1px solid rgba(231, 200, 137, .35);
+    border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-lg);
     box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
     padding: 42px 36px;
@@ -1876,7 +1919,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .32em;
-    color: var(--coral);
+    color: var(--sand);
     margin-bottom: 10px;
 }
 
@@ -1906,8 +1949,8 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     width: 58px;
     padding: 12px 4px;
     text-align: center;
-    background: rgba(11, 33, 41, .85);
-    border: 1px solid rgba(231, 200, 137, .35);
+    background: rgba(22, 19, 20, .9);
+    border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-sm);
     color: var(--cream);
     font: inherit;
@@ -1919,7 +1962,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 
 .dob-input:focus { border-color: var(--gold); }
 
-.dob-input::placeholder { color: rgba(231, 200, 137, .45); }
+.dob-input::placeholder { color: rgba(167, 153, 110, .62); }
 
 .dob-input-year { width: 86px; }
 
@@ -1936,7 +1979,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     margin-top: 16px;
     font-size: 13px;
     line-height: 1.5;
-    color: #ffb3a6;
+    color: var(--brand-red-tint);
 }
 
 .age-gate-card.denied .dob-row,
@@ -1978,8 +2021,8 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 }
 
 @keyframes audio-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(231, 200, 137, .35); }
-    50% { box-shadow: 0 0 0 10px rgba(231, 200, 137, 0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(167, 153, 110, .45); }
+    50% { box-shadow: 0 0 0 10px rgba(167, 153, 110, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

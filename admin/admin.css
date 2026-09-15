@@ -1,21 +1,35 @@
 /* =========================================================
    LA CASA DEL HABANO UAE — Events Admin styles
+   (Brand palette: Habano Red / Gold / Tobacco Brown / Black)
    ========================================================= */
 :root {
-    --navy: #102d36;
-    --navy-deep: #0b2129;
-    --cream: #f8e7c7;
-    --gold: #e7c889;
-    --coral: #db6246;
-    --line: rgba(248, 231, 199, .18);
-    --danger: #e05b48;
+    /* --- Core brand colours --- */
+    --brand-red: #98012d;
+    --brand-gold: #a7996e;
+    --brand-brown: #7b3900;
+    --brand-black: #211e1f;
+
+    /* --- Brand shade & tint --- */
+    --brand-black-deep: #161314;
+    --brand-ivory: #f4efe4;
+    --brand-red-tint: #e5bfca;
+
+    /* --- Panel aliases --- */
+    --navy: var(--brand-black);
+    --navy-deep: var(--brand-black-deep);
+    --cream: var(--brand-ivory);
+    --gold: var(--brand-gold);
+    --coral: var(--brand-red);
+    --line: rgba(244, 239, 228, .18);
+    --danger: var(--brand-red);
+    --danger-tint: var(--brand-red-tint);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: "DM Sans", sans-serif;
-    background: radial-gradient(circle at 80% -10%, #16404d 0%, var(--navy-deep) 55%);
+    background: radial-gradient(circle at 80% -10%, #4e2400 0%, var(--navy-deep) 55%);
     color: var(--cream);
     min-height: 100vh;
 }
@@ -34,7 +48,7 @@ body {
 .login-card {
     width: 100%;
     max-width: 380px;
-    background: rgba(16, 45, 54, .92);
+    background: rgba(33, 30, 31, .92);
     border: 1px solid var(--line);
     padding: 40px 32px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
@@ -44,7 +58,7 @@ body {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .35em;
-    color: var(--coral);
+    color: var(--gold);
     margin-bottom: 14px;
 }
 
@@ -64,7 +78,7 @@ body {
 .login-error {
     margin-top: 14px;
     font-size: 12px;
-    color: #ffb3a6;
+    color: var(--danger-tint);
     min-height: 16px;
 }
 
@@ -84,7 +98,7 @@ input[type="url"],
 input[type="password"],
 textarea {
     width: 100%;
-    background: rgba(11, 33, 41, .8);
+    background: rgba(22, 19, 20, .85);
     border: 1px solid var(--line);
     color: var(--cream);
     font: inherit;
@@ -117,7 +131,7 @@ textarea { resize: vertical; }
 .btn-primary { background: var(--coral); color: var(--cream); }
 .btn-ghost { background: none; border-color: var(--line); color: var(--cream); }
 .btn-ghost:hover { border-color: var(--gold); }
-.btn-danger-ghost { background: none; border-color: rgba(224, 91, 72, .5); color: #ffb3a6; }
+.btn-danger-ghost { background: none; border-color: rgba(152, 1, 45, .7); color: var(--danger-tint); }
 .btn-danger-ghost:hover { border-color: var(--danger); }
 .btn-block { width: 100%; margin-top: 22px; }
 
@@ -130,7 +144,7 @@ textarea { resize: vertical; }
     flex-wrap: wrap;
     padding: 20px 32px;
     border-bottom: 1px solid var(--line);
-    background: rgba(11, 33, 41, .65);
+    background: rgba(22, 19, 20, .65);
 }
 
 .topbar-brand {
@@ -158,7 +172,7 @@ textarea { resize: vertical; }
 }
 
 .card {
-    background: rgba(16, 45, 54, .85);
+    background: rgba(33, 30, 31, .85);
     border: 1px solid var(--line);
     padding: 26px;
 }
@@ -209,7 +223,7 @@ textarea { resize: vertical; }
     font-weight: 700;
     letter-spacing: .16em;
     color: var(--gold);
-    border: 1px solid rgba(231, 200, 137, .4);
+    border: 1px solid rgba(167, 153, 110, .6);
     padding: 2px 8px;
     margin-bottom: 6px;
 }
@@ -272,7 +286,7 @@ textarea { resize: vertical; }
 .event-item.dragging {
     opacity: .45;
     outline: 1px dashed var(--gold);
-    background: rgba(11, 33, 41, .5);
+    background: rgba(22, 19, 20, .5);
 }
 
 .grip {
@@ -313,7 +327,7 @@ textarea { resize: vertical; }
     gap: 4px;
     padding: 14px 32px 0;
     border-bottom: 1px solid var(--line);
-    background: rgba(11, 33, 41, .4);
+    background: rgba(22, 19, 20, .4);
 }
 
 @media (max-width: 900px) {
@@ -340,9 +354,9 @@ textarea { resize: vertical; }
 
 .tab-btn.active {
     opacity: 1;
-    background: rgba(16, 45, 54, .9);
+    background: rgba(33, 30, 31, .9);
     border-color: var(--line);
-    border-top: 2px solid var(--coral);
+    border-top: 2px solid var(--gold);
 }
 
 /* ===== SETTINGS ===== */
@@ -354,8 +368,8 @@ textarea { resize: vertical; }
 }
 
 .settings-hint code {
-    background: rgba(231, 200, 137, .15);
-    border: 1px solid rgba(231, 200, 137, .35);
+    background: rgba(167, 153, 110, .18);
+    border: 1px solid rgba(167, 153, 110, .45);
     padding: 1px 6px;
     font-size: 12px;
 }
