@@ -6,45 +6,44 @@
    ---------------------------------------------------------
    LA CASA DEL HABANO BRAND PALETTE
    ---------------------------------------------------------
-     HABANO RED      #98012D   primary   · CTAs, rules, accents
-     HABANO GOLD     #A7996E   secondary · foil lines, borders,
+     HABANO RED      #98012D   DOMINANT · page ground, bands,
+                                           CTAs, titles, rules
+     HABANO GOLD     #A7996E   accent   · foil lines, borders,
                                            numerals, small copy
-     TOBACCO BROWN   #7B3900   tertiary  · large warm surfaces
-     HABANO BLACK    #211E1F   base      · page ground & copy
+     HABANO BLACK    #211E1F   base     · deep copy on ivory
+     TOBACCO BROWN   #7B3900   reserved · print & packaging
    ---------------------------------------------------------
-   The shades/tints below are mixed from those four colours
-   only, so every surface on the site stays on-palette.
-   Contrast is AA-checked: gold copy on brown/red grounds
-   uses the gold tint, never straight Habano Red on black.
+   Every large surface is a shade of Habano Red #98012D
+   (shades mixed for depth), so the brand red leads the page
+   while ivory paper and gold stay as accents. Contrast is
+   AA-checked for every pairing used below.
    ========================================================= */
 
 :root {
     /* --- Core brand colours (do not alter) --- */
     --brand-red: #98012d;
     --brand-gold: #a7996e;
-    --brand-brown: #7b3900;
-    --brand-black: #211e1f;
+    --brand-black: #211e1f;   /* base — reserved for deep copy, not a surface   */
 
-    /* --- Brand shades (large surfaces) --- */
-    --brand-red-deep: #6b0120;
-    --brand-brown-deep: #4e2400;
-    --brand-black-deep: #161314;
+    /* --- Habano Red shades: DOMINANT. Every large surface mixes #98012D --- */
+    --brand-red-deep: #6b0120;    /* 30% shade — panels, cards, warm bands  */
+    --brand-red-dark: #4a0116;    /* 50% shade — deep bands, nested panels  */
+    --brand-red-darkest: #2e0109; /* 70% shade — page edge, footer, copy    */
 
-    /* --- Brand tints (paper surfaces & copy on dark) --- */
+    /* --- Brand tints (paper surfaces & copy on red) --- */
     --brand-ivory: #f4efe4;
     --brand-gold-tint: #d7d1be;
     --brand-red-tint: #e5bfca;
 
     /* --- Semantic aliases (used by every rule below) --- */
-    --navy: var(--brand-black);          /* dark surface: body, cards, panels   */
-    --navy-deep: var(--brand-black-deep);
-    --blue: var(--brand-brown);          /* warm secondary surface              */
-    --cream: var(--brand-ivory);         /* paper surface & light copy          */
-    --sand: var(--brand-gold);           /* gold accents, rules, borders        */
-    --gold-copy: var(--brand-gold-tint); /* gold copy on brown/red grounds      */
-    --red: var(--brand-red);             /* signature Habano Red surface        */
-    --coral: var(--brand-red);           /* CTAs (legacy name, now brand red)   */
-    --ink: var(--brand-black-deep);      /* deepest surface / copy on paper     */
+    --navy: var(--brand-red-deep);       /* dominant surface: body, cards, panels */
+    --navy-deep: var(--brand-red-dark);
+    --cream: var(--brand-ivory);         /* paper surface & light copy            */
+    --sand: var(--brand-gold);           /* gold accents, rules, borders          */
+    --gold-copy: var(--brand-gold-tint); /* gold copy on Habano Red grounds       */
+    --red: var(--brand-red);             /* signature Habano Red                  */
+    --coral: var(--brand-red);           /* primary CTA fill (legacy name)        */
+    --ink: var(--brand-red-darkest);     /* deep copy / footer / nested panels    */
     --gold: var(--brand-gold);
 
     --vh: 1vh;
@@ -89,10 +88,10 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* Habano Red selection, ivory text */
+/* Brand-palette selection: reads on both ivory paper and Habano Red grounds */
 ::selection {
-    background: var(--brand-red);
-    color: var(--cream);
+    background: var(--brand-gold);
+    color: var(--brand-black);
 }
 
 a:focus-visible,
@@ -167,7 +166,7 @@ select:focus-visible {
     font-weight: 600;
     line-height: .95;
     letter-spacing: -0.01em;
-    color: var(--ink);
+    color: var(--brand-red);
 }
 
 @media (min-width: 640px) {
@@ -220,12 +219,13 @@ select:focus-visible {
 
 .btn-casa:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 30px -12px rgba(22, 19, 20, .55);
+    box-shadow: 0 16px 30px -12px rgba(46, 1, 9, .55);
 }
 
+/* Primary CTA: ivory ground + Habano Red copy — stays legible on red surfaces */
 .btn-coral {
-    background: var(--coral);
-    color: var(--cream);
+    background: var(--cream);
+    color: var(--brand-red);
 }
 
 .btn-outline {
@@ -234,8 +234,9 @@ select:focus-visible {
     color: var(--cream);
 }
 
+/* Secondary CTA used on the ivory paper band: full Habano Red */
 .btn-blue {
-    background: var(--blue);
+    background: var(--brand-red);
     color: var(--cream);
 }
 /* ===== HEADER ===== */
@@ -251,8 +252,8 @@ select:focus-visible {
 }
 
 .site-header.scrolled {
-    background: rgba(22, 19, 20, .985);
-    box-shadow: 0 5px 18px rgba(0, 0, 0, .38);
+    background: rgba(74, 1, 22, .97);
+    box-shadow: 0 5px 18px rgba(46, 1, 9, .45);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
@@ -337,14 +338,15 @@ select:focus-visible {
 }
 
 .nav-cta {
-    background: var(--coral);
-    color: var(--cream);
+    background: var(--cream);
+    color: var(--brand-red);
 }
 
-/* Primary CTAs deepen to the shaded Habano Red on hover */
+/* On hover the CTA flips to deep Habano Red with ivory copy */
 .btn-coral:hover,
 .nav-cta:hover {
-    background: var(--brand-red-deep);
+    background: var(--brand-red-dark);
+    color: var(--cream);
 }
 
 .menu-button {
@@ -446,7 +448,7 @@ select:focus-visible {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--brand-black-deep);
+    background: var(--brand-red-darkest);
 }
 
 .hero-bg-img {
@@ -457,24 +459,24 @@ select:focus-visible {
     object-fit: cover;
 }
 
-/* Habano Black fading into a Habano Red glow over the photo */
+/* Habano Red wash over the photo, first thing the eye reads */
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg,
-        rgba(33, 30, 31, .88),
-        rgba(33, 30, 31, .38) 54%,
-        rgba(152, 1, 45, .5));
+        rgba(46, 1, 9, .92),
+        rgba(74, 1, 22, .55) 54%,
+        rgba(152, 1, 45, .72));
 }
 
-/* Brand-gold warmth behind the hero copy */
+/* Habano Red glow behind the hero copy */
 .hero-sun {
     width: 460px;
     height: 460px;
     border-radius: 50%;
-    background: var(--brand-gold);
+    background: var(--brand-red);
     filter: blur(1px);
-    opacity: .5;
+    opacity: .55;
     position: absolute;
     right: -130px;
     top: 12%;
@@ -533,7 +535,7 @@ select:focus-visible {
     font-weight: 600;
     line-height: 1;
     color: var(--cream);
-    text-shadow: 2px 3px 0 rgba(152, 1, 45, .55), 0 14px 34px rgba(0, 0, 0, .35);
+    text-shadow: 2px 3px 0 rgba(46, 1, 9, .85), 0 14px 34px rgba(46, 1, 9, .45);
 }
 
 @media (min-width: 640px) {
@@ -596,39 +598,39 @@ select:focus-visible {
 
 /* ===== TILE RULE ===== */
 
-/* Repeating Habano Red · Ivory · Tobacco Brown tile band */
+/* Repeating Habano Red · Ivory · Ivory tile band */
 .tile-rule {
     height: 12px;
     width: 100%;
     background: repeating-linear-gradient(90deg,
         var(--brand-red) 0 22px,
         var(--cream) 22px 28px,
-        var(--brand-brown) 28px 50px,
+        var(--brand-red-dark) 28px 50px,
         var(--cream) 50px 56px);
 }
 /* ===== SECTION BACKGROUNDS ===== */
 
-/* Ivory paper with Tobacco Brown specks (Habano Gold tint base) */
+/* Ivory paper with Habano Red specks */
 .paper-grain {
     background-color: var(--brand-ivory);
-    background-image: radial-gradient(rgba(123, 57, 0, .14) .7px, transparent .8px);
+    background-image: radial-gradient(rgba(152, 1, 45, .16) .7px, transparent .8px);
     background-size: 7px 7px;
 }
 
 .section-blue {
-    background: var(--brand-brown);
+    background: var(--brand-red-deep);    /* The Casa Experience */
 }
 
 .section-red {
-    background: var(--brand-red);
+    background: var(--brand-red);         /* Nights at the Casa  */
 }
 
 .section-leaf {
-    background: var(--brand-brown-deep);
+    background: var(--brand-red);         /* Find Your Casa      */
 }
 
 .section-navy {
-    background: var(--brand-black);
+    background: var(--brand-red-dark);    /* Contact             */
 }
 
 /* ===== HERITAGE ===== */
@@ -670,7 +672,7 @@ select:focus-visible {
     height: 430px;
     object-fit: cover;
     border-radius: var(--radius-md);
-    box-shadow: 0 28px 50px -20px rgba(22, 19, 20, .5);
+    box-shadow: 0 28px 50px -20px rgba(46, 1, 9, .5);
 }
 
 @media (min-width: 1024px) {
@@ -713,7 +715,7 @@ select:focus-visible {
 .experience-card:hover {
     transform: translateY(-7px);
     background: rgba(244, 239, 228, .1);
-    box-shadow: 0 24px 40px -18px rgba(22, 19, 20, .55);
+    box-shadow: 0 24px 40px -18px rgba(46, 1, 9, .55);
 }
 
 .experience-img {
@@ -814,7 +816,7 @@ select:focus-visible {
     background: var(--navy);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 30px 60px -24px rgba(22, 19, 20, .6);
+    box-shadow: 0 30px 60px -24px rgba(46, 1, 9, .6);
 }
 
 @media (max-width: 767px) {
@@ -1041,7 +1043,7 @@ select:focus-visible {
 
 .location-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 38px -18px rgba(22, 19, 20, .6);
+    box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
 }
 
 .location-img {
@@ -1106,14 +1108,14 @@ select:focus-visible {
 
 .location-link:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 38px -18px rgba(22, 19, 20, .6);
+    box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
     border-color: rgba(167, 153, 110, .8);
 }
 
 .location-link.active {
-    background: rgba(22, 19, 20, .55);
+    background: rgba(74, 1, 22, .6);
     border-color: var(--sand);
-    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(22, 19, 20, .6);
+    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(46, 1, 9, .6);
 }
 
 .location-link-top {
@@ -1191,7 +1193,7 @@ select:focus-visible {
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy);
-    box-shadow: 0 30px 60px -24px rgba(22, 19, 20, .6);
+    box-shadow: 0 30px 60px -24px rgba(46, 1, 9, .6);
 }
 
 /* Leaflet map theming to match the site */
@@ -1390,7 +1392,7 @@ select:focus-visible {
 }
 
 .form-input::placeholder {
-    color: rgba(244, 239, 228, .5);
+    color: rgba(244, 239, 228, .62);
 }
 
 .form-input option {
@@ -1522,17 +1524,18 @@ select.form-input {
     justify-content: center;
     width: 56px;
     height: 56px;
+    border: 2px solid rgba(244, 239, 228, .85);
     border-radius: 50%;
-    background: var(--coral);
+    background: var(--brand-red);
     color: var(--cream);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .3);
+    box-shadow: 0 10px 15px -3px rgba(46, 1, 9, .45);
     text-decoration: none;
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .whatsapp-float:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 20px -4px rgba(0, 0, 0, .4);
+    box-shadow: 0 14px 20px -4px rgba(46, 1, 9, .5);
 }
 
 /* ===== WHATSAPP CHATBOT ===== */
@@ -1549,7 +1552,7 @@ select.form-input {
     background: var(--navy);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, .45);
+    box-shadow: 0 24px 48px rgba(46, 1, 9, .55);
     opacity: 0;
     visibility: hidden;
     transform: translateY(16px) scale(.98);
@@ -1652,7 +1655,7 @@ select.form-input {
 
 .message-bot {
     align-self: flex-start;
-    background: #332e30;
+    background: var(--brand-red);
     color: var(--cream);
     border-bottom-left-radius: 4px;
 }
@@ -1887,7 +1890,7 @@ select.form-input {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: var(--brand-black-deep);
+    background: var(--brand-red-darkest);
 }
 
 .age-gate.visible { display: flex; }
@@ -1903,7 +1906,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     background: var(--navy);
     border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-lg);
-    box-shadow: 0 40px 90px rgba(0, 0, 0, .55);
+    box-shadow: 0 40px 90px rgba(46, 1, 9, .6);
     padding: 42px 36px;
     text-align: center;
 }
@@ -1949,7 +1952,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     width: 58px;
     padding: 12px 4px;
     text-align: center;
-    background: rgba(22, 19, 20, .9);
+    background: rgba(46, 1, 9, .85);
     border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-sm);
     color: var(--cream);
@@ -1962,7 +1965,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 
 .dob-input:focus { border-color: var(--gold); }
 
-.dob-input::placeholder { color: rgba(167, 153, 110, .62); }
+.dob-input::placeholder { color: rgba(167, 153, 110, .78); }
 
 .dob-input-year { width: 86px; }
 
@@ -2009,7 +2012,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 /* ===== AUDIO TOGGLE ===== */
 
 #audio-toggle {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+    box-shadow: 0 4px 12px rgba(46, 1, 9, .45);
 }
 
 #audio-toggle .audio-icon {

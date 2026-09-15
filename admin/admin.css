@@ -1,25 +1,27 @@
 /* =========================================================
    LA CASA DEL HABANO UAE — Events Admin styles
-   (Brand palette: Habano Red / Gold / Tobacco Brown / Black)
+   (Red-dominant brand palette: Everything is mixed from
+    Habano Red #98012D, with Habano Gold #A7996E + ivory
+    as accents. Tobacco Brown #7B3900 and Habano Black
+    #211E1F remain reserved for print/packaging.)
    ========================================================= */
 :root {
-    /* --- Core brand colours --- */
+    /* --- Core brand colour --- */
     --brand-red: #98012d;
-    --brand-gold: #a7996e;
-    --brand-brown: #7b3900;
-    --brand-black: #211e1f;
 
-    /* --- Brand shade & tint --- */
-    --brand-black-deep: #161314;
+    /* --- Habano Red shades (every surface) --- */
+    --brand-red-deep: #6b0120;
+    --brand-red-dark: #4a0116;
+    --brand-red-darkest: #2e0109;
+
+    /* --- Brand accents & tints --- */
+    --brand-gold: #a7996e;
     --brand-ivory: #f4efe4;
     --brand-red-tint: #e5bfca;
 
     /* --- Panel aliases --- */
-    --navy: var(--brand-black);
-    --navy-deep: var(--brand-black-deep);
     --cream: var(--brand-ivory);
     --gold: var(--brand-gold);
-    --coral: var(--brand-red);
     --line: rgba(244, 239, 228, .18);
     --danger: var(--brand-red);
     --danger-tint: var(--brand-red-tint);
@@ -29,7 +31,7 @@
 
 body {
     font-family: "DM Sans", sans-serif;
-    background: radial-gradient(circle at 80% -10%, #4e2400 0%, var(--navy-deep) 55%);
+    background: radial-gradient(circle at 80% -10%, var(--brand-red) 0%, var(--brand-red-darkest) 60%);
     color: var(--cream);
     min-height: 100vh;
 }
@@ -48,10 +50,10 @@ body {
 .login-card {
     width: 100%;
     max-width: 380px;
-    background: rgba(33, 30, 31, .92);
-    border: 1px solid var(--line);
+    background: rgba(46, 1, 9, .82);
+    border: 1px solid rgba(167, 153, 110, .45);
     padding: 40px 32px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+    box-shadow: 0 30px 60px rgba(46, 1, 9, .6);
 }
 
 .brand-mark {
@@ -98,7 +100,7 @@ input[type="url"],
 input[type="password"],
 textarea {
     width: 100%;
-    background: rgba(22, 19, 20, .85);
+    background: rgba(46, 1, 9, .55);
     border: 1px solid var(--line);
     color: var(--cream);
     font: inherit;
@@ -128,10 +130,10 @@ textarea { resize: vertical; }
 }
 
 .btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--coral); color: var(--cream); }
+.btn-primary { background: var(--cream); color: var(--brand-red); }
 .btn-ghost { background: none; border-color: var(--line); color: var(--cream); }
 .btn-ghost:hover { border-color: var(--gold); }
-.btn-danger-ghost { background: none; border-color: rgba(152, 1, 45, .7); color: var(--danger-tint); }
+.btn-danger-ghost { background: none; border-color: rgba(229, 191, 202, .55); color: var(--danger-tint); }
 .btn-danger-ghost:hover { border-color: var(--danger); }
 .btn-block { width: 100%; margin-top: 22px; }
 
@@ -144,7 +146,7 @@ textarea { resize: vertical; }
     flex-wrap: wrap;
     padding: 20px 32px;
     border-bottom: 1px solid var(--line);
-    background: rgba(22, 19, 20, .65);
+    background: var(--brand-red-dark);
 }
 
 .topbar-brand {
@@ -172,7 +174,7 @@ textarea { resize: vertical; }
 }
 
 .card {
-    background: rgba(33, 30, 31, .85);
+    background: rgba(244, 239, 228, .07);
     border: 1px solid var(--line);
     padding: 26px;
 }
@@ -266,8 +268,8 @@ textarea { resize: vertical; }
     left: 50%;
     bottom: 26px;
     transform: translate(-50%, 20px);
-    background: var(--coral);
-    color: var(--cream);
+    background: var(--cream);
+    color: var(--brand-red);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: .04em;
@@ -286,7 +288,7 @@ textarea { resize: vertical; }
 .event-item.dragging {
     opacity: .45;
     outline: 1px dashed var(--gold);
-    background: rgba(22, 19, 20, .5);
+    background: rgba(46, 1, 9, .5);
 }
 
 .grip {
@@ -327,7 +329,7 @@ textarea { resize: vertical; }
     gap: 4px;
     padding: 14px 32px 0;
     border-bottom: 1px solid var(--line);
-    background: rgba(22, 19, 20, .4);
+    background: var(--brand-red-deep);
 }
 
 @media (max-width: 900px) {
@@ -354,7 +356,7 @@ textarea { resize: vertical; }
 
 .tab-btn.active {
     opacity: 1;
-    background: rgba(33, 30, 31, .9);
+    background: rgba(244, 239, 228, .1);
     border-color: var(--line);
     border-top: 2px solid var(--gold);
 }

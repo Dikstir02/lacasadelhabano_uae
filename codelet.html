@@ -11,9 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;display=swap" rel="stylesheet">
   <style>
     :root{
-      --navy:#211e1f; --blue:#7b3900; --cream:#f4efe4; --sand:#a7996e;
-      --red:#98012d; --coral:#98012d; --leaf:#4e2400; --tobacco:#7b3900;
-      --ink:#161314; --gold:#a7996e;
+      --navy:#6b0120; --blue:#6b0120; --cream:#f4efe4; --sand:#a7996e;
+      --red:#98012d; --coral:#98012d; --leaf:#98012d; --tobacco:#6b0120;
+      --ink:#2e0109; --gold:#a7996e;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -21,20 +21,20 @@
     .display{font-family:"Playfair Display",serif}
     .paper-grain{
       background-color:#f4efe4;
-      background-image:radial-gradient(rgba(123,57,0,.14) .7px,transparent .8px);
+      background-image:radial-gradient(rgba(152,1,45,.16) .7px,transparent .8px);
       background-size:7px 7px;
     }
     .site-header{transition:background .35s ease,box-shadow .35s ease}
-    .site-header.scrolled{background:rgba(22,19,20,.985);box-shadow:0 5px 18px rgba(0,0,0,.38);backdrop-filter:blur(12px)}
+    .site-header.scrolled{background:rgba(46,1,9,.985);box-shadow:0 5px 18px rgba(0,0,0,.38);backdrop-filter:blur(12px)}
     .nav-link{font-size:11px;font-weight:700;letter-spacing:.13em;text-decoration:none;color:#f4efe4;position:relative}
     .nav-link:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;background:var(--sand);transition:width .25s ease}
     .nav-link:hover:after{width:100%}
     .stamp{border:2px solid currentColor;border-radius:999px;letter-spacing:.12em}
-    .hero-overlay{background:linear-gradient(90deg,rgba(33,30,31,.88),rgba(33,30,31,.38) 54%,rgba(152,1,45,.5))}
-    .hero-sun{width:460px;height:460px;border-radius:50%;background:#a7996e;filter:blur(1px);opacity:.52;position:absolute;right:-130px;top:12%}
+    .hero-overlay{background:linear-gradient(90deg,rgba(74,1,22,.88),rgba(74,1,22,.38) 54%,rgba(152,1,45,.5))}
+    .hero-sun{width:460px;height:460px;border-radius:50%;background:#98012d;filter:blur(1px);opacity:.55;position:absolute;right:-130px;top:12%}
     .title-shadow{text-shadow:4px 4px 0 var(--red)}
     .btn-casa{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.95rem 1.2rem;font-size:11px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
-    .btn-casa:hover{transform:translateY(-3px);box-shadow:5px 6px 0 rgba(22,19,20,.55)}
+    .btn-casa:hover{transform:translateY(-3px);box-shadow:5px 6px 0 rgba(46,1,9,.55)}
     .btn-casa:focus-visible,.location-contact:focus-visible,.event-dot:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #f4efe4;outline-offset:3px}
     .tile-rule{height:12px;background:repeating-linear-gradient(90deg,var(--red) 0 22px,var(--cream) 22px 28px,var(--blue) 28px 50px,var(--cream) 50px 56px)}
     .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
@@ -54,7 +54,7 @@
     .location-contact{background:none;border:0;padding:0;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.12em}
     .input{width:100%;border:0;border-bottom:2px solid rgba(244,239,228,.52);background:transparent;padding:.7rem 0;color:#f4efe4;font:400 14px "DM Sans",sans-serif}
     .input:focus{outline:none;border-color:#a7996e}
-    .input option{background:#211e1f}
+    .input option{background:#6b0120}
     .mobile-menu{transform:translateX(100%);transition:transform .35s ease}
     .mobile-menu.open{transform:translateX(0)}
     .brands-marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
@@ -75,11 +75,11 @@
  <body data-template-id="__page-root" class="w-full overflow-x-hidden">
   <header class="site-header fixed top-0 z-40 w-full">
    <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10"><a href="#home" aria-label="La Casa del Habano UAE home" class="flex items-center gap-3 no-underline"> <span class="h-8 w-2 bg-[#98012d]"></span> <span data-template-id="header-logo" class="canva-text display text-lg tracking-[.12em]"></span> </a>
-    <div class="desktop-nav flex items-center gap-7"><a data-template-id="nav-home" class="canva-link nav-link" href="#home"></a> <a data-template-id="nav-heritage" class="canva-link nav-link" href="#heritage"></a> <a data-template-id="nav-experience" class="canva-link nav-link" href="#experience"></a> <a data-template-id="nav-contact" class="canva-link nav-link" href="#contact"></a> <a data-template-id="nav-visit" class="canva-button btn-casa bg-[#98012d] text-[#f4efe4]" href="#locations"></a>
+    <div class="desktop-nav flex items-center gap-7"><a data-template-id="nav-home" class="canva-link nav-link" href="#home"></a> <a data-template-id="nav-heritage" class="canva-link nav-link" href="#heritage"></a> <a data-template-id="nav-experience" class="canva-link nav-link" href="#experience"></a> <a data-template-id="nav-contact" class="canva-link nav-link" href="#contact"></a> <a data-template-id="nav-visit" class="canva-button btn-casa bg-[#f4efe4] text-[#98012d]" href="#locations"></a>
     </div><button id="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" class="text-[#f4efe4] md:hidden"> <i data-lucide="menu"></i> </button>
    </nav>
   </header>
-  <aside id="mobile-menu" class="mobile-menu fixed inset-0 z-50 bg-[#211e1f] p-7 md:hidden">
+  <aside id="mobile-menu" class="mobile-menu fixed inset-0 z-50 bg-[#6b0120] p-7 md:hidden">
    <div class="flex items-center justify-between"><span data-template-id="mobile-logo" class="canva-text display text-xl tracking-[.12em]"></span> <button id="menu-close" type="button" aria-label="Close navigation menu" class="text-[#f4efe4]"><i data-lucide="x"></i></button>
    </div>
    <nav aria-label="Mobile navigation" class="mt-20 flex flex-col gap-6"><a data-template-id="mobile-home" class="canva-link display text-4xl" href="#home"></a> <a data-template-id="mobile-heritage" class="canva-link display text-4xl" href="#heritage"></a> <a data-template-id="mobile-experience" class="canva-link display text-4xl" href="#experience"></a> <a data-template-id="mobile-locations" class="canva-link display text-4xl" href="#locations"></a> <a data-template-id="mobile-contact" class="canva-link display text-4xl" href="#contact"></a>
@@ -95,13 +95,13 @@
       <p data-template-id="hero-logo" class="canva-text display text-lg tracking-[.2em] text-[#a7996e]"></p>
       <h1 data-template-id="hero-title" class="canva-text display title-shadow mt-5 max-w-3xl text-6xl font-semibold leading-[.9] sm:text-8xl"></h1>
       <p data-template-id="hero-description" class="canva-text mt-7 max-w-xl text-sm leading-7 text-[#f4efe4]"></p>
-      <div class="mt-9 flex flex-col gap-3 sm:flex-row"><a data-template-id="hero-primary" class="canva-button btn-casa bg-[#98012d] text-[#f4efe4]" href="#heritage"></a> <a data-template-id="hero-secondary" class="canva-button btn-casa border-2 border-[#f4efe4] text-[#f4efe4]" href="#locations"></a>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row"><a data-template-id="hero-primary" class="canva-button btn-casa bg-[#f4efe4] text-[#98012d]" href="#heritage"></a> <a data-template-id="hero-secondary" class="canva-button btn-casa border-2 border-[#f4efe4] text-[#f4efe4]" href="#locations"></a>
       </div>
      </div>
     </div><a href="#heritage" class="absolute bottom-7 left-6 z-10 flex items-center gap-3 text-[#f4efe4] no-underline lg:left-10"> <span class="h-[1px] w-10 bg-[#a7996e]"></span><span data-template-id="scroll-label" class="canva-text text-[10px] font-bold tracking-[.15em]"></span> </a>
    </section>
    <div class="tile-rule"></div>
-   <section id="heritage" class="paper-grain w-full px-6 py-24 text-[#161314] lg:px-10 lg:py-32">
+   <section id="heritage" class="paper-grain w-full px-6 py-24 text-[#2e0109] lg:px-10 lg:py-32">
     <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-24">
      <div class="reveal relative">
       <div class="absolute -left-3 -top-3 h-full w-full border-4 border-[#98012d]"></div><img data-template-id="about-image" loading="lazy" class="canva-image relative h-[430px] w-full object-cover lg:h-[580px]">
@@ -110,11 +110,11 @@
       <p data-template-id="about-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
       <h2 data-template-id="about-title" class="canva-text display mt-4 max-w-xl text-5xl leading-[.95] sm:text-6xl"></h2>
       <p data-template-id="about-copy-1" class="canva-text mt-7 max-w-xl text-sm leading-7"></p>
-      <p data-template-id="about-copy-2" class="canva-text mt-5 max-w-xl text-sm leading-7"></p><a data-template-id="about-cta" class="canva-link btn-casa mt-9 bg-[#7b3900] text-[#f4efe4]" href="#contact"></a>
+      <p data-template-id="about-copy-2" class="canva-text mt-5 max-w-xl text-sm leading-7"></p><a data-template-id="about-cta" class="canva-link btn-casa mt-9 bg-[#98012d] text-[#f4efe4]" href="#contact"></a>
      </div>
     </div>
    </section>
-   <section id="experience" class="w-full bg-[#7b3900] px-6 py-24 lg:px-10 lg:py-32">
+   <section id="experience" class="w-full bg-[#6b0120] px-6 py-24 lg:px-10 lg:py-32">
     <div class="mx-auto max-w-7xl">
      <div class="reveal max-w-2xl">
       <p data-template-id="experience-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
@@ -177,7 +177,7 @@
       </div>
      </div>
      <div id="event-carousel" class="mt-11 overflow-hidden">
-      <article class="event-slide active grid-cols-[1.2fr_.8fr] bg-[#211e1f]"><img data-template-id="event-1-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
+      <article class="event-slide active grid-cols-[1.2fr_.8fr] bg-[#6b0120]"><img data-template-id="event-1-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
        <div class="flex flex-col justify-center p-8 lg:p-12">
         <p data-template-id="event-1-category" class="canva-text text-[11px] font-bold tracking-[.15em]"></p>
         <h3 data-template-id="event-1-title" class="canva-text display mt-5 text-4xl leading-none"></h3>
@@ -185,7 +185,7 @@
         <p data-template-id="event-1-date" class="canva-text mt-7 text-[11px] font-bold tracking-[.12em]"></p><a data-template-id="event-1-link" class="canva-link mt-7 text-[11px] font-bold tracking-[.13em]" href="#contact"></a>
        </div>
       </article>
-      <article class="event-slide grid-cols-[1.2fr_.8fr] bg-[#211e1f]"><img data-template-id="event-2-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
+      <article class="event-slide grid-cols-[1.2fr_.8fr] bg-[#6b0120]"><img data-template-id="event-2-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
        <div class="flex flex-col justify-center p-8 lg:p-12">
         <p data-template-id="event-2-category" class="canva-text text-[11px] font-bold tracking-[.15em]"></p>
         <h3 data-template-id="event-2-title" class="canva-text display mt-5 text-4xl leading-none"></h3>
@@ -193,7 +193,7 @@
         <p data-template-id="event-2-date" class="canva-text mt-7 text-[11px] font-bold tracking-[.12em]"></p><a data-template-id="event-2-link" class="canva-link mt-7 text-[11px] font-bold tracking-[.13em]" href="#contact"></a>
        </div>
       </article>
-      <article class="event-slide grid-cols-[1.2fr_.8fr] bg-[#211e1f]"><img data-template-id="event-3-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
+      <article class="event-slide grid-cols-[1.2fr_.8fr] bg-[#6b0120]"><img data-template-id="event-3-image" loading="lazy" class="canva-image h-[350px] w-full object-cover lg:h-[480px]">
        <div class="flex flex-col justify-center p-8 lg:p-12">
         <p data-template-id="event-3-category" class="canva-text text-[11px] font-bold tracking-[.15em]"></p>
         <h3 data-template-id="event-3-title" class="canva-text display mt-5 text-4xl leading-none"></h3>
@@ -206,7 +206,7 @@
      </div>
     </div>
    </section>
-   <section id="brands" class="paper-grain w-full px-6 py-24 text-[#161314] lg:px-10 lg:py-32">
+   <section id="brands" class="paper-grain w-full px-6 py-24 text-[#2e0109] lg:px-10 lg:py-32">
     <div class="mx-auto max-w-7xl">
      <p data-template-id="brands-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
      <h2 data-template-id="brands-title" class="canva-text display mt-4 text-5xl sm:text-6xl"></h2>
@@ -237,13 +237,13 @@
      </div>
     </div>
    </section>
-   <section id="locations" class="w-full bg-[#4e2400] px-6 py-24 lg:px-10 lg:py-32">
+   <section id="locations" class="w-full bg-[#98012d] px-6 py-24 lg:px-10 lg:py-32">
     <div class="mx-auto max-w-7xl">
      <p data-template-id="locations-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
      <h2 data-template-id="locations-title" class="canva-text display mt-4 text-5xl sm:text-6xl"></h2>
      <p data-template-id="locations-subtitle" class="canva-text mt-4 text-sm"></p>
      <div class="mt-14 grid gap-6 lg:grid-cols-3">
-      <article class="location-card overflow-hidden bg-[#211e1f]">
+      <article class="location-card overflow-hidden bg-[#6b0120]">
        <div class="h-56 overflow-hidden">
         <img data-template-id="location-1-image" loading="lazy" class="canva-image h-full w-full object-cover">
        </div>
@@ -256,7 +256,7 @@
         <p data-template-id="location-1-hours" class="canva-text mt-3 text-xs leading-6"></p><button type="button" data-location="City Walk — Dubai" class="location-contact mt-7 text-[#a7996e]">CONTACT LOCATION →</button>
        </div>
       </article>
-      <article class="location-card overflow-hidden bg-[#211e1f]">
+      <article class="location-card overflow-hidden bg-[#6b0120]">
        <div class="h-56 overflow-hidden">
         <img data-template-id="location-2-image" loading="lazy" class="canva-image h-full w-full object-cover">
        </div>
@@ -269,7 +269,7 @@
         <p data-template-id="location-2-hours" class="canva-text mt-3 text-xs leading-6"></p><button type="button" data-location="JBR — Dubai" class="location-contact mt-7 text-[#a7996e]">CONTACT LOCATION →</button>
        </div>
       </article>
-      <article class="location-card overflow-hidden bg-[#211e1f]">
+      <article class="location-card overflow-hidden bg-[#6b0120]">
        <div class="h-56 overflow-hidden">
         <img data-template-id="location-3-image" loading="lazy" class="canva-image h-full w-full object-cover">
        </div>
@@ -285,7 +285,7 @@
      </div>
     </div>
    </section>
-   <section id="contact" class="w-full bg-[#211e1f] px-6 py-24 lg:px-10 lg:py-32">
+   <section id="contact" class="w-full bg-[#4a0116] px-6 py-24 lg:px-10 lg:py-32">
     <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[.8fr_1.2fr]">
      <div>
       <p data-template-id="contact-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
@@ -311,14 +311,14 @@
        <label data-template-id="label-message" class="canva-text text-[11px] font-bold tracking-[.13em]" for="message"></label><textarea id="message" class="input min-h-28 resize-y" required></textarea>
       </div>
       <div class="sm:col-span-2">
-       <button id="submit-button" data-template-id="submit-button" type="submit" class="canva-button btn-casa bg-[#98012d] text-[#f4efe4]"></button>
+       <button id="submit-button" data-template-id="submit-button" type="submit" class="canva-button btn-casa bg-[#f4efe4] text-[#98012d]"></button>
        <p id="form-status" class="mt-4 text-sm text-[#a7996e]" aria-live="polite"></p>
       </div>
      </form>
     </div>
    </section>
   </main>
-  <footer class="w-full bg-[#161314] px-6 pt-14 lg:px-10">
+  <footer class="w-full bg-[#2e0109] px-6 pt-14 lg:px-10">
    <div class="mx-auto grid max-w-7xl gap-10 pb-12 md:grid-cols-2 lg:grid-cols-4">
     <div>
      <p data-template-id="footer-logo" class="canva-text display text-2xl tracking-[.1em]"></p>
@@ -341,7 +341,7 @@
    <div class="border-t border-[#f4efe4]/20 py-6">
     <span data-template-id="footer-copyright" class="canva-text text-[10px]"></span>
    </div>
-  </footer><a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" aria-label="Chat with La Casa del Habano UAE on WhatsApp" class="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-[#98012d] text-[#f4efe4] shadow-xl transition hover:-translate-y-1"><i data-lucide="message-circle"></i></a>
+  </footer><a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" aria-label="Chat with La Casa del Habano UAE on WhatsApp" class="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#f4efe4]/85 bg-[#98012d] text-[#f4efe4] shadow-xl transition hover:-translate-y-1"><i data-lucide="message-circle"></i></a>
   <script src="/codelet/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..QwjzoNN7m4xJekbq.2Pkb2DmhhvKrZPHEi_Vz1ej3Pjyye1vJnmF0fxaWevS96nuOj5tyiFTOMNWSB9BlJXCXLMNg-OL0b__kpB2jwMK99z1bSqzeTXwgYkNek_VfUhKdVtsebB25c7DOluItOAB-cGtulYmg1LkGGte093xv1AiTYgUnczVo8XMSAAgW40hEg1HdR21q68-rn2jolIxmfqzCtcOU459nYoinzsDzNun7kPPZm9qgHc5sew.ceBIzijTKPjeWSR4j1FVYg/editing_sdk.js?pin_id=dcb27b1868063687cf37de6ebc39f6d7"></script>
   <script>
     lucide.createIcons();
