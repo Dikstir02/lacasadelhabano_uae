@@ -1644,7 +1644,7 @@ select:focus-visible {
     gap: 12px;
     padding: 14px 16px;
     background: linear-gradient(135deg, #128c7e, #075e54);
-    color: #fff;
+    color: #D7DFDA;
 }
 
 .chatbot-avatar {
@@ -1655,7 +1655,7 @@ select:focus-visible {
     height: 40px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, .15);
+    background: rgba(215, 223, 218, .15);
 }
 
 .chatbot-header-info {
@@ -1674,7 +1674,7 @@ select:focus-visible {
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: rgba(255, 255, 255, .85);
+    color: rgba(215, 223, 218, .85);
 }
 
 .chatbot-status-dot {
@@ -1693,14 +1693,14 @@ select:focus-visible {
     height: 32px;
     border: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, .12);
-    color: #fff;
+    background: rgba(215, 223, 218, .12);
+    color: #D7DFDA;
     cursor: pointer;
     transition: background .2s ease;
 }
 
 #chatbot-close:hover {
-    background: rgba(255, 255, 255, .28);
+    background: rgba(215, 223, 218, .28);
 }
 
 .chatbot-messages {
@@ -1735,7 +1735,7 @@ select:focus-visible {
 .message-user {
     align-self: flex-end;
     background: #005c4b;
-    color: #eafff3;
+    color: #D7DFDA;
     border-bottom-right-radius: 4px;
 }
 
