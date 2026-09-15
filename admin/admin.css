@@ -16,13 +16,13 @@
 
     /* --- Brand accents & tints --- */
     --brand-gold: #a7996e;
-    --brand-ivory: #f4efe4;
+    --brand-ivory: #d7dfda;
     --brand-red-tint: #e5bfca;
 
     /* --- Panel aliases --- */
     --cream: var(--brand-ivory);
     --gold: var(--brand-gold);
-    --line: rgba(244, 239, 228, .18);
+    --line: rgba(215, 223, 218, .18);
     --danger: var(--brand-red);
     --danger-tint: var(--brand-red-tint);
 }
@@ -174,7 +174,7 @@ textarea { resize: vertical; }
 }
 
 .card {
-    background: rgba(244, 239, 228, .07);
+    background: rgba(215, 223, 218, .07);
     border: 1px solid var(--line);
     padding: 26px;
 }
@@ -356,7 +356,7 @@ textarea { resize: vertical; }
 
 .tab-btn.active {
     opacity: 1;
-    background: rgba(244, 239, 228, .1);
+    background: rgba(215, 223, 218, .1);
     border-color: var(--line);
     border-top: 2px solid var(--gold);
 }
