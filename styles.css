@@ -342,10 +342,14 @@ select:focus-visible {
     color: var(--brand-red);
 }
 
-/* On hover the CTA flips to deep Habano Red with ivory copy */
-.btn-coral:hover,
-.nav-cta:hover {
+/* Primary CTA hover stays deep Habano Red with ivory copy; nav CTA hover is full Habano Red #98012D */
+.btn-coral:hover {
     background: var(--brand-red-dark);
+    color: var(--cream);
+}
+
+.nav-cta:hover {
+    background: #98012d;
     color: var(--cream);
 }
 
