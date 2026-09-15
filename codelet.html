@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;display=swap" rel="stylesheet">
   <style>
     :root{
-      --navy:#6b0120; --blue:#6b0120; --cream:#d7dfda; --sand:#a7996e;
+      --navy:#6b0120; --blue:#6b0120; --cream:#fee7c6; --sand:#a7996e;
       --red:#98012d; --coral:#98012d; --leaf:#98012d; --tobacco:#6b0120;
       --ink:#2e0109; --gold:#a7996e;
     }
@@ -20,13 +20,13 @@
     body{margin:0;font-family:"DM Sans",sans-serif;color:var(--cream);background:var(--navy)}
     .display{font-family:"Playfair Display",serif}
     .paper-grain{
-      background-color:#d7dfda;
+      background-color:#fee7c6;
       background-image:radial-gradient(rgba(152,1,45,.16) .7px,transparent .8px);
       background-size:7px 7px;
     }
     .site-header{transition:background .35s ease,box-shadow .35s ease}
     .site-header.scrolled{background:rgba(46,1,9,.985);box-shadow:0 5px 18px rgba(0,0,0,.38);backdrop-filter:blur(12px)}
-    .nav-link{font-size:11px;font-weight:700;letter-spacing:.13em;text-decoration:none;color:#d7dfda;position:relative}
+    .nav-link{font-size:11px;font-weight:700;letter-spacing:.13em;text-decoration:none;color:#fee7c6;position:relative}
     .nav-link:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:2px;background:var(--sand);transition:width .25s ease}
     .nav-link:hover:after{width:100%}
     .stamp{border:2px solid currentColor;border-radius:999px;letter-spacing:.12em}
@@ -35,24 +35,24 @@
     .title-shadow{text-shadow:4px 4px 0 var(--red)}
     .btn-casa{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.95rem 1.2rem;font-size:11px;font-weight:700;letter-spacing:.12em;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
     .btn-casa:hover{transform:translateY(-3px);box-shadow:5px 6px 0 rgba(46,1,9,.55)}
-    .btn-casa:focus-visible,.location-contact:focus-visible,.event-dot:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #d7dfda;outline-offset:3px}
+    .btn-casa:focus-visible,.location-contact:focus-visible,.event-dot:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #fee7c6;outline-offset:3px}
     .tile-rule{height:12px;background:repeating-linear-gradient(90deg,var(--red) 0 22px,var(--cream) 22px 28px,var(--blue) 28px 50px,var(--cream) 50px 56px)}
     .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
     .reveal.visible{opacity:1;transform:none}
-    .experience-card{border:1px solid rgba(215, 223, 218,.45);transition:transform .3s ease,background .3s ease}
-    .experience-card:hover{transform:translateY(-7px);background:rgba(215, 223, 218,.1)}
+    .experience-card{border:1px solid rgba(254, 231, 198,.45);transition:transform .3s ease,background .3s ease}
+    .experience-card:hover{transform:translateY(-7px);background:rgba(254, 231, 198,.1)}
     .experience-card img{transition:transform .55s ease}
     .experience-card:hover img{transform:scale(1.07)}
     .event-slide{display:none}
     .event-slide.active{display:grid}
     .event-dot{height:11px;width:11px;border:0;border-radius:999px;background:#a7996e;transition:.25s}
-    .event-dot.active{width:35px;background:#d7dfda}
-    .location-card{border:1px solid rgba(215, 223, 218,.42);transition:transform .3s ease}
+    .event-dot.active{width:35px;background:#fee7c6}
+    .location-card{border:1px solid rgba(254, 231, 198,.42);transition:transform .3s ease}
     .location-card:hover{transform:translateY(-7px)}
     .location-card img{transition:transform .55s ease}
     .location-card:hover img{transform:scale(1.06)}
     .location-contact{background:none;border:0;padding:0;cursor:pointer;font-size:11px;font-weight:700;letter-spacing:.12em}
-    .input{width:100%;border:0;border-bottom:2px solid rgba(215, 223, 218,.52);background:transparent;padding:.7rem 0;color:#d7dfda;font:400 14px "DM Sans",sans-serif}
+    .input{width:100%;border:0;border-bottom:2px solid rgba(254, 231, 198,.52);background:transparent;padding:.7rem 0;color:#fee7c6;font:400 14px "DM Sans",sans-serif}
     .input:focus{outline:none;border-color:#a7996e}
     .input option{background:#6b0120}
     .mobile-menu{transform:translateX(100%);transition:transform .35s ease}
@@ -75,12 +75,12 @@
  <body data-template-id="__page-root" class="w-full overflow-x-hidden">
   <header class="site-header fixed top-0 z-40 w-full">
    <nav aria-label="Main navigation" class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10"><a href="#home" aria-label="La Casa del Habano UAE home" class="flex items-center gap-3 no-underline"> <span class="h-8 w-2 bg-[#98012d]"></span> <span data-template-id="header-logo" class="canva-text display text-lg tracking-[.12em]"></span> </a>
-    <div class="desktop-nav flex items-center gap-7"><a data-template-id="nav-home" class="canva-link nav-link" href="#home"></a> <a data-template-id="nav-heritage" class="canva-link nav-link" href="#heritage"></a> <a data-template-id="nav-experience" class="canva-link nav-link" href="#experience"></a> <a data-template-id="nav-contact" class="canva-link nav-link" href="#contact"></a> <a data-template-id="nav-visit" class="canva-button btn-casa bg-[#d7dfda] text-[#98012d]" href="#locations"></a>
-    </div><button id="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" class="text-[#d7dfda] md:hidden"> <i data-lucide="menu"></i> </button>
+    <div class="desktop-nav flex items-center gap-7"><a data-template-id="nav-home" class="canva-link nav-link" href="#home"></a> <a data-template-id="nav-heritage" class="canva-link nav-link" href="#heritage"></a> <a data-template-id="nav-experience" class="canva-link nav-link" href="#experience"></a> <a data-template-id="nav-contact" class="canva-link nav-link" href="#contact"></a> <a data-template-id="nav-visit" class="canva-button btn-casa bg-[#fee7c6] text-[#98012d]" href="#locations"></a>
+    </div><button id="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" class="text-[#fee7c6] md:hidden"> <i data-lucide="menu"></i> </button>
    </nav>
   </header>
   <aside id="mobile-menu" class="mobile-menu fixed inset-0 z-50 bg-[#6b0120] p-7 md:hidden">
-   <div class="flex items-center justify-between"><span data-template-id="mobile-logo" class="canva-text display text-xl tracking-[.12em]"></span> <button id="menu-close" type="button" aria-label="Close navigation menu" class="text-[#d7dfda]"><i data-lucide="x"></i></button>
+   <div class="flex items-center justify-between"><span data-template-id="mobile-logo" class="canva-text display text-xl tracking-[.12em]"></span> <button id="menu-close" type="button" aria-label="Close navigation menu" class="text-[#fee7c6]"><i data-lucide="x"></i></button>
    </div>
    <nav aria-label="Mobile navigation" class="mt-20 flex flex-col gap-6"><a data-template-id="mobile-home" class="canva-link display text-4xl" href="#home"></a> <a data-template-id="mobile-heritage" class="canva-link display text-4xl" href="#heritage"></a> <a data-template-id="mobile-experience" class="canva-link display text-4xl" href="#experience"></a> <a data-template-id="mobile-locations" class="canva-link display text-4xl" href="#locations"></a> <a data-template-id="mobile-contact" class="canva-link display text-4xl" href="#contact"></a>
    </nav>
@@ -90,15 +90,15 @@
     <div class="hero-overlay absolute inset-0"></div>
     <div class="hero-sun"></div>
     <div class="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 lg:px-10">
-     <p data-template-id="hero-kicker" class="canva-text stamp inline-block border-[#a7996e] px-4 py-2 text-[10px] font-bold text-[#d7dfda]"></p>
+     <p data-template-id="hero-kicker" class="canva-text stamp inline-block border-[#a7996e] px-4 py-2 text-[10px] font-bold text-[#fee7c6]"></p>
      <div class="mt-8 max-w-4xl">
       <p data-template-id="hero-logo" class="canva-text display text-lg tracking-[.2em] text-[#a7996e]"></p>
       <h1 data-template-id="hero-title" class="canva-text display title-shadow mt-5 max-w-3xl text-6xl font-semibold leading-[.9] sm:text-8xl"></h1>
-      <p data-template-id="hero-description" class="canva-text mt-7 max-w-xl text-sm leading-7 text-[#d7dfda]"></p>
-      <div class="mt-9 flex flex-col gap-3 sm:flex-row"><a data-template-id="hero-primary" class="canva-button btn-casa bg-[#d7dfda] text-[#98012d]" href="#heritage"></a> <a data-template-id="hero-secondary" class="canva-button btn-casa border-2 border-[#d7dfda] text-[#d7dfda]" href="#locations"></a>
+      <p data-template-id="hero-description" class="canva-text mt-7 max-w-xl text-sm leading-7 text-[#fee7c6]"></p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row"><a data-template-id="hero-primary" class="canva-button btn-casa bg-[#fee7c6] text-[#98012d]" href="#heritage"></a> <a data-template-id="hero-secondary" class="canva-button btn-casa border-2 border-[#fee7c6] text-[#fee7c6]" href="#locations"></a>
       </div>
      </div>
-    </div><a href="#heritage" class="absolute bottom-7 left-6 z-10 flex items-center gap-3 text-[#d7dfda] no-underline lg:left-10"> <span class="h-[1px] w-10 bg-[#a7996e]"></span><span data-template-id="scroll-label" class="canva-text text-[10px] font-bold tracking-[.15em]"></span> </a>
+    </div><a href="#heritage" class="absolute bottom-7 left-6 z-10 flex items-center gap-3 text-[#fee7c6] no-underline lg:left-10"> <span class="h-[1px] w-10 bg-[#a7996e]"></span><span data-template-id="scroll-label" class="canva-text text-[10px] font-bold tracking-[.15em]"></span> </a>
    </section>
    <div class="tile-rule"></div>
    <section id="heritage" class="paper-grain w-full px-6 py-24 text-[#2e0109] lg:px-10 lg:py-32">
@@ -110,7 +110,7 @@
       <p data-template-id="about-eyebrow" class="canva-text text-[11px] font-bold tracking-[.16em]"></p>
       <h2 data-template-id="about-title" class="canva-text display mt-4 max-w-xl text-5xl leading-[.95] sm:text-6xl"></h2>
       <p data-template-id="about-copy-1" class="canva-text mt-7 max-w-xl text-sm leading-7"></p>
-      <p data-template-id="about-copy-2" class="canva-text mt-5 max-w-xl text-sm leading-7"></p><a data-template-id="about-cta" class="canva-link btn-casa mt-9 bg-[#98012d] text-[#d7dfda]" href="#contact"></a>
+      <p data-template-id="about-copy-2" class="canva-text mt-5 max-w-xl text-sm leading-7"></p><a data-template-id="about-cta" class="canva-link btn-casa mt-9 bg-[#98012d] text-[#fee7c6]" href="#contact"></a>
      </div>
     </div>
    </section>
@@ -173,7 +173,7 @@
        <h2 data-template-id="events-title" class="canva-text display mt-4 text-5xl leading-none sm:text-6xl"></h2>
        <p data-template-id="events-subtitle" class="canva-text mt-4 text-sm"></p>
       </div>
-      <div class="hidden gap-3 sm:flex"><button id="prev-event" type="button" aria-label="Previous event" class="border-2 border-[#d7dfda] p-3 text-[#d7dfda]"><i data-lucide="arrow-left"></i></button> <button id="next-event" type="button" aria-label="Next event" class="border-2 border-[#d7dfda] p-3 text-[#d7dfda]"><i data-lucide="arrow-right"></i></button>
+      <div class="hidden gap-3 sm:flex"><button id="prev-event" type="button" aria-label="Previous event" class="border-2 border-[#fee7c6] p-3 text-[#fee7c6]"><i data-lucide="arrow-left"></i></button> <button id="next-event" type="button" aria-label="Next event" class="border-2 border-[#fee7c6] p-3 text-[#fee7c6]"><i data-lucide="arrow-right"></i></button>
       </div>
      </div>
      <div id="event-carousel" class="mt-11 overflow-hidden">
@@ -311,7 +311,7 @@
        <label data-template-id="label-message" class="canva-text text-[11px] font-bold tracking-[.13em]" for="message"></label><textarea id="message" class="input min-h-28 resize-y" required></textarea>
       </div>
       <div class="sm:col-span-2">
-       <button id="submit-button" data-template-id="submit-button" type="submit" class="canva-button btn-casa bg-[#d7dfda] text-[#98012d]"></button>
+       <button id="submit-button" data-template-id="submit-button" type="submit" class="canva-button btn-casa bg-[#fee7c6] text-[#98012d]"></button>
        <p id="form-status" class="mt-4 text-sm text-[#a7996e]" aria-live="polite"></p>
       </div>
      </form>
@@ -338,10 +338,10 @@
      <p data-template-id="footer-contact-heading" class="canva-text text-[11px] font-bold tracking-[.15em]"></p><a data-template-id="footer-email" class="canva-link mt-5 block text-xs" href="mailto:info@lacasadelhabano.ae"></a><a data-template-id="footer-whatsapp" class="canva-link mt-3 block text-xs" href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer"></a>
     </div>
    </div>
-   <div class="border-t border-[#d7dfda]/20 py-6">
+   <div class="border-t border-[#fee7c6]/20 py-6">
     <span data-template-id="footer-copyright" class="canva-text text-[10px]"></span>
    </div>
-  </footer><a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" aria-label="Chat with La Casa del Habano UAE on WhatsApp" class="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#d7dfda]/85 bg-[#98012d] text-[#d7dfda] shadow-xl transition hover:-translate-y-1"><i data-lucide="message-circle"></i></a>
+  </footer><a href="https://wa.me/971500000000" target="_blank" rel="noopener noreferrer" aria-label="Chat with La Casa del Habano UAE on WhatsApp" class="fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#fee7c6]/85 bg-[#98012d] text-[#fee7c6] shadow-xl transition hover:-translate-y-1"><i data-lucide="message-circle"></i></a>
   <script src="/codelet/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..QwjzoNN7m4xJekbq.2Pkb2DmhhvKrZPHEi_Vz1ej3Pjyye1vJnmF0fxaWevS96nuOj5tyiFTOMNWSB9BlJXCXLMNg-OL0b__kpB2jwMK99z1bSqzeTXwgYkNek_VfUhKdVtsebB25c7DOluItOAB-cGtulYmg1LkGGte093xv1AiTYgUnczVo8XMSAAgW40hEg1HdR21q68-rn2jolIxmfqzCtcOU459nYoinzsDzNun7kPPZm9qgHc5sew.ceBIzijTKPjeWSR4j1FVYg/editing_sdk.js?pin_id=dcb27b1868063687cf37de6ebc39f6d7"></script>
   <script>
     lucide.createIcons();

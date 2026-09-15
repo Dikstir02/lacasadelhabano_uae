@@ -31,7 +31,7 @@
     --brand-red-darkest: #2e0109; /* 70% shade — page edge, footer, copy    */
 
     /* --- Brand tints (paper surfaces & copy on red) --- */
-    --brand-ivory: #d7dfda;
+    --brand-ivory: #fee7c6;
     --brand-gold-tint: #d7d1be;
     --brand-red-tint: #e5bfca;
 
@@ -706,7 +706,7 @@ select:focus-visible {
 }
 
 .experience-card {
-    border: 1px solid rgba(215, 223, 218, .45);
+    border: 1px solid rgba(254, 231, 198, .45);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
@@ -714,7 +714,7 @@ select:focus-visible {
 
 .experience-card:hover {
     transform: translateY(-7px);
-    background: rgba(215, 223, 218, .1);
+    background: rgba(254, 231, 198, .1);
     box-shadow: 0 24px 40px -18px rgba(46, 1, 9, .55);
 }
 
@@ -792,7 +792,7 @@ select:focus-visible {
 }
 
 .events-arrows button:hover {
-    background: rgba(215, 223, 218, .1);
+    background: rgba(254, 231, 198, .1);
 }
 
 .event-carousel {
@@ -1035,7 +1035,7 @@ select:focus-visible {
 
 .location-card {
     background: var(--navy);
-    border: 1px solid rgba(215, 223, 218, .42);
+    border: 1px solid rgba(254, 231, 198, .42);
     border-radius: var(--radius-md);
     overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease;
@@ -1097,7 +1097,7 @@ select:focus-visible {
     width: 100%;
     text-align: left;
     background: var(--navy);
-    border: 1px solid rgba(215, 223, 218, .42);
+    border: 1px solid rgba(254, 231, 198, .42);
     border-radius: var(--radius-md);
     padding: 16px 22px;
     cursor: pointer;
@@ -1189,7 +1189,7 @@ select:focus-visible {
     width: 100%;
     height: 100%;
     min-height: 380px;
-    border: 1px solid rgba(215, 223, 218, .45);
+    border: 1px solid rgba(254, 231, 198, .45);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--navy);
@@ -1351,12 +1351,12 @@ select:focus-visible {
 
 .btn-outline-light {
     background: transparent;
-    border: 2px solid rgba(215, 223, 218, .65);
+    border: 2px solid rgba(254, 231, 198, .65);
     color: var(--cream);
 }
 
 .btn-outline-light:hover {
-    background: rgba(215, 223, 218, .12);
+    background: rgba(254, 231, 198, .12);
     border-color: var(--cream);
 }
 
@@ -1427,16 +1427,16 @@ select:focus-visible {
 }
 
 .about-card {
-    border: 1px solid rgba(215, 223, 218, .35);
+    border: 1px solid rgba(254, 231, 198, .35);
     border-radius: var(--radius-md);
     padding: 28px;
-    background: rgba(215, 223, 218, .05);
+    background: rgba(254, 231, 198, .05);
     transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
 }
 
 .about-card:hover {
     transform: translateY(-7px);
-    background: rgba(215, 223, 218, .1);
+    background: rgba(254, 231, 198, .1);
     box-shadow: 0 24px 40px -18px rgba(46, 1, 9, .55);
 }
 
@@ -1457,14 +1457,14 @@ select:focus-visible {
     margin-top: 12px;
     font-size: 14px;
     line-height: 24px;
-    color: rgba(215, 223, 218, .85);
+    color: rgba(254, 231, 198, .85);
 }
 
 .about-stats {
     margin-top: 56px;
     display: grid;
     gap: 24px;
-    border-top: 1px solid rgba(215, 223, 218, .25);
+    border-top: 1px solid rgba(254, 231, 198, .25);
     padding-top: 40px;
     text-align: center;
 }
@@ -1574,7 +1574,7 @@ select:focus-visible {
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(215, 223, 218, .2);
+    border-top: 1px solid rgba(254, 231, 198, .2);
     padding: 24px 0;
     text-align: center;
 }
@@ -1596,7 +1596,7 @@ select:focus-visible {
     justify-content: center;
     width: 56px;
     height: 56px;
-    border: 2px solid rgba(215, 223, 218, .85);
+    border: 2px solid rgba(254, 231, 198, .85);
     border-radius: 50%;
     background: var(--brand-red);
     color: var(--cream);
@@ -1644,7 +1644,7 @@ select:focus-visible {
     gap: 12px;
     padding: 14px 16px;
     background: linear-gradient(135deg, #128c7e, #075e54);
-    color: #D7DFDA;
+    color: #fee7c6;
 }
 
 .chatbot-avatar {
@@ -1655,7 +1655,7 @@ select:focus-visible {
     height: 40px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: rgba(215, 223, 218, .15);
+    background: rgba(254, 231, 198, .15);
 }
 
 .chatbot-header-info {
@@ -1674,7 +1674,7 @@ select:focus-visible {
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: rgba(215, 223, 218, .85);
+    color: rgba(254, 231, 198, .85);
 }
 
 .chatbot-status-dot {
@@ -1693,14 +1693,14 @@ select:focus-visible {
     height: 32px;
     border: 0;
     border-radius: 50%;
-    background: rgba(215, 223, 218, .12);
-    color: #D7DFDA;
+    background: rgba(254, 231, 198, .12);
+    color: #fee7c6;
     cursor: pointer;
     transition: background .2s ease;
 }
 
 #chatbot-close:hover {
-    background: rgba(215, 223, 218, .28);
+    background: rgba(254, 231, 198, .28);
 }
 
 .chatbot-messages {
@@ -1735,7 +1735,7 @@ select:focus-visible {
 .message-user {
     align-self: flex-end;
     background: #005c4b;
-    color: #D7DFDA;
+    color: #fee7c6;
     border-bottom-right-radius: 4px;
 }
 
@@ -1775,7 +1775,7 @@ select:focus-visible {
     resize: none;
     border: 0;
     outline: none;
-    background: rgba(215, 223, 218, .08);
+    background: rgba(254, 231, 198, .08);
     color: var(--cream);
     font-family: inherit;
     font-size: 14px;
@@ -1786,7 +1786,7 @@ select:focus-visible {
 }
 
 #chatbot-input::placeholder {
-    color: rgba(215, 223, 218, .45);
+    color: rgba(254, 231, 198, .45);
 }
 
 #chatbot-send {
