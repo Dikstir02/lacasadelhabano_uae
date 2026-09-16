@@ -1096,59 +1096,82 @@ select:focus-visible {
     color: var(--cream);
 }
 
-.location-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 18px;
-    align-items: center;
+/* Contact Store lives INSIDE each Casa's CONTACT LOCATION popover options */
+.location-link-item,
+.location-contact-wrap {
+    position: relative;
 }
 
-.location-store-btn {
-    display: inline-flex;
-    align-items: center;
+.location-contact-wrap {
+    margin-top: 20px;
+}
+
+.location-contact-wrap .location-contact {
+    margin-top: 0;
+}
+
+.loc-popover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
     gap: 6px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
-    border: 1px solid rgba(254, 231, 198, .5);
-    color: #fee7c6;
+    padding: 10px;
+    background: linear-gradient(160deg, #5c011b 0%, #211e1f 100%);
+    border: 1px solid rgba(167, 153, 110, .55);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, .65);
+}
+
+.location-link-item .loc-popover {
+    top: auto;
+    bottom: calc(100% + 8px);
+}
+
+.loc-popover[hidden] {
+    display: none;
+}
+
+.loc-pop-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--cream);
     font-family: "DM Sans", sans-serif;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .12em;
     text-decoration: none;
     text-transform: uppercase;
-    transition: filter .2s ease, transform .2s ease;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease;
 }
 
-.location-store-btn:hover {
-    filter: brightness(1.15);
-    transform: translateY(-1px);
+a.loc-pop-option {
+    display: block;
 }
 
-.location-link-wrap .location-link {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.loc-pop-option:hover {
+    background: rgba(254, 231, 198, .1);
+    border-color: rgba(167, 153, 110, .5);
 }
 
-.location-store-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0 22px 16px;
-    padding: 9px 16px;
-    border-radius: 999px;
+.loc-pop-store {
     background: linear-gradient(135deg, #98012d 0%, #000000 130%);
-    border: 1px solid rgba(254, 231, 198, .5);
-    color: #fee7c6;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-decoration: none;
-    text-transform: uppercase;
+    border-color: rgba(254, 231, 198, .5);
 }
 
-.location-store-link:hover { filter: brightness(1.15); }
+.loc-pop-store:hover {
+    filter: brightness(1.15);
+    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+}
 
 /* --- Desktop clickable rows (compact) --- */
 .location-links {

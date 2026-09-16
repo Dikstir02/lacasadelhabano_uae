@@ -7,13 +7,11 @@
     const audio = document.getElementById('bg-audio');
     if (!audio) return;
 
-    /* Fallback track used only when the admin URL is empty/unreachable.
-       Prefer the admin URL from js/site-settings.js. */
-    const SAFE_FALLBACK = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-
+    /* The track is whatever was last set — the admin URL from
+       js/site-settings.js (managed via /admin → Site Settings). */
     const fromSettings = window.LCDH_SETTINGS && window.LCDH_SETTINGS.audio && window.LCDH_SETTINGS.audio.url;
     const sourceEl = audio.querySelector('source');
-    if (fromSettings && sourceEl && sourceEl.src !== fromSettings) {
+    if (fromSettings && sourceEl && sourceEl.getAttribute('src') !== fromSettings) {
         sourceEl.src = fromSettings;
         audio.load();
     }
@@ -61,32 +59,10 @@
         }
     };
 
-    /* If the configured file 404s/403s (hotlink protection, expired link),
-       try the safe fallback once before giving up. */
-    let triedFallback = false;
-    audio.addEventListener('error', () => {
-        if (!triedFallback) {
-            triedFallback = true;
-            if (sourceEl) sourceEl.src = SAFE_FALLBACK;
-            else audio.src = SAFE_FALLBACK;
-            audio.load();
-            tryPlay();
-        } else {
-            markFailed();
-        }
-    });
-    if (sourceEl) {
-        sourceEl.addEventListener('error', () => {
-            if (!triedFallback) {
-                triedFallback = true;
-                sourceEl.src = SAFE_FALLBACK;
-                audio.load();
-                tryPlay();
-            } else {
-                markFailed();
-            }
-        });
-    }
+    /* Keep the last-used track — no swapping in another song. If the file
+       fails (expired link, hotlink block), surface it on the toggle. */
+    audio.addEventListener('error', markFailed);
+    if (sourceEl) sourceEl.addEventListener('error', markFailed);
 
     /* Browsers block autoplay with sound — start muted-safe, then unmute on
        the first real user gesture (including the age-gate YES click). */

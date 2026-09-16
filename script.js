@@ -194,14 +194,18 @@ function applySiteSettings() {
             locs.map((l) => '<option value="' + escapeHtml(l.label) + '">' + escapeHtml(l.label) + '</option>').join('');
     }
 
-    /* Desktop clickable list */
+    /* Desktop clickable list — one trigger per Casa. Contact Store is an
+       option INSIDE that Casa's own CONTACT LOCATION popover, not its own button. */
     const linksWrap = document.getElementById('location-links');
     if (linksWrap && locs.length) {
         linksWrap.innerHTML = locs.map((loc) => {
             const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
             const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
-            return '<div class="location-link-wrap">' +
-                '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '">' +
+            const storeItem = storeHref
+                ? '<a class="loc-pop-option loc-pop-store" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>'
+                : '';
+            return '<div class="location-link-item">' +
+                '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" aria-expanded="false" aria-haspopup="true">' +
                     '<span class="location-link-top">' +
                         '<span class="location-city">' + escapeHtml(loc.city) + '</span>' +
                         '<span class="location-link-arrow" aria-hidden="true">→</span>' +
@@ -209,17 +213,25 @@ function applySiteSettings() {
                     '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
                     '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
                 '</button>' +
-                (storeHref ? '<a class="location-store-link" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>' : '') +
+                '<div class="loc-popover" role="menu" hidden>' +
+                    storeItem +
+                    '<button type="button" class="loc-pop-option loc-pop-maps" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" data-location="' + escapeHtml(loc.label) + '" role="menuitem">OPEN IN GOOGLE MAPS →</button>' +
+                    '<a class="loc-pop-option" href="#about" role="menuitem">ABOUT THIS CASA →</a>' +
+                '</div>' +
             '</div>';
         }).join('');
     }
 
-    /* Mobile photo-card style */
+    /* Contact Store is one of the choices INSIDE the same CONTACT LOCATION
+       options — never a separate button on the card/row itself. */
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
         gridWrap.innerHTML = locs.map((loc) => {
             const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
             const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
+            const storeItem = storeHref
+                ? '<a class="loc-pop-option loc-pop-store" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>'
+                : '';
             return '<article class="location-card">' +
                 '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
                 '<div class="location-body">' +
@@ -229,14 +241,69 @@ function applySiteSettings() {
                     '<hr class="location-rule" aria-hidden="true">' +
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
                     '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
-                    '<div class="location-actions">' +
-                        '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact">CONTACT LOCATION →</button>' +
-                        (storeHref ? '<a href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer" class="location-store-btn">CONTACT STORE ↗</a>' : '') +
+                    '<div class="location-contact-wrap">' +
+                        '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact" aria-expanded="false" aria-haspopup="true">CONTACT LOCATION →</button>' +
+                        '<div class="loc-popover" role="menu" hidden>' +
+                            storeItem +
+                            '<button type="button" class="loc-pop-option loc-pop-maps" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" data-location="' + escapeHtml(loc.label) + '" role="menuitem">OPEN IN GOOGLE MAPS →</button>' +
+                            '<a class="loc-pop-option" href="#about" role="menuitem">ABOUT THIS CASA →</a>' +
+                        '</div>' +
                     '</div>' +
                 '</div>' +
             '</article>';
         }).join('');
     }
+
+    /* Each Casa's CONTACT LOCATION trigger opens its own small options menu;
+       CONTACT STORE is one choice inside it (plus Maps / About). One open at
+       a time; Escape / outside click closes. */
+    (function initLocationPopovers() {
+        const closeAll = (except) => {
+            document.querySelectorAll('.loc-popover:not([hidden])').forEach((pop) => {
+                if (pop !== except) pop.hidden = true;
+            });
+            document.querySelectorAll('.location-link[aria-expanded="true"], .location-contact[aria-expanded="true"]').forEach((btn) => {
+                const pop = btn.parentElement ? btn.parentElement.querySelector('.loc-popover') : null;
+                if (pop !== except) btn.setAttribute('aria-expanded', 'false');
+            });
+            document.querySelectorAll('.location-link-item.open, .location-contact-wrap.open').forEach((wrap) => {
+                const pop = wrap.querySelector('.loc-popover');
+                if (pop !== except) wrap.classList.remove('open');
+            });
+        };
+
+        document.querySelectorAll('.location-link-item, .location-contact-wrap').forEach((wrap) => {
+            const trigger = wrap.querySelector('.location-link, .location-contact');
+            const pop = wrap.querySelector('.loc-popover');
+            if (!trigger || !pop) return;
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const willOpen = pop.hidden;
+                closeAll(pop);
+                pop.hidden = !willOpen;
+                wrap.classList.toggle('open', willOpen);
+                trigger.setAttribute('aria-expanded', String(willOpen));
+            });
+            pop.querySelectorAll('.loc-pop-maps').forEach((mapsBtn) => {
+                mapsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const mapUrl = mapsBtn.getAttribute('data-map-url') || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((mapsBtn.getAttribute('data-location') || '') + ', United Arab Emirates');
+                    window.open(mapUrl, '_blank', 'noopener,noreferrer');
+                    pop.hidden = true;
+                    wrap.classList.remove('open');
+                    trigger.setAttribute('aria-expanded', 'false');
+                });
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.location-link-item') && !e.target.closest('.location-contact-wrap')) closeAll(null);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAll(null);
+        });
+    })();
 }
 
 applySiteSettings();
@@ -454,6 +521,8 @@ startAutoplay();
         loc.marker.openPopup();
     }
 
+    /* Desktop rows are CONTACT LOCATION triggers (their options popover is
+       toggled by initLocationPopovers above). Also highlight the Casa map. */
     links.forEach(function (link) {
         link.addEventListener('click', () => {
             activate(link.dataset.location, true);
@@ -471,9 +540,11 @@ startAutoplay();
 })();
 
 /* ===== MOBILE LOCATION CARDS - LOCATION BUTTONS ===== */
-/* On mobile the original photo-card style is shown; each card's button opens
-   the Casa in Google Maps. */
+/* Each card's CONTACT LOCATION opens that Casa's options (Contact Store /
+   Maps / About). The raw Maps-open fallback is kept for cards that somehow
+   render without their popover. */
 document.querySelectorAll('.location-contact').forEach(button => {
+    if (button.closest('.location-contact-wrap')) return; /* handled by initLocationPopovers */
     button.addEventListener('click', () => {
         const mapUrl = button.dataset.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(button.dataset.location + ', United Arab Emirates');
         window.open(mapUrl, '_blank', 'noopener,noreferrer');
