@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2398012d'/><text x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23fee7c6' text-anchor='middle'>H</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
 </head>
     <body>
     <!-- ===== AGE GATE (21+) ===== -->
@@ -20,17 +20,11 @@
             <img src="logo.svg" alt="La Casa del Habano UAE" class="age-gate-logo">
             <p class="age-gate-kicker">AGE RESTRICTION</p>
             <h2 class="age-gate-title" id="age-gate-title">ARE YOU OVER 21?</h2>
-            <p class="age-gate-copy">This website is intended for adults aged 21 and over only.<br>Please enter your date of birth to continue.</p>
-            <form id="age-gate-form" novalidate>
-                <div class="dob-row" aria-label="Date of birth">
-                    <input id="dob-day" class="dob-input" type="text" inputmode="numeric" maxlength="2" placeholder="DD" autocomplete="bday-day" aria-label="Day of birth">
-                    <span class="dob-sep" aria-hidden="true">/</span>
-                    <input id="dob-month" class="dob-input" type="text" inputmode="numeric" maxlength="2" placeholder="MM" autocomplete="bday-month" aria-label="Month of birth">
-                    <span class="dob-sep" aria-hidden="true">/</span>
-                    <input id="dob-year" class="dob-input dob-input-year" type="text" inputmode="numeric" maxlength="4" placeholder="YYYY" autocomplete="bday-year" aria-label="Year of birth">
-                </div>
-                <button type="submit" class="btn-casa btn-coral age-gate-btn">ENTER SITE</button>
-            </form>
+            <p class="age-gate-copy">This website is intended for adults aged 21 and over only.<br>Are you of legal smoking age in your country of residence?</p>
+            <div class="age-choice-row" role="group" aria-label="Are you over 21?">
+                <button type="button" id="age-yes" class="btn-casa btn-coral age-choice-btn">YES</button>
+                <button type="button" id="age-no" class="btn-casa btn-outline age-choice-btn">NO</button>
+            </div>
             <p class="age-gate-error" id="age-gate-error" role="alert"></p>
         </div>
     </div>
@@ -53,7 +47,7 @@
     </script>
 
     <!-- ===== BACKGROUND AUDIO ===== -->
-    <audio id="bg-audio" preload="auto" loop muted playsinline>
+    <audio id="bg-audio" preload="auto" loop playsinline>
         <source src="https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3" type="audio/mpeg">
     </audio>
     <button id="audio-toggle" aria-label="Unmute background music" title="Toggle background music" style="position:fixed;bottom:24px;left:24px;z-index:1000;background:rgba(74,1,22,0.94);border:2px solid rgba(167,153,110,0.75);color:#a7996e;width:52px;height:52px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:all 0.3s ease;box-shadow:0 4px 12px rgba(46,1,9,0.45);">
@@ -446,8 +440,8 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/site-settings.js?v=1"></script>
     <script src="js/events-data.js?v=2"></script>
-    <script src="script.js?v=6"></script>
-    <script src="audio.js?v=1"></script>
+    <script src="script.js?v=7"></script>
+    <script src="audio.js?v=2"></script>
 </body>
 </html>
 

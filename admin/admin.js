@@ -385,6 +385,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8',
             lat: 25.2056,
             lng: 55.2570,
+            whatsapp: '971542137706',
             image: 'https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg'
         },
         {
@@ -398,6 +399,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A',
             lat: 25.0795,
             lng: 55.1400,
+            whatsapp: '9715066008888',
             image: 'https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg'
         },
         {
@@ -411,6 +413,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8',
             lat: 24.5006,
             lng: 54.3961,
+            whatsapp: '971558002731',
             image: 'https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg'
         }
     ]
@@ -443,7 +446,15 @@ function currentSettings() {
     const merged = cloneSettings(DEFAULT_SETTINGS);
     if (base.contact) Object.assign(merged.contact, base.contact);
     if (base.audio) Object.assign(merged.audio, base.audio);
-    if (Array.isArray(base.locations)) merged.locations = base.locations;
+    if (Array.isArray(base.locations)) {
+        merged.locations = base.locations.map((loc, i) => {
+            const fallback = DEFAULT_SETTINGS.locations[i] || {};
+            const withDefaults = Object.assign({}, fallback, loc);
+            /* Back-fill per-store WhatsApp numbers for older exports. */
+            if (!withDefaults.whatsapp) withDefaults.whatsapp = fallback.whatsapp || merged.contact.whatsapp || '';
+            return withDefaults;
+        });
+    }
     return merged;
 }
 
@@ -508,6 +519,7 @@ function settingsFormHtml(settings) {
         html += '<div class="field-span-2">' + label('Google Maps link') + urlIn('s-loc-' + i + '-mapsurl', loc.mapsUrl) + '</div>';
         html += '<div>' + label('Latitude') + textIn('s-loc-' + i + '-lat', loc.lat) + '</div>';
         html += '<div>' + label('Longitude') + textIn('s-loc-' + i + '-lng', loc.lng) + '</div>';
+        html += '<div>' + label('Store WhatsApp number (Contact Store button)') + textIn('s-loc-' + i + '-whatsapp', loc.whatsapp, '971…') + '</div>';
         html += '</div></div>';
     });
 
@@ -540,6 +552,7 @@ function readSettingsFromForm() {
         loc.mapsUrl = val('s-loc-' + i + '-mapsurl');
         loc.lat = Number(val('s-loc-' + i + '-lat')) || 0;
         loc.lng = Number(val('s-loc-' + i + '-lng')) || 0;
+        loc.whatsapp = val('s-loc-' + i + '-whatsapp');
     });
 
     return settings;

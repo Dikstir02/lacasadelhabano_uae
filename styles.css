@@ -25,6 +25,12 @@
     --brand-gold: #a7996e;
     --brand-black: #211e1f;   /* base — reserved for deep copy, not a surface   */
 
+    /* --- Dark red → black gradient pair (requested) --- */
+    --habano-crimson: #98012d;
+    --habano-black: #211e1f;
+    --habano-gradient: linear-gradient(135deg, #98012d 0%, #5c011b 42%, #211e1f 100%);
+    --habano-gradient-soft: linear-gradient(160deg, rgba(152, 1, 45, .28), rgba(33, 30, 31, .92));
+
     /* --- Habano Red shades: DOMINANT. Every large surface mixes #98012D --- */
     --brand-red-deep: #6b0120;    /* 30% shade — panels, cards, warm bands  */
     --brand-red-dark: #4a0116;    /* 50% shade — deep bands, nested panels  */
@@ -66,7 +72,8 @@ body {
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 16px;
     color: var(--cream);
-    background: var(--navy);
+    background: linear-gradient(180deg, #98012d 0%, #5c011b 40%, #211e1f 100%);
+    background-attachment: fixed;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
@@ -622,19 +629,19 @@ select:focus-visible {
 }
 
 .section-blue {
-    background: var(--brand-red-deep);    /* The Casa Experience */
+    background: var(--habano-gradient);    /* The Casa Experience */
 }
 
 .section-red {
-    background: var(--brand-red);         /* Nights at the Casa  */
+    background: var(--habano-gradient);         /* Nights at the Casa  */
 }
 
 .section-leaf {
-    background: var(--brand-red);         /* Find Your Casa      */
+    background: var(--habano-gradient);         /* Find Your Casa      */
 }
 
 .section-navy {
-    background: var(--brand-red-dark);    /* About Us            */
+    background: var(--habano-gradient);    /* About Us            */
 }
 
 /* ===== HERITAGE ===== */
@@ -1089,6 +1096,60 @@ select:focus-visible {
     color: var(--cream);
 }
 
+.location-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: center;
+}
+
+.location-store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    border: 1px solid rgba(254, 231, 198, .5);
+    color: #fee7c6;
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: filter .2s ease, transform .2s ease;
+}
+
+.location-store-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.location-link-wrap .location-link {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.location-store-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 22px 16px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    border: 1px solid rgba(254, 231, 198, .5);
+    color: #fee7c6;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.location-store-link:hover { filter: brightness(1.15); }
+
 /* --- Desktop clickable rows (compact) --- */
 .location-links {
     display: flex;
@@ -1117,9 +1178,9 @@ select:focus-visible {
 }
 
 .location-link.active {
-    background: rgba(74, 1, 22, .6);
+    background: linear-gradient(135deg, rgba(152, 1, 45, .85), rgba(0, 0, 0, .9));
     border-color: var(--sand);
-    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(46, 1, 9, .6);
+    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(0, 0, 0, .6);
 }
 
 .location-link-top {
@@ -1496,7 +1557,7 @@ select:focus-visible {
 
 .footer {
     width: 100%;
-    background: var(--ink);
+    background: linear-gradient(180deg, #98012d 0%, #2a0207 55%, #000000 100%);
     padding-top: 56px;
 }
 
@@ -1962,7 +2023,7 @@ select:focus-visible {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: var(--brand-red-darkest);
+    background: linear-gradient(140deg, #98012d 0%, #4d0113 48%, #000000 100%);
 }
 
 .age-gate.visible { display: flex; }
@@ -1975,10 +2036,10 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 .age-gate-card {
     width: 100%;
     max-width: 440px;
-    background: var(--navy);
+    background: linear-gradient(160deg, #5c011b 0%, #211e1f 100%);
     border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-lg);
-    box-shadow: 0 40px 90px rgba(46, 1, 9, .6);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
     padding: 42px 36px;
     text-align: center;
 }
@@ -2012,39 +2073,16 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     color: var(--sand);
 }
 
-.dob-row {
+.age-choice-row {
     display: flex;
-    align-items: center;
+    gap: 14px;
     justify-content: center;
-    gap: 10px;
     margin-top: 28px;
 }
 
-.dob-input {
-    width: 58px;
-    padding: 12px 4px;
-    text-align: center;
-    background: rgba(46, 1, 9, .85);
-    border: 1px solid rgba(167, 153, 110, .55);
-    border-radius: var(--radius-sm);
-    color: var(--cream);
-    font: inherit;
-    font-size: 18px;
-    letter-spacing: .06em;
-    outline: none;
-    transition: border-color .2s ease;
-}
-
-.dob-input:focus { border-color: var(--gold); }
-
-.dob-input::placeholder { color: rgba(167, 153, 110, .78); }
-
-.dob-input-year { width: 86px; }
-
-.dob-sep {
-    color: var(--gold);
-    font-size: 20px;
-    opacity: .7;
+.age-choice-btn {
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .age-gate-btn { margin-top: 28px; width: 100%; }
@@ -2055,12 +2093,6 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     font-size: 13px;
     line-height: 1.5;
     color: var(--brand-red-tint);
-}
-
-.age-gate-card.denied .dob-row,
-.age-gate-card.denied .age-gate-btn {
-    opacity: .4;
-    pointer-events: none;
 }
 
 @keyframes age-shake {
@@ -2077,8 +2109,7 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
 
 @media (max-width: 420px) {
     .age-gate-card { padding: 34px 22px; }
-    .dob-input { width: 48px; }
-    .dob-input-year { width: 74px; }
+    .age-choice-row { flex-direction: column; }
 }
 
 /* ===== AUDIO TOGGLE ===== */

@@ -1,93 +1,152 @@
 /* =========================================================
    LA CASA DEL HABANO UAE
-   Background audio autoplay
+   Background audio autoplay (with admin-managed URL)
    ========================================================= */
 
 (() => {
     const audio = document.getElementById('bg-audio');
     if (!audio) return;
 
-    /* The background music comes from js/site-settings.js (managed via /admin). */
-    const musicUrl = window.LCDH_SETTINGS && window.LCDH_SETTINGS.audio && window.LCDH_SETTINGS.audio.url;
+    /* Fallback track used only when the admin URL is empty/unreachable.
+       Prefer the admin URL from js/site-settings.js. */
+    const SAFE_FALLBACK = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+
+    const fromSettings = window.LCDH_SETTINGS && window.LCDH_SETTINGS.audio && window.LCDH_SETTINGS.audio.url;
     const sourceEl = audio.querySelector('source');
-    if (musicUrl && sourceEl) {
-        sourceEl.src = musicUrl;
+    if (fromSettings && sourceEl && sourceEl.src !== fromSettings) {
+        sourceEl.src = fromSettings;
         audio.load();
     }
 
-    let isReady = false;
+    let failed = false;
+    let started = false;
 
-    audio.volume = 0.3;
+    audio.volume = 0.35;
     audio.loop = true;
+    audio.muted = false;
+    audio.preload = 'auto';
 
-    const tryPlay = async (muted = false) => {
+    const toggle = document.getElementById('audio-toggle');
+    const icon = toggle ? toggle.querySelector('.audio-icon') : null;
+
+    const updateToggle = () => {
+        if (!toggle) return;
+        const muted = audio.muted || audio.paused;
+        toggle.setAttribute('aria-label', muted ? 'Unmute background music' : 'Mute background music');
+        toggle.style.opacity = muted ? '0.85' : '1';
+        if (icon) icon.textContent = muted ? '🔇' : '🔊';
+    };
+
+    const markFailed = () => {
+        failed = true;
+        if (toggle) {
+            toggle.setAttribute('aria-label', 'Background music unavailable');
+            toggle.style.opacity = '0.45';
+            toggle.style.cursor = 'not-allowed';
+            if (icon) icon.textContent = '🔇';
+        }
+    };
+
+    const tryPlay = async () => {
+        if (failed) return false;
         try {
-            audio.muted = muted;
+            audio.muted = false;
             await audio.play();
+            started = true;
+            updateToggle();
             return true;
-        } catch {
+        } catch (err) {
+            updateToggle();
             return false;
         }
     };
 
-    (async () => {
-        const played = await tryPlay(false);
-        if (!played) {
-            await tryPlay(true);
+    /* If the configured file 404s/403s (hotlink protection, expired link),
+       try the safe fallback once before giving up. */
+    let triedFallback = false;
+    audio.addEventListener('error', () => {
+        if (!triedFallback) {
+            triedFallback = true;
+            if (sourceEl) sourceEl.src = SAFE_FALLBACK;
+            else audio.src = SAFE_FALLBACK;
+            audio.load();
+            tryPlay();
+        } else {
+            markFailed();
         }
-    })();
+    });
+    if (sourceEl) {
+        sourceEl.addEventListener('error', () => {
+            if (!triedFallback) {
+                triedFallback = true;
+                sourceEl.src = SAFE_FALLBACK;
+                audio.load();
+                tryPlay();
+            } else {
+                markFailed();
+            }
+        });
+    }
 
-    const toggle = document.getElementById('audio-toggle');
-    const updateToggle = () => {
-        if (!toggle) return;
-        toggle.setAttribute('aria-label', audio.muted ? 'Unmute background music' : 'Mute background music');
-        toggle.style.opacity = audio.muted ? '0.85' : '1';
+    /* Browsers block autoplay with sound — start muted-safe, then unmute on
+       the first real user gesture (including the age-gate YES click). */
+    try { audio.muted = true; } catch (e) { /* noop */ }
+    audio.play().then(() => {
+        updateToggle();
+    }).catch(() => {
+        updateToggle();
+    });
+
+    const unlock = async () => {
+        if (failed || started) {
+            if (started) {
+                try { audio.muted = false; await audio.play(); } catch (e) { /* keep muted */ }
+                updateToggle();
+            }
+            return;
+        }
+        const ok = await tryPlay();
+        if (ok) {
+            window.removeEventListener('scroll', unlock);
+            window.removeEventListener('click', unlock);
+            window.removeEventListener('pointermove', unlock);
+            window.removeEventListener('keydown', unlock);
+            window.removeEventListener('touchstart', unlock);
+            document.removeEventListener('lcdh:age-verified', unlock);
+        }
     };
+
+    window.addEventListener('scroll', unlock, { passive: true });
+    window.addEventListener('click', unlock);
+    window.addEventListener('pointermove', unlock, { passive: true });
+    window.addEventListener('keydown', unlock);
+    window.addEventListener('touchstart', unlock, { passive: true });
+    /* The YES button on the age gate counts as the gesture. */
+    document.addEventListener('lcdh:age-verified', unlock);
 
     if (toggle) {
         toggle.addEventListener('click', async (e) => {
             e.preventDefault();
-            audio.muted = !audio.muted;
-            if (!audio.muted) {
-                await tryPlay(false);
+            e.stopPropagation();
+            if (failed) return;
+            if (audio.paused) {
+                await tryPlay();
+            } else {
+                audio.muted = !audio.muted;
+                if (!audio.muted) {
+                    try { await audio.play(); } catch (err) { /* stay muted */ }
+                }
             }
             updateToggle();
         });
     }
 
-    const unlock = async () => {
-        if (isReady) return;
-        isReady = true;
-        audio.muted = false;
-        audio.currentTime = 0;
-        await tryPlay(false);
-        updateToggle();
-
-        window.removeEventListener('scroll', unlock, { passive: true });
-        window.removeEventListener('click', unlock, { passive: true });
-        window.removeEventListener('pointermove', unlock, { passive: true });
-        window.removeEventListener('keydown', unlock);
-        window.removeEventListener('touchstart', unlock, { passive: true });
-    };
-
-    window.addEventListener('scroll', unlock, { passive: true });
-    window.addEventListener('click', unlock, { passive: true });
-    window.addEventListener('pointermove', unlock, { passive: true });
-    window.addEventListener('keydown', unlock);
-    window.addEventListener('touchstart', unlock, { passive: true });
-
     document.addEventListener('visibilitychange', async () => {
-        if (document.visibilityState === 'visible' && !audio.muted && audio.paused) {
-            await tryPlay(false);
+        if (document.visibilityState === 'visible' && !failed && !audio.muted && audio.paused && started) {
+            try { await audio.play(); } catch (err) { /* ignore */ }
+            updateToggle();
         }
     });
 
-    document.body.addEventListener('click', async (e) => {
-        if (audio.muted || audio.paused) {
-            audio.muted = false;
-            await tryPlay(false);
-            updateToggle();
-            isReady = true;
-        }
-    }, { once: true });
+    updateToggle();
 })();

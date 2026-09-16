@@ -11,19 +11,17 @@ function setVH() {
 setVH();
 window.addEventListener('resize', setVH);
 
-/* ===== AGE GATE (21+) ===== */
+/* ===== AGE GATE (21+) — YES / NO ===== */
 /* Verification is kept in sessionStorage only, so it expires as soon as
    the visitor exits (closes the tab or browser) and every new visit
-   must pass the DOB check again. */
+   must confirm again. */
 const AGE_KEY = 'lcdh_age_verified';
-const AGE_LIMIT_YEARS = 21;
 
 const ageGate = document.getElementById('age-gate');
-const ageCard = ageGate.querySelector('.age-gate-card');
-const dobDay = document.getElementById('dob-day');
-const dobMonth = document.getElementById('dob-month');
-const dobYear = document.getElementById('dob-year');
+const ageCard = ageGate ? ageGate.querySelector('.age-gate-card') : null;
 const ageError = document.getElementById('age-gate-error');
+const ageYesBtn = document.getElementById('age-yes');
+const ageNoBtn = document.getElementById('age-no');
 
 function ageGatePassed() {
     try {
@@ -34,82 +32,41 @@ function ageGatePassed() {
 }
 
 function openAgeGate() {
+    if (!ageGate) return;
     document.body.classList.add('age-gate-open');
     ageGate.classList.add('visible');
     ageGate.setAttribute('aria-hidden', 'false');
-    dobDay.focus();
+    if (ageYesBtn) ageYesBtn.focus();
 }
 
 function closeAgeGate() {
+    if (!ageGate) return;
     document.body.classList.remove('age-gate-open');
     ageGate.classList.remove('visible');
     ageGate.setAttribute('aria-hidden', 'true');
 }
 
-function calculateAge(birthDate) {
-    const now = new Date();
-    let age = now.getFullYear() - birthDate.getFullYear();
-    const monthDiff = now.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthDate.getDate())) age--;
-    return age;
-}
-
 function nudgeCard() {
+    if (!ageCard) return;
     ageCard.classList.remove('shake');
     void ageCard.offsetWidth;   /* restart the animation */
     ageCard.classList.add('shake');
 }
 
-/* Digits only + auto-advance between DD / MM / YYYY segments */
-[dobDay, dobMonth, dobYear].forEach((input, index, list) => {
-    input.addEventListener('input', () => {
-        input.value = input.value.replace(/\D/g, '').slice(0, input.maxLength);
-        if (input.value.length === input.maxLength && list[index + 1]) list[index + 1].focus();
-    });
-    input.addEventListener('keydown', (keyEvent) => {
-        if (keyEvent.key === 'Backspace' && input.value.length === 0 && list[index - 1]) {
-            list[index - 1].focus();
-        }
-    });
-});
+function markAgeVerified() {
+    try { sessionStorage.setItem(AGE_KEY, '1'); } catch (storageError) { /* storage unavailable — still let them in */ }
+    if (ageError) ageError.textContent = '';
+    closeAgeGate();
+    document.dispatchEvent(new CustomEvent('lcdh:age-verified'));
+}
 
-if (!ageGatePassed()) openAgeGate();
+if (ageGate && !ageGatePassed()) openAgeGate();
 
-document.getElementById('age-gate-form').addEventListener('submit', (submitEvent) => {
-    submitEvent.preventDefault();
+if (ageYesBtn) ageYesBtn.addEventListener('click', markAgeVerified);
 
-    const day = dobDay.value.trim();
-    const month = dobMonth.value.trim();
-    const year = dobYear.value.trim();
-
-    if (day.length !== 2 || month.length !== 2 || year.length !== 4 || Number(year) < 1900) {
-        ageError.textContent = 'Please enter your full date of birth (DD / MM / YYYY).';
-        nudgeCard();
-        return;
-    }
-
-    const birthDate = new Date(Number(year), Number(month) - 1, Number(day));
-    const isRealDate = birthDate.getFullYear() === Number(year) &&
-                       birthDate.getMonth() === Number(month) - 1 &&
-                       birthDate.getDate() === Number(day);
-
-    if (!isRealDate || birthDate > new Date()) {
-        ageError.textContent = 'That date does not exist — please check DD / MM / YYYY.';
-        nudgeCard();
-        return;
-    }
-
-    if (calculateAge(birthDate) >= AGE_LIMIT_YEARS) {
-        try { sessionStorage.setItem(AGE_KEY, '1'); } catch (storageError) { /* storage unavailable */ }
-        ageError.textContent = '';
-        closeAgeGate();
-    } else {
-        ageCard.classList.add('denied');
-        dobDay.disabled = true;
-        dobMonth.disabled = true;
-        dobYear.disabled = true;
-        ageError.textContent = 'Sorry — you must be 21 or older to enter this website.';
-    }
+if (ageNoBtn) ageNoBtn.addEventListener('click', () => {
+    if (ageError) ageError.textContent = 'Sorry — this site is for adults aged 21 and over only.';
+    nudgeCard();
 });
 
 /* ===== STICKY HEADER ===== */
@@ -240,23 +197,30 @@ function applySiteSettings() {
     /* Desktop clickable list */
     const linksWrap = document.getElementById('location-links');
     if (linksWrap && locs.length) {
-        linksWrap.innerHTML = locs.map((loc) =>
-            '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '">' +
-                '<span class="location-link-top">' +
-                    '<span class="location-city">' + escapeHtml(loc.city) + '</span>' +
-                    '<span class="location-link-arrow" aria-hidden="true">→</span>' +
-                '</span>' +
-                '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
-                '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
-            '</button>'
-        ).join('');
+        linksWrap.innerHTML = locs.map((loc) => {
+            const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
+            const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
+            return '<div class="location-link-wrap">' +
+                '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '">' +
+                    '<span class="location-link-top">' +
+                        '<span class="location-city">' + escapeHtml(loc.city) + '</span>' +
+                        '<span class="location-link-arrow" aria-hidden="true">→</span>' +
+                    '</span>' +
+                    '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
+                    '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
+                '</button>' +
+                (storeHref ? '<a class="location-store-link" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>' : '') +
+            '</div>';
+        }).join('');
     }
 
     /* Mobile photo-card style */
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
-        gridWrap.innerHTML = locs.map((loc) =>
-            '<article class="location-card">' +
+        gridWrap.innerHTML = locs.map((loc) => {
+            const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
+            const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
+            return '<article class="location-card">' +
                 '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
                 '<div class="location-body">' +
                     '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
@@ -265,10 +229,13 @@ function applySiteSettings() {
                     '<hr class="location-rule" aria-hidden="true">' +
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
                     '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
-                    '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact">CONTACT LOCATION →</button>' +
+                    '<div class="location-actions">' +
+                        '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact">CONTACT LOCATION →</button>' +
+                        (storeHref ? '<a href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer" class="location-store-btn">CONTACT STORE ↗</a>' : '') +
+                    '</div>' +
                 '</div>' +
-            '</article>'
-        ).join('');
+            '</article>';
+        }).join('');
     }
 }
 
