@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    LA CASA DEL HABANO UAE
    Reference-aligned interactions
    ========================================================= */
@@ -212,11 +212,12 @@ function applySiteSettings() {
         ).join('');
     }
 
-        /* Mobile photo cards — each card carries its own store contact +
-       directions buttons so mobile users get the same quick actions that
-       desktop users reach via the map-pin popups. These buttons are
-       hidden on desktop (min-width: 1024px) in CSS so the desktop
-       map-popup interaction stays untouched. */
+                /* Mobile location cards — on mobile the locations-grid renders a
+       compact, info-only card (no image), mirroring the desktop
+       location-link row style. Each card carries its own tappable
+       Contact Store (WhatsApp) + View in Google Maps buttons,
+       giving mobile users the same quick actions that desktop users
+       reach via the map-pin popups. */
     const waNumbers = {
         'City Walk — Dubai': '971542137706',
         'JBR — Dubai': '9715066008888',
@@ -226,10 +227,11 @@ function applySiteSettings() {
     if (gridWrap && locs.length) {
         gridWrap.innerHTML = locs.map((loc) =>
             '<article class="location-card" data-location="' + escapeHtml(loc.label) + '">' +
-                '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
                 '<div class="location-body">' +
-                    '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
-                    '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
+                    '<div class="loc-mobile-head">' +
+                        '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
+                        '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
+                    '</div>' +
                     '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
                     '<hr class="location-rule" aria-hidden="true">' +
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +

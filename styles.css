@@ -1238,24 +1238,18 @@ body.experience-modal-open { overflow: hidden; }
     box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
 }
 
-.location-img {
-    height: 200px;
-    overflow: hidden;
-}
-
-.location-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .55s ease;
-}
-
-.location-card:hover .location-img img {
-    transform: scale(1.06);
+/* Mobile location card: compact info-only layout (no image),
+   mirroring the desktop location-link row style. */
+.loc-mobile-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
 }
 
 .location-body {
-    padding: 24px;
+    padding: 20px;
 }
 
 .location-contact {
@@ -1278,10 +1272,11 @@ body.experience-modal-open { overflow: hidden; }
 }
 
 /* ===== Mobile location card quick actions =====
-   Each photo card gets its own Contact Store + View in Google Maps
-   buttons so mobile users reach the same store actions that desktop
-   users get via the map-pin popups. These are hidden on desktop
-   (min-width: 1024px) so the desktop map-popup design is untouched. */
+   Each mobile card (image-free, info-style) gets its own Contact Store
+   + View in Google Maps buttons so mobile users reach the same quick
+   actions that desktop users get via the map-pin popups. These are
+   hidden on desktop (min-width: 1024px) so the desktop map-popup
+   interaction is untouched. */
 .loc-mobile-actions {
     display: flex;
     flex-direction: column;
