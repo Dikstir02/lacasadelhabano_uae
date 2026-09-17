@@ -212,12 +212,20 @@ function applySiteSettings() {
         ).join('');
     }
 
-    /* Mobile photo cards — plain selector only; Contact Store + Maps live
-       inside the map pin popup details */
+        /* Mobile photo cards — each card carries its own store contact +
+       directions buttons so mobile users get the same quick actions that
+       desktop users reach via the map-pin popups. These buttons are
+       hidden on desktop (min-width: 1024px) in CSS so the desktop
+       map-popup interaction stays untouched. */
+    const waNumbers = {
+        'City Walk — Dubai': '971542137706',
+        'JBR — Dubai': '9715066008888',
+        'Abu Dhabi Mall — Abu Dhabi': '971558002731'
+    };
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
         gridWrap.innerHTML = locs.map((loc) =>
-            '<article class="location-card">' +
+            '<article class="location-card" data-location="' + escapeHtml(loc.label) + '">' +
                 '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
                 '<div class="location-body">' +
                     '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
@@ -226,11 +234,36 @@ function applySiteSettings() {
                     '<hr class="location-rule" aria-hidden="true">' +
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
                     '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
+                    '<div class="loc-mobile-actions">' +
+                        '<a href="https://wa.me/' + (loc.whatsapp || waNumbers[loc.label] || '') + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || loc.label) + '! I have a question.') + '" class="loc-mobile-btn loc-mobile-whatsapp" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>' +
+                        '<a href="' + escapeHtml(loc.mapsUrl || 'https://www.google.com/maps') + '" class="loc-mobile-btn loc-mobile-maps" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>' +
+                    '</div>' +
                 '</div>' +
             '</article>'
         ).join('');
     }
 }
+
+/* ===== MOBILE LOCATION CARD ACTION HANDLING ===== */
+/* On desktop the clickable location-link rows drive map focus, and
+   the real Contact Store + View in Google Maps actions live inside map
+   pin popups. On mobile there is no map list, so wire the Contact
+   Store button on each photo card to also update the contact-form
+   location — mirroring the desktop row behaviour. */
+(function initMobileLocationActions() {
+    const cards = document.querySelectorAll('.location-card[data-location]');
+    if (!cards.length) return;
+    cards.forEach(function (card) {
+        const locLabel = card.getAttribute('data-location');
+        const waBtn = card.querySelector('.loc-mobile-whatsapp');
+        if (waBtn && locLabel) {
+            waBtn.addEventListener('click', function () {
+                const locationInput = document.getElementById('location');
+                if (locationInput) locationInput.value = locLabel;
+            });
+        }
+    });
+})();
 
 applySiteSettings();
 

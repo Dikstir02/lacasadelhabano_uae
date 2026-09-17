@@ -1277,6 +1277,65 @@ body.experience-modal-open { overflow: hidden; }
     color: var(--cream);
 }
 
+/* ===== Mobile location card quick actions =====
+   Each photo card gets its own Contact Store + View in Google Maps
+   buttons so mobile users reach the same store actions that desktop
+   users get via the map-pin popups. These are hidden on desktop
+   (min-width: 1024px) so the desktop map-popup design is untouched. */
+.loc-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.loc-mobile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(254, 231, 198, .45);
+    background: transparent;
+    color: var(--cream);
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, filter .2s ease, color .2s ease;
+}
+
+.loc-mobile-btn:hover {
+    background: rgba(254, 231, 198, .12);
+    border-color: rgba(167, 153, 110, .8);
+    filter: brightness(1.1);
+}
+
+.loc-mobile-whatsapp {
+    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    border-color: rgba(254, 231, 198, .5);
+}
+
+.loc-mobile-whatsapp:hover {
+    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    border-color: rgba(254, 231, 198, .7);
+}
+
+.loc-mobile-maps {
+    background: rgba(0, 0, 0, .35);
+}
+
+/* Hide the mobile card actions on desktop — desktop uses map-pin popups */
+@media (min-width: 1024px) {
+    .loc-mobile-actions {
+        display: none;
+    }
+}
+
 /* Options sit inline next to VIEW IN GOOGLE MAPS — no popup nav */
 .loc-inline-row {
     display: flex;
