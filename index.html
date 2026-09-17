@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2398012d'/><text x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23fee7c6' text-anchor='middle'>H</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
 </head>
     <body>
     <!-- ===== AGE GATE (21+) ===== -->
@@ -48,7 +48,7 @@
 
     <!-- ===== BACKGROUND AUDIO ===== -->
     <audio id="bg-audio" preload="auto" loop playsinline>
-        <source src="https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2026/02/24/audio_c6c3c46f82.mp3?filename=silesfelipe-siles-calendar-august-1-490186.mp3" type="audio/mpeg">
     </audio>
     <button id="audio-toggle" aria-label="Unmute background music" title="Toggle background music" style="position:fixed;bottom:24px;left:24px;z-index:1000;background:rgba(74,1,22,0.94);border:2px solid rgba(167,153,110,0.75);color:#a7996e;width:52px;height:52px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:all 0.3s ease;box-shadow:0 4px 12px rgba(46,1,9,0.45);">
         <span class="audio-icon">🔊</span>
@@ -142,41 +142,59 @@
                     <p class="section-sub cream">A considered world of flavour, knowledge and unmistakable Cuban character.</p>
                 </div>
                 <div class="experience-grid">
-                    <article class="experience-card reveal">
+                    <article class="experience-card reveal" data-experience="premium-habanos" tabindex="0" role="button" aria-haspopup="dialog" aria-expanded="false">
                         <div class="experience-img"><img src="https://images.pexels.com/photos/38027071/pexels-photo-38027071.jpeg" alt="Premium Habanos selection" loading="lazy"></div>
                         <div class="experience-body">
                             <p class="experience-number display">01</p>
                             <h3 class="experience-title display">PREMIUM HABANOS</h3>
                             <p class="experience-copy">A curated collection from Cuba's most storied cigar houses.</p>
+                            <span class="experience-more" aria-hidden="true">Discover more →</span>
                         </div>
                     </article>
-                    <article class="experience-card reveal">
+                    <article class="experience-card reveal" data-experience="expert-guidance" tabindex="0" role="button" aria-haspopup="dialog" aria-expanded="false">
                         <div class="experience-img"><img src="https://images.pexels.com/photos/1637114/pexels-photo-1637114.jpeg" alt="Expert advice on Habanos" loading="lazy"></div>
                         <div class="experience-body">
                             <p class="experience-number display">02</p>
                             <h3 class="experience-title display">EXPERT GUIDANCE</h3>
                             <p class="experience-copy">Personal recommendations, whether it is your first discovery or favourite ritual.</p>
+                            <span class="experience-more" aria-hidden="true">Discover more →</span>
                         </div>
                     </article>
-                    <article class="experience-card reveal">
+                    <article class="experience-card reveal" data-experience="humidor-care" tabindex="0" role="button" aria-haspopup="dialog" aria-expanded="false">
                         <div class="experience-img"><img src="https://images.pexels.com/photos/3975066/pexels-photo-3975066.jpeg" alt="Humidor care" loading="lazy"></div>
                         <div class="experience-body">
                             <p class="experience-number display">03</p>
                             <h3 class="experience-title display">HUMIDOR CARE</h3>
                             <p class="experience-copy">Meticulous conservation creates the ideal environment for every Habano.</p>
+                            <span class="experience-more" aria-hidden="true">Discover more →</span>
                         </div>
                     </article>
-                    <article class="experience-card reveal">
+                    <article class="experience-card reveal" data-experience="lounge-hospitality" tabindex="0" role="button" aria-haspopup="dialog" aria-expanded="false">
                         <div class="experience-img"><img src="https://images.pexels.com/photos/11311205/pexels-photo-11311205.jpeg" alt="Casa lounge hospitality" loading="lazy"></div>
                         <div class="experience-body">
                             <p class="experience-number display">04</p>
                             <h3 class="experience-title display">LOUNGE HOSPITALITY</h3>
                             <p class="experience-copy">Relaxed, welcoming spaces for conversation, connection and a well-earned pause.</p>
+                            <span class="experience-more" aria-hidden="true">Discover more →</span>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
+<!-- ===== EXPERIENCE DETAIL MODAL ===== -->
+        <div id="experience-modal" class="exp-modal" role="dialog" aria-modal="true" aria-labelledby="exp-modal-title" aria-hidden="true">
+            <div class="exp-modal-backdrop" data-exp-close></div>
+            <div class="exp-modal-card" role="document">
+                <button type="button" class="exp-modal-close" data-exp-close aria-label="Close details">&times;</button>
+                <div class="exp-modal-img"><img id="exp-modal-img" alt=""></div>
+                <div class="exp-modal-body">
+                    <p class="exp-modal-number display" id="exp-modal-number">01</p>
+                    <h3 class="exp-modal-title display" id="exp-modal-title"></h3>
+                    <p class="exp-modal-tagline" id="exp-modal-tagline"></p>
+                    <div class="exp-modal-text" id="exp-modal-text"></div>
+                </div>
+            </div>
+        </div>
 <!-- ===== EVENTS ===== -->
         <section id="events" class="section section-red">
             <div class="container">
@@ -438,10 +456,10 @@
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/site-settings.js?v=1"></script>
+    <script src="js/site-settings.js?v=3"></script>
     <script src="js/events-data.js?v=2"></script>
-    <script src="script.js?v=8"></script>
-    <script src="audio.js?v=3"></script>
+    <script src="script.js?v=9"></script>
+    <script src="audio.js?v=5"></script>
 </body>
 </html>
 

@@ -194,18 +194,13 @@ function applySiteSettings() {
             locs.map((l) => '<option value="' + escapeHtml(l.label) + '">' + escapeHtml(l.label) + '</option>').join('');
     }
 
-    /* Desktop clickable list — one trigger per Casa. Contact Store is an
-       option INSIDE that Casa's own CONTACT LOCATION popover, not its own button. */
+    /* Desktop clickable list — plain selector only; Contact Store + Maps
+       live inside the map pin popup details */
     const linksWrap = document.getElementById('location-links');
     if (linksWrap && locs.length) {
-        linksWrap.innerHTML = locs.map((loc) => {
-            const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
-            const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
-            const storeItem = storeHref
-                ? '<a class="loc-pop-option loc-pop-store" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>'
-                : '';
-            return '<div class="location-link-item">' +
-                '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" aria-expanded="false" aria-haspopup="true">' +
+        linksWrap.innerHTML = locs.map((loc) =>
+            '<div class="location-link-item">' +
+                '<button type="button" class="location-link" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '">' +
                     '<span class="location-link-top">' +
                         '<span class="location-city">' + escapeHtml(loc.city) + '</span>' +
                         '<span class="location-link-arrow" aria-hidden="true">→</span>' +
@@ -213,26 +208,16 @@ function applySiteSettings() {
                     '<h3 class="location-title display">' + escapeHtml(loc.title) + '</h3>' +
                     '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
                 '</button>' +
-                '<div class="loc-popover" role="menu" hidden>' +
-                    storeItem +
-                    '<button type="button" class="loc-pop-option loc-pop-maps" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" data-location="' + escapeHtml(loc.label) + '" role="menuitem">OPEN IN GOOGLE MAPS →</button>' +
-                    '<a class="loc-pop-option" href="#about" role="menuitem">ABOUT THIS CASA →</a>' +
-                '</div>' +
-            '</div>';
-        }).join('');
+            '</div>'
+        ).join('');
     }
 
-    /* Contact Store is one of the choices INSIDE the same CONTACT LOCATION
-       options — never a separate button on the card/row itself. */
+    /* Mobile photo cards — plain selector only; Contact Store + Maps live
+       inside the map pin popup details */
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
-        gridWrap.innerHTML = locs.map((loc) => {
-            const storeWa = (loc.whatsapp || '').replace(/\D/g, '');
-            const storeHref = storeWa ? 'https://wa.me/' + storeWa + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || 'La Casa del Habano') + '! I have a question.') : '';
-            const storeItem = storeHref
-                ? '<a class="loc-pop-option loc-pop-store" href="' + escapeHtml(storeHref) + '" target="_blank" rel="noopener noreferrer">CONTACT STORE ↗</a>'
-                : '';
-            return '<article class="location-card">' +
+        gridWrap.innerHTML = locs.map((loc) =>
+            '<article class="location-card">' +
                 '<div class="location-img"><img src="' + escapeHtml(loc.image || '') + '" alt="' + escapeHtml(loc.title) + ' Casa" loading="lazy"></div>' +
                 '<div class="location-body">' +
                     '<p class="location-city">' + escapeHtml(loc.city) + '</p>' +
@@ -241,69 +226,10 @@ function applySiteSettings() {
                     '<hr class="location-rule" aria-hidden="true">' +
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
                     '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
-                    '<div class="location-contact-wrap">' +
-                        '<button type="button" data-location="' + escapeHtml(loc.label) + '" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" class="location-contact" aria-expanded="false" aria-haspopup="true">CONTACT LOCATION →</button>' +
-                        '<div class="loc-popover" role="menu" hidden>' +
-                            storeItem +
-                            '<button type="button" class="loc-pop-option loc-pop-maps" data-map-url="' + escapeHtml(loc.mapsUrl || '') + '" data-location="' + escapeHtml(loc.label) + '" role="menuitem">OPEN IN GOOGLE MAPS →</button>' +
-                            '<a class="loc-pop-option" href="#about" role="menuitem">ABOUT THIS CASA →</a>' +
-                        '</div>' +
-                    '</div>' +
                 '</div>' +
-            '</article>';
-        }).join('');
+            '</article>'
+        ).join('');
     }
-
-    /* Each Casa's CONTACT LOCATION trigger opens its own small options menu;
-       CONTACT STORE is one choice inside it (plus Maps / About). One open at
-       a time; Escape / outside click closes. */
-    (function initLocationPopovers() {
-        const closeAll = (except) => {
-            document.querySelectorAll('.loc-popover:not([hidden])').forEach((pop) => {
-                if (pop !== except) pop.hidden = true;
-            });
-            document.querySelectorAll('.location-link[aria-expanded="true"], .location-contact[aria-expanded="true"]').forEach((btn) => {
-                const pop = btn.parentElement ? btn.parentElement.querySelector('.loc-popover') : null;
-                if (pop !== except) btn.setAttribute('aria-expanded', 'false');
-            });
-            document.querySelectorAll('.location-link-item.open, .location-contact-wrap.open').forEach((wrap) => {
-                const pop = wrap.querySelector('.loc-popover');
-                if (pop !== except) wrap.classList.remove('open');
-            });
-        };
-
-        document.querySelectorAll('.location-link-item, .location-contact-wrap').forEach((wrap) => {
-            const trigger = wrap.querySelector('.location-link, .location-contact');
-            const pop = wrap.querySelector('.loc-popover');
-            if (!trigger || !pop) return;
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const willOpen = pop.hidden;
-                closeAll(pop);
-                pop.hidden = !willOpen;
-                wrap.classList.toggle('open', willOpen);
-                trigger.setAttribute('aria-expanded', String(willOpen));
-            });
-            pop.querySelectorAll('.loc-pop-maps').forEach((mapsBtn) => {
-                mapsBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const mapUrl = mapsBtn.getAttribute('data-map-url') || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((mapsBtn.getAttribute('data-location') || '') + ', United Arab Emirates');
-                    window.open(mapUrl, '_blank', 'noopener,noreferrer');
-                    pop.hidden = true;
-                    wrap.classList.remove('open');
-                    trigger.setAttribute('aria-expanded', 'false');
-                });
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.location-link-item') && !e.target.closest('.location-contact-wrap')) closeAll(null);
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeAll(null);
-        });
-    })();
 }
 
 applySiteSettings();
@@ -434,9 +360,7 @@ startAutoplay();
     const links = Array.prototype.slice.call(document.querySelectorAll('.location-link'));
     if (!mapEl) return;
 
-    /* The map + list layout only exists on desktop (≥1024px); on mobile we keep the
-       original photo-card style, so the interactive map should not initialize. */
-    if (window.matchMedia && !window.matchMedia('(min-width: 1024px)').matches) return;
+    /* Map pin details provide store actions on desktop and mobile. */
 
     /* If Leaflet failed to load, fall back to plain direction links */
     if (typeof L === 'undefined') {
@@ -463,7 +387,9 @@ startAutoplay();
             city: item.city || '',
             address: item.address || '',
             hours: item.hours || '',
-            directions: item.mapsUrl || ''
+            directions: item.mapsUrl || '',
+            whatsapp: String(item.whatsapp || '').replace(/\D/g, ''),
+            storeName: item.title || item.name || item.label
         };
     });
 
@@ -494,12 +420,21 @@ startAutoplay();
             riseOnHover: true
         }).addTo(map);
 
+        const storeHref = loc.whatsapp
+            ? 'https://wa.me/' + loc.whatsapp + '?text=' + encodeURIComponent('Hello ' + loc.storeName + '! I have a question.')
+            : '';
+        const storeLink = storeHref
+            ? '<a class="lp-link lp-store" href="' + storeHref + '" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>'
+            : '';
         loc.marker.bindPopup(
             '<span class="lp-kicker">' + loc.city + '</span>' +
             '<span class="lp-title">' + loc.name + '</span>' +
             '<span class="lp-address">' + loc.address + '</span>' +
             '<span class="lp-hours">' + loc.hours + '</span>' +
-            '<a class="lp-link" href="' + loc.directions + '" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>',
+            '<span class="lp-actions">' +
+                storeLink +
+                '<a class="lp-link" href="' + loc.directions + '" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>' +
+            '</span>',
             { closeButton: true, className: 'location-popup' }
         );
 
@@ -517,12 +452,17 @@ startAutoplay();
         links.forEach(function (link) {
             link.classList.toggle('active', link.dataset.location === key);
         });
-        if (pan !== false) map.flyTo([loc.lat, loc.lng], 15, { duration: 1.1 });
+        if (pan !== false) {
+            /* Offset the center upward so the pin lands lower on screen,
+               leaving full room for the popup above it. */
+            const targetZoom = 15;
+            const pt = map.project([loc.lat, loc.lng], targetZoom).subtract([0, 60]);
+            map.flyTo(map.unproject(pt, targetZoom), targetZoom, { duration: 1.1 });
+        }
         loc.marker.openPopup();
     }
 
-    /* Desktop rows are CONTACT LOCATION triggers (their options popover is
-       toggled by initLocationPopovers above). Also highlight the Casa map. */
+    /* Desktop rows highlight the Casa on the map. */
     links.forEach(function (link) {
         link.addEventListener('click', () => {
             activate(link.dataset.location, true);
@@ -539,19 +479,101 @@ startAutoplay();
     }
 })();
 
-/* ===== MOBILE LOCATION CARDS - LOCATION BUTTONS ===== */
-/* Each card's CONTACT LOCATION opens that Casa's options (Contact Store /
-   Maps / About). The raw Maps-open fallback is kept for cards that somehow
-   render without their popover. */
-document.querySelectorAll('.location-contact').forEach(button => {
-    if (button.closest('.location-contact-wrap')) return; /* handled by initLocationPopovers */
-    button.addEventListener('click', () => {
-        const mapUrl = button.dataset.mapUrl || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(button.dataset.location + ', United Arab Emirates');
-        window.open(mapUrl, '_blank', 'noopener,noreferrer');
-        const aboutSection = document.getElementById('about');
-        if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
+/* ===== EXPERIENCE DETAILS ===== */
+(function () {
+    const modal = document.getElementById('experience-modal');
+    if (!modal) return;
+    const modalCard = modal.querySelector('.exp-modal-card');
+    const details = {
+        'premium-habanos': [
+            ['Cuban heritage', 'Habanos are rooted in Cuba’s tobacco-growing regions and a tradition of hand craftsmanship. The character of each cigar reflects its blend, format and the work that goes into preparing and rolling the leaves.'],
+            ['Explore the collection', 'Different houses and formats offer different expressions of aroma, strength and smoking time. Our collection is an opportunity to learn about those distinctions, from the dimensions of a vitola to the identity of its maker.'],
+            ['Plan your visit', 'Ask your chosen Casa about the current selection and the background of a particular cigar. Availability varies by location and over time, so contact the store before visiting for a specific item.']
+        ],
+        'expert-guidance': [
+            ['A conversation, not a checklist', 'Understanding Habanos begins with questions. Share what you already know, which styles interest you and what you would like to understand better. Personal guidance helps make the terminology and traditions easier to navigate.'],
+            ['Understand the differences', 'Learn how cigar size, shape and blend relate to the experience, and why strength and flavour are not the same thing. Our team can explain the vocabulary used to describe different formats and their characteristics.'],
+            ['Care beyond the Casa', 'Bring your questions about storage, handling and travel. Speak with your local store about practical care considerations and the guidance available during your visit.']
+        ],
+        'humidor-care': [
+            ['A carefully maintained environment', 'Tobacco responds to its surroundings. A humidor helps moderate humidity, while a stable environment protects cigars from abrupt changes that can affect their condition. Conservation is an important part of looking after a collection.'],
+            ['Consistency matters', 'Direct sunlight, heat and frequent fluctuations can disrupt storage conditions. Monitoring the environment and checking the accuracy of measuring equipment are useful habits; avoid making sudden adjustments in response to a single reading.'],
+            ['Your own storage routine', 'The right approach depends on your humidor, the surrounding climate and how often you open it. Ask the Casa team about maintaining your setup and transporting cigars, and follow the care instructions supplied with your equipment.']
+        ],
+        'lounge-hospitality': [
+            ['Time to settle in', 'The Casa experience is also about its setting: a welcoming space for conversation, shared interests and a slower pace. Each location has its own atmosphere while drawing on the same Cuban heritage.'],
+            ['A personal welcome', 'Whether you arrive with friends or want to learn more about the world of Habanos, speak with the team about your visit. Hospitality starts with understanding what brings you to the Casa.'],
+            ['Before you arrive', 'Check the location’s opening hours and contact the store for current lounge access, seating availability, house rules and any reservation requirements. Facilities and services can differ between Casas.']
+        ]
+        };
+    let opener = null;
+    const closeButton = modal.querySelector('.exp-modal-close');
+
+    /* Show the branded scrollbar only while the modal card is scrolled */
+    function refreshScrollbar() {
+        if (!modalCard) return;
+        if (modalCard.scrollTop > 0) {
+            modalCard.classList.add('scrolled');
+        } else {
+            modalCard.classList.remove('scrolled');
+        }
+    }
+    if (modalCard) {
+        modalCard.addEventListener('scroll', refreshScrollbar, { passive: true });
+    }
+
+    function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('experience-modal-open');
+        if (modalCard) modalCard.classList.remove('scrolled');
+        if (opener) {
+            opener.setAttribute('aria-expanded', 'false');
+            opener.focus({ preventScroll: true });
+        }
+    }
+    function open(card) {
+        const content = details[card.dataset.experience];
+        if (!content) return;
+        opener = card;
+        const image = card.querySelector('img');
+        document.getElementById('exp-modal-img').src = image.src;
+        document.getElementById('exp-modal-img').alt = image.alt;
+        document.getElementById('exp-modal-title').textContent = card.querySelector('.experience-title').textContent;
+        document.getElementById('exp-modal-number').textContent = card.querySelector('.experience-number').textContent;
+        document.getElementById('exp-modal-tagline').textContent = card.querySelector('.experience-copy').textContent;
+        document.getElementById('exp-modal-text').innerHTML = content.map(([title, copy]) =>
+            '<h4>' + escapeHtml(title) + '</h4><p>' + escapeHtml(copy) + '</p>').join('');
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        card.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('experience-modal-open');
+        if (modalCard) {
+            modalCard.scrollTop = 0;
+            modalCard.classList.remove('scrolled');
+        }
+        closeButton.focus({ preventScroll: true });
+    }
+    document.querySelectorAll('[data-experience]').forEach(card => {
+        card.setAttribute('aria-controls', 'experience-modal');
+        card.addEventListener('click', () => open(card));
+        card.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                open(card);
+            }
+        });
     });
-});
+    modal.querySelectorAll('[data-exp-close]').forEach(button => button.addEventListener('click', close));
+    document.addEventListener('keydown', event => {
+        if (!modal.classList.contains('open')) return;
+        if (event.key === 'Escape') { event.preventDefault(); close(); }
+        if (event.key === 'Tab') { event.preventDefault(); closeButton.focus(); }
+    });
+    document.addEventListener('focusin', event => {
+        if (modal.classList.contains('open') && !modal.contains(event.target)) closeButton.focus();
+    });
+})();
 
 /* ===== ENQUIRY FORM (only when present) ===== */
 /* The About Us section replaced the old contact/enquiry form. Guard everything

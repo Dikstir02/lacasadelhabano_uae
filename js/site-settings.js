@@ -6,7 +6,8 @@ window.LCDH_SETTINGS = {
     "instagram": "https://instagram.com/lacasadelhabano_uae"
   },
   "audio": {
-    "url": "https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3"
+    "url": "https://cdn.pixabay.com/download/audio/2026/02/24/audio_c6c3c46f82.mp3?filename=silesfelipe-siles-calendar-august-1-490186.mp3",
+    "enabled": true
   },
   "locations": [
     {

@@ -768,6 +768,138 @@ select:focus-visible {
     color: var(--cream);
 }
 
+/* ===== EXPERIENCE DETAILS ===== */
+.experience-card[data-experience] { cursor: pointer; }
+.experience-card[data-experience]:focus-visible {
+    outline: 3px solid var(--sand);
+    outline-offset: 5px;
+}
+.experience-more {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--sand);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+body.experience-modal-open { overflow: hidden; }
+
+/* --- Smooth reveal: fade + scale the whole dialog --- */
+.exp-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    padding: 24px;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .3s ease, visibility .3s ease .3s;
+}
+.exp-modal.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity .3s ease, visibility .3s ease 0s;
+}
+.exp-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+.exp-modal.open .exp-modal-backdrop {
+    opacity: 1;
+}
+.exp-modal-card {
+    position: relative;
+    width: min(760px, 100%);
+    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--habano-gradient);
+    color: var(--cream);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
+    /* entrance animation for the card itself */
+    opacity: 0;
+    transform: translateY(-12px) scale(0.97);
+    transition: opacity .42s cubic-bezier(.2,.85,.2,1), transform .42s cubic-bezier(.2,.85,.2,1);
+}
+.exp-modal.open .exp-modal-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* --- Scrollbar: hidden at rest, branded thumb on scroll --- */
+.exp-modal-card {
+    /* hide native scrollbar by default (all browsers) */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* Edge legacy */
+}
+.exp-modal-card::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+/* reveal a styled scrollbar only while the card is scrolled */
+.exp-modal-card.scrolled {
+    scrollbar-width: thin;                              /* Firefox */
+    scrollbar-color: var(--sand) rgba(254, 231, 198, .1);
+}
+.exp-modal-card.scrolled::-webkit-scrollbar {
+    width: 8px;
+}
+.exp-modal-card.scrolled::-webkit-scrollbar-track {
+    background: rgba(254, 231, 198, .08);
+    border-radius: 4px;
+}
+.exp-modal-card.scrolled::-webkit-scrollbar-thumb {
+    background: var(--sand);
+    border-radius: 4px;
+}
+.exp-modal-card.scrolled::-webkit-scrollbar-thumb:hover {
+    background: #d7d1be;
+}
+.exp-modal-close {
+    position: sticky;
+    top: 12px;
+    float: right;
+    z-index: 2;
+    margin: 12px 12px -56px 0;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    background: #211e1f;
+    color: var(--cream);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .25s ease;
+}
+.exp-modal-close:hover { background: #98012d; }
+.exp-modal-close:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
+.exp-modal-img { height: 220px; overflow: hidden; }
+.exp-modal-img img { width: 100%; height: 100%; object-fit: cover; }
+.exp-modal-body { padding: 32px 40px 40px; }
+.exp-modal-number { color: var(--sand); font-size: 28px; }
+.exp-modal-title { font-size: clamp(26px, 5vw, 38px); line-height: 1.2; margin-top: 8px; }
+.exp-modal-tagline { margin-top: 16px; font-size: 17px; line-height: 1.7; }
+.exp-modal-text h4 { margin-top: 24px; font-size: 17px; color: var(--sand); }
+.exp-modal-text p { margin-top: 8px; font-size: 15px; line-height: 1.8; }
+@media (max-width: 639px) {
+    .exp-modal { padding: 12px; }
+    .exp-modal-card { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }
+    .exp-modal-img { height: 160px; }
+    .exp-modal-body { padding: 24px; }
+}
+
 /* ===== EVENTS ===== */
 
 .events-header {
@@ -970,14 +1102,14 @@ select:focus-visible {
 .brands-set {
     display: flex;
     flex-shrink: 0;
-    padding-right: 40px;
+    padding-right: 24px;
     align-items: center;
 }
 
 .brand-logo {
-    height: 120px;
+    height: 138px;
     width: auto;
-    margin-right: 80px;
+    margin-right: 48px;
     filter: brightness(0) invert(0);
     opacity: 0.85;
     transition: opacity .2s ease, transform .2s ease;
@@ -1009,8 +1141,8 @@ select:focus-visible {
         animation-duration: 35s;
     }
     .brand-logo {
-        height: 80px;
-        margin-right: 56px;
+        height: 96px;
+        margin-right: 32px;
     }
 }
 
@@ -1039,6 +1171,14 @@ select:focus-visible {
 }
 
 @media (max-width: 1023.98px) {
+    .locations-layout {
+        display: block;
+    }
+
+    .locations-layout .location-links {
+        display: none;
+    }
+
     .locations-grid {
         display: grid;
     }
@@ -1096,52 +1236,26 @@ select:focus-visible {
     color: var(--cream);
 }
 
-/* Contact Store lives INSIDE each Casa's CONTACT LOCATION popover options */
-.location-link-item,
-.location-contact-wrap {
-    position: relative;
+/* Options sit inline next to VIEW IN GOOGLE MAPS — no popup nav */
+.loc-inline-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    margin-top: 16px;
+    align-items: center;
 }
 
-.location-contact-wrap {
+.loc-inline-row-card {
     margin-top: 20px;
 }
 
-.location-contact-wrap .location-contact {
-    margin-top: 0;
-}
-
-.loc-popover {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(100% + 8px);
-    z-index: 30;
-    display: flex;
-    flex-direction: column;
+.loc-inline-btn {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-    padding: 10px;
-    background: linear-gradient(160deg, #5c011b 0%, #211e1f 100%);
-    border: 1px solid rgba(167, 153, 110, .55);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, .65);
-}
-
-.location-link-item .loc-popover {
-    top: auto;
-    bottom: calc(100% + 8px);
-}
-
-.loc-popover[hidden] {
-    display: none;
-}
-
-.loc-pop-option {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 11px 14px;
-    border-radius: 8px;
-    border: 1px solid transparent;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(254, 231, 198, .45);
     background: transparent;
     color: var(--cream);
     font-family: "DM Sans", sans-serif;
@@ -1151,26 +1265,49 @@ select:focus-visible {
     text-decoration: none;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background .2s ease, border-color .2s ease;
+    transition: background .2s ease, border-color .2s ease, filter .2s ease;
 }
 
-a.loc-pop-option {
-    display: block;
+button.loc-inline-btn {
+    appearance: none;
 }
 
-.loc-pop-option:hover {
-    background: rgba(254, 231, 198, .1);
-    border-color: rgba(167, 153, 110, .5);
+.loc-inline-btn:hover {
+    background: rgba(254, 231, 198, .12);
+    border-color: rgba(167, 153, 110, .8);
 }
 
-.loc-pop-store {
+.loc-inline-store {
     background: linear-gradient(135deg, #98012d 0%, #000000 130%);
     border-color: rgba(254, 231, 198, .5);
 }
 
-.loc-pop-store:hover {
-    filter: brightness(1.15);
+.loc-inline-store:hover {
     background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    filter: brightness(1.15);
+}
+
+/* Map pin popup: Contact Store + View in Google Maps side by side */
+.lp-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.lp-actions .lp-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    margin-top: 0;
+}
+
+.lp-actions .lp-store {
+    color: var(--cream);
+    background: var(--habano-gradient);
+    border: 1px solid var(--sand);
+    border-radius: 999px;
+    padding: 4px 12px;
 }
 
 /* --- Desktop clickable rows (compact) --- */

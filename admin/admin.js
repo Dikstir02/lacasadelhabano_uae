@@ -371,7 +371,9 @@ const DEFAULT_SETTINGS = {
         instagram: 'https://instagram.com/lacasadelhabano_uae'
     },
     audio: {
-        url: 'https://uploads.pastewaves.com/uploads/c574f98a-dd73-4954-b8b8-3914f1840958/audio.mp3'
+        url: 'https://cdn.pixabay.com/download/audio/2026/02/24/audio_c6c3c46f82.mp3?filename=silesfelipe-siles-calendar-august-1-490186.mp3',
+        /* ON by default — the live site plays background music. */
+        enabled: true
     },
     locations: [
         {
@@ -502,8 +504,17 @@ function settingsFormHtml(settings) {
     html += '<div class="settings-block">';
     html += '<h3 class="settings-block-title">Background music</h3>';
     html += '<div class="field-grid">';
-    html += '<div>' + label('Music file URL') + urlIn('s-audio-url', a.url, 'https://…/audio.mp3') + '</div>';
-    html += '</div></div>';
+    const audioOn = !(a && a.enabled === false);
+    html += '<div>' + label('Status') + '<select id="s-audio-enabled">'
+        + '<option value="on"' + (audioOn ? ' selected' : '') + '>ON — play background music</option>'
+        + '<option value="off"' + (!audioOn ? ' selected' : '') + '>OFF — disable background music</option>'
+        + '</select></div>';
+    html += '<div class="field-span-2">' + label('Music file URL — the live site plays exactly this track') + urlIn('s-audio-url', a.url, 'https://…/audio.mp3') + '</div>';
+    html += '</div>';
+    if (a.url) {
+        html += '<div class="audio-preview-row"><span class="field-label">Preview</span><audio controls preload="metadata" src="' + escapeHtml(a.url) + '" style="width:100%"></audio></div>';
+    }
+    html += '</div>';
 
     locs.forEach((loc, i) => {
         html += '<div class="settings-block">';
@@ -540,6 +551,7 @@ function readSettingsFromForm() {
     settings.contact.whatsappBot = val('s-whatsapp-bot');
     settings.contact.instagram = val('s-instagram');
     settings.audio.url = val('s-audio-url');
+    settings.audio.enabled = (val('s-audio-enabled') !== 'off');
 
     settings.locations.forEach((loc, i) => {
         loc.label = val('s-loc-' + i + '-label');
@@ -562,6 +574,16 @@ function renderSettingsForm() {
     const wrap = $('#settings-forms');
     if (!wrap) return;
     wrap.innerHTML = settingsFormHtml(currentSettings());
+
+    /* A dead link is the usual reason the live site has no music (expired
+       upload, hotlink block), so say it out loud instead of showing a
+       preview that silently refuses to play. */
+    const preview = wrap.querySelector('.audio-preview-row audio');
+    if (preview) {
+        preview.addEventListener('error', () => {
+            showStatus('⚠ Music file could not be loaded — check the URL or upload it again');
+        });
+    }
 }
 
 /* ===== settings actions ===== */
@@ -569,7 +591,9 @@ function renderSettingsForm() {
 $('#settings-save-btn').addEventListener('click', () => {
     const settings = readSettingsFromForm();
     localStorage.setItem(SETTINGS_KEY, JSON.stringify({ settings }));
-    showStatus('Settings saved ✓ — now copy site-settings.js');
+    /* Re-render so the audio preview + location titles reflect the save. */
+    renderSettingsForm();
+    showStatus('Settings saved ✓ — the live site now uses this music on reload');
 });
 
 $('#settings-export-btn').addEventListener('click', async () => {
