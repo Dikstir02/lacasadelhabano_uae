@@ -575,6 +575,100 @@ startAutoplay();
     });
 })();
 
+/* ===== HERITAGE STORY MODAL ===== */
+/* Reuses the .exp-modal look & behaviour from the Experience modal, so the
+   "Our Story" button opens a dialog identical in style. The heritage image
+   is pulled from the #heritage section (single source of truth) and the
+   long-form history copy lives as static HTML inside the modal body. */
+(function () {
+    const modal = document.getElementById('heritage-modal');
+    const opener = document.getElementById('heritage-story');
+    if (!modal) return;
+    const card = modal.querySelector('.exp-modal-card');
+    const closeBtn = modal.querySelector('.exp-modal-close');
+    const heroImg = document.getElementById('heritage-modal-img');
+    const sectionImg = document.querySelector('#heritage .heritage-media img');
+
+    function experienceModal() {
+        const em = document.getElementById('experience-modal');
+        return (em && em.classList.contains('open')) ? em : null;
+    }
+
+    function openStory() {
+        const other = experienceModal();
+        if (other) {
+            other.classList.remove('open');
+            other.setAttribute('aria-hidden', 'true');
+        }
+        if (heroImg && sectionImg) {
+            heroImg.src = sectionImg.src;
+            heroImg.alt = sectionImg.alt || '';
+        }
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('experience-modal-open');
+        if (card) {
+            card.scrollTop = 0;
+        }
+        if (opener) {
+            opener.setAttribute('aria-expanded', 'true');
+        }
+        if (closeBtn) {
+            closeBtn.focus({ preventScroll: true });
+        }
+    }
+
+    function closeStory() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('experience-modal-open');
+        if (opener) {
+            opener.setAttribute('aria-expanded', 'false');
+            opener.focus({ preventScroll: true });
+        }
+    }
+
+    /* Close via the backdrop or the X button (both carry data-heritage-close) */
+    modal.querySelectorAll('[data-heritage-close]').forEach(el => {
+        el.addEventListener('click', closeStory);
+    });
+
+    /* Branded scrollbar only while the card is scrolled (mirrors Experience) */
+    if (card) {
+        card.addEventListener('scroll', () => {
+            if (card.scrollTop > 0) {
+                card.classList.add('scrolled');
+            } else {
+                card.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    }
+
+    /* Close on Escape / basic Tab trap, only while this modal is open */
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            closeStory();
+        }
+        if (e.key === 'Tab' && closeBtn) {
+            e.preventDefault();
+            closeBtn.focus();
+        }
+    });
+
+    if (opener) {
+        opener.addEventListener('click', openStory);
+        opener.addEventListener('keydown', (e) => {
+            if (!e.defaultPrevented && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                openStory();
+            }
+        });
+    }
+})();
+
+
 /* ===== ENQUIRY FORM (only when present) ===== */
 /* The About Us section replaced the old contact/enquiry form. Guard everything
    so removing the form can never throw and break the scripts below it. */

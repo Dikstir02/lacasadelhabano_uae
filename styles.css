@@ -893,6 +893,47 @@ body.experience-modal-open { overflow: hidden; }
 .exp-modal-tagline { margin-top: 16px; font-size: 17px; line-height: 1.7; }
 .exp-modal-text h4 { margin-top: 24px; font-size: 17px; color: var(--sand); }
 .exp-modal-text p { margin-top: 8px; font-size: 15px; line-height: 1.8; }
+
+/* ===== HERITAGE STORY MODAL (long-form, mirrors .exp-modal) ===== */
+.story-content {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--cream);
+}
+
+.story-content .story-title {
+    margin-top: 8px;
+    margin-bottom: 6px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--sand);
+}
+
+.story-content h2 {
+    margin-top: 28px;
+    font-size: 19px;
+    line-height: 1.35;
+    color: var(--sand);
+}
+
+.story-content h3 {
+    margin-top: 22px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--cream);
+}
+
+.story-content em {
+    color: var(--sand);
+    font-style: italic;
+}
+
+.story-content p {
+    margin-top: 12px;
+}
+
 @media (max-width: 639px) {
     .exp-modal { padding: 12px; }
     .exp-modal-card { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }

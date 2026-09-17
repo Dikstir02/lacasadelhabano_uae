@@ -124,17 +124,51 @@
             <div class="container heritage-grid">
                 <div class="reveal heritage-media">
                     <div class="heritage-frame" aria-hidden="true"></div>
-                    <img src="https://images.pexels.com/photos/37224648/pexels-photo-37224648.jpeg" alt="Tobacco leaves drying in a Cuban barn" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/1777_Map_of_Cuba_and_Yucatan.jpg" alt="18th-century map of Cuba and the Yucatan Peninsula" loading="lazy">
                 </div>
                 <div class="reveal">
                     <p class="eyebrow">FROM LEAF TO LEGACY</p>
                     <h2 class="section-title">CUBAN SOUL. TRUE HABANO CRAFT.</h2>
-                    <p class="section-copy">La Casa del Habano celebrates more than a cigar. It is a meeting place for stories, expertise and the patient art of enjoying the moment.</p>
-                    <p class="section-copy">From the tobacco landscapes of Cuba to our Casas in Dubai and Abu Dhabi, every detail honours authenticity, care and the pleasure of good company.</p>
-                    <a href="#about" class="btn-casa btn-blue">OUR STORY →</a>
+                    <p class="section-copy">For over five centuries, the Habano has carried the story of Cuba in every leaf. From the Vuelta Abajo soils where the island's finest tobacco is born to the humidor-lined lounges of our Casas in Dubai and Abu Dhabi, that legacy is lived here.</p>
+                    <p class="section-copy">Ours is a house built around that craft — hand-rolled Habanos, patient ageing, and the unhurried ritual of good company. To know La Casa del Habano is to know the Habano itself.</p>
+                    <button type="button" id="heritage-story" class="btn-casa btn-blue" data-heritage role="button" aria-haspopup="dialog" aria-expanded="false">OUR STORY →</button>
                 </div>
             </div>
         </section>
+
+        <!-- ===== HERITAGE STORY MODAL (mirrors the .exp-modal look & behaviour) ===== -->
+        <div id="heritage-modal" class="exp-modal" role="dialog" aria-modal="true" aria-labelledby="heritage-modal-title" aria-hidden="true">
+            <div class="exp-modal-backdrop" data-heritage-close></div>
+            <div class="exp-modal-card" role="document">
+                <button type="button" class="exp-modal-close" data-heritage-close aria-label="Close details">&times;</button>
+                <div class="exp-modal-img"><img id="heritage-modal-img" alt=""></div>
+                <div class="exp-modal-body">
+                    <h2 id="heritage-modal-title" class="exp-modal-title display">The Habano</h2>
+                    <div class="story-content">
+                        <h2 class="story-title">The Legacy of the Habano</h2>
+                        <h3>A Heritage Rooted in Cuba</h3>
+                        <p>Long before the world came to know the Cuban cigar, the Taino people of Cuba were already cultivating and enjoying tobacco. In 1492, Christopher Columbus and his expedition encountered this ancient tradition for the first time, witnessing the burning and rolling of tobacco leaves known to the indigenous people as <em>Cohiba</em>.</p>
+                        <p>What began as a discovery would become a legacy that travelled across continents. Yet, despite tobacco's journey around the world, the true character of the Cuban cigar remains inseparable from the land where it was born.</p>
+                        <h3>Where Nature Meets Craftsmanship</h3>
+                        <p>The unmistakable character of a Habano begins with the extraordinary conditions found in Cuba. Its fertile soil, distinctive climate, native black tobacco seed varieties and generations of agricultural expertise come together to create a tobacco unlike any other.</p>
+                        <p>Beyond these natural elements lies a tradition shaped by patience and dedication. Cuban tobacco growers devote exceptional care to every stage of cultivation, from planting the first seeds to harvesting and carefully ageing the leaves. Each leaf follows its own journey, guided by the experience of those who understand when it has reached the quality required for a Habano.</p>
+                        <p>It is this relationship between nature, time and human craftsmanship that gives Cuban tobacco its enduring distinction.</p>
+                        <h3>The Meaning Behind the Name</h3>
+                        <p>Not every cigar made in Cuba is a Habano. The name represents a protected heritage, reserved for a selection of distinguished Cuban cigar brands that meet specific standards of origin, production and quality.</p>
+                        <p>Recognised through the Protected Denomination of Origin, or <em>Denominación de Origen Protegida</em> (D.O.P.), Habanos are produced using tobacco grown in designated Cuban regions, each with its own protected geographical identity.</p>
+                        <p>This distinction preserves the connection between the cigar and the land, ensuring that the name Habano represents more than a place of manufacture. It represents a tradition with a defined origin and a carefully guarded identity.</p>
+                        <h3>A Tradition Made Entirely by Hand</h3>
+                        <p>For more than two centuries, the art of making Habanos has been guided by techniques developed in Havana and passed from one generation of cigar makers to the next.</p>
+                        <p>Every Habano is crafted <em>Totalmente a Mano</em> — entirely by hand. From the cultivation of tobacco to the final presentation of the cigar in its box, more than 500 manual tasks contribute to its creation.</p>
+                        <p>The process demands precision at every stage. Experienced hands select, prepare, roll and finish the tobacco, while each cigar undergoes rigorous quality controls established by the Regulatory Council for the Protected Denomination of Origin Habanos.</p>
+                        <p>Only those that satisfy these exacting requirements may carry the distinguished name.</p>
+                        <h3>A Heritage That Endures</h3>
+                        <p>The story of the Habano is one of continuity: a Cuban tradition shaped by nature, perfected through generations of knowledge and preserved through uncompromising craftsmanship.</p>
+                        <p>More than five centuries after tobacco first captured the attention of the outside world in Cuba, the Habano remains a testament to the extraordinary relationship between its origins, its people and the art of making a truly distinctive cigar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ===== EXPERIENCE ===== -->
         <section id="experience" class="section section-blue">
