@@ -764,3 +764,25 @@ if (chatForm && chatInput) {
 
     raf = requestAnimationFrame(animate);
 })();
+/* ===== DEVELOPER SIGNATURE ===== */
+/* Hidden by default. Becomes visible only when "devdetshow" appears anywhere
+   in the URL, e.g. https://lacasadelhabano.ae/?devdetshow or #devdetshow */
+(function devSignature() {
+    const DEV_KEY = 'devdetshow';
+    const signatureEl = document.getElementById('dev-signature');
+    if (!signatureEl) return;
+
+    function syncDevSignature() {
+        let url = '';
+        try {
+            url = String(window.location.href || '').toLowerCase();
+        } catch (error) { /* location unavailable */ }
+        const show = url.indexOf(DEV_KEY) !== -1;
+        signatureEl.hidden = !show;
+        signatureEl.setAttribute('aria-hidden', String(!show));
+    }
+
+    syncDevSignature();
+    window.addEventListener('hashchange', syncDevSignature);
+    window.addEventListener('popstate', syncDevSignature);
+})();
