@@ -152,6 +152,13 @@ select:focus-visible {
     transform: none;
 }
 
+/* Once revealed, drop the element off the compositor so scrolling over it
+   is a plain paint instead of a live layer blend. */
+.reveal.reveal-settled {
+    transition: none;
+    will-change: auto;
+}
+
 /* ===== TYPOGRAPHY PRIMITIVES ===== */
 
 .eyebrow {
@@ -259,10 +266,8 @@ select:focus-visible {
 }
 
 .site-header.scrolled {
-    background: rgba(74, 1, 22, .97);
+    background: #4a0116;
     box-shadow: 0 5px 18px rgba(46, 1, 9, .45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-container {
@@ -470,14 +475,27 @@ select:focus-visible {
     object-fit: cover;
 }
 
-/* Habano Red wash over the photo, first thing the eye reads */
+/* Habano Red wash over the photo, first thing the eye reads.
+   Tuned for the bright daylight hero photo: the wash keeps the red
+   signature across the copy column without flattening the gallery wall
+   and sofa detail underneath.
+   The 180deg layer is the nav scrim: .site-header is fixed and transparent
+   at the top of the page, so the cream nav links sit straight on bright
+   photo pixels. The plateau holds a floor of contrast across the whole nav
+   bar (84px, 78px under 480px) on any viewport height, then fades out well
+   above the headline so the photo still reads. */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg,
-        rgba(46, 1, 9, .92),
-        rgba(74, 1, 22, .55) 54%,
-        rgba(152, 1, 45, .72));
+    background:
+        linear-gradient(180deg,
+            rgba(46, 1, 9, .70),
+            rgba(46, 1, 9, .44) min(90px, 24%),
+            rgba(46, 1, 9, 0) min(210px, 34%)),
+        linear-gradient(90deg,
+            rgba(46, 1, 9, .88),
+            rgba(74, 1, 22, .42) 42%,
+            rgba(152, 1, 45, .30));
 }
 
 /* Habano Red glow behind the hero copy */
@@ -487,7 +505,7 @@ select:focus-visible {
     border-radius: 50%;
     background: var(--brand-red);
     filter: blur(1px);
-    opacity: .55;
+    opacity: .16;
     position: absolute;
     right: -130px;
     top: 12%;
@@ -720,6 +738,7 @@ select:focus-visible {
     border: 1px solid rgba(254, 231, 198, .45);
     border-radius: var(--radius-md);
     overflow: hidden;
+    contain: layout paint;
     transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
 }
 
@@ -1127,6 +1146,40 @@ body.experience-modal-open { overflow: hidden; }
     overflow: hidden;
 }
 
+/* Swipable mode (enabled by JS with .is-swipable): the strip becomes a
+   native horizontal scroller — touch-swipe on mobile, click-drag on
+   desktop, arrow keys when focused. The CSS keyframe loop above stays as
+   the no-JS fallback. */
+.brands-marquee.is-swipable {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.brands-marquee.is-swipable::-webkit-scrollbar {
+    display: none;
+}
+
+.brands-marquee.is-swipable.dragging {
+    cursor: grabbing;
+}
+
+.brands-marquee.is-swipable:focus-visible {
+    outline: 2px solid var(--gold-copy);
+    outline-offset: 4px;
+}
+
+.brands-marquee.is-swipable .brands-track {
+    -webkit-animation: none;
+    animation: none;
+}
+
 .brands-track {
     display: flex;
     width: max-content;
@@ -1211,12 +1264,12 @@ body.experience-modal-open { overflow: hidden; }
     gap: 24px;
 }
 
+/* --- Mobile: info cards only --- */
+/* Both the Casa list and the inline Leaflet map are desktop-only below
+   1024px: the map is heavy on a phone, so each card's View in Google Maps
+   button links straight to that Casa's Google Maps listing instead. */
 @media (max-width: 1023.98px) {
     .locations-layout {
-        display: block;
-    }
-
-    .locations-layout .location-links {
         display: none;
     }
 
@@ -1238,14 +1291,21 @@ body.experience-modal-open { overflow: hidden; }
     box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
 }
 
-/* Mobile location card: compact info-only layout (no image),
-   mirroring the desktop location-link row style. */
+/* Mobile location card: compact info-only layout (no image).
+   The head stacks the city above the Casa name and centres both; the
+   desktop rows keep their city-beside-name layout via .location-link-top. */
 .loc-mobile-head {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     margin-bottom: 8px;
+    text-align: center;
+}
+
+/* The stacked head controls its own spacing, so drop the title's offset */
+.loc-mobile-head .location-title {
+    margin-top: 0;
 }
 
 .location-body {
@@ -1891,6 +1951,24 @@ button.loc-inline-btn {
     font-size: 14px;
     line-height: 28px;
     color: var(--cream);
+}
+
+/* Footer location deep-links — same rhythm as the nav column */
+.footer-locations {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Mobile card flash when reached via a footer deep-link */
+.location-card--flash {
+    animation: location-card-flash 1.6s ease;
+}
+
+@keyframes location-card-flash {
+    0%, 100% { box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6); border-color: rgba(254, 231, 198, .42); }
+    25%, 60% { box-shadow: 0 0 0 2px var(--sand), 0 20px 38px -18px rgba(46, 1, 9, .6); border-color: var(--sand); }
 }
 
 .footer-bottom {

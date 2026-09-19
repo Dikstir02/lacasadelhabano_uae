@@ -387,7 +387,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8',
             lat: 25.2056,
             lng: 55.2570,
-            whatsapp: '971542137706',
+            whatsapp: '971558001577',
             image: 'https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg'
         },
         {
@@ -401,7 +401,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A',
             lat: 25.0795,
             lng: 55.1400,
-            whatsapp: '9715066008888',
+            whatsapp: '971558002731',
             image: 'https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg'
         },
         {
@@ -415,7 +415,7 @@ const DEFAULT_SETTINGS = {
             mapsUrl: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8',
             lat: 24.5006,
             lng: 54.3961,
-            whatsapp: '971558002731',
+            whatsapp: '971507093183',
             image: 'https://images.pexels.com/photos/10603649/pexels-photo-10603649.jpeg'
         }
     ]

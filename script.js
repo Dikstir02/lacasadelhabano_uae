@@ -110,7 +110,13 @@ sections.forEach(section => spyObserver.observe(section));
 /* ===== REVEAL ON SCROLL ===== */
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.classList.add('visible');
+        /* Settle the animation, then release the compositor layer so future
+           scrolls over this element stay cheap. */
+        window.setTimeout(() => el.classList.add('reveal-settled'), 750);
+        revealObserver.unobserve(el);
     });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
@@ -173,17 +179,26 @@ function applySiteSettings() {
     if (c.whatsapp) setLink('contact-wa', 'https://wa.me/' + c.whatsapp);
     if (c.whatsappBot) setLink('footer-whatsapp', 'https://wa.me/' + c.whatsappBot);
     if (c.instagram) setLink('contact-ig', c.instagram);
+    if (c.instagram) {
+        const handle = '@' + String(c.instagram).split('/').filter(Boolean).pop();
+        setLink('footer-instagram', c.instagram, 'Follow us on Instagram  ');
+    }
     if (c.email) {
         setLink('contact-email', 'mailto:' + c.email, 'EMAIL — ' + String(c.email).toUpperCase());
-        setLink('footer-email', 'mailto:' + c.email, c.email);
     }
     const widget = document.getElementById('whatsapp-widget');
     if (widget && c.whatsapp) widget.href = 'https://wa.me/' + c.whatsapp;
 
-    /* Footer locations list */
+    /* Footer locations list — clickable deep-links into #locations.
+       Each link carries its Casa label so the footer handler below can
+       select the matching map pin (desktop) or card (mobile). */
     const footerLocs = document.getElementById('footer-locations');
     if (footerLocs && locs.length) {
-        footerLocs.innerHTML = locs.map((l) => escapeHtml(l.name || l.title)).join('<br>');
+        footerLocs.innerHTML = locs.map((l) =>
+            '<a class="footer-link footer-location-link" href="#locations" data-location="' + escapeHtml(l.label) + '">' +
+                escapeHtml(l.name || l.title) +
+            '</a>'
+        ).join('');
     }
 
     /* Contact form location dropdown */
@@ -219,9 +234,9 @@ function applySiteSettings() {
        giving mobile users the same quick actions that desktop users
        reach via the map-pin popups. */
     const waNumbers = {
-        'City Walk — Dubai': '971542137706',
-        'JBR — Dubai': '9715066008888',
-        'Abu Dhabi Mall — Abu Dhabi': '971558002731'
+        'City Walk — Dubai': '971558001577',
+        'JBR — Dubai': '971558002731',
+        'Abu Dhabi Mall — Abu Dhabi': '971507093183'
     };
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
@@ -237,7 +252,7 @@ function applySiteSettings() {
                     '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
                     '<p class="location-hours">' + escapeHtml(loc.hours) + '</p>' +
                     '<div class="loc-mobile-actions">' +
-                        '<a href="https://wa.me/' + (loc.whatsapp || waNumbers[loc.label] || '') + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || loc.label) + '! I have a question.') + '" class="loc-mobile-btn loc-mobile-whatsapp" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>' +
+                        '<a href="https://wa.me/' + (loc.whatsapp || waNumbers[loc.label] || '') + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || loc.label) + '! I have a question.') + '" class="loc-mobile-btn loc-mobile-whatsapp" data-chat-store="true" data-location="' + escapeHtml(loc.label) + '" data-number="' + (loc.whatsapp || waNumbers[loc.label] || '') + '" data-store="' + escapeHtml(loc.title || loc.name || loc.label) + '" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>' +
                         '<a href="' + escapeHtml(loc.mapsUrl || 'https://www.google.com/maps') + '" class="loc-mobile-btn loc-mobile-maps" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>' +
                     '</div>' +
                 '</div>' +
@@ -247,24 +262,13 @@ function applySiteSettings() {
 }
 
 /* ===== MOBILE LOCATION CARD ACTION HANDLING ===== */
-/* On desktop the clickable location-link rows drive map focus, and
-   the real Contact Store + View in Google Maps actions live inside map
-   pin popups. On mobile there is no map list, so wire the Contact
-   Store button on each photo card to also update the contact-form
-   location — mirroring the desktop row behaviour. */
+/* Contact-form pre-select is now handled centrally by the delegated
+   [data-chat-store] click handler in the chatbot section (which also
+   covers desktop map popups). This stub is kept only so the ordering
+   quirk stays documented: it runs before applySiteSettings() renders
+   the cards, so it intentionally does nothing. */
 (function initMobileLocationActions() {
-    const cards = document.querySelectorAll('.location-card[data-location]');
-    if (!cards.length) return;
-    cards.forEach(function (card) {
-        const locLabel = card.getAttribute('data-location');
-        const waBtn = card.querySelector('.loc-mobile-whatsapp');
-        if (waBtn && locLabel) {
-            waBtn.addEventListener('click', function () {
-                const locationInput = document.getElementById('location');
-                if (locationInput) locationInput.value = locLabel;
-            });
-        }
-    });
+    return;
 })();
 
 applySiteSettings();
@@ -339,16 +343,33 @@ function step(delta) {
     goToSlide(next);
 }
 
+/* Autoplay every 3s, but only while the carousel is actually on screen.
+   An IntersectionObserver gates the timer so nothing slides off-screen;
+   hover / touch pauses, and manual arrows restart the 3s rhythm. */
+let carouselVisible = false;
+let userPaused = false;
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function startAutoplay() {
-    clearInterval(autoplay);
-    autoplay = setInterval(() => step(1), 5000);
+    if (autoplay || reduceMotion || slideCount < 2) return;
+    autoplay = setInterval(() => step(1), 3000);
 }
 
-document.getElementById('next-event').addEventListener('click', () => step(1));
-document.getElementById('prev-event').addEventListener('click', () => step(-1));
+function stopAutoplay() {
+    clearInterval(autoplay);
+    autoplay = null;
+}
 
-carousel.addEventListener('mouseenter', () => clearInterval(autoplay));
-carousel.addEventListener('mouseleave', startAutoplay);
+function refreshAutoplay() {
+    if (carouselVisible && !userPaused && !document.hidden) startAutoplay();
+    else stopAutoplay();
+}
+
+document.getElementById('next-event').addEventListener('click', () => { step(1); stopAutoplay(); refreshAutoplay(); });
+document.getElementById('prev-event').addEventListener('click', () => { step(-1); stopAutoplay(); refreshAutoplay(); });
+
+carousel.addEventListener('mouseenter', () => { userPaused = true; stopAutoplay(); });
+carousel.addEventListener('mouseleave', () => { userPaused = false; refreshAutoplay(); });
 
 let touchStart = 0;
 let touchStartY = 0;
@@ -358,7 +379,7 @@ carousel.addEventListener('touchstart', (event) => {
     touchStart = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
     isSwiping = false;
-    clearInterval(autoplay);
+    stopAutoplay();
 }, { passive: true });
 
 carousel.addEventListener('touchmove', (event) => {
@@ -371,12 +392,13 @@ carousel.addEventListener('touchmove', (event) => {
 
 carousel.addEventListener('touchend', (event) => {
     if (!isSwiping) {
-        startAutoplay();
+        refreshAutoplay();
         return;
     }
     const difference = event.changedTouches[0].clientX - touchStart;
     if (Math.abs(difference) > 30) step(difference < 0 ? 1 : -1);
-    startAutoplay();
+    stopAutoplay();
+    refreshAutoplay();
 });
 
 window.addEventListener('resize', () => render(false));
@@ -387,7 +409,141 @@ if (document.readyState === 'complete') render(false);
 
 updateDots();
 render(false);
-startAutoplay();
+
+/* Gate autoplay on visibility: no sliding until the carousel scrolls
+   into view, then every 3s — and pause again when it scrolls away. */
+if ('IntersectionObserver' in window && carousel) {
+    new IntersectionObserver((entries) => {
+        carouselVisible = entries.some((entry) => entry.isIntersecting);
+        refreshAutoplay();
+    }, { threshold: 0.25 }).observe(carousel);
+} else {
+    carouselVisible = true;
+    refreshAutoplay();
+}
+
+/* Pause when the tab is hidden so slides don't queue up in the background. */
+document.addEventListener('visibilitychange', refreshAutoplay);
+
+/* ===== BRANDS MARQUEE — swipe / drag + gentle auto-drift ===== */
+/* The strip is a CSS keyframe loop by default (no-JS fallback). When JS
+   runs, it becomes a native horizontal scroller: touch-swipe on mobile,
+   click-drag on desktop, arrow keys when focused, plus a slow auto-drift
+   that pauses on interaction and only runs while the strip is visible. */
+(function initBrandsMarquee() {
+    const marquee = document.getElementById('brands-marquee');
+    if (!marquee) return;
+    const trackEl = marquee.querySelector('.brands-track');
+    if (!trackEl) return;
+    const sets = trackEl.querySelectorAll('.brands-set');
+    if (sets.length < 2) return;
+
+    /* A third copy gives seamless room in both directions; the middle
+       copy is home. Images are decorative repeats — hide the clone. */
+    const clone = sets[0].cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    trackEl.appendChild(clone);
+    trackEl.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
+    trackEl.addEventListener('dragstart', (e) => e.preventDefault());
+
+    marquee.classList.add('is-swipable');
+    marquee.setAttribute('tabindex', '0');
+
+    /* One set's width, from live layout (re-measured as logos load). */
+    let setWidth = 0;
+    const measure = () => {
+        const first = trackEl.querySelector('.brands-set');
+        if (first && first.offsetWidth > 0) {
+            setWidth = first.offsetWidth;
+            if (marquee.scrollLeft === 0) marquee.scrollLeft = setWidth;
+        }
+    };
+    measure();
+    window.addEventListener('load', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    trackEl.querySelectorAll('img').forEach((img) => {
+        if (!img.complete) img.addEventListener('load', measure, { once: true });
+    });
+    window.addEventListener('resize', () => {
+        const first = trackEl.querySelector('.brands-set');
+        if (first && first.offsetWidth > 0) setWidth = first.offsetWidth;
+    });
+
+    /* Seamless wrap: keep the viewport inside the middle copy's range. */
+    marquee.addEventListener('scroll', () => {
+        if (!setWidth) return;
+        if (marquee.scrollLeft >= setWidth * 2) marquee.scrollLeft -= setWidth;
+        else if (marquee.scrollLeft <= 0) marquee.scrollLeft += setWidth;
+    }, { passive: true });
+
+    /* Slow auto-drift, gated on visibility / interaction / tab state. */
+    const reduceMotionBrands = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let brandsVisible = false;
+    let brandsHeld = false;
+    let lastT = 0;
+    const DRIFT_PX_PER_SEC = 28;
+    const tick = (t) => {
+        if (!reduceMotionBrands && brandsVisible && !brandsHeld && !document.hidden && setWidth) {
+            if (lastT) {
+                let next = marquee.scrollLeft + DRIFT_PX_PER_SEC * ((t - lastT) / 1000);
+                if (next >= setWidth * 2) next -= setWidth;
+                marquee.scrollLeft = next;
+            }
+            lastT = t;
+        } else {
+            lastT = 0;
+        }
+        requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+            brandsVisible = entries.some((entry) => entry.isIntersecting);
+        }, { threshold: 0.1 }).observe(marquee);
+    } else {
+        brandsVisible = true;
+    }
+
+    /* Desktop click-drag. */
+    let dragging = false;
+    let startX = 0;
+    let startScroll = 0;
+    marquee.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        dragging = true;
+        brandsHeld = true;
+        startX = e.clientX;
+        startScroll = marquee.scrollLeft;
+        marquee.classList.add('dragging');
+        try { marquee.setPointerCapture(e.pointerId); } catch (captureError) { /* older browsers — drag still works */ }
+    });
+    marquee.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        marquee.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    const endDrag = () => {
+        dragging = false;
+        brandsHeld = false;
+        marquee.classList.remove('dragging');
+    };
+    marquee.addEventListener('pointerup', endDrag);
+    marquee.addEventListener('pointercancel', endDrag);
+
+    /* Hover pauses the drift (matches the old CSS hover-pause); touch
+       scrolls natively, so just hold the drift while fingers are down. */
+    marquee.addEventListener('mouseenter', () => { if (!dragging) brandsHeld = true; });
+    marquee.addEventListener('mouseleave', () => { if (!dragging) brandsHeld = false; });
+    marquee.addEventListener('touchstart', () => { brandsHeld = true; }, { passive: true });
+    marquee.addEventListener('touchend', () => { brandsHeld = false; }, { passive: true });
+    marquee.addEventListener('touchcancel', () => { brandsHeld = false; }, { passive: true });
+
+    /* Keyboard: arrows move by ~40% of the visible strip. */
+    marquee.addEventListener('keydown', (e) => {
+        const step = Math.round(marquee.clientWidth * 0.4);
+        if (e.key === 'ArrowRight') { marquee.scrollLeft += step; e.preventDefault(); }
+        else if (e.key === 'ArrowLeft') { marquee.scrollLeft -= step; e.preventDefault(); }
+    });
+})();
 
 /* ===== LOCATIONS MAP (Leaflet + OpenStreetMap) ===== */
 (function initLocationsMap() {
@@ -428,62 +584,88 @@ startAutoplay();
         };
     });
 
-    const map = L.map(mapEl, {
-        scrollWheelZoom: false,
-        zoomControl: true,
-        attributionControl: true
-    });
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    /* The inline map is desktop-only: below 1024px the CSS hides
+       .locations-layout and the cards link straight to Google Maps.
+       Leaflet cannot measure a hidden container, so the map is mounted
+       only while the desktop layout is active — and mounted later if the
+       viewport grows back. */
+    const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    let map = null;
 
-    const allKeys = Object.keys(LOCATIONS);
+    function mountInlineMap() {
+        if (map || !desktopQuery.matches) return;
 
-    allKeys.forEach(function (key) {
-        const loc = LOCATIONS[key];
-        loc.marker = L.marker([loc.lat, loc.lng], {
-            icon: L.divIcon({
-                className: 'location-marker',
-                html: '<span class="location-pin"></span>',
-                iconSize: [20, 20],
-                iconAnchor: [10, 18],
-                popupAnchor: [0, -24]
-            }),
-            title: loc.name,
-            riseOnHover: true
+        map = L.map(mapEl, {
+            scrollWheelZoom: false,
+            zoomControl: true,
+            attributionControl: true
+        });
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        const storeHref = loc.whatsapp
-            ? 'https://wa.me/' + loc.whatsapp + '?text=' + encodeURIComponent('Hello ' + loc.storeName + '! I have a question.')
-            : '';
-        const storeLink = storeHref
-            ? '<a class="lp-link lp-store" href="' + storeHref + '" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>'
-            : '';
-        loc.marker.bindPopup(
-            '<span class="lp-kicker">' + loc.city + '</span>' +
-            '<span class="lp-title">' + loc.name + '</span>' +
-            '<span class="lp-address">' + loc.address + '</span>' +
-            '<span class="lp-hours">' + loc.hours + '</span>' +
-            '<span class="lp-actions">' +
-                storeLink +
-                '<a class="lp-link" href="' + loc.directions + '" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>' +
-            '</span>',
-            { closeButton: true, className: 'location-popup' }
-        );
+        const allKeys = Object.keys(LOCATIONS);
 
-        loc.marker.on('click', () => activate(key, false));
-    });
+        allKeys.forEach(function (key) {
+            const loc = LOCATIONS[key];
+            loc.marker = L.marker([loc.lat, loc.lng], {
+                icon: L.divIcon({
+                    className: 'location-marker',
+                    html: '<span class="location-pin"></span>',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 18],
+                    popupAnchor: [0, -24]
+                }),
+                title: loc.name,
+                riseOnHover: true
+            }).addTo(map);
 
-    /* Show all three Casas at once initially, then zoom on selection */
-    map.fitBounds(allKeys.map(function (key) {
-        return [LOCATIONS[key].lat, LOCATIONS[key].lng];
-    }), { padding: [48, 48] });
+            const storeHref = loc.whatsapp
+                ? 'https://wa.me/' + loc.whatsapp + '?text=' + encodeURIComponent('Hello ' + loc.storeName + '! I have a question.')
+                : '';
+            const storeLink = storeHref
+                ? '<a class="lp-link lp-store" href="' + storeHref + '" target="_blank" rel="noopener noreferrer" data-chat-store="true" data-location="' + key.replace(/"/g, '') + '" data-number="' + loc.whatsapp + '" data-store="' + loc.storeName.replace(/"/g, '') + '">Contact Store ↗</a>'
+                : '';
+            loc.marker.bindPopup(
+                '<span class="lp-kicker">' + loc.city + '</span>' +
+                '<span class="lp-title">' + loc.name + '</span>' +
+                '<span class="lp-address">' + loc.address + '</span>' +
+                '<span class="lp-hours">' + loc.hours + '</span>' +
+                '<span class="lp-actions">' +
+                    storeLink +
+                    '<a class="lp-link" href="' + loc.directions + '" target="_blank" rel="noopener noreferrer">View in Google Maps →</a>' +
+                '</span>',
+                { closeButton: true, className: 'location-popup' }
+            );
+
+            loc.marker.on('click', () => activate(key, false));
+        });
+
+        /* Show all three Casas at once initially, then zoom on selection */
+        map.fitBounds(allKeys.map(function (key) {
+            return [LOCATIONS[key].lat, LOCATIONS[key].lng];
+        }), { padding: [48, 48] });
+
+        /* Re-measure the map once everything is laid out (reveal animations etc.) */
+        window.addEventListener('load', () => map.invalidateSize());
+        setTimeout(() => map.invalidateSize(), 400);
+    }
+
+    /* Mount now if the desktop layout is active, and again if it becomes
+       active later (rotate / resize back to desktop). */
+    mountInlineMap();
+    if (desktopQuery.addEventListener) {
+        desktopQuery.addEventListener('change', mountInlineMap);
+    } else if (desktopQuery.addListener) {
+        desktopQuery.addListener(mountInlineMap);
+    }
 
     function activate(key, pan) {
         const loc = LOCATIONS[key];
-        if (!loc) return;
+        if (!loc || !map || !loc.marker) return;
         links.forEach(function (link) {
             link.classList.toggle('active', link.dataset.location === key);
         });
@@ -507,11 +689,25 @@ startAutoplay();
         });
     });
 
-    /* Re-measure the map once everything is laid out (reveal animations etc.) */
-    if (map.invalidateSize) {
-        window.addEventListener('load', () => map.invalidateSize());
-        setTimeout(() => map.invalidateSize(), 400);
-    }
+    /* Footer location links deep-link into #locations and select the Casa:
+       on desktop this flies the map to the pin; on mobile it scrolls to
+       and flashes the matching card. Exposed globally for footer links. */
+    window.LCDH_showCasa = function (label) {
+        if (!label) return;
+        /* Desktop: the row click does everything (map fly + form select). */
+        const row = links.filter(function (link) { return link.dataset.location === label; })[0];
+        if (row) row.click();
+        /* Mobile: no map rows exist — scroll to the card and flash it. */
+        const card = document.querySelector('.location-card[data-location="' + label.replace(/"/g, '') + '"]');
+        if (card) {
+            setTimeout(function () {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.remove('location-card--flash');
+                void card.offsetWidth; /* restart the flash animation */
+                card.classList.add('location-card--flash');
+            }, 450);
+        }
+    };
 })();
 
 /* ===== EXPERIENCE DETAILS ===== */
@@ -520,25 +716,25 @@ startAutoplay();
     if (!modal) return;
     const modalCard = modal.querySelector('.exp-modal-card');
     const details = {
-        'premium-habanos': [
-            ['Cuban heritage', 'Habanos are rooted in Cuba’s tobacco-growing regions and a tradition of hand craftsmanship. The character of each cigar reflects its blend, format and the work that goes into preparing and rolling the leaves.'],
-            ['Explore the collection', 'Different houses and formats offer different expressions of aroma, strength and smoking time. Our collection is an opportunity to learn about those distinctions, from the dimensions of a vitola to the identity of its maker.'],
-            ['Plan your visit', 'Ask your chosen Casa about the current selection and the background of a particular cigar. Availability varies by location and over time, so contact the store before visiting for a specific item.']
+        'torcedor-events': [
+            ['Craft, live before your eyes', 'A master torcedor rolling at your event is pure theatre — watching hands that have shaped thousands of cigars coax a wrapper leaf into a flawless cylinder, then tasting one rolled minutes earlier. Guests remember it long after the evening ends.'],
+            ['Shaped around your occasion', 'Corporate receptions, weddings, private milestones — we tailor the format to the night: live rolling stations, guided tastings, pairing sessions with rum or coffee, and short masterclasses in cutting, lighting and savouring.'],
+            ['Request your event', 'Tell us the date, venue and headcount via the contact form or WhatsApp and we will design the evening with you — availability is limited, so early booking is recommended.']
         ],
-        'expert-guidance': [
-            ['A conversation, not a checklist', 'Understanding Habanos begins with questions. Share what you already know, which styles interest you and what you would like to understand better. Personal guidance helps make the terminology and traditions easier to navigate.'],
-            ['Understand the differences', 'Learn how cigar size, shape and blend relate to the experience, and why strength and flavour are not the same thing. Our team can explain the vocabulary used to describe different formats and their characteristics.'],
-            ['Care beyond the Casa', 'Bring your questions about storage, handling and travel. Speak with your local store about practical care considerations and the guidance available during your visit.']
+        'casa-lounge': [
+            ['Your armchair is waiting', 'Step out of the Dubai heat into cedar-scented calm: deep leather chairs, low lamplight, the quiet ceremony of the cut and light. Every Casa is a small Havana — unhurried, welcoming, and made for lingering.'],
+            ['Hospitality, the Cuban way', 'Our hosts know every cigar in the humidor and every rum on the shelf. New to Habanos or a lifelong aficionado, you will be guided — never rushed — to the pour and vitola that suit your evening.'],
+            ['Before you settle in', 'Check your chosen location for opening hours, lounge seating and reservation details — facilities differ between City Walk, JBR and Abu Dhabi Mall, so a quick message ahead guarantees your spot.']
         ],
-        'humidor-care': [
-            ['A carefully maintained environment', 'Tobacco responds to its surroundings. A humidor helps moderate humidity, while a stable environment protects cigars from abrupt changes that can affect their condition. Conservation is an important part of looking after a collection.'],
-            ['Consistency matters', 'Direct sunlight, heat and frequent fluctuations can disrupt storage conditions. Monitoring the environment and checking the accuracy of measuring equipment are useful habits; avoid making sudden adjustments in response to a single reading.'],
-            ['Your own storage routine', 'The right approach depends on your humidor, the surrounding climate and how often you open it. Ask the Casa team about maintaining your setup and transporting cigars, and follow the care instructions supplied with your equipment.']
+        'premium-cigars': [
+            ['Cuba’s great houses, under one roof', 'Cohiba, Montecristo, Partagás, Romeo y Julieta, Hoyo de Monterrey and more — every box sourced through official Habanos channels and rested in our walk-in humidors at perfect maturity.'],
+            ['From first cigar to connoisseur', 'Mild and honeyed for a first exploration, full-bodied and complex for the seasoned palate — our team will match strength, format and smoking time to your taste and your evening.'],
+            ['Ask before you visit', 'Rare formats and aged boxes move quickly. Message your Casa about the current selection or a specific cigar before visiting so we can have it ready for you.']
         ],
-        'lounge-hospitality': [
-            ['Time to settle in', 'The Casa experience is also about its setting: a welcoming space for conversation, shared interests and a slower pace. Each location has its own atmosphere while drawing on the same Cuban heritage.'],
-            ['A personal welcome', 'Whether you arrive with friends or want to learn more about the world of Habanos, speak with the team about your visit. Hospitality starts with understanding what brings you to the Casa.'],
-            ['Before you arrive', 'Check the location’s opening hours and contact the store for current lounge access, seating availability, house rules and any reservation requirements. Facilities and services can differ between Casas.']
+        'cigar-accessories': [
+            ['Everything the ritual deserves', 'Precision double-blade cutters, torch and soft-flame lighters, cedar spills, travel cases and desktop humidors — a curated range chosen to cut clean, light true and keep every cigar at its best.'],
+            ['For home, travel and gifting', 'From pocket essentials to cabinet humidors and presentation gift sets, we will help you choose pieces that suit your routine — and wrap them beautifully when they are destined for someone else.'],
+            ['Chosen with expert hands', 'Unsure which cutter suits a figurado, or which humidor suits the UAE climate? Ask in store or on WhatsApp and we will point you to the right tool for the job.']
         ]
         };
     let opener = null;
@@ -756,6 +952,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+/* ===== FOOTER LOCATION DEEP-LINKS ===== */
+/* After the smooth-scroll above glides to #locations, select the matching
+   Casa — desktop flies the map to its pin, mobile flashes its card. */
+document.querySelectorAll('.footer-location-link[data-location]').forEach(link => {
+    link.addEventListener('click', () => {
+        if (typeof window.LCDH_showCasa === 'function') {
+            window.LCDH_showCasa(link.dataset.location);
+        }
+    });
+});
+
 /* ===== WHATSAPP CHATBOT WIDGET ===== */
 const WA_NUMBER = (SETTINGS.contact && SETTINGS.contact.whatsapp) ? SETTINGS.contact.whatsapp : '971542137706';
 const chatWidget = document.getElementById('whatsapp-widget');
@@ -770,22 +977,28 @@ function setChatOpen(open) {
     chatPanel.classList.toggle('open', open);
     chatPanel.setAttribute('aria-hidden', String(!open));
     chatWidget.setAttribute('aria-expanded', String(open));
+    const footerLink = document.getElementById('footer-whatsapp');
+    if (footerLink) footerLink.setAttribute('aria-expanded', String(open));
     if (open && chatInput) {
         setTimeout(() => chatInput.focus(), 250);
     }
 }
 
-if (chatWidget) {
-    chatWidget.addEventListener('click', (e) => {
-        /* Open the in-page chat popup instead of navigating straight to WhatsApp */
-        e.preventDefault();
-        e.stopPropagation();
-        setChatOpen(!chatPanel.classList.contains('open'));
-    });
-}
-
 if (chatClose) {
     chatClose.addEventListener('click', () => setChatOpen(false));
+}
+
+/* Footer "Chat on WhatsApp" opens the same in-page chat popup as the
+   floating widget instead of navigating straight to wa.me. The link's
+   href stays as a fallback (right-click / copy-link / no-JS). */
+const footerChatLink = document.getElementById('footer-whatsapp');
+if (footerChatLink) {
+    footerChatLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        resetChatTarget();
+        setChatOpen(true);
+    });
 }
 
 document.addEventListener('keydown', (e) => {
@@ -796,7 +1009,10 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('click', (e) => {
     if (!chatPanel || !chatPanel.classList.contains('open')) return;
-    if (!chatPanel.contains(e.target) && !chatWidget.contains(e.target)) {
+    const footerChatLink = document.getElementById('footer-whatsapp');
+    if (chatWidget && chatWidget.contains(e.target)) return;
+    if (footerChatLink && footerChatLink.contains(e.target)) return;
+    if (!chatPanel.contains(e.target)) {
         setChatOpen(false);
     }
 });
@@ -821,9 +1037,52 @@ function showTypingIndicator() {
     return el;
 }
 
-function openWhatsAppWithMessage(text) {
-    const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+function openWhatsAppWithMessage(text, number) {
+    const digits = String(number || '').replace(/\D/g, '') || WA_NUMBER;
+    const url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(text);
     window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+/* Per-store Contact buttons (desktop map popups + mobile cards) open the
+   in-page chat popup, routed to that Casa's own WhatsApp number. The send
+   handler above reads chatTarget for the destination; generic opens
+   (floating widget, footer link) fall back to the main WA_NUMBER.
+   Delegated on document so it works for admin-rendered markup and
+   Leaflet popup content injected after page load. */
+let chatTarget = null;
+
+document.addEventListener('click', (e) => {
+    const storeLink = e.target && e.target.closest ? e.target.closest('[data-chat-store="true"]') : null;
+    if (!storeLink) return;
+    e.preventDefault();
+    e.stopPropagation();
+    chatTarget = {
+        number: storeLink.getAttribute('data-number') || '',
+        store: storeLink.getAttribute('data-store') || '',
+        location: storeLink.getAttribute('data-location') || ''
+    };
+    if (chatTarget.location) {
+        const locationInput = document.getElementById('location');
+        if (locationInput) locationInput.value = chatTarget.location;
+    }
+    setChatOpen(true);
+    if (chatTarget.store) {
+        setTimeout(() => addChatMessage('Chatting with ' + chatTarget.store + ' — type your message below and we\'ll continue on WhatsApp. 🏠', 'bot'), 300);
+    }
+});
+
+function resetChatTarget() {
+    chatTarget = null;
+}
+
+if (chatWidget) {
+    chatWidget.addEventListener('click', (e) => {
+        /* Open the in-page chat popup instead of navigating straight to WhatsApp */
+        e.preventDefault();
+        e.stopPropagation();
+        resetChatTarget();
+        setChatOpen(!chatPanel.classList.contains('open'));
+    });
 }
 
 if (chatForm && chatInput) {
@@ -837,9 +1096,10 @@ if (chatForm && chatInput) {
         chatInput.style.height = 'auto';
 
         const typing = showTypingIndicator();
+        const targetNumber = chatTarget && chatTarget.number ? chatTarget.number : null;
         setTimeout(() => {
             if (typing) typing.remove();
-            openWhatsAppWithMessage(text);
+            openWhatsAppWithMessage(text, targetNumber);
             addChatMessage('Connecting you on WhatsApp… 💬', 'bot');
         }, 700);
     });
