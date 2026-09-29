@@ -2378,8 +2378,9 @@ button.loc-inline-btn {
 
 body.age-gate-open { overflow: hidden; }
 
-/* While the gate is open, nothing else on the page may be seen */
-body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
+/* While the gate is open, nothing else on the page may be seen
+   (the Coming Soon overlay stays visible above the gate) */
+body.age-gate-open > *:not(#age-gate):not(#coming-soon) { visibility: hidden; }
 
 .age-gate-card {
     width: 100%;
@@ -2483,4 +2484,123 @@ body.age-gate-open > *:not(#age-gate) { visibility: hidden; }
     #audio-toggle[aria-label="Unmute background music"] {
         animation: none;
     }
+}
+
+/* ===== COMING SOON PAGE (switchable in /admin → Site Settings) ===== */
+
+body.coming-soon-open { overflow: hidden; }
+
+/* Nothing may float over the overlay — or stay reachable behind it
+   (the audio toggle's display is set inline, hence !important). */
+body.coming-soon-open #audio-toggle,
+body.coming-soon-open .whatsapp-float,
+body.coming-soon-open .whatsapp-chatbot { display: none !important; }
+
+.coming-soon {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;   /* above the age gate (3000) and experience modal (10000) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(140deg, #4d0113 0%, #2e0109 55%, #000000 100%);
+    opacity: 0;
+    animation: coming-soon-fade .6s ease forwards;
+}
+
+@keyframes coming-soon-fade { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .coming-soon { animation: none; opacity: 1; }
+}
+
+.coming-soon-card {
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+    background: linear-gradient(160deg, rgba(92, 1, 27, .92) 0%, rgba(33, 30, 31, .96) 100%);
+    border: 1px solid rgba(167, 153, 110, .55);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
+    padding: 52px 44px;
+}
+
+.coming-soon-logo {
+    display: block;
+    height: 56px;
+    width: auto;
+    margin: 0 auto 26px;
+}
+
+.coming-soon-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .32em;
+    color: var(--sand);
+    margin-bottom: 14px;
+}
+
+.coming-soon-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(34px, 7vw, 54px);
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--cream);
+}
+
+.coming-soon-rule {
+    display: block;
+    width: 76px;
+    height: 2px;
+    margin: 22px auto;
+    background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
+}
+
+.coming-soon-message {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(254, 231, 198, .85);
+}
+
+.coming-soon-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.coming-soon-link {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid rgba(167, 153, 110, .7);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    text-decoration: none;
+    transition: background .25s ease, color .25s ease;
+}
+
+.coming-soon-link:hover,
+.coming-soon-link:focus-visible {
+    background: var(--brand-gold);
+    color: var(--brand-red-darkest);
+}
+
+.coming-soon-foot {
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: .28em;
+    color: rgba(167, 153, 110, .75);
+}
+
+@media (max-width: 480px) {
+    .coming-soon-card { padding: 38px 22px; }
+    .coming-soon-logo { height: 46px; }
+    .coming-soon-links { flex-direction: column; }
+    .coming-soon-link { text-align: center; }
 }

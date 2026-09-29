@@ -37,6 +37,22 @@
         };
     }
 
+    /* The admin panel's Coming Soon switch (Site Settings): while it is ON
+       the whole site sits behind the overlay, so there is nothing to listen
+       to — same localStorage → exported-file precedence as the track. */
+    function comingSoonEnabled() {
+        try {
+            const raw = localStorage.getItem(SETTINGS_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                const cs = parsed && parsed.settings && parsed.settings.comingSoon;
+                if (cs && typeof cs === 'object') return cs.enabled === true;
+            }
+        } catch (e) { /* storage unavailable — fall through */ }
+        const fileCs = window.LCDH_SETTINGS && window.LCDH_SETTINGS.comingSoon;
+        return !!(fileCs && fileCs.enabled === true);
+    }
+
     let adminAudio = readAdminAudio();
     const sourceEl = audio.querySelector('source');
 
@@ -78,9 +94,10 @@
     let candidates = buildCandidates(adminAudio.url);
     let candidateIndex = 0;
 
-    /* OFF in the panel = hide the toggle + never attempt playback. */
+    /* OFF in the panel (or the Coming Soon page ON) = hide the toggle +
+       never attempt playback. */
     const toggle = document.getElementById('audio-toggle');
-    if (!adminAudio.enabled) {
+    if (!adminAudio.enabled || comingSoonEnabled()) {
         if (toggle) toggle.style.display = 'none';
         try { audio.pause(); } catch (e) { /* noop */ }
         audio.removeAttribute('src');

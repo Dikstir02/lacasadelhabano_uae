@@ -364,6 +364,14 @@ if (sessionStorage.getItem(SESSION_KEY) === '1') {
 const SETTINGS_KEY = 'lcdh_settings_v1';
 
 const DEFAULT_SETTINGS = {
+    /* Full-screen "Coming Soon" page (rendered by index.html). The live
+       site follows the exported js/site-settings.js — OFF here is only the
+       safe fallback used when that file cannot be read. */
+    comingSoon: {
+        enabled: false,
+        headline: 'COMING SOON',
+        message: 'We\'re putting the finishing touches on our new website. La Casa del Habano UAE will be online soon — in the meantime, reach us on WhatsApp or Instagram.'
+    },
     contact: {
         email: 'info@lacasadelhabano.ae',
         whatsapp: '971542137706',
@@ -443,11 +451,12 @@ function currentSettings() {
     if (fileSettings && fileSettings.contact) base = fileSettings;
     else base = loadSettingsFromStorage() || DEFAULT_SETTINGS;
 
-    /* Always return the full shape (contact/audio/locations) so editing
+    /* Always return the full shape (comingSoon/contact/audio/locations) so editing
        never crashes or silently blanks fields, even when the source is partial. */
     const merged = cloneSettings(DEFAULT_SETTINGS);
     if (base.contact) Object.assign(merged.contact, base.contact);
     if (base.audio) Object.assign(merged.audio, base.audio);
+    if (base.comingSoon) Object.assign(merged.comingSoon, base.comingSoon);
     if (Array.isArray(base.locations)) {
         merged.locations = base.locations.map((loc, i) => {
             const fallback = DEFAULT_SETTINGS.locations[i] || {};
@@ -484,15 +493,32 @@ async function loadFileSettings() {
 function settingsFormHtml(settings) {
     const c = settings.contact || {};
     const a = settings.audio || {};
+    const cs = settings.comingSoon || {};
     const locs = Array.isArray(settings.locations) ? settings.locations : [];
 
     const textIn = (name, value, placeholder) =>
         '<input type="text" id="' + name + '" value="' + escapeHtml(value) + '" placeholder="' + escapeHtml(placeholder || '') + '">';
     const urlIn = (name, value, placeholder) =>
         '<input type="url" id="' + name + '" value="' + escapeHtml(value) + '" placeholder="' + escapeHtml(placeholder || '') + '">';
+    const textArea = (name, value, rows) =>
+        '<textarea id="' + name + '" rows="' + (rows || 3) + '">' + escapeHtml(value) + '</textarea>';
     const label = (text) => '<span class="field-label">' + text + '</span>';
 
     let html = '<div class="settings-block">';
+    html += '<h3 class="settings-block-title">Coming soon page</h3>';
+    html += '<div class="field-grid">';
+    const csOn = cs.enabled === true;
+    html += '<div>' + label('Status') + '<select id="s-coming-enabled">'
+        + '<option value="on"' + (csOn ? ' selected' : '') + '>ON — show the Coming Soon page</option>'
+        + '<option value="off"' + (!csOn ? ' selected' : '') + '>OFF — show the full website</option>'
+        + '</select></div>';
+    html += '<div>' + label('Headline') + textIn('s-coming-headline', cs.headline, 'COMING SOON') + '</div>';
+    html += '<div class="field-span-2">' + label('Message shown under the headline') + textArea('s-coming-message', cs.message, 3) + '</div>';
+    html += '</div>';
+    html += '<p class="settings-hint" style="margin-top:8px">While ON, visitors only see this page (contact links stay live). Save to preview it here, then Copy site-settings.js to publish.</p>';
+    html += '</div>';
+
+    html += '<div class="settings-block">';
     html += '<h3 class="settings-block-title">Contact details</h3>';
     html += '<div class="field-grid">';
     html += '<div>' + label('Email address') + textIn('s-email', c.email, 'info@…') + '</div>';
@@ -545,6 +571,10 @@ function readSettingsFromForm() {
         return el ? el.value.trim() : '';
     };
     const settings = currentSettings();
+
+    settings.comingSoon.enabled = (val('s-coming-enabled') !== 'off');
+    settings.comingSoon.headline = val('s-coming-headline');
+    settings.comingSoon.message = val('s-coming-message');
 
     settings.contact.email = val('s-email');
     settings.contact.whatsapp = val('s-whatsapp');

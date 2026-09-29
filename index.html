@@ -15,7 +15,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=17">
+    <link rel="stylesheet" href="styles.css?v=18">
+    <!-- Settings load in <head> so the Coming Soon switch below can read
+         them before the body renders (no flash of the real site). -->
+    <script src="js/site-settings.js?v=4"></script>
 </head>
     <body>
     <!-- ===== AGE GATE (21+) ===== -->
@@ -47,6 +50,56 @@
             document.getElementById('age-gate').classList.add('visible');
             document.body.classList.add('age-gate-open');
         }
+    })();
+    </script>
+
+    <!-- ===== COMING SOON PAGE (switchable in /admin → Site Settings) =====
+         Reads the admin's latest save (localStorage `lcdh_settings_v1`)
+         first so a toggle in the panel previews on reload, then the
+         exported js/site-settings.js (loaded in <head> above), defaulting
+         to OFF. Runs synchronously before the rest of the body renders,
+         so the real site never flashes behind the overlay. -->
+    <script>
+    (function () {
+        var settings = null;
+        try {
+            var raw = localStorage.getItem('lcdh_settings_v1');
+            if (raw) {
+                var saved = JSON.parse(raw);
+                if (saved && saved.settings && saved.settings.comingSoon && typeof saved.settings.comingSoon === 'object') {
+                    settings = saved.settings;
+                }
+            }
+        } catch (error) { /* storage unavailable — fall through */ }
+        if (!settings && window.LCDH_SETTINGS && typeof window.LCDH_SETTINGS === 'object') {
+            settings = window.LCDH_SETTINGS;
+        }
+        var cs = settings && settings.comingSoon;
+        if (!cs || cs.enabled !== true) return;
+
+        function esc(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, function (ch) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+            });
+        }
+        var contact = settings.contact || {};
+        var html = '<div id="coming-soon" class="coming-soon" role="dialog" aria-modal="true" aria-labelledby="coming-soon-title">'
+            + '<div class="coming-soon-card">'
+            + '<img src="logo.svg" alt="La Casa del Habano UAE" class="coming-soon-logo">'
+            + '<p class="coming-soon-kicker">LA CASA DEL HABANO &middot; UAE</p>'
+            + '<h1 class="coming-soon-title" id="coming-soon-title">' + esc(cs.headline || 'COMING SOON') + '</h1>'
+            + '<span class="coming-soon-rule" aria-hidden="true"></span>'
+            + '<p class="coming-soon-message">' + esc(cs.message || '') + '</p>'
+            + '<div class="coming-soon-links">'
+            + (contact.email ? '<a class="coming-soon-link" href="mailto:' + esc(contact.email) + '">Email us</a>' : '')
+            + (contact.whatsapp ? '<a class="coming-soon-link" href="https://wa.me/' + esc(String(contact.whatsapp).replace(/[^0-9]/g, '')) + '" target="_blank" rel="noopener">WhatsApp</a>' : '')
+            + (contact.instagram ? '<a class="coming-soon-link" href="' + esc(contact.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : '')
+            + '</div>'
+            + '<p class="coming-soon-foot">DUBAI &middot; ABU DHABI</p>'
+            + '</div></div>';
+        document.body.classList.add('coming-soon-open');
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.title = 'Coming Soon · La Casa del Habano UAE';
     })();
     </script>
 
@@ -500,10 +553,9 @@
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/site-settings.js?v=3"></script>
     <script src="js/events-data.js?v=2"></script>
     <script src="script.js?v=21"></script>
-    <script src="audio.js?v=5"></script>
+    <script src="audio.js?v=6"></script>
 </body>
 </html>
 
