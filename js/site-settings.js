@@ -1,6 +1,6 @@
 window.LCDH_SETTINGS = {
   "comingSoon": {
-    "enabled": true,
+    "enabled": false,
     "headline": "COMING SOON",
     "message": "We're putting the finishing touches on our new website. La Casa del Habano UAE will be online soon — in the meantime, reach us on WhatsApp or Instagram."
   },
