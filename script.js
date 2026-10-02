@@ -78,30 +78,32 @@ window.addEventListener('scroll', () => {
 /* ===== MOBILE MENU ===== */
 const menu = document.getElementById('mobile-menu');
 const openMenu = document.getElementById('menu-button');
-const closeMenu = document.getElementById('menu-close');
 
-openMenu.addEventListener('click', () => {
+/* The drawer has no logo or close button inside; these are the only ways out:
+   the hamburger again, an outside tap on the left 60%, Escape, or a nav link. */
+const openDrawer = () => {
     menu.classList.add('open');
     openMenu.setAttribute('aria-expanded', 'true');
-});
-closeMenu.addEventListener('click', () => {
+};
+const closeDrawer = () => {
     menu.classList.remove('open');
     openMenu.setAttribute('aria-expanded', 'false');
-});
+};
+
+openMenu.addEventListener('click', openDrawer);
 document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => closeMenu.click());
+    link.addEventListener('click', closeDrawer);
 });
-/* The drawer only covers the right 40% of the screen, so the page to its left
-   is reachable. Capture-phase listener closes the menu on an outside tap and
-   stops that tap from also activating whatever sits underneath it. */
+/* Capture-phase listener closes the drawer on an outside tap and stops that
+   tap from also activating whatever sits underneath it. */
 document.addEventListener('click', (event) => {
     if (!menu.classList.contains('open')) return;
     if (menu.contains(event.target) || openMenu.contains(event.target)) return;
-    closeMenu.click();
+    closeDrawer();
     event.stopPropagation();
 }, true);
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && menu.classList.contains('open')) closeMenu.click();
+    if (event.key === 'Escape' && menu.classList.contains('open')) closeDrawer();
 });
 
 /* ===== SCROLLSPY (active nav link) ===== */
