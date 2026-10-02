@@ -391,18 +391,19 @@ select:focus-visible {
 .mobile-menu {
     position: fixed;
     top: 0;
+    bottom: 0;
     left: 0;
-    right: 0;
-    /* Only the top 40% of the viewport — the rest of the page stays visible. */
-    height: 40vh;
-    height: 40dvh;
+    /* Full-height drawer covering the left 40% of the screen. */
+    width: 40%;
     z-index: 50;
     background: var(--navy);
-    padding: 16px 24px;
-    /* Hidden off the left edge; slides in from the left when .open is added. */
-    transform: translateX(-100%);
+    padding: 16px 14px;
+    /* Parked fully off the left edge (1px extra so the antialiased edge
+       never bleeds a hairline onto the screen when closed). */
+    transform: translateX(calc(-100% - 1px));
     transition: transform .35s ease;
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -427,8 +428,11 @@ select:focus-visible {
 
 .mobile-logo-image {
     display: block;
-    height: 34px;
+    /* Shrink to fit beside the close button — the drawer is only 40% wide. */
     width: auto;
+    height: auto;
+    max-height: 34px;
+    max-width: calc(100% - 44px);
 }
 
 @media (max-width: 480px) {
@@ -447,19 +451,20 @@ select:focus-visible {
 
 .mobile-nav {
     flex: 1 0 auto;
-    margin-top: 10px;
+    margin-top: 18px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    gap: 6px;
+    justify-content: flex-start;
+    gap: 16px;
 }
 
 .mobile-nav a {
-    font-size: clamp(22px, 6.5vw, 34px);
+    font-size: clamp(18px, 6vw, 26px);
     font-weight: 500;
-    line-height: 1.1;
+    line-height: 1.15;
     color: var(--cream);
     text-decoration: none;
+    overflow-wrap: break-word;
 }
 
 .mobile-nav a:hover {
