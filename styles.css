@@ -390,23 +390,31 @@ select:focus-visible {
 
 .mobile-menu {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* Only the top 40% of the viewport — the rest of the page stays visible. */
+    height: 40vh;
+    height: 40dvh;
     z-index: 50;
     background: var(--navy);
-    padding: 28px;
-    transform: translateX(100%);
+    padding: 16px 24px;
+    transform: translateY(-100%);
     transition: transform .35s ease;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-menu.open {
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 .mobile-menu-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-shrink: 0;
 }
 
 .mobile-logo {
@@ -437,14 +445,16 @@ select:focus-visible {
 }
 
 .mobile-nav {
-    margin-top: 80px;
+    flex: 1 0 auto;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    justify-content: space-evenly;
+    gap: 6px;
 }
 
 .mobile-nav a {
-    font-size: 36px;
+    font-size: clamp(22px, 6.5vw, 34px);
     font-weight: 500;
     line-height: 1.1;
     color: var(--cream);

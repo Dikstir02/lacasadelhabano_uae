@@ -91,6 +91,18 @@ closeMenu.addEventListener('click', () => {
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => closeMenu.click());
 });
+/* The menu only covers the top 40% of the screen now, so the page below it is
+   reachable. Capture-phase listener closes the menu on an outside tap and stops
+   that tap from also activating whatever sits underneath it. */
+document.addEventListener('click', (event) => {
+    if (!menu.classList.contains('open')) return;
+    if (menu.contains(event.target) || openMenu.contains(event.target)) return;
+    closeMenu.click();
+    event.stopPropagation();
+}, true);
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu.classList.contains('open')) closeMenu.click();
+});
 
 /* ===== SCROLLSPY (active nav link) ===== */
 const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
