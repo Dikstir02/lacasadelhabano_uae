@@ -398,9 +398,10 @@ select:focus-visible {
     z-index: 50;
     background: var(--navy);
     padding: 16px 14px;
-    /* Parked fully off the left edge (1px extra so the antialiased edge
-       never bleeds a hairline onto the screen when closed). */
-    transform: translateX(calc(-100% - 1px));
+    /* Parked fully off the RIGHT edge (+1px so the antialiased edge never
+       bleeds a hairline onto the screen when closed) and slides leftwards
+       across the page into its home on the left 40%. */
+    transform: translateX(calc(100vw + 1px));
     transition: transform .35s ease;
     overflow-y: auto;
     overflow-x: hidden;
