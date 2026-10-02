@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css?v=3">
+    <link rel="stylesheet" href="admin.css?v=4">
 </head>
 <body>
 
@@ -46,6 +46,7 @@
         <nav class="tabs" aria-label="Admin sections">
             <button type="button" class="tab-btn active" data-panel="events">Events</button>
             <button type="button" class="tab-btn" data-panel="settings">Site Settings</button>
+            <button type="button" class="tab-btn" data-panel="github">GitHub Sync</button>
         </nav>
 
         <div id="panel-events">
@@ -94,7 +95,7 @@
         <main class="layout">
             <section class="card">
                 <h2 class="card-title">Site Settings</h2>
-                <p class="settings-hint">These settings power the live website and are exported to <code>js/site-settings.js</code> — same workflow as events. The <strong>Coming soon page</strong> switch at the top controls whether visitors see the full-screen Coming Soon page or the full site.</p>
+                <p class="settings-hint">These settings power the live website and write to <code>js/site-settings.js</code> — same workflow as events. With the <strong>GitHub Sync</strong> tab connected, pressing <em>Save settings</em> commits the file for you; otherwise use <em>Copy site-settings.js</em>. The <strong>Coming soon page</strong> switch at the top controls whether visitors see the full-screen Coming Soon page or the full site.</p>
                 <div id="settings-forms"></div>
                 <div class="form-actions">
                     <button type="button" class="btn btn-primary" id="settings-save-btn">Save settings</button>
@@ -104,10 +105,61 @@
             </section>
         </main>
         </div>
+
+        <div id="panel-github" class="hidden">
+        <main class="layout">
+            <section class="card">
+                <h2 class="card-title">GitHub Sync</h2>
+                <p class="settings-hint">When a token is saved below, every <strong>Save</strong> in this panel commits the matching file straight to the repository — no more copying files by hand. The token is stored in <em>this browser only</em> and is never written into the repo (this repository is public).</p>
+
+                <div class="settings-block">
+                    <h3 class="settings-block-title">Connection</h3>
+                    <div class="field-grid">
+                        <div class="field-span-2">
+                            <label class="field-label" for="gh-token">Personal access token</label>
+                            <input type="password" id="gh-token" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div>
+                            <label class="field-label" for="gh-owner">Owner</label>
+                            <input type="text" id="gh-owner" placeholder="Dikstir02" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div>
+                            <label class="field-label" for="gh-repo">Repository</label>
+                            <input type="text" id="gh-repo" placeholder="lacasadelhabano_uae" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div>
+                            <label class="field-label" for="gh-branch">Branch</label>
+                            <input type="text" id="gh-branch" placeholder="main" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div class="field-span-2">
+                            <span class="field-label">Status</span>
+                            <p class="gh-status" id="gh-status">Checking…</p>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" id="gh-save-btn">Save connection</button>
+                        <button type="button" class="btn btn-ghost" id="gh-test-btn">Test connection</button>
+                        <button type="button" class="btn btn-danger-ghost" id="gh-disconnect-btn">Disconnect</button>
+                    </div>
+                </div>
+
+                <div class="settings-block">
+                    <h3 class="settings-block-title">One-time token setup</h3>
+                    <ol class="gh-steps">
+                        <li>On GitHub: <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>.</li>
+                        <li>Repository access → <strong>Only select repositories</strong> → <code>Dikstir02/lacasadelhabano_uae</code>.</li>
+                        <li>Permissions → Repository permissions → <strong>Contents → Read and write</strong>.</li>
+                        <li>Choose an expiry, generate it, then paste the token above and press <strong>Save connection</strong>.</li>
+                    </ol>
+                    <p class="settings-hint">If you clear this browser's storage, or the token expires, publishing stops silently — come back here and paste a fresh one. The manual <em>Copy …</em> buttons still work as a fallback.</p>
+                </div>
+            </section>
+        </main>
+        </div>
     </div>
 
     <div class="status-toast" id="status-toast" role="status"></div>
 
-    <script src="admin.js?v=2"></script>
+    <script src="admin.js?v=3"></script>
 </body>
 </html>

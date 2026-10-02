@@ -404,3 +404,42 @@ textarea { resize: vertical; }
     .field-grid { grid-template-columns: 1fr; }
     .field-grid .field-span-2 { grid-column: span 1; }
 }
+
+/* ===== GITHUB SYNC ===== */
+.gh-status {
+    margin-top: 4px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(254, 231, 198, .06);
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+
+.gh-status.on {
+    border-color: rgba(126, 196, 138, .55);
+    background: rgba(126, 196, 138, .1);
+    color: #a8e2b1;
+}
+
+.gh-status.err {
+    border-color: rgba(229, 140, 140, .55);
+    background: rgba(229, 140, 140, .1);
+    color: #f0b4b4;
+}
+
+.gh-steps {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: .85;
+}
+
+.gh-steps li { margin-left: 20px; margin-bottom: 4px; }
+
+.gh-steps code {
+    background: rgba(167, 153, 110, .18);
+    border: 1px solid rgba(167, 153, 110, .45);
+    padding: 1px 6px;
+    font-size: 12px;
+}

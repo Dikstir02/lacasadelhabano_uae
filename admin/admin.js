@@ -94,6 +94,12 @@ function currentEvents() {
     return stored && stored.length > 0 ? stored : DEFAULT_EVENTS.slice();
 }
 
+/* The exact file body that ships to the repo — shared by the manual Copy
+   button and the automatic GitHub publish below, so they can never drift. */
+function buildEventsFile(events) {
+    return 'window.LCDH_EVENTS = ' + JSON.stringify(events, null, 2) + ';\n';
+}
+
 let statusTimer;
 function showStatus(message) {
     const toast = $('#status-toast');
@@ -162,7 +168,7 @@ fields.image.addEventListener('change', () => {
     preview.classList.remove('hidden');
 });
 
-$('#event-form').addEventListener('submit', (formEvent) => {
+$('#event-form').addEventListener('submit', async (formEvent) => {
     formEvent.preventDefault();
 
     const event = {
@@ -174,17 +180,24 @@ $('#event-form').addEventListener('submit', (formEvent) => {
     };
 
     const events = currentEvents();
-    if (editingIndex === null) {
+    const wasEdit = editingIndex !== null;
+    if (!wasEdit) {
         events.push(event);
-        showStatus('Event added ✓');
     } else {
         events[editingIndex] = event;
-        showStatus('Event updated ✓');
     }
 
     persistEvents(events);
     clearForm();
     renderList();
+    showStatus(wasEdit ? 'Event updated ✓' : 'Event added ✓');
+
+    await publishAndReport(
+        'js/events-data.js',
+        buildEventsFile(events),
+        (wasEdit ? 'Update' : 'Add') + ' event "' + (event.title || 'untitled') + '" via admin',
+        wasEdit ? 'Event updated ✓' : 'Event added ✓'
+    );
 });
 
 $('#cancel-edit-btn').addEventListener('click', () => {
@@ -194,7 +207,7 @@ $('#cancel-edit-btn').addEventListener('click', () => {
 
 /* ===== list actions (delegated) ===== */
 
-$('#event-list').addEventListener('click', (clickEvent) => {
+$('#event-list').addEventListener('click', async (clickEvent) => {
     const button = clickEvent.target.closest('button[data-action]');
     if (!button) return;
 
@@ -225,6 +238,8 @@ $('#event-list').addEventListener('click', (clickEvent) => {
         if (editingIndex !== null) clearForm();   /* indices shifted */
         renderList();
         showStatus('Event removed ✓');
+        await publishAndReport('js/events-data.js', buildEventsFile(events),
+            'Remove event "' + (target.title || 'untitled') + '" via admin', 'Event removed ✓');
     }
 
     if (button.dataset.action === 'move-up' || button.dataset.action === 'move-down') {
@@ -238,6 +253,9 @@ $('#event-list').addEventListener('click', (clickEvent) => {
         else if (editingIndex === swapWith) editingIndex = index;
         renderList();
         showStatus('Order updated ✓');
+        await publishAndReport('js/events-data.js', buildEventsFile(events),
+            'Reorder events (move "' + (moved.title || 'untitled') + '" via admin)',
+            'Order updated ✓');
     }
 });
 
@@ -254,7 +272,7 @@ $('#restore-btn').addEventListener('click', async () => {
 
 $('#export-btn').addEventListener('click', async () => {
     const events = currentEvents();
-    const jsContent = 'window.LCDH_EVENTS = ' + JSON.stringify(events, null, 2) + ';\n';
+    const jsContent = buildEventsFile(events);
     try {
         await navigator.clipboard.writeText(jsContent);
         showStatus('Copied to clipboard ✓');
@@ -326,7 +344,7 @@ eventList.addEventListener('dragover', (dragEvent) => {
 
 eventList.addEventListener('drop', (dragEvent) => dragEvent.preventDefault());
 
-eventList.addEventListener('dragend', () => {
+eventList.addEventListener('dragend', async () => {
     if (!draggedItem) return;
     draggedItem.classList.remove('dragging');
     draggedItem = null;
@@ -343,9 +361,12 @@ eventList.addEventListener('dragend', () => {
     }
 
     const events = currentEvents();
-    persistEvents(order.map((i) => events[i]));
+    const reordered = order.map((i) => events[i]);
+    persistEvents(reordered);
     renderList();
     showStatus('Order updated ✓');
+    await publishAndReport('js/events-data.js', buildEventsFile(reordered),
+        'Reorder events via drag and drop', 'Order updated ✓');
 });
 
 /* ===== boot ===== */
@@ -515,7 +536,7 @@ function settingsFormHtml(settings) {
     html += '<div>' + label('Headline') + textIn('s-coming-headline', cs.headline, 'COMING SOON') + '</div>';
     html += '<div class="field-span-2">' + label('Message shown under the headline') + textArea('s-coming-message', cs.message, 3) + '</div>';
     html += '</div>';
-    html += '<p class="settings-hint" style="margin-top:8px">While ON, visitors only see this page (contact links stay live). Save to preview it here, then Copy site-settings.js to publish.</p>';
+    html += '<p class="settings-hint" style="margin-top:8px">While ON, visitors only see this page (contact links stay live). Save to preview it here — with GitHub Sync connected the file is committed automatically, otherwise use Copy site-settings.js.</p>';
     html += '</div>';
 
     html += '<div class="settings-block">';
@@ -618,12 +639,14 @@ function renderSettingsForm() {
 
 /* ===== settings actions ===== */
 
-$('#settings-save-btn').addEventListener('click', () => {
+$('#settings-save-btn').addEventListener('click', async () => {
     const settings = readSettingsFromForm();
     localStorage.setItem(SETTINGS_KEY, JSON.stringify({ settings }));
     /* Re-render so the audio preview + location titles reflect the save. */
     renderSettingsForm();
-    showStatus('Settings saved ✓ — the live site now uses this music on reload');
+    showStatus('Settings saved ✓');
+    await publishAndReport('js/site-settings.js', buildSettingsFile(settings),
+        'Update site settings via admin', 'Settings saved ✓');
 });
 
 $('#settings-export-btn').addEventListener('click', async () => {
@@ -652,13 +675,253 @@ $('#settings-restore-btn').addEventListener('click', async () => {
     showStatus('Settings restored ✓');
 });
 
+/* =========================================================
+   GITHUB SYNC — auto-commit the exported JS files to the
+   repository whenever something is saved in this panel.
+
+   Uses the GitHub Contents API (GET sha → PUT contents) from the
+   browser. The repo is PUBLIC, so the personal access token lives
+   only in this browser's localStorage — never in a committed file.
+   ========================================================= */
+
+const GH_KEY = 'lcdh_github_v1';
+const GH_HINT_KEY = 'lcdh_gh_hinted';
+const GH_DEFAULTS = { token: '', owner: 'Dikstir02', repo: 'lacasadelhabano_uae', branch: 'main' };
+
+function loadGitHubConfig() {
+    try {
+        const raw = localStorage.getItem(GH_KEY);
+        if (!raw) return Object.assign({}, GH_DEFAULTS);
+        return Object.assign({}, GH_DEFAULTS, JSON.parse(raw));
+    } catch (error) {
+        console.warn('Could not read GitHub config:', error);
+        return Object.assign({}, GH_DEFAULTS);
+    }
+}
+
+function saveGitHubConfig(config) {
+    localStorage.setItem(GH_KEY, JSON.stringify(config));
+}
+
+/* btoa() only accepts Latin-1, so encode to UTF-8 bytes first — event copy
+   and settings routinely contain curly quotes, arrows and emoji. */
+function toBase64Utf8(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+}
+
+function ghHeaders(config) {
+    return {
+        'Authorization': 'Bearer ' + config.token.trim(),
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json'
+    };
+}
+
+async function ghErrorBody(response) {
+    try {
+        const text = await response.text();
+        try {
+            const parsed = JSON.parse(text);
+            if (parsed && parsed.message) return parsed.message;
+        } catch (ignoreJson) { /* not JSON — fall through to the raw text */ }
+        return text.slice(0, 200);
+    } catch (ignoreRead) {
+        return '';
+    }
+}
+
+/* PUT a file to the repo. Returns { ok, commitUrl } or { ok:false, error }. */
+async function publishFileToGitHub(path, content, commitMessage) {
+    const config = loadGitHubConfig();
+    if (!config.token.trim()) return { ok: false, skipped: true, error: 'No GitHub token saved.' };
+
+    const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+    const endpoint = 'https://api.github.com/repos/'
+        + encodeURIComponent(config.owner) + '/'
+        + encodeURIComponent(config.repo) + '/contents/' + encodedPath;
+
+    /* Existing files must be written back with their blob SHA, otherwise the
+       API rejects the update as a "sha wasn't supplied" conflict. 404 simply
+       means the file is new. */
+    let sha = '';
+    let response;
+    try {
+        response = await fetch(endpoint + '?ref=' + encodeURIComponent(config.branch), { headers: ghHeaders(config) });
+    } catch (error) {
+        return { ok: false, error: 'Network error — ' + error.message };
+    }
+    if (response.ok) {
+        const current = await response.json();
+        sha = (current && current.sha) || '';
+    } else if (response.status !== 404) {
+        return { ok: false, error: 'Read failed (HTTP ' + response.status + '): ' + await ghErrorBody(response) };
+    }
+
+    const payload = {
+        message: commitMessage,
+        content: toBase64Utf8(content),
+        branch: config.branch
+    };
+    if (sha) payload.sha = sha;
+
+    try {
+        response = await fetch(endpoint, { method: 'PUT', headers: ghHeaders(config), body: JSON.stringify(payload) });
+    } catch (error) {
+        return { ok: false, error: 'Network error — ' + error.message };
+    }
+    if (!response.ok) {
+        return { ok: false, error: 'Write failed (HTTP ' + response.status + '): ' + await ghErrorBody(response) };
+    }
+
+    const data = await response.json();
+    return { ok: true, commitUrl: (data.commit && data.commit.html_url) || '' };
+}
+
+/* Commit and report the outcome in the toast. `localMessage` is shown only
+   when auto-publish is switched off, so a save never looks like a no-op. */
+async function publishAndReport(path, content, commitMessage, localMessage) {
+    const config = loadGitHubConfig();
+
+    if (!config.token.trim()) {
+        /* Only nudge once per session — repeating the hint on every save would be noise. */
+        if (!sessionStorage.getItem(GH_HINT_KEY)) {
+            sessionStorage.setItem(GH_HINT_KEY, '1');
+            showStatus((localMessage || 'Saved ✓') + ' — open GitHub Sync to auto-publish');
+        } else {
+            showStatus(localMessage || 'Saved ✓');
+        }
+        return false;
+    }
+
+    showStatus('Publishing to GitHub…');
+    const result = await publishFileToGitHub(path, content, commitMessage);
+    if (result.ok) {
+        showStatus('✓ ' + localMessage + ' → pushed to ' + config.owner + '/' + config.repo);
+        return true;
+    }
+    showStatus('⚠ Saved here, but the GitHub push failed: ' + result.error, true);
+    return false;
+}
+
+/* ===== GitHub Sync panel ===== */
+
+function setGhStatus(message, kind) {
+    const statusEl = $('#gh-status');
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove('on', 'err');
+    if (kind) statusEl.classList.add(kind);
+}
+
+function renderGitHubPanel() {
+    const config = loadGitHubConfig();
+    $('#gh-token').value = config.token;
+    $('#gh-owner').value = config.owner;
+    $('#gh-repo').value = config.repo;
+    $('#gh-branch').value = config.branch;
+    if (config.token.trim()) {
+        setGhStatus('Connected — token saved in this browser. Saves in Events and Site Settings publish to '
+            + config.owner + '/' + config.repo + ' @ ' + config.branch + '.', 'on');
+    } else {
+        setGhStatus('Not connected — saves stay local until you add a token below.', null);
+    }
+}
+
+function readGitHubForm() {
+    return {
+        token: $('#gh-token').value.trim(),
+        owner: $('#gh-owner').value.trim() || GH_DEFAULTS.owner,
+        repo: $('#gh-repo').value.trim() || GH_DEFAULTS.repo,
+        branch: $('#gh-branch').value.trim() || GH_DEFAULTS.branch
+    };
+}
+
+$('#gh-save-btn').addEventListener('click', () => {
+    const config = readGitHubForm();
+    if (!config.token) {
+        setGhStatus('Paste a token first, then press Save connection.', 'err');
+        showStatus('No token entered', true);
+        return;
+    }
+    saveGitHubConfig(config);
+    renderGitHubPanel();
+    showStatus('GitHub connection saved ✓');
+});
+
+$('#gh-test-btn').addEventListener('click', async () => {
+    const config = readGitHubForm();
+    if (!config.token) {
+        setGhStatus('Enter a token to test the connection.', 'err');
+        return;
+    }
+
+    /* Test the form's values so you can try before saving. */
+    saveGitHubConfig(config);
+    setGhStatus('Testing connection…', null);
+
+    let response;
+    try {
+        response = await fetch('https://api.github.com/user', { headers: ghHeaders(config) });
+    } catch (error) {
+        setGhStatus('Could not reach GitHub — ' + error.message, 'err');
+        return;
+    }
+    if (!response.ok) {
+        setGhStatus('Token rejected (HTTP ' + response.status + '): ' + await ghErrorBody(response), 'err');
+        showStatus('GitHub test failed ✗', true);
+        return;
+    }
+    const user = await response.json();
+
+    try {
+        response = await fetch('https://api.github.com/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo),
+            { headers: ghHeaders(config) });
+    } catch (error) {
+        setGhStatus('Could not reach GitHub — ' + error.message, 'err');
+        return;
+    }
+    if (!response.ok) {
+        setGhStatus('Token works for @' + user.login + ', but the repository was unreachable (HTTP '
+            + response.status + '): ' + await ghErrorBody(response), 'err');
+        showStatus('Repository not reachable ✗', true);
+        return;
+    }
+    const repo = await response.json();
+    if (repo.permissions && repo.permissions.push === false) {
+        setGhStatus('Connected as @' + user.login + ', but the token is read-only. '
+            + 'Grant Repository permissions → Contents → Read and write.', 'err');
+        showStatus('Token needs write access ✗', true);
+        return;
+    }
+
+    setGhStatus('Connected as @' + user.login + ' → ' + repo.full_name + ' @ ' + config.branch
+        + ' (write access confirmed). Saves now publish automatically.', 'on');
+    showStatus('GitHub connection OK ✓');
+});
+
+$('#gh-disconnect-btn').addEventListener('click', () => {
+    if (!confirm('Stop auto-publishing? Saves will stay local until you reconnect.')) return;
+    localStorage.removeItem(GH_KEY);
+    renderGitHubPanel();
+    showStatus('GitHub disconnected ✓');
+});
+
 /* ===== admin tabs ===== */
+
+const PANEL_IDS = ['events', 'settings', 'github'];
 
 document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach((b) => b.classList.toggle('active', b === btn));
-        $('#panel-events').classList.toggle('hidden', btn.dataset.panel !== 'events');
-        $('#panel-settings').classList.toggle('hidden', btn.dataset.panel !== 'settings');
+        PANEL_IDS.forEach((name) => {
+            const panel = $('#panel-' + name);
+            if (panel) panel.classList.toggle('hidden', btn.dataset.panel !== name);
+        });
         if (btn.dataset.panel === 'settings') renderSettingsForm();
+        if (btn.dataset.panel === 'github') renderGitHubPanel();
     });
 });
