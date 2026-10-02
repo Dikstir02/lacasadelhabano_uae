@@ -146,7 +146,7 @@ if (eventsData.length > 0) {
                 '<h3 class="event-title display">' + escapeHtml(item.title) + '</h3>' +
                 (item.copy ? '<p class="event-copy">' + escapeHtml(item.copy) + '</p>' : '') +
                 (item.date ? '<p class="event-date">' + escapeHtml(item.date) + '</p>' : '') +
-                '<a href="#contact" class="event-link">ENQUIRE ABOUT EVENTS &rarr;</a>' +
+                '<a id="event-enquire-chat" href="https://wa.me/971542137706" class="event-link" data-open-chat="true" role="button" aria-haspopup="dialog" aria-controls="whatsapp-chatbot" aria-expanded="false">ENQUIRE ABOUT EVENTS &rarr;</a>' +
             '</div>' +
         '</article>'
     )).join('');
@@ -188,6 +188,10 @@ function applySiteSettings() {
     }
     const widget = document.getElementById('whatsapp-widget');
     if (widget && c.whatsapp) widget.href = 'https://wa.me/' + c.whatsapp;
+
+    /* "ENQUIRE ABOUT EVENTS" deep-links into the same chat popup. Keep its
+       no-JS fallback (wa.me) in sync with the configured main number. */
+    if (c.whatsapp) setLink('event-enquire-chat', 'https://wa.me/' + c.whatsapp);
 
     /* Footer locations list — clickable deep-links into #locations.
        Each link carries its Casa label so the footer handler below can
@@ -1012,9 +1016,25 @@ document.addEventListener('click', (e) => {
     const footerChatLink = document.getElementById('footer-whatsapp');
     if (chatWidget && chatWidget.contains(e.target)) return;
     if (footerChatLink && footerChatLink.contains(e.target)) return;
+    /* Anything carrying [data-open-chat] opens the popup — never treat it as
+       an outside click (it would otherwise close the panel we just opened). */
+    if (e.target && e.target.closest && e.target.closest('[data-open-chat="true"]')) return;
     if (!chatPanel.contains(e.target)) {
         setChatOpen(false);
     }
+});
+
+/* Any element carrying [data-open-chat] opens the in-page chat popup on the
+   default (main) number — used by the footer "Chat on WhatsApp" link and the
+   Events section's "ENQUIRE ABOUT EVENTS" CTA. Registered after the
+   outside-click handler above so the popup stays open. */
+document.addEventListener('click', (e) => {
+    const opener = e.target && e.target.closest ? e.target.closest('[data-open-chat="true"]') : null;
+    if (!opener) return;
+    e.preventDefault();
+    e.stopPropagation();
+    resetChatTarget();
+    setChatOpen(true);
 });
 
 function addChatMessage(text, who) {
@@ -1051,6 +1071,24 @@ function openWhatsAppWithMessage(text, number) {
    Leaflet popup content injected after page load. */
 let chatTarget = null;
 
+/* ===== STORE TARGET BAR (cancel a store-specific chat) ===== */
+/* Rendered straight under the chat header whenever the popup was opened from
+   a Casa's "Contact Store" button (map popup or mobile card). The Cancel
+   button drops chatTarget, so the next message falls back to the default
+   (main) WhatsApp receiver — the same one the floating widget uses. */
+const chatStoreBar = document.getElementById('chatbot-store-bar');
+const chatStoreName = document.getElementById('chatbot-store-name');
+const chatStoreCancel = document.getElementById('chatbot-store-cancel');
+const chatTitleEl = document.getElementById('chatbot-title');
+const CHAT_DEFAULT_TITLE = chatTitleEl ? chatTitleEl.textContent.trim() : 'La Casa del Habano';
+
+function refreshChatTargetBar() {
+    const active = !!(chatTarget && chatTarget.store);
+    if (chatStoreBar) chatStoreBar.hidden = !active;
+    if (chatStoreName && active) chatStoreName.textContent = chatTarget.store;
+    if (chatTitleEl) chatTitleEl.textContent = active ? chatTarget.store : CHAT_DEFAULT_TITLE;
+}
+
 document.addEventListener('click', (e) => {
     const storeLink = e.target && e.target.closest ? e.target.closest('[data-chat-store="true"]') : null;
     if (!storeLink) return;
@@ -1066,6 +1104,7 @@ document.addEventListener('click', (e) => {
         if (locationInput) locationInput.value = chatTarget.location;
     }
     setChatOpen(true);
+    refreshChatTargetBar();
     if (chatTarget.store) {
         setTimeout(() => addChatMessage('Chatting with ' + chatTarget.store + ' — type your message below and we\'ll continue on WhatsApp. 🏠', 'bot'), 300);
     }
@@ -1073,6 +1112,17 @@ document.addEventListener('click', (e) => {
 
 function resetChatTarget() {
     chatTarget = null;
+    refreshChatTargetBar();
+}
+
+/* Cancel the store-specific conversation and go back to the default chat. */
+if (chatStoreCancel) {
+    chatStoreCancel.addEventListener('click', () => {
+        if (!chatTarget || !chatTarget.store) return;
+        resetChatTarget();
+        addChatMessage('Cancelled — your message now goes to the main La Casa del Habano UAE team again. 💬', 'bot');
+        if (chatInput) chatInput.focus();
+    });
 }
 
 if (chatWidget) {

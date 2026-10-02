@@ -2098,6 +2098,55 @@ button.loc-inline-btn {
     box-shadow: 0 0 0 3px rgba(37, 211, 102, .25);
 }
 
+/* ===== CHAT STORE-TARGET BAR (cancel a store-specific conversation) ===== */
+.chatbot-store-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 16px;
+    background: rgba(254, 231, 198, .1);
+    border-bottom: 1px solid rgba(167, 153, 110, .35);
+}
+
+/* `hidden` must beat the flex display above. */
+.chatbot-store-bar[hidden] {
+    display: none;
+}
+
+.chatbot-store-bar-text {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--sand);
+}
+
+.chatbot-store-bar-text strong {
+    color: var(--cream);
+    font-weight: 600;
+}
+
+.chatbot-store-cancel {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: 1px solid rgba(254, 231, 198, .5);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease;
+}
+
+.chatbot-store-cancel:hover,
+.chatbot-store-cancel:focus-visible {
+    background: rgba(254, 231, 198, .18);
+    border-color: rgba(254, 231, 198, .85);
+}
+
 #chatbot-close {
     display: flex;
     align-items: center;
