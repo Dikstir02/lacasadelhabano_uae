@@ -727,7 +727,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
         ],
         'casa-lounge': [
             ['Your armchair is waiting', 'Step out of the Dubai heat into cedar-scented calm: deep leather chairs, low lamplight, the quiet ceremony of the cut and light. Every Casa is a small Havana — unhurried, welcoming, and made for lingering.'],
-            ['Hospitality, the Cuban way', 'Our hosts know every cigar in the humidor and every rum on the shelf. New to Habanos or a lifelong aficionado, you will be guided — never rushed — to the pour and vitola that suit your evening.'],
+            ['Hospitality, the Cuban way', 'Our hosts know every cigar in the humidor and every rum on the shelf. New to Habanos or a lifelong aficionado, you will be guided — never rushed — to the vitola that suits your evening.'],
             ['Before you settle in', 'Check your chosen location for opening hours, lounge seating and reservation details — facilities differ between City Walk, JBR and Abu Dhabi Mall, so a quick message ahead guarantees your spot.']
         ],
         'premium-cigars': [
