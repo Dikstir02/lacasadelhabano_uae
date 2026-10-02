@@ -457,13 +457,17 @@ select:focus-visible {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 16px;
+    /* Roomy spacing between items — the drawer is full height, so the list
+       can breathe. Scales with viewport like the label size below. */
+    gap: clamp(20px, 5vw, 28px);
 }
 
 .mobile-nav a {
-    font-size: clamp(18px, 6vw, 26px);
+    /* Smaller labels suit the 40% column; still scales with the viewport so
+       the longest label ("The Experience") stays on one line where it can. */
+    font-size: clamp(15px, 4vw, 20px);
     font-weight: 500;
-    line-height: 1.15;
+    line-height: 1.3;
     color: var(--cream);
     text-decoration: none;
     overflow-wrap: break-word;
