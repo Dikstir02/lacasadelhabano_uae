@@ -390,9 +390,11 @@ select:focus-visible {
 
 .mobile-menu {
     position: fixed;
-    top: 0;
+    /* Starts BELOW the fixed header (logo + hamburger): header height is
+       20px padding x 2 + the 44px logo = 84px, so the panel never covers it. */
+    top: 84px;
     bottom: 0;
-    /* Anchored to the RIGHT edge — full-height drawer over the right 40%. */
+    /* Anchored to the RIGHT edge — drawer over the right 40%. */
     right: 0;
     width: 40%;
     z-index: 50;
@@ -417,6 +419,11 @@ select:focus-visible {
 @media (max-width: 480px) {
     .logo-image {
         height: 38px;
+    }
+
+    /* The logo shrinks to 38px here, so the header is 20px x 2 + 38px = 78px. */
+    .mobile-menu {
+        top: 78px;
     }
 }
 

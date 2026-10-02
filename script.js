@@ -90,7 +90,12 @@ const closeDrawer = () => {
     openMenu.setAttribute('aria-expanded', 'false');
 };
 
-openMenu.addEventListener('click', openDrawer);
+/* The hamburger stays visible above the open drawer (the panel starts below
+   the header), so it doubles as the way out — tap to open, tap to close. */
+openMenu.addEventListener('click', () => {
+    if (menu.classList.contains('open')) closeDrawer();
+    else openDrawer();
+});
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', closeDrawer);
 });
