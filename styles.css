@@ -392,16 +392,17 @@ select:focus-visible {
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
-    /* Full-height drawer covering the left 40% of the screen. */
+    /* Anchored to the RIGHT edge — full-height drawer over the right 40%. */
+    right: 0;
     width: 40%;
     z-index: 50;
     background: var(--navy);
     padding: 16px 14px;
     /* Parked fully off the RIGHT edge (+1px so the antialiased edge never
-       bleeds a hairline onto the screen when closed) and slides leftwards
-       across the page into its home on the left 40%. */
-    transform: translateX(calc(100vw + 1px));
+       bleeds a hairline onto the screen when closed) and slides in from the
+       right side. 100% of its own width is exactly enough to clear the screen
+       because the panel is flush with the right edge. */
+    transform: translateX(calc(100% + 1px));
     transition: transform .35s ease;
     overflow-y: auto;
     overflow-x: hidden;
