@@ -2650,3 +2650,177 @@ body.coming-soon-open .whatsapp-chatbot { display: none !important; }
     .coming-soon-links { flex-direction: column; }
     .coming-soon-link { text-align: center; }
 }
+/* =========================================================
+   SMOOTH HOVER SYSTEM — one motion language for every hover
+   Short .2s ease ends abruptly; this unifies hovers on
+   longer ease-out curves + GPU-friendly transforms.
+   ========================================================= */
+:root {
+    --ease-hover: cubic-bezier(.22, .61, .21, 1);
+    --ease-zoom: cubic-bezier(.16, 1, .3, 1);
+    --dur-lift: .5s;
+    --dur-fade: .38s;
+    --dur-zoom: .8s;
+    --dur-line: .45s;
+    --dur-shadow: .5s;
+}
+
+/* Lift group: buttons + cards that translateY on hover */
+.btn-casa,
+.btn-coral,
+.nav-cta,
+.experience-card,
+.location-card,
+.location-link,
+.about-card,
+.whatsapp-float {
+    -webkit-transition:
+        transform var(--dur-lift) var(--ease-hover),
+        box-shadow var(--dur-shadow) var(--ease-hover),
+        background-color var(--dur-fade) var(--ease-hover),
+        background var(--dur-fade) var(--ease-hover),
+        border-color var(--dur-fade) var(--ease-hover),
+        color var(--dur-fade) var(--ease-hover);
+    transition:
+        transform var(--dur-lift) var(--ease-hover),
+        box-shadow var(--dur-shadow) var(--ease-hover),
+        background-color var(--dur-fade) var(--ease-hover),
+        background var(--dur-fade) var(--ease-hover),
+        border-color var(--dur-fade) var(--ease-hover),
+        color var(--dur-fade) var(--ease-hover);
+    will-change: transform;
+}
+
+/* Keep lifts on the GPU so they never stutter mid-flight */
+.btn-casa:hover,
+.btn-coral:hover,
+.nav-cta:hover,
+.experience-card:hover,
+.location-card:hover,
+.location-link:hover,
+.about-card:hover,
+.whatsapp-float:hover {
+    -webkit-transform: translateY(-7px) translateZ(0);
+    transform: translateY(-7px) translateZ(0);
+}
+
+/* Preserve smaller bespoke lifts, just smoothed */
+.brand-logo:hover { -webkit-transform: translateY(-2px) translateZ(0); transform: translateY(-2px) translateZ(0); }
+.location-card:hover,
+.location-link:hover { -webkit-transform: translateY(-4px) translateZ(0); transform: translateY(-4px) translateZ(0); }
+.whatsapp-float:hover { -webkit-transform: translateY(-4px) translateZ(0) scale(1.04); transform: translateY(-4px) translateZ(0) scale(1.04); }
+
+/* Image zoom: slow glide-y scale (was .55s ease) */
+.experience-img img,
+.location-media img {
+    -webkit-transition: -webkit-transform var(--dur-zoom) var(--ease-zoom);
+    transition: transform var(--dur-zoom) var(--ease-zoom);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Underline / arrow micro-motion */
+.site-header {
+    -webkit-transition: background var(--dur-fade) var(--ease-hover), box-shadow var(--dur-shadow) var(--ease-hover);
+    transition: background var(--dur-fade) var(--ease-hover), box-shadow var(--dur-shadow) var(--ease-hover);
+}
+.nav-link::after,
+.event-link::after {
+    -webkit-transition: width var(--dur-line) var(--ease-hover), background-color var(--dur-fade) var(--ease-hover);
+    transition: width var(--dur-line) var(--ease-hover), background-color var(--dur-fade) var(--ease-hover);
+}
+.location-link-arrow {
+    -webkit-transition: -webkit-transform var(--dur-line) var(--ease-hover);
+    transition: transform var(--dur-line) var(--ease-hover);
+    will-change: transform;
+}
+/* Fade group: links + pills + icon buttons (had no base
+   transition or short .2s ease, so they snapped) */
+.brand-logo,
+.mobile-nav a,
+.events-arrows button,
+.event-link,
+.location-contact,
+.loc-mobile-btn,
+.loc-mobile-whatsapp,
+.loc-inline-btn,
+.loc-inline-store,
+.btn-outline-light,
+.lp-link,
+.locations-map-fallback-link,
+.footer-link,
+.exp-modal-close,
+.chatbot-store-cancel,
+#chatbot-close,
+#chatbot-send,
+.coming-soon-link {
+    transition:
+        color var(--dur-fade) var(--ease-hover),
+        background-color var(--dur-fade) var(--ease-hover),
+        background var(--dur-fade) var(--ease-hover),
+        border-color var(--dur-fade) var(--ease-hover),
+        opacity var(--dur-fade) var(--ease-hover),
+        box-shadow var(--dur-shadow) var(--ease-hover),
+        filter var(--dur-fade) var(--ease-hover),
+        transform var(--dur-lift) var(--ease-hover);
+}
+
+/* Audio btn uses inline transition:all (forces repaints) */
+#audio-toggle {
+    transition:
+        transform var(--dur-lift) var(--ease-hover),
+        background-color var(--dur-fade) var(--ease-hover),
+        border-color var(--dur-fade) var(--ease-hover),
+        box-shadow var(--dur-shadow) var(--ease-hover),
+        filter var(--dur-fade) var(--ease-hover) !important;
+    will-change: transform;
+}
+#audio-toggle:hover { transform: scale(1.06) translateZ(0); }
+
+/* Modal pop lands softer */
+.exp-modal.open .exp-modal-card {
+    transition:
+        transform .55s var(--ease-hover),
+        opacity .45s var(--ease-hover);
+}
+
+/* Marquee pause was instant — ease the handoff */
+.brands-track {
+    transition: filter var(--dur-fade) var(--ease-hover);
+}
+.brands-track:hover { filter: brightness(1.04); }
+/* Touch: no sticky hover hang */
+@media (hover: none) {
+    .btn-casa:hover,
+    .btn-coral:hover,
+    .nav-cta:hover,
+    .experience-card:hover,
+    .location-card:hover,
+    .location-link:hover,
+    .about-card:hover,
+    .whatsapp-float:hover { transform: none; }
+}
+
+/* Respect reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+    .btn-casa, .btn-coral, .nav-cta,
+    .experience-card, .location-card, .location-link,
+    .about-card, .whatsapp-float,
+    .experience-img img, .location-media img,
+    .brand-logo, .mobile-nav a, .events-arrows button,
+    .event-link, .location-contact,
+    .loc-mobile-btn, .loc-mobile-whatsapp,
+    .loc-inline-btn, .loc-inline-store,
+    .btn-outline-light, .lp-link,
+    .locations-map-fallback-link, .footer-link,
+    .exp-modal-close, .chatbot-store-cancel,
+    #chatbot-close, #chatbot-send,
+    .coming-soon-link, #audio-toggle,
+    .site-header, .nav-link::after, .event-link::after,
+    .location-link-arrow, .brands-track {
+        transition: none !important;
+        animation: none !important;
+        will-change: auto;
+    }
+}
