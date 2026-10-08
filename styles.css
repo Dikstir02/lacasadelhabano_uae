@@ -23,6 +23,7 @@
     /* --- Core brand colours (do not alter) --- */
     --brand-red: #98012d;
     --brand-gold: #a7996e;
+    --gold-outline: #d6b46c;
     --brand-black: #211e1f;   /* base — reserved for deep copy, not a surface   */
 
     /* --- Dark red → black gradient pair (requested) --- */
@@ -71,7 +72,7 @@ body {
     margin: 0;
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 16px;
-    color: var(--cream);
+    color: var(--gold-copy);
     background: linear-gradient(180deg, #98012d 0%, #5c011b 40%, #211e1f 100%);
     background-attachment: fixed;
     overflow-x: hidden;
@@ -117,6 +118,22 @@ select:focus-visible {
     margin: 0 auto;
     padding-left: 24px;
     padding-right: 24px;
+}
+
+/* Mobile: widen the base gutters so text/cards never kiss the edges */
+@media (max-width: 767px) {
+    .container {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+}
+
+/* Very small phones: keep the wider gutter, prevent overflow */
+@media (max-width: 380px) {
+    .container {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -279,6 +296,17 @@ select:focus-visible {
     padding: 20px 24px;
 }
 
+/* Mobile: match the wider container gutters */
+@media (max-width: 767px) {
+    .nav-container {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    .nav-logo {
+        max-width: calc(100vw - 170px);
+    }
+}
+
 @media (min-width: 1024px) {
     .nav-container {
         padding-left: 40px;
@@ -399,7 +427,7 @@ select:focus-visible {
     width: 40%;
     z-index: 50;
     background: var(--navy);
-    padding: 16px 14px;
+    padding: 20px 22px calc(20px + env(safe-area-inset-bottom));
     /* Parked fully off the RIGHT edge (+1px so the antialiased edge never
        bleeds a hairline onto the screen when closed) and slides in from the
        right side. 100% of its own width is exactly enough to clear the screen
@@ -541,7 +569,7 @@ select:focus-visible {
 }
 
 .hero-inner {
-    margin-top: 32px;
+    margin-top: 0;
     max-width: 56rem;
 }
 
@@ -554,20 +582,16 @@ select:focus-visible {
 }
 
 .hero-title {
-    margin-top: 20px;
-    max-width: 48rem;
+    margin-top: 0;
+    max-width: 16ch;
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 40px;
+    font-size: clamp(34px, 4.5vw, 62px);
     font-weight: 600;
-    line-height: 1;
+    line-height: 1.05;
+    letter-spacing: .01em;
+    text-wrap: balance;
     color: var(--cream);
     text-shadow: 2px 3px 0 rgba(46, 1, 9, .85), 0 14px 34px rgba(46, 1, 9, .45);
-}
-
-@media (min-width: 640px) {
-    .hero-title {
-        font-size: 32px;
-    }
 }
 
 .hero-description {
@@ -589,37 +613,6 @@ select:focus-visible {
     .hero-actions {
         flex-direction: row;
     }
-}
-
-.hero-scroll {
-    position: absolute;
-    bottom: 28px;
-    left: 24px;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: var(--cream);
-}
-
-@media (min-width: 1024px) {
-    .hero-scroll {
-        left: 40px;
-    }
-}
-
-.hero-scroll-line {
-    height: 1px;
-    width: 40px;
-    background: var(--sand);
-}
-
-.hero-scroll-text {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
 }
 
 /* ===== TILE RULE ===== */
@@ -651,8 +644,73 @@ select:focus-visible {
     background: var(--habano-gradient);         /* Nights at the Casa  */
 }
 
+.section-gold {
+    background: #d6b46c;   /* Nights at the Casa — flat logo gold */
+}
+
+.section-brands {
+    background: var(--habano-gradient);   /* The World of Habanos (black/red) */
+}
+
+/* --- Nights at the Casa on gold: deep-red ink keeps AA contrast
+   (cream copy would wash out on the gold ground). The event slide
+   cards stay deep red so they lift off the gold. --- */
+#events .eyebrow,
+#events .eyebrow-gold {
+    color: var(--brand-red-darkest);
+}
+
+#events .section-title,
+#events .section-title-cream {
+    color: var(--brand-red-darkest);
+}
+
+#about .section-title-cream {
+    color: #d6b46c;
+}
+
+#events .section-sub {
+    color: rgba(46, 1, 9, .82);
+}
+
+#events .events-arrows button {
+    border-color: var(--brand-red-darkest);
+    color: var(--brand-red-darkest);
+}
+
+#events .events-arrows button:hover {
+    background: rgba(46, 1, 9, .08);
+}
+
+#events .event-dot {
+    background: rgba(46, 1, 9, .35);
+}
+
+#events .event-dot.active {
+    background: var(--brand-red-darkest);
+}
+
+#events :focus-visible {
+    outline-color: var(--brand-red-darkest);
+}
+
 .section-leaf {
     background: var(--habano-gradient);         /* Find Your Casa      */
+}
+
+/* Locations now sits on the ivory paper-grain ground (same as Heritage) —
+   the header copy flips from cream to the light-section palette so it
+   stays legible on ivory. Cards/map keep their own dark surfaces. */
+#locations .eyebrow-gold {
+    color: var(--red);
+}
+
+#locations .section-title-cream {
+    color: var(--brand-red-darkest);
+}
+
+#locations .section-sub.cream {
+    color: var(--ink);
 }
 
 .section-navy {
@@ -732,11 +790,37 @@ select:focus-visible {
 }
 
 .experience-card {
+    position: relative;
     border: 1px solid rgba(254, 231, 198, .45);
+    border: 1px solid transparent; /* gradient ring painted by ::before */
     border-radius: var(--radius-md);
     overflow: hidden;
     contain: layout paint;
     transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+/* Gradient outline: #d6b46c → darker bronze of the same gold hue.
+   Masked 2px ring so it follows the card's border-radius. */
+.experience-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px; /* ring thickness */
+    background: linear-gradient(135deg, #d6b46c 0%, #9a7a35 100%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    /* Explicit z-index so the ring paints ABOVE the image: the <img> gets
+       will-change: transform (GPU lift group), making it a stacking context
+       that would otherwise cover the ::before, which has no z-index. */
+    z-index: 1;
+    pointer-events: none;
 }
 
 .experience-card:hover {
@@ -746,7 +830,7 @@ select:focus-visible {
 }
 
 .experience-img {
-    height: 160px;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
 }
 
@@ -754,6 +838,7 @@ select:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform .55s ease;
 }
 
@@ -762,7 +847,13 @@ select:focus-visible {
 }
 
 .experience-body {
-    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    padding: 20px 24px;
+    text-align: center;
 }
 
 .experience-number {
@@ -771,9 +862,12 @@ select:focus-visible {
 }
 
 .experience-title {
-    margin-top: 12px;
-    font-size: 24px;
+    margin-top: 0;
+    font-size: 20px;
     font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .04em;
+    text-align: center;
     color: var(--cream);
 }
 
@@ -781,7 +875,30 @@ select:focus-visible {
     margin-top: 12px;
     font-size: 14px;
     line-height: 24px;
+    text-align: center;
     color: var(--cream);
+}
+
+/* CTA line under the four cards — opens the WhatsApp chat popup */
+.experience-cta {
+    margin-top: 44px;
+    text-align: center;
+    font-size: 17px;
+    color: var(--cream);
+}
+
+.experience-cta-link {
+    color: #d6b46c;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(214, 180, 108, .5);
+    padding-bottom: 2px;
+    transition: color .3s ease, border-color .3s ease;
+}
+
+.experience-cta-link:hover {
+    color: var(--cream);
+    border-color: #d6b46c;
 }
 
 /* ===== EXPERIENCE DETAILS ===== */
@@ -948,6 +1065,18 @@ body.experience-modal-open { overflow: hidden; }
 
 .story-content p {
     margin-top: 12px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.story-content .story-reference {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(167, 153, 110, .35);
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(254, 231, 198, .6);
+    text-align: left;
 }
 
 @media (max-width: 639px) {
@@ -1081,7 +1210,7 @@ body.experience-modal-open { overflow: hidden; }
     font-size: 36px;
     font-weight: 600;
     line-height: 1;
-    color: var(--cream);
+    color: #d6b46c;
 }
 
 .event-copy {
@@ -1136,10 +1265,50 @@ body.experience-modal-open { overflow: hidden; }
     width: 35px;
     background: var(--cream);
 }
+#brands {
+    padding-left: 0;
+    padding-right: 0;
+    /* Tighter vertical rhythm than the base .section — the logo strip
+       should read as a compact band, not a full-height section */
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+@media (min-width: 1024px) {
+    #brands {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+#brands .brands-head {
+    text-align: center;
+}
+
+#brands .brands-head .section-copy {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Gold stat line under the section copy */
+#brands .brands-tagline {
+    margin-top: 14px;
+    color: #d6b46c;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+#brands .brands-marquee {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
 /* ===== BRANDS MARQUEE ===== */
 
 .brands-marquee {
-    margin-top: 48px;
+    margin-top: 36px;
     overflow: hidden;
 }
 
@@ -1193,16 +1362,16 @@ body.experience-modal-open { overflow: hidden; }
 .brands-set {
     display: flex;
     flex-shrink: 0;
-    padding-right: 24px;
+    padding-right: 8px;
     align-items: center;
 }
 
 .brand-logo {
-    height: 138px;
+    height: 176px;
     width: auto;
-    margin-right: 48px;
-    filter: brightness(0) invert(0);
+    margin-right: 24px;
     opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .35));
     transition: opacity .2s ease, transform .2s ease;
 }
 
@@ -1232,8 +1401,8 @@ body.experience-modal-open { overflow: hidden; }
         animation-duration: 35s;
     }
     .brand-logo {
-        height: 96px;
-        margin-right: 32px;
+        height: 130px;
+        margin-right: 16px;
     }
 }
 
@@ -1579,6 +1748,11 @@ button.loc-inline-btn {
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* No attribution line below/over the map — the credit lives in code */
+.locations-map .leaflet-control-attribution {
+    display: none !important;
+}
+
 .location-marker {
     background: transparent;
     border: none;
@@ -1814,7 +1988,7 @@ button.loc-inline-btn {
 .about-card:hover {
     transform: translateY(-7px);
     background: rgba(254, 231, 198, .1);
-    box-shadow: 0 24px 40px -18px rgba(46, 1, 9, .55);
+    box-shadow: 0 0 0 1px var(--gold-outline), 0 24px 40px -18px rgba(46, 1, 9, .55);
 }
 
 .about-number {
@@ -1891,16 +2065,17 @@ button.loc-inline-btn {
     }
 }
 
-/* Logo container - centered vertically and horizontally */
+/* Logo row - full width, centered */
 .footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(254, 231, 198, .2);
 }
 
 .footer-logo-image {
-    display: block;
-    height: 72px;
+    display: inline-block;
+    height: 80px;
     width: auto;
 }
 
@@ -1912,6 +2087,10 @@ button.loc-inline-btn {
     text-transform: uppercase;
 }
 
+.footer-nav-section {
+    padding-top: 16px;
+}
+
 .footer-nav {
     margin-top: 20px;
     display: flex;
@@ -1920,7 +2099,9 @@ button.loc-inline-btn {
 }
 
 .footer-link {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     color: var(--cream);
     text-decoration: none;
@@ -1935,14 +2116,24 @@ button.loc-inline-btn {
     margin: 0;
 }
 
-.footer-list {
-    margin-top: 20px;
-    font-size: 14px;
-    line-height: 28px;
-    color: var(--cream);
+/* Social links */
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Footer location deep-links — same rhythm as the nav column */
+.social-icon {
+    flex-shrink: 0;
+    opacity: 0.9;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.social-link:hover .social-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
 .footer-locations {
     margin-top: 20px;
     display: flex;
@@ -1998,18 +2189,18 @@ button.loc-inline-btn {
     justify-content: center;
     width: 56px;
     height: 56px;
-    border: 2px solid rgba(254, 231, 198, .85);
+    border: 2px solid #1ebe5b;
     border-radius: 50%;
-    background: var(--brand-red);
-    color: var(--cream);
-    box-shadow: 0 10px 15px -3px rgba(46, 1, 9, .45);
+    background: #25d366;
+    color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(37, 211, 102, .45);
     text-decoration: none;
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .whatsapp-float:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 20px -4px rgba(46, 1, 9, .5);
+    box-shadow: 0 14px 20px -4px rgba(37, 211, 102, .55);
 }
 
 /* ===== WHATSAPP CHATBOT ===== */
@@ -2057,7 +2248,8 @@ button.loc-inline-btn {
     height: 40px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: rgba(254, 231, 198, .15);
+    background: #25d366;
+    color: #fff;
 }
 
 .chatbot-header-info {
@@ -2301,16 +2493,6 @@ button.loc-inline-btn {
     .hero-actions {
         align-items: center;
         justify-content: center;
-    }
-
-    .hero-scroll-text {
-        display: none;
-    }
-
-    /* Centered scroll indicator */
-    .hero-scroll {
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     /* --- Section headers & copy (heritage, experience, brands, etc.) --- */
@@ -2814,5 +2996,107 @@ body.coming-soon-open .whatsapp-chatbot { display: none !important; }
         transition: none !important;
         animation: none !important;
         will-change: auto;
+    }
+}
+/* =========================================================
+   MOBILE SAFE-SIDE GUTTERS — nothing kisses the viewport edge
+   .container already gives 28px sides on mobile. This block
+   protects the elements that sit OUTSIDE .container (hero,
+   footer bar, chatbot, floats, marquees, overlays) + adds a
+   global last-resort guard for <380px phones and notched
+   devices (safe-area-inset).
+   ========================================================= */
+@media (max-width: 767px) {
+    /* Hero copy sits outside .container — mirror its gutter */
+    .hero-content {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    /* Long display words (LA CASA...) can overflow a 360px
+       viewport — allow graceful wrapping, never sideways scroll */
+    .hero-title,
+    .section-title {
+        overflow-wrap: break-word;
+        text-wrap: balance;
+    }
+    /* Buttons stretch full width on tiny screens — keep them
+       inside the gutter with room for their lift shadow */
+    .hero-actions .btn-casa,
+    .hero-actions .btn-outline-light {
+        max-width: 100%;
+    }
+    /* Brands marquee bleeds full width by design — inset only the
+       header copy so titles don't touch the glass */
+    #brands .container > .eyebrow,
+    #brands .container > .section-title,
+    #brands .container > .section-copy {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    /* Event slide is full-bleed; body copy keeps inner padding */
+    .event-content {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    /* Location mobile cards carry their own padding — widen it */
+    .location-body {
+        padding: 26px 24px 28px;
+    }
+    /* Footer bar sits outside .container — match the gutter */
+    .footer-bottom {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    /* Modals / chatbot / age gate float over everything — keep a
+       minimum air gap to the screen edge */
+    .exp-modal {
+        padding: 20px 16px;
+    }
+    .whatsapp-chatbot {
+        right: 16px;
+        left: 16px;
+        width: auto;
+    }
+    .coming-soon-inner {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+    /* Floating action buttons respect the notch + gutter */
+    .whatsapp-float {
+        right: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+    #audio-toggle {
+        left: 20px !important;
+        bottom: calc(20px + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+/* Very small phones (<380px): tighten gracefully, never clip */
+@media (max-width: 380px) {
+    .hero-content {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .event-content {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .location-body {
+        padding: 22px 20px 24px;
+    }
+    .footer-bottom {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+    .exp-modal {
+        padding: 16px 12px;
+    }
+    .exp-modal-body {
+        padding: 22px 20px;
+    }
+    .whatsapp-chatbot {
+        right: 12px;
+        left: 12px;
     }
 }
