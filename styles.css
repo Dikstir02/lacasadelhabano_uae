@@ -2130,7 +2130,6 @@ button.loc-inline-btn {
 
 .social-icon {
     flex-shrink: 0;
-    color: var(--cream);
     opacity: 0.9;
     transition: opacity .2s ease, transform .2s ease;
 }
