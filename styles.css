@@ -2065,10 +2065,11 @@ button.loc-inline-btn {
     }
 }
 
-/* Logo in first column */
+/* Logo in first column - centered vertically */
 .footer-brand {
-    padding-bottom: 24px;
-    border-bottom: 1px solid rgba(254, 231, 198, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-logo-image {
