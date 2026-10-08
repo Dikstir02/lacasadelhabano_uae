@@ -2049,7 +2049,7 @@ button.loc-inline-btn {
 
 .footer-grid {
     display: grid;
-    gap: 32px;
+    gap: 40px;
     padding-bottom: 48px;
 }
 
@@ -2070,7 +2070,6 @@ button.loc-inline-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: -8px;
 }
 
 .footer-logo-image {
@@ -2085,18 +2084,17 @@ button.loc-inline-btn {
     letter-spacing: .15em;
     color: var(--sand);
     text-transform: uppercase;
-    margin-bottom: 16px;
 }
 
 .footer-nav-section {
-    padding-top: 8px;
+    padding-top: 16px;
 }
 
 .footer-nav {
-    margin-top: 12px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     list-style: none;
     padding: 0;
 }
