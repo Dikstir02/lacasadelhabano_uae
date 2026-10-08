@@ -1891,25 +1891,17 @@ button.loc-inline-btn {
     }
 }
 
-.footer-logo {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    color: var(--cream);
+/* Logo container - centered vertically and horizontally */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-logo-image {
     display: block;
-    height: 40px;
+    height: 72px;
     width: auto;
-}
-
-.footer-statement {
-    margin-top: 20px;
-    max-width: 320px;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--sand);
 }
 
 .footer-heading {
