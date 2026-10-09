@@ -1127,7 +1127,10 @@ body.experience-modal-open { overflow: hidden; }
 .event-carousel {
     margin-top: 44px;
     overflow: hidden;
-    touch-action: none;
+    /* pan-y keeps vertical page scrolling native on mobile — the JS swipe
+       handlers below only react to horizontal gestures. `none` used to block
+       all touch scrolling whenever a finger landed on the carousel. */
+    touch-action: pan-y;
     user-select: none;
 }
 
@@ -2426,7 +2429,9 @@ button.loc-inline-btn {
     background: rgba(254, 231, 198, .08);
     color: var(--cream);
     font-family: inherit;
-    font-size: 14px;
+    /* Must stay >= 16px — anything smaller makes iOS/Android auto-zoom into
+       the field on focus (the widget auto-focuses it when it opens). */
+    font-size: 16px;
     line-height: 1.4;
     padding: 10px 14px;
     border-radius: 20px;

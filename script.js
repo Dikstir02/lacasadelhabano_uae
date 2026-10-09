@@ -424,6 +424,10 @@ carousel.addEventListener('touchend', (event) => {
     refreshAutoplay();
 });
 
+/* With `touch-action: pan-y` the browser can take over a vertical scroll
+   mid-gesture and cancel the touch — resume autoplay in that case too. */
+carousel.addEventListener('touchcancel', () => refreshAutoplay());
+
 window.addEventListener('resize', () => render(false));
 
 /* Re-render carousel after layout/images are ready (fixes 0-width on load) */
