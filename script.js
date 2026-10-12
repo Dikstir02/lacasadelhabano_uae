@@ -189,7 +189,17 @@ function applySiteSettings() {
         const el = document.getElementById(id);
         if (!el) return;
         if (href) el.href = href;
-        if (text) el.textContent = text;
+        if (text) {
+            /* When the link wraps a label around an icon (e.g. the footer
+               social links), swap only the label text so the SVG icon
+               survives — replacing textContent would wipe it out. */
+            const label = el.querySelector('span');
+            if (label && el.querySelector('svg')) {
+                label.textContent = text;
+            } else {
+                el.textContent = text;
+            }
+        }
         el.setAttribute('target', '_blank');
         el.setAttribute('rel', 'noopener noreferrer');
     };
