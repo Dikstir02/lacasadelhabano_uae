@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    LA CASA DEL HABANO UAE
    Reference-aligned interactions
    ========================================================= */
@@ -11,7 +11,7 @@ function setVH() {
 setVH();
 window.addEventListener('resize', setVH);
 
-/* ===== AGE GATE (21+) — YES / NO ===== */
+/* ===== AGE GATE (21+) - YES / NO ===== */
 /* Verification is kept in sessionStorage only, so it expires as soon as
    the visitor exits (closes the tab or browser) and every new visit
    must confirm again. */
@@ -54,7 +54,7 @@ function nudgeCard() {
 }
 
 function markAgeVerified() {
-    try { sessionStorage.setItem(AGE_KEY, '1'); } catch (storageError) { /* storage unavailable — still let them in */ }
+    try { sessionStorage.setItem(AGE_KEY, '1'); } catch (storageError) { /* storage unavailable - still let them in */ }
     if (ageError) ageError.textContent = '';
     closeAgeGate();
     document.dispatchEvent(new CustomEvent('lcdh:age-verified'));
@@ -65,7 +65,7 @@ if (ageGate && !ageGatePassed()) openAgeGate();
 if (ageYesBtn) ageYesBtn.addEventListener('click', markAgeVerified);
 
 if (ageNoBtn) ageNoBtn.addEventListener('click', () => {
-    if (ageError) ageError.textContent = 'Sorry — this site is for adults aged 21 and over only.';
+    if (ageError) ageError.textContent = 'Sorry - this site is for adults aged 21 and over only.';
     nudgeCard();
 });
 
@@ -91,7 +91,7 @@ const closeDrawer = () => {
 };
 
 /* The hamburger stays visible above the open drawer (the panel starts below
-   the header), so it doubles as the way out — tap to open, tap to close. */
+   the header), so it doubles as the way out - tap to open, tap to close. */
 openMenu.addEventListener('click', () => {
     if (menu.classList.contains('open')) closeDrawer();
     else openDrawer();
@@ -192,7 +192,7 @@ function applySiteSettings() {
         if (text) {
             /* When the link wraps a label around an icon (e.g. the footer
                social links), swap only the label text so the SVG icon
-               survives — replacing textContent would wipe it out. */
+               survives - replacing textContent would wipe it out. */
             const label = el.querySelector('span');
             if (label && el.querySelector('svg')) {
                 label.textContent = text;
@@ -213,7 +213,7 @@ function applySiteSettings() {
         setLink('footer-instagram', c.instagram, 'Follow us on Instagram  ');
     }
     if (c.email) {
-        setLink('contact-email', 'mailto:' + c.email, 'EMAIL — ' + String(c.email).toUpperCase());
+        setLink('contact-email', 'mailto:' + c.email, 'EMAIL - ' + String(c.email).toUpperCase());
     }
     const widget = document.getElementById('whatsapp-widget');
     if (widget && c.whatsapp) widget.href = 'https://wa.me/' + c.whatsapp;
@@ -222,7 +222,7 @@ function applySiteSettings() {
        no-JS fallback (wa.me) in sync with the configured main number. */
     if (c.whatsapp) setLink('event-enquire-chat', 'https://wa.me/' + c.whatsapp);
 
-    /* Footer locations list — clickable deep-links into #locations.
+    /* Footer locations list - clickable deep-links into #locations.
        Each link carries its Casa label so the footer handler below can
        select the matching map pin (desktop) or card (mobile). */
     const footerLocs = document.getElementById('footer-locations');
@@ -242,7 +242,7 @@ function applySiteSettings() {
             locs.map((l) => '<option value="' + escapeHtml(l.label) + '">' + escapeHtml(l.label) + '</option>').join('');
     }
 
-    /* Desktop clickable list — plain selector only; Contact Store + Maps
+    /* Desktop clickable list - plain selector only; Contact Store + Maps
        live inside the map pin popup details */
     const linksWrap = document.getElementById('location-links');
     if (linksWrap && locs.length) {
@@ -260,16 +260,16 @@ function applySiteSettings() {
         ).join('');
     }
 
-                /* Mobile location cards — on mobile the locations-grid renders a
+                /* Mobile location cards - on mobile the locations-grid renders a
        compact, info-only card (no image), mirroring the desktop
        location-link row style. Each card carries its own tappable
        Contact Store (WhatsApp) + View in Google Maps buttons,
        giving mobile users the same quick actions that desktop users
        reach via the map-pin popups. */
     const waNumbers = {
-        'City Walk — Dubai': '971558001577',
-        'JBR — Dubai': '971558002731',
-        'Abu Dhabi Mall — Abu Dhabi': '971507093183'
+        'City Walk - Dubai': '971558001577',
+        'JBR - Dubai': '971558002731',
+        'Abu Dhabi Mall - Abu Dhabi': '971507093183'
     };
     const gridWrap = document.getElementById('locations-grid');
     if (gridWrap && locs.length) {
@@ -435,7 +435,7 @@ carousel.addEventListener('touchend', (event) => {
 });
 
 /* With `touch-action: pan-y` the browser can take over a vertical scroll
-   mid-gesture and cancel the touch — resume autoplay in that case too. */
+   mid-gesture and cancel the touch - resume autoplay in that case too. */
 carousel.addEventListener('touchcancel', () => refreshAutoplay());
 
 window.addEventListener('resize', () => render(false));
@@ -448,7 +448,7 @@ updateDots();
 render(false);
 
 /* Gate autoplay on visibility: no sliding until the carousel scrolls
-   into view, then every 3s — and pause again when it scrolls away. */
+   into view, then every 3s - and pause again when it scrolls away. */
 if ('IntersectionObserver' in window && carousel) {
     new IntersectionObserver((entries) => {
         carouselVisible = entries.some((entry) => entry.isIntersecting);
@@ -462,7 +462,7 @@ if ('IntersectionObserver' in window && carousel) {
 /* Pause when the tab is hidden so slides don't queue up in the background. */
 document.addEventListener('visibilitychange', refreshAutoplay);
 
-/* ===== BRANDS MARQUEE — swipe / drag + gentle auto-drift ===== */
+/* ===== BRANDS MARQUEE - swipe / drag + gentle auto-drift ===== */
 /* The strip is a CSS keyframe loop by default (no-JS fallback). When JS
    runs, it becomes a native horizontal scroller: touch-swipe on mobile,
    click-drag on desktop, arrow keys when focused, plus a slow auto-drift
@@ -476,7 +476,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
     if (sets.length < 2) return;
 
     /* A third copy gives seamless room in both directions; the middle
-       copy is home. Images are decorative repeats — hide the clone. */
+       copy is home. Images are decorative repeats - hide the clone. */
     const clone = sets[0].cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     trackEl.appendChild(clone);
@@ -552,7 +552,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
         startX = e.clientX;
         startScroll = marquee.scrollLeft;
         marquee.classList.add('dragging');
-        try { marquee.setPointerCapture(e.pointerId); } catch (captureError) { /* older browsers — drag still works */ }
+        try { marquee.setPointerCapture(e.pointerId); } catch (captureError) { /* older browsers - drag still works */ }
     });
     marquee.addEventListener('pointermove', (e) => {
         if (!dragging) return;
@@ -625,7 +625,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
     /* The inline map is desktop-only: below 1024px the CSS hides
        .locations-layout and the cards link straight to Google Maps.
        Leaflet cannot measure a hidden container, so the map is mounted
-       only while the desktop layout is active — and mounted later if the
+       only while the desktop layout is active - and mounted later if the
        viewport grows back. */
     const desktopQuery = window.matchMedia('(min-width: 1024px)');
     let map = null;
@@ -734,7 +734,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
         /* Desktop: the row click does everything (map fly + form select). */
         const row = links.filter(function (link) { return link.dataset.location === label; })[0];
         if (row) row.click();
-        /* Mobile: no map rows exist — scroll to the card and flash it. */
+        /* Mobile: no map rows exist - scroll to the card and flash it. */
         const card = document.querySelector('.location-card[data-location="' + label.replace(/"/g, '') + '"]');
         if (card) {
             setTimeout(function () {
@@ -754,23 +754,23 @@ document.addEventListener('visibilitychange', refreshAutoplay);
     const modalCard = modal.querySelector('.exp-modal-card');
     const details = {
         'torcedor-events': [
-            ['Craft, live before your eyes', 'A master torcedor rolling at your event is pure theatre — watching hands that have shaped thousands of cigars coax a wrapper leaf into a flawless cylinder, then tasting one rolled minutes earlier. Guests remember it long after the evening ends.'],
-            ['Shaped around your occasion', 'Corporate receptions, weddings, private milestones — we tailor the format to the night: live rolling stations, guided tastings, pairing sessions with rum or coffee, and short masterclasses in cutting, lighting and savouring.'],
-            ['Request your event', 'Tell us the date, venue and headcount via the contact form or WhatsApp and we will design the evening with you — availability is limited, so early booking is recommended.']
+            ['Craft, live before your eyes', 'A master torcedor rolling at your event is pure theatre - watching hands that have shaped thousands of cigars coax a wrapper leaf into a flawless cylinder, then tasting one rolled minutes earlier. Guests remember it long after the evening ends.'],
+            ['Shaped around your occasion', 'Corporate receptions, weddings, private milestones - we tailor the format to the night: live rolling stations, guided tastings, pairing sessions with rum or coffee, and short masterclasses in cutting, lighting and savouring.'],
+            ['Request your event', 'Tell us the date, venue and headcount via the contact form or WhatsApp and we will design the evening with you - availability is limited, so early booking is recommended.']
         ],
         'casa-lounge': [
-            ['Your armchair is waiting', 'Step out of the Dubai heat into cedar-scented calm: deep leather chairs, low lamplight, the quiet ceremony of the cut and light. Every Casa is a small Havana — unhurried, welcoming, and made for lingering.'],
-            ['Hospitality, the Cuban way', 'Our hosts know every cigar in the humidor and every rum on the shelf. New to Habanos or a lifelong aficionado, you will be guided — never rushed — to the vitola that suits your evening.'],
-            ['Before you settle in', 'Check your chosen location for opening hours, lounge seating and reservation details — facilities differ between City Walk, JBR and Abu Dhabi Mall, so a quick message ahead guarantees your spot.']
+            ['Your armchair is waiting', 'Step out of the Dubai heat into cedar-scented calm: deep leather chairs, low lamplight, the quiet ceremony of the cut and light. Every Casa is a small Havana - unhurried, welcoming, and made for lingering.'],
+            ['Hospitality, the Cuban way', 'Our hosts know every cigar in the humidor and every rum on the shelf. New to Habanos or a lifelong aficionado, you will be guided - never rushed - to the vitola that suits your evening.'],
+            ['Before you settle in', 'Check your chosen location for opening hours, lounge seating and reservation details - facilities differ between City Walk, JBR and Abu Dhabi Mall, so a quick message ahead guarantees your spot.']
         ],
         'premium-cigars': [
-            ['Cuba’s great houses, under one roof', 'Cohiba, Montecristo, Partagás, Romeo y Julieta, Hoyo de Monterrey and more — every box sourced through official Habanos channels and rested in our walk-in humidors at perfect maturity.'],
-            ['From first cigar to connoisseur', 'Mild and honeyed for a first exploration, full-bodied and complex for the seasoned palate — our team will match strength, format and smoking time to your taste and your evening.'],
+            ['Cuba’s great houses, under one roof', 'Cohiba, Montecristo, Partagás, Romeo y Julieta, Hoyo de Monterrey and more - every box sourced through official Habanos channels and rested in our walk-in humidors at perfect maturity.'],
+            ['From first cigar to connoisseur', 'Mild and honeyed for a first exploration, full-bodied and complex for the seasoned palate - our team will match strength, format and smoking time to your taste and your evening.'],
             ['Ask before you visit', 'Rare formats and aged boxes move quickly. Message your Casa about the current selection or a specific cigar before visiting so we can have it ready for you.']
         ],
         'cigar-accessories': [
-            ['Everything the ritual deserves', 'Precision double-blade cutters, torch and soft-flame lighters, cedar spills, travel cases and desktop humidors — a curated range chosen to cut clean, light true and keep every cigar at its best.'],
-            ['For home, travel and gifting', 'From pocket essentials to cabinet humidors and presentation gift sets, we will help you choose pieces that suit your routine — and wrap them beautifully when they are destined for someone else.'],
+            ['Everything the ritual deserves', 'Precision double-blade cutters, torch and soft-flame lighters, cedar spills, travel cases and desktop humidors - a curated range chosen to cut clean, light true and keep every cigar at its best.'],
+            ['For home, travel and gifting', 'From pocket essentials to cabinet humidors and presentation gift sets, we will help you choose pieces that suit your routine - and wrap them beautifully when they are destined for someone else.'],
             ['Chosen with expert hands', 'Unsure which cutter suits a figurado, or which humidor suits the UAE climate? Ask in store or on WhatsApp and we will point you to the right tool for the job.']
         ]
         };
@@ -970,7 +970,7 @@ if (form && statusEl && submitButton) {
            forward it (e.g. WhatsApp / a backend / an API route). */
         setTimeout(() => {
             submitButton.disabled = false;
-            statusEl.textContent = 'Gracias — your enquiry has been received.';
+            statusEl.textContent = 'Gracias - your enquiry has been received.';
             form.reset();
         }, 600);
 
@@ -991,7 +991,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ===== FOOTER LOCATION DEEP-LINKS ===== */
 /* After the smooth-scroll above glides to #locations, select the matching
-   Casa — desktop flies the map to its pin, mobile flashes its card. */
+   Casa - desktop flies the map to its pin, mobile flashes its card. */
 document.querySelectorAll('.footer-location-link[data-location]').forEach(link => {
     link.addEventListener('click', () => {
         if (typeof window.LCDH_showCasa === 'function') {
@@ -1049,7 +1049,7 @@ document.addEventListener('click', (e) => {
     const footerChatLink = document.getElementById('footer-whatsapp');
     if (chatWidget && chatWidget.contains(e.target)) return;
     if (footerChatLink && footerChatLink.contains(e.target)) return;
-    /* Anything carrying [data-open-chat] opens the popup — never treat it as
+    /* Anything carrying [data-open-chat] opens the popup - never treat it as
        an outside click (it would otherwise close the panel we just opened). */
     if (e.target && e.target.closest && e.target.closest('[data-open-chat="true"]')) return;
     if (!chatPanel.contains(e.target)) {
@@ -1058,7 +1058,7 @@ document.addEventListener('click', (e) => {
 });
 
 /* Any element carrying [data-open-chat] opens the in-page chat popup on the
-   default (main) number — used by the footer "Chat on WhatsApp" link and the
+   default (main) number - used by the footer "Chat on WhatsApp" link and the
    Events section's "ENQUIRE ABOUT EVENTS" CTA. Registered after the
    outside-click handler above so the popup stays open. */
 document.addEventListener('click', (e) => {
@@ -1108,7 +1108,7 @@ let chatTarget = null;
 /* Rendered straight under the chat header whenever the popup was opened from
    a Casa's "Contact Store" button (map popup or mobile card). The Cancel
    button drops chatTarget, so the next message falls back to the default
-   (main) WhatsApp receiver — the same one the floating widget uses. */
+   (main) WhatsApp receiver - the same one the floating widget uses. */
 const chatStoreBar = document.getElementById('chatbot-store-bar');
 const chatStoreName = document.getElementById('chatbot-store-name');
 const chatStoreCancel = document.getElementById('chatbot-store-cancel');
@@ -1139,7 +1139,7 @@ document.addEventListener('click', (e) => {
     setChatOpen(true);
     refreshChatTargetBar();
     if (chatTarget.store) {
-        setTimeout(() => addChatMessage('Chatting with ' + chatTarget.store + ' — type your message below and we\'ll continue on WhatsApp. 🏠', 'bot'), 300);
+        setTimeout(() => addChatMessage('Chatting with ' + chatTarget.store + ' - type your message below and we\'ll continue on WhatsApp. 🏠', 'bot'), 300);
     }
 });
 
@@ -1153,7 +1153,7 @@ if (chatStoreCancel) {
     chatStoreCancel.addEventListener('click', () => {
         if (!chatTarget || !chatTarget.store) return;
         resetChatTarget();
-        addChatMessage('Cancelled — your message now goes to the main La Casa del Habano UAE team again. 💬', 'bot');
+        addChatMessage('Cancelled - your message now goes to the main La Casa del Habano UAE team again. 💬', 'bot');
         if (chatInput) chatInput.focus();
     });
 }
@@ -1257,4 +1257,27 @@ if (chatForm && chatInput) {
     syncDevSignature();
     window.addEventListener('hashchange', syncDevSignature);
     window.addEventListener('popstate', syncDevSignature);
+})();
+
+/* ===== DISABLE RIGHT-CLICK MENU =====
+   Discourages casual image/content saving on the public site. Right-click
+   stays available inside text fields so paste-menu usability is kept. */
+document.addEventListener('contextmenu', (event) => {
+    const tag = event.target && event.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    event.preventDefault();
+});
+
+/* ===== SITE VISIT COUNTER =====
+   Each page load bumps a counter kept by the free Abacus API (the
+   CountAPI successor - keyless, CORS-enabled, no backend needed).
+   Purely best-effort: any failure is swallowed so the public site
+   never depends on it. The admin panel reads the same counter
+   through the read-only /get endpoint. */
+(function trackVisit() {
+    try {
+        fetch('https://abacus.jasoncameron.dev/hit/lcdh-uae-visits-lcdh02/home', { cache: 'no-store' })
+            .catch(function () { /* offline or API down - ignore */ });
+    } catch (error) { /* ignore */
+    }
 })();

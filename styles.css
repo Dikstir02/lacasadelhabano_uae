@@ -29,8 +29,8 @@
     /* --- Dark red → black gradient pair (requested) --- */
     --habano-crimson: #98012d;
     --habano-black: #211e1f;
-    --habano-gradient: linear-gradient(135deg, #98012d 0%, #5c011b 42%, #211e1f 100%);
-    --habano-gradient-soft: linear-gradient(160deg, rgba(152, 1, 45, .28), rgba(33, 30, 31, .92));
+    --habano-gradient: linear-gradient(135deg, #98012d 0%, #2a0207 55%, #000000 100%);
+    --habano-gradient-soft: linear-gradient(160deg, rgba(152, 1, 45, .28), rgba(42, 2, 7, .92));
 
     /* --- Habano Red shades: DOMINANT. Every large surface mixes #98012D --- */
     --brand-red-deep: #6b0120;    /* 30% shade — panels, cards, warm bands  */
@@ -73,10 +73,17 @@ body {
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 16px;
     color: var(--gold-copy);
-    background: linear-gradient(180deg, #98012d 0%, #5c011b 40%, #211e1f 100%);
+    background: linear-gradient(180deg, #98012d 0%, #2a0207 55%, #000000 100%);
     background-attachment: fixed;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Paragraphs are justified by default; later rules may override
+   (centered cards, mobile layout, etc.). */
+p {
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 img {
@@ -645,72 +652,36 @@ select:focus-visible {
 }
 
 .section-gold {
-    background: #d6b46c;   /* Nights at the Casa — flat logo gold */
+    background: #000000;   /* Nights at the Casa — full black */
 }
 
 .section-brands {
     background: var(--habano-gradient);   /* The World of Habanos (black/red) */
 }
 
-/* --- Nights at the Casa on gold: deep-red ink keeps AA contrast
-   (cream copy would wash out on the gold ground). The event slide
-   cards stay deep red so they lift off the gold. --- */
-#events .eyebrow,
-#events .eyebrow-gold {
-    color: var(--brand-red-darkest);
-}
-
-#events .section-title,
-#events .section-title-cream {
-    color: var(--brand-red-darkest);
-}
-
+/* Events now sits on full black — the base dark-section palette applies
+   (gold eyebrow, cream titles/copy, cream arrows, gold/cream dots). */
 #about .section-title-cream {
     color: #d6b46c;
 }
 
-#events .section-sub {
-    color: rgba(46, 1, 9, .82);
+#experience .section-title-cream {
+    color: #d6b46c;
 }
 
-#events .events-arrows button {
-    border-color: var(--brand-red-darkest);
-    color: var(--brand-red-darkest);
-}
-
-#events .events-arrows button:hover {
-    background: rgba(46, 1, 9, .08);
-}
-
-#events .event-dot {
-    background: rgba(46, 1, 9, .35);
-}
-
-#events .event-dot.active {
-    background: var(--brand-red-darkest);
-}
-
-#events :focus-visible {
-    outline-color: var(--brand-red-darkest);
+#events .section-title-cream {
+    color: #d6b46c;
 }
 
 .section-leaf {
     background: var(--habano-gradient);         /* Find Your Casa      */
 }
 
-/* Locations now sits on the ivory paper-grain ground (same as Heritage) —
-   the header copy flips from cream to the light-section palette so it
-   stays legible on ivory. Cards/map keep their own dark surfaces. */
-#locations .eyebrow-gold {
-    color: var(--red);
-}
-
-#locations .section-title-cream {
-    color: var(--brand-red-darkest);
-}
-
-#locations .section-sub.cream {
-    color: var(--ink);
+/* Locations sits on the red→black brand gradient (footer combination) —
+   header copy uses the standard dark-section palette; cards/map keep
+   their own dark surfaces. */
+#locations {
+    background: linear-gradient(180deg, #98012d 0%, #2a0207 55%, #000000 100%);
 }
 
 .section-navy {
@@ -868,7 +839,7 @@ select:focus-visible {
     line-height: 1.4;
     letter-spacing: .04em;
     text-align: center;
-    color: var(--cream);
+    color: #d6b46c;
 }
 
 .experience-copy {
@@ -1293,6 +1264,21 @@ body.experience-modal-open { overflow: hidden; }
     margin-right: auto;
 }
 
+/* Big simplified sans-serif statement headline — single line, nearly full width */
+.brands-headline {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 3.4vw, 46px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .brands-headline {
+        white-space: nowrap;
+    }
+}
+
 /* Gold stat line under the section copy */
 #brands .brands-tagline {
     margin-top: 14px;
@@ -1540,12 +1526,12 @@ body.experience-modal-open { overflow: hidden; }
 }
 
 .loc-mobile-whatsapp {
-    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    background: linear-gradient(135deg, #98012d 0%, #2a0207 55%, #000000 100%);
     border-color: rgba(254, 231, 198, .5);
 }
 
 .loc-mobile-whatsapp:hover {
-    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    background: linear-gradient(135deg, #98012d 0%, #2a0207 55%, #000000 100%);
     border-color: rgba(254, 231, 198, .7);
 }
 
@@ -1602,12 +1588,12 @@ button.loc-inline-btn {
 }
 
 .loc-inline-store {
-    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    background: linear-gradient(135deg, #98012d 0%, #2a0207 55%, #000000 100%);
     border-color: rgba(254, 231, 198, .5);
 }
 
 .loc-inline-store:hover {
-    background: linear-gradient(135deg, #98012d 0%, #000000 130%);
+    background: linear-gradient(135deg, #98012d 0%, #2a0207 55%, #000000 100%);
     filter: brightness(1.15);
 }
 
@@ -1662,7 +1648,7 @@ button.loc-inline-btn {
 }
 
 .location-link.active {
-    background: linear-gradient(135deg, rgba(152, 1, 45, .85), rgba(0, 0, 0, .9));
+    background: linear-gradient(135deg, rgba(152, 1, 45, .85) 0%, rgba(42, 2, 7, .88) 55%, rgba(0, 0, 0, .92) 100%);
     border-color: var(--sand);
     box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(0, 0, 0, .6);
 }
@@ -1695,6 +1681,7 @@ button.loc-inline-btn {
 
 .location-title {
     margin-top: 8px;
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 30px;
     font-weight: 600;
     color: var(--cream);
@@ -1810,7 +1797,7 @@ button.loc-inline-btn {
 
 .lp-title {
     margin-top: 6px;
-    font-family: "Playfair Display", Georgia, serif;
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 22px;
     font-weight: 600;
     color: var(--cream);
@@ -2517,6 +2504,11 @@ button.loc-inline-btn {
         text-align: center;
     }
 
+    .event-copy,
+    .location-copy {
+        text-align: center;
+    }
+
     /* --- Experience cards --- */
     .experience-body {
         text-align: center;
@@ -2601,7 +2593,7 @@ button.loc-inline-btn {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: linear-gradient(140deg, #98012d 0%, #4d0113 48%, #000000 100%);
+    background: linear-gradient(140deg, #98012d 0%, #2a0207 55%, #000000 100%);
 }
 
 .age-gate.visible { display: flex; }
@@ -2615,11 +2607,16 @@ body.age-gate-open > *:not(#age-gate):not(#coming-soon) { visibility: hidden; }
 .age-gate-card {
     width: 100%;
     max-width: 440px;
-    background: linear-gradient(160deg, #5c011b 0%, #211e1f 100%);
+    background: linear-gradient(160deg, #2a0207 0%, #000000 100%);
     border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-lg);
     box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
     padding: 42px 36px;
+    text-align: center;
+}
+
+/* Keep the card's copy centered — the global p rule would justify it */
+.age-gate-card p {
     text-align: center;
 }
 
@@ -2734,7 +2731,7 @@ body.coming-soon-open .whatsapp-chatbot { display: none !important; }
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: linear-gradient(140deg, #4d0113 0%, #2e0109 55%, #000000 100%);
+    background: linear-gradient(140deg, #98012d 0%, #2a0207 55%, #000000 100%);
     opacity: 0;
     animation: coming-soon-fade .6s ease forwards;
 }
@@ -2749,11 +2746,16 @@ body.coming-soon-open .whatsapp-chatbot { display: none !important; }
     width: 100%;
     max-width: 560px;
     text-align: center;
-    background: linear-gradient(160deg, rgba(92, 1, 27, .92) 0%, rgba(33, 30, 31, .96) 100%);
+    background: linear-gradient(160deg, rgba(42, 2, 7, .92) 0%, rgba(0, 0, 0, .96) 100%);
     border: 1px solid rgba(167, 153, 110, .55);
     border-radius: var(--radius-lg);
     box-shadow: 0 40px 90px rgba(0, 0, 0, .6);
     padding: 52px 44px;
+}
+
+/* Keep the card's copy centered — the global p rule would justify it */
+.coming-soon-card p {
+    text-align: center;
 }
 
 .coming-soon-logo {

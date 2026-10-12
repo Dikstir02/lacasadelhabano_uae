@@ -1,5 +1,5 @@
 /* =========================================================
-   LA CASA DEL HABANO UAE — Events Admin logic
+   LA CASA DEL HABANO UAE - Events Admin logic
    Edits are exported as js/events-data.js for the live site.
    ========================================================= */
 
@@ -94,7 +94,7 @@ function currentEvents() {
     return stored && stored.length > 0 ? stored : DEFAULT_EVENTS.slice();
 }
 
-/* The exact file body that ships to the repo — shared by the manual Copy
+/* The exact file body that ships to the repo - shared by the manual Copy
    button and the automatic GitHub publish below, so they can never drift. */
 function buildEventsFile(events) {
     return 'window.LCDH_EVENTS = ' + JSON.stringify(events, null, 2) + ';\n';
@@ -108,6 +108,29 @@ function showStatus(message) {
     clearTimeout(statusTimer);
     statusTimer = setTimeout(() => toast.classList.remove('show'), 2600);
 }
+
+/* ===== site visits (Abacus counter - read-only) ===== */
+/* The public site bumps this counter on every page load via the free
+   Abacus API (CountAPI successor - keyless, CORS-enabled). Here we only
+   READ it with the /get endpoint, so opening the admin panel never
+   inflates the number. */
+const VISITS_API = 'https://abacus.jasoncameron.dev/get/lcdh-uae-visits-lcdh02/home';
+
+async function loadVisitsCount() {
+    const chip = $('#visits-count');
+    if (!chip) return;
+    chip.textContent = 'Visits: …';
+    try {
+        const resp = await fetch(VISITS_API, { cache: 'no-store' });
+        /* 404 = counter not created yet (no visits have been counted) */
+        const value = resp.ok ? (await resp.json()).value : 0;
+        chip.textContent = 'Visits: ' + Number(value || 0).toLocaleString('en-US');
+    } catch (error) {
+        chip.textContent = 'Visits: unavailable';
+    }
+}
+
+$('#visits-count').addEventListener('click', loadVisitsCount);
 
 /* ===== login ===== */
 
@@ -124,7 +147,7 @@ $('#login-form').addEventListener('submit', async (formEvent) => {
             passwordInput.select();
         }
     } catch (error) {
-        $('#login-error').textContent = 'Crypto unavailable — open this page via http(s) or a modern browser.';
+        $('#login-error').textContent = 'Crypto unavailable - open this page via http(s) or a modern browser.';
     }
     passwordInput.value = '';
 });
@@ -141,6 +164,7 @@ async function openAdmin() {
     fileSettings = await loadFileSettings();
     renderList();
     renderSettingsForm();
+    loadVisitsCount();
 }
 
 /* ===== form ===== */
@@ -278,7 +302,7 @@ $('#export-btn').addEventListener('click', async () => {
         showStatus('Copied to clipboard ✓');
     } catch (error) {
         console.error('Copy failed:', error);
-        showStatus('Copy failed — please copy manually', true);
+        showStatus('Copy failed - please copy manually', true);
     }
 });
 
@@ -378,7 +402,7 @@ if (sessionStorage.getItem(SESSION_KEY) === '1') {
 }
 
 /* =========================================================
-   SITE SETTINGS MODULE — basic information for the live site
+   SITE SETTINGS MODULE - basic information for the live site
    Same workflow as events: save locally → copy site-settings.js
    ========================================================= */
 
@@ -386,12 +410,12 @@ const SETTINGS_KEY = 'lcdh_settings_v1';
 
 const DEFAULT_SETTINGS = {
     /* Full-screen "Coming Soon" page (rendered by index.html). The live
-       site follows the exported js/site-settings.js — OFF here is only the
+       site follows the exported js/site-settings.js - OFF here is only the
        safe fallback used when that file cannot be read. */
     comingSoon: {
         enabled: false,
         headline: 'COMING SOON',
-        message: 'We\'re putting the finishing touches on our new website. La Casa del Habano UAE will be online soon — in the meantime, reach us on WhatsApp or Instagram.'
+        message: 'We\'re putting the finishing touches on our new website. La Casa del Habano UAE will be online soon - in the meantime, reach us on WhatsApp or Instagram.'
     },
     contact: {
         email: 'info@lacasadelhabano.ae',
@@ -401,15 +425,15 @@ const DEFAULT_SETTINGS = {
     },
     audio: {
         url: 'https://cdn.pixabay.com/download/audio/2026/02/24/audio_c6c3c46f82.mp3?filename=silesfelipe-siles-calendar-august-1-490186.mp3',
-        /* ON by default — the live site plays background music. */
+        /* ON by default - the live site plays background music. */
         enabled: true
     },
     locations: [
         {
-            label: 'City Walk — Dubai',
+            label: 'City Walk - Dubai',
             name: 'City Walk',
-            city: 'DUBAI',
-            title: 'CITY WALK',
+            city: 'LCDH - DUBAI',
+            title: 'City Walk',
             copy: 'A colourful, contemporary Casa in the heart of City Walk.',
             address: 'City Walk, Dubai, United Arab Emirates',
             hours: 'Please contact the Casa for current opening hours.',
@@ -420,10 +444,10 @@ const DEFAULT_SETTINGS = {
             image: 'https://images.pexels.com/photos/7662956/pexels-photo-7662956.jpeg'
         },
         {
-            label: 'JBR — Dubai',
-            name: 'JBR',
-            city: 'DUBAI',
-            title: 'JBR',
+            label: 'JBR - Dubai',
+            name: 'Jumeirah Beach Residences',
+            city: 'LCDH - DUBAI',
+            title: 'Jumeirah Beach Residences',
             copy: 'A relaxed cigar destination close to the vibrant JBR waterfront.',
             address: 'The Walk, Jumeirah Beach Residence, Dubai',
             hours: 'Please contact the Casa for current opening hours.',
@@ -434,10 +458,10 @@ const DEFAULT_SETTINGS = {
             image: 'https://images.pexels.com/photos/37268883/pexels-photo-37268883.jpeg'
         },
         {
-            label: 'Abu Dhabi Mall — Abu Dhabi',
+            label: 'Abu Dhabi Mall - Abu Dhabi',
             name: 'Abu Dhabi Mall',
-            city: 'ABU DHABI',
-            title: 'ABU DHABI MALL',
+            city: 'LCDH - ABU DHABI',
+            title: 'Abu Dhabi Mall',
             copy: 'A refined Casa for discovering Cuban tradition in the capital.',
             address: 'Abu Dhabi Mall, Abu Dhabi, United Arab Emirates',
             hours: 'Please contact the Casa for current opening hours.',
@@ -530,13 +554,13 @@ function settingsFormHtml(settings) {
     html += '<div class="field-grid">';
     const csOn = cs.enabled === true;
     html += '<div>' + label('Status') + '<select id="s-coming-enabled">'
-        + '<option value="on"' + (csOn ? ' selected' : '') + '>ON — show the Coming Soon page</option>'
-        + '<option value="off"' + (!csOn ? ' selected' : '') + '>OFF — show the full website</option>'
+        + '<option value="on"' + (csOn ? ' selected' : '') + '>ON - show the Coming Soon page</option>'
+        + '<option value="off"' + (!csOn ? ' selected' : '') + '>OFF - show the full website</option>'
         + '</select></div>';
     html += '<div>' + label('Headline') + textIn('s-coming-headline', cs.headline, 'COMING SOON') + '</div>';
     html += '<div class="field-span-2">' + label('Message shown under the headline') + textArea('s-coming-message', cs.message, 3) + '</div>';
     html += '</div>';
-    html += '<p class="settings-hint" style="margin-top:8px">While ON, visitors only see this page (contact links stay live). Save to preview it here — with GitHub Sync connected the file is committed automatically, otherwise use Copy site-settings.js.</p>';
+    html += '<p class="settings-hint" style="margin-top:8px">While ON, visitors only see this page (contact links stay live). Save to preview it here - with GitHub Sync connected the file is committed automatically, otherwise use Copy site-settings.js.</p>';
     html += '</div>';
 
     html += '<div class="settings-block">';
@@ -553,10 +577,10 @@ function settingsFormHtml(settings) {
     html += '<div class="field-grid">';
     const audioOn = !(a && a.enabled === false);
     html += '<div>' + label('Status') + '<select id="s-audio-enabled">'
-        + '<option value="on"' + (audioOn ? ' selected' : '') + '>ON — play background music</option>'
-        + '<option value="off"' + (!audioOn ? ' selected' : '') + '>OFF — disable background music</option>'
+        + '<option value="on"' + (audioOn ? ' selected' : '') + '>ON - play background music</option>'
+        + '<option value="off"' + (!audioOn ? ' selected' : '') + '>OFF - disable background music</option>'
         + '</select></div>';
-    html += '<div class="field-span-2">' + label('Music file URL — the live site plays exactly this track') + urlIn('s-audio-url', a.url, 'https://…/audio.mp3') + '</div>';
+    html += '<div class="field-span-2">' + label('Music file URL - the live site plays exactly this track') + urlIn('s-audio-url', a.url, 'https://…/audio.mp3') + '</div>';
     html += '</div>';
     if (a.url) {
         html += '<div class="audio-preview-row"><span class="field-label">Preview</span><audio controls preload="metadata" src="' + escapeHtml(a.url) + '" style="width:100%"></audio></div>';
@@ -565,7 +589,7 @@ function settingsFormHtml(settings) {
 
     locs.forEach((loc, i) => {
         html += '<div class="settings-block">';
-        html += '<h3 class="settings-block-title">Location ' + (i + 1) + (loc.title ? ' — ' + escapeHtml(loc.title) : '') + '</h3>';
+        html += '<h3 class="settings-block-title">Location ' + (i + 1) + (loc.title ? ' - ' + escapeHtml(loc.title) : '') + '</h3>';
         html += '<div class="field-grid">';
         html += '<div>' + label('Label &middot; shown in forms &amp; links') + textIn('s-loc-' + i + '-label', loc.label) + '</div>';
         html += '<div>' + label('Short name') + textIn('s-loc-' + i + '-name', loc.name) + '</div>';
@@ -585,7 +609,7 @@ function settingsFormHtml(settings) {
 }
 
 function readSettingsFromForm() {
-    /* NOTE: the '#' prefix is required — document.querySelector('s-email')
+    /* NOTE: the '#' prefix is required - document.querySelector('s-email')
        is a `<s-email>` element-type selector and matches nothing. */
     const val = (id) => {
         const el = $('#' + id);
@@ -632,7 +656,7 @@ function renderSettingsForm() {
     const preview = wrap.querySelector('.audio-preview-row audio');
     if (preview) {
         preview.addEventListener('error', () => {
-            showStatus('⚠ Music file could not be loaded — check the URL or upload it again');
+            showStatus('⚠ Music file could not be loaded - check the URL or upload it again');
         });
     }
 }
@@ -663,7 +687,7 @@ $('#settings-export-btn').addEventListener('click', async () => {
         showStatus('Copied site-settings.js ✓');
     } catch (error) {
         console.error('Copy failed:', error);
-        showStatus('Copy failed — please copy manually', true);
+        showStatus('Copy failed - please copy manually', true);
     }
 });
 
@@ -676,12 +700,12 @@ $('#settings-restore-btn').addEventListener('click', async () => {
 });
 
 /* =========================================================
-   GITHUB SYNC — auto-commit the exported JS files to the
+   GITHUB SYNC - auto-commit the exported JS files to the
    repository whenever something is saved in this panel.
 
    Uses the GitHub Contents API (GET sha → PUT contents) from the
    browser. The repo is PUBLIC, so the personal access token lives
-   only in this browser's localStorage — never in a committed file.
+   only in this browser's localStorage - never in a committed file.
    ========================================================= */
 
 const GH_KEY = 'lcdh_github_v1';
@@ -703,7 +727,7 @@ function saveGitHubConfig(config) {
     localStorage.setItem(GH_KEY, JSON.stringify(config));
 }
 
-/* btoa() only accepts Latin-1, so encode to UTF-8 bytes first — event copy
+/* btoa() only accepts Latin-1, so encode to UTF-8 bytes first - event copy
    and settings routinely contain curly quotes, arrows and emoji. */
 function toBase64Utf8(text) {
     const bytes = new TextEncoder().encode(text);
@@ -727,7 +751,7 @@ async function ghErrorBody(response) {
         try {
             const parsed = JSON.parse(text);
             if (parsed && parsed.message) return parsed.message;
-        } catch (ignoreJson) { /* not JSON — fall through to the raw text */ }
+        } catch (ignoreJson) { /* not JSON - fall through to the raw text */ }
         return text.slice(0, 200);
     } catch (ignoreRead) {
         return '';
@@ -752,7 +776,7 @@ async function publishFileToGitHub(path, content, commitMessage) {
     try {
         response = await fetch(endpoint + '?ref=' + encodeURIComponent(config.branch), { headers: ghHeaders(config) });
     } catch (error) {
-        return { ok: false, error: 'Network error — ' + error.message };
+        return { ok: false, error: 'Network error - ' + error.message };
     }
     if (response.ok) {
         const current = await response.json();
@@ -771,7 +795,7 @@ async function publishFileToGitHub(path, content, commitMessage) {
     try {
         response = await fetch(endpoint, { method: 'PUT', headers: ghHeaders(config), body: JSON.stringify(payload) });
     } catch (error) {
-        return { ok: false, error: 'Network error — ' + error.message };
+        return { ok: false, error: 'Network error - ' + error.message };
     }
     if (!response.ok) {
         return { ok: false, error: 'Write failed (HTTP ' + response.status + '): ' + await ghErrorBody(response) };
@@ -787,10 +811,10 @@ async function publishAndReport(path, content, commitMessage, localMessage) {
     const config = loadGitHubConfig();
 
     if (!config.token.trim()) {
-        /* Only nudge once per session — repeating the hint on every save would be noise. */
+        /* Only nudge once per session - repeating the hint on every save would be noise. */
         if (!sessionStorage.getItem(GH_HINT_KEY)) {
             sessionStorage.setItem(GH_HINT_KEY, '1');
-            showStatus((localMessage || 'Saved ✓') + ' — open GitHub Sync to auto-publish');
+            showStatus((localMessage || 'Saved ✓') + ' - open GitHub Sync to auto-publish');
         } else {
             showStatus(localMessage || 'Saved ✓');
         }
@@ -824,10 +848,10 @@ function renderGitHubPanel() {
     $('#gh-repo').value = config.repo;
     $('#gh-branch').value = config.branch;
     if (config.token.trim()) {
-        setGhStatus('Connected — token saved in this browser. Saves in Events and Site Settings publish to '
+        setGhStatus('Connected - token saved in this browser. Saves in Events and Site Settings publish to '
             + config.owner + '/' + config.repo + ' @ ' + config.branch + '.', 'on');
     } else {
-        setGhStatus('Not connected — saves stay local until you add a token below.', null);
+        setGhStatus('Not connected - saves stay local until you add a token below.', null);
     }
 }
 
@@ -867,7 +891,7 @@ $('#gh-test-btn').addEventListener('click', async () => {
     try {
         response = await fetch('https://api.github.com/user', { headers: ghHeaders(config) });
     } catch (error) {
-        setGhStatus('Could not reach GitHub — ' + error.message, 'err');
+        setGhStatus('Could not reach GitHub - ' + error.message, 'err');
         return;
     }
     if (!response.ok) {
@@ -881,7 +905,7 @@ $('#gh-test-btn').addEventListener('click', async () => {
         response = await fetch('https://api.github.com/repos/' + encodeURIComponent(config.owner) + '/' + encodeURIComponent(config.repo),
             { headers: ghHeaders(config) });
     } catch (error) {
-        setGhStatus('Could not reach GitHub — ' + error.message, 'err');
+        setGhStatus('Could not reach GitHub - ' + error.message, 'err');
         return;
     }
     if (!response.ok) {
