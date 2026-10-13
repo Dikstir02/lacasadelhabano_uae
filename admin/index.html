@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css?v=5">
+    <link rel="stylesheet" href="admin.css?v=8">
 </head>
 <body>
 
@@ -33,11 +33,15 @@
         <header class="topbar">
             <div>
                 <p class="topbar-brand">LA CASA DEL HABANO <span>· Site Admin</span></p>
-                <p class="topbar-sub" id="events-count"></p>
+                <div class="events-count-row">
+                    <p class="topbar-sub" id="events-count"></p>
+                    <button type="button" class="btn btn-primary btn-small hidden" id="reorder-save-btn" title="Publish the new order to the site">Save</button>
+                </div>
                 <button type="button" class="visits-chip" id="visits-count" title="Total page loads of the public site - click to refresh">Visits: …</button>
             </div>
             <div class="topbar-actions">
                 <a class="btn btn-ghost" href="../index.html#events" target="_blank" rel="noopener">View site ↗</a>
+                <button type="button" class="btn btn-ghost" id="sync-btn">Sync Data</button>
                 <button type="button" class="btn btn-ghost" id="export-btn">Copy events-data.js</button>
                 <button type="button" class="btn btn-danger-ghost" id="restore-btn">Restore defaults</button>
                 <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
@@ -58,7 +62,12 @@
                 <form id="event-form">
                     <label class="field-label" for="f-image">Image URL *</label>
                     <input type="url" id="f-image" placeholder="https://…/photo.jpg" required>
-                    <div class="preview-box"><img id="image-preview" alt="Preview of event image" class="hidden"></div>
+                    <div class="upload-row">
+                        <button type="button" class="btn btn-ghost btn-small" id="ik-upload-btn">Upload image</button>
+                        <span class="upload-hint">picked files are saved to ImageKit and the link fills in automatically · you can also drop an image on the preview below</span>
+                        <input type="file" id="ik-file-input" accept="image/*" class="hidden">
+                    </div>
+                    <div class="preview-box" id="preview-dropzone"><img id="image-preview" alt="Preview of event image" class="hidden"></div>
 
                     <div class="form-row">
                         <div>
@@ -111,7 +120,7 @@
         <main class="layout">
             <section class="card">
                 <h2 class="card-title">GitHub Sync</h2>
-                <p class="settings-hint">When a token is saved below, every <strong>Save</strong> in this panel commits the matching file straight to the repository - no more copying files by hand. The token is stored in <em>this browser only</em> and is never written into the repo (this repository is public).</p>
+                <p class="settings-hint">Every <strong>Save</strong> in this panel commits the matching file straight to the repository - no more copying files by hand. The connection is pre-configured; use the controls below only if the token needs to be replaced.</p>
 
                 <div class="settings-block">
                     <h3 class="settings-block-title">Connection</h3>
@@ -120,39 +129,15 @@
                             <label class="field-label" for="gh-token">Personal access token</label>
                             <input type="password" id="gh-token" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
                         </div>
-                        <div>
-                            <label class="field-label" for="gh-owner">Owner</label>
-                            <input type="text" id="gh-owner" placeholder="Dikstir02" autocomplete="off" spellcheck="false">
-                        </div>
-                        <div>
-                            <label class="field-label" for="gh-repo">Repository</label>
-                            <input type="text" id="gh-repo" placeholder="lacasadelhabano_uae" autocomplete="off" spellcheck="false">
-                        </div>
-                        <div>
-                            <label class="field-label" for="gh-branch">Branch</label>
-                            <input type="text" id="gh-branch" placeholder="main" autocomplete="off" spellcheck="false">
-                        </div>
                         <div class="field-span-2">
                             <span class="field-label">Status</span>
                             <p class="gh-status" id="gh-status">Checking…</p>
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-primary" id="gh-save-btn">Save connection</button>
+                        <button type="button" class="btn btn-primary" id="gh-save-btn">Update token</button>
                         <button type="button" class="btn btn-ghost" id="gh-test-btn">Test connection</button>
-                        <button type="button" class="btn btn-danger-ghost" id="gh-disconnect-btn">Disconnect</button>
                     </div>
-                </div>
-
-                <div class="settings-block">
-                    <h3 class="settings-block-title">One-time token setup</h3>
-                    <ol class="gh-steps">
-                        <li>On GitHub: <strong>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</strong>.</li>
-                        <li>Repository access → <strong>Only select repositories</strong> → <code>Dikstir02/lacasadelhabano_uae</code>.</li>
-                        <li>Permissions → Repository permissions → <strong>Contents → Read and write</strong>.</li>
-                        <li>Choose an expiry, generate it, then paste the token above and press <strong>Save connection</strong>.</li>
-                    </ol>
-                    <p class="settings-hint">If you clear this browser's storage, or the token expires, publishing stops silently - come back here and paste a fresh one. The manual <em>Copy …</em> buttons still work as a fallback.</p>
                 </div>
             </section>
         </main>
@@ -161,6 +146,6 @@
 
     <div class="status-toast" id="status-toast" role="status"></div>
 
-    <script src="admin.js?v=4"></script>
+    <script src="admin.js?v=14"></script>
 </body>
 </html>

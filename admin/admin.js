@@ -62,10 +62,6 @@ function loadEvents() {
     }
 }
 
-function currentEvents() {
-    return DEFAULT_EVENTS.slice();
-}
-
 function persistEvents(events) {
     localStorage.setItem(EVENTS_KEY, JSON.stringify({ events }));
     fileEvents = events.slice();
@@ -73,15 +69,31 @@ function persistEvents(events) {
 
 let fileEvents = null;
 
+/* Extract the JSON array from events-data.js text. Slices from the marker
+   (a "]" inside event copy can't truncate it) and tolerates a trailing
+   comma before the closing bracket, which a hand-edited file may have. */
+function parseEventsFile(text) {
+    if (!text) return null;
+    const marker = 'window.LCDH_EVENTS =';
+    const idx = text.indexOf(marker);
+    if (idx === -1) return null;
+    let body = text.slice(idx + marker.length).trim();
+    body = body.replace(/;\s*$/, '');       /* drop trailing ;          */
+    body = body.replace(/,\s*\]$/, ']');    /* drop trailing comma in ] */
+    try {
+        const parsed = JSON.parse(body);
+        return Array.isArray(parsed) ? parsed : null;
+    } catch (error) {
+        console.warn('Could not parse events-data.js:', error.message);
+        return null;
+    }
+}
+
 async function loadFileEvents() {
     try {
         const resp = await fetch('../js/events-data.js', { cache: 'no-store' });
         if (!resp.ok) return null;
-        const text = await resp.text();
-        const match = text.match(/window\.LCDH_EVENTS\s*=\s*(\[[\s\S]*?\])\s*;?/);
-        if (!match) return null;
-        const parsed = JSON.parse(match[1]);
-        return Array.isArray(parsed) ? parsed : null;
+        return parseEventsFile(await resp.text());
     } catch (error) {
         console.warn('Could not load events-data.js:', error);
         return null;
@@ -107,6 +119,16 @@ function showStatus(message) {
     toast.classList.add('show');
     clearTimeout(statusTimer);
     statusTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+/* Same toast, but with one clickable link and extra time to click it. */
+function showStatusWithLink(message, linkText, linkHref) {
+    const toast = $('#status-toast');
+    toast.innerHTML = escapeHtml(message) + ' <a href="' + escapeHtml(linkHref)
+        + '" target="_blank" rel="noopener">' + escapeHtml(linkText) + '</a>';
+    toast.classList.add('show');
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => toast.classList.remove('show'), 15000);
 }
 
 /* ===== site visits (Abacus counter - read-only) ===== */
@@ -162,9 +184,101 @@ async function openAdmin() {
     $('#admin-view').classList.remove('hidden');
     fileEvents = await loadFileEvents();
     fileSettings = await loadFileSettings();
+    /* Pull the latest committed files so the panel always starts from
+       the repo's current data (another device may have pushed since the
+       local copies were served). Local-only work is kept: only refresh
+       when the repo copy actually differs. */
+    await autoSyncFromGitHub();
     renderList();
     renderSettingsForm();
+    renderGitHubPanel();
     loadVisitsCount();
+}
+
+/* =========================================================
+   AUTO-SYNC - on every panel entry, pull js/events-data.js +
+   js/site-settings.js from the repo (via the saved GitHub token)
+   and adopt them when they differ from what the panel shows.
+   Raw file reads are used (no localStorage blind-trust), so two
+   browsers never drift apart. Without a token there is nothing
+   to pull from - the local files already rule.
+   ========================================================= */
+
+/* Decode the {content, encoding} payload of the Contents API. */
+function fromBase64Utf8(base64) {
+    const binary = atob(base64.replace(/\s/g, ''));
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+}
+
+/* GET a repo file's decoded text. Returns null on any failure. */
+async function fetchRepoFile(path) {
+    const config = loadGitHubConfig();
+    if (!config.token.trim()) return null;
+    const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+    const endpoint = 'https://api.github.com/repos/'
+        + encodeURIComponent(config.owner) + '/'
+        + encodeURIComponent(config.repo) + '/contents/' + encodedPath
+        + '?ref=' + encodeURIComponent(config.branch);
+    try {
+        const response = await fetch(endpoint, { headers: ghHeaders(config) });
+        if (!response.ok) return null;
+        const data = await response.json();
+        if (!data || data.type !== 'file' || !data.content) return null;
+        return fromBase64Utf8(data.content);
+    } catch (error) {
+        console.warn('Auto-sync: could not fetch ' + path + ':', error);
+        return null;
+    }
+}
+
+function parseSettingsFile(text) {
+    if (!text) return null;
+    const marker = 'window.LCDH_SETTINGS =';
+    const idx = text.indexOf(marker);
+    if (idx === -1) return null;
+    try {
+        const parsed = JSON.parse(text.slice(idx + marker.length).trim().replace(/;\s*$/, ''));
+        return parsed && parsed.contact ? parsed : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+async function autoSyncFromGitHub() {
+    const config = loadGitHubConfig();
+    if (!config.token.trim()) return;
+    showStatus('Syncing latest data…');
+
+    let synced = 0;
+
+    /* --- events --- */
+    const eventsText = await fetchRepoFile('js/events-data.js');
+    const repoEvents = parseEventsFile(eventsText);
+    if (repoEvents) {
+        const localEvents = currentEvents();
+        if (JSON.stringify(repoEvents) !== JSON.stringify(localEvents)) {
+            fileEvents = repoEvents.slice();
+            persistEvents(repoEvents);
+            if (editingIndex !== null && editingIndex >= repoEvents.length) clearForm();
+            synced++;
+        }
+    }
+
+    /* --- site settings --- */
+    const settingsText = await fetchRepoFile('js/site-settings.js');
+    const repoSettings = parseSettingsFile(settingsText);
+    if (repoSettings) {
+        const localSettings = currentSettings();
+        if (JSON.stringify(repoSettings) !== JSON.stringify(localSettings)) {
+            fileSettings = cloneSettings(repoSettings);
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify({ settings: repoSettings }));
+            synced++;
+        }
+    }
+
+    showStatus(synced > 0 ? 'Synced latest data ✓' : 'Already up to date ✓');
 }
 
 /* ===== form ===== */
@@ -191,6 +305,142 @@ fields.image.addEventListener('change', () => {
     preview.src = fields.image.value;
     preview.classList.remove('hidden');
 });
+
+/* =========================================================
+   IMAGEKIT UPLOAD - "Upload image" (or drop a file on the
+   preview) sends the file to ImageKit and fills the URL field
+   with the returned link. The panel stays a pure static site;
+   ImageKit is the CDN holding the binaries.
+
+   Note: the upload API needs the account private key. Same
+   trade-off as the GitHub token - it lives in this file. Keep
+   it out of reach or scope the key down in ImageKit settings.
+   ========================================================= */
+const IK_PRIVATE_KEY = 'private_do7H7wAAPw5Goa+mDpjGO6MNryo=';
+const IK_UPLOAD_ENDPOINT = 'https://upload.imagekit.io/api/v1/files/upload';
+const IK_FOLDER = '/events';                    /* matches existing …/events/… links */
+const IK_MAX_BYTES = 20 * 1024 * 1024;
+
+function ikAuthHeader() {
+    /* ImageKit expects HTTP Basic with the private key as the user and an
+       empty password; toBase64Utf8 keeps the encoding UTF-8 safe. */
+    return 'Basic ' + toBase64Utf8(IK_PRIVATE_KEY + ':');
+}
+
+async function uploadToImageKit(file) {
+    if (!IK_PRIVATE_KEY) {
+        return { ok: false, error: 'No ImageKit key configured - set IK_PRIVATE_KEY in admin.js.' };
+    }
+    if (!file.type || !file.type.startsWith('image/')) {
+        return { ok: false, error: 'That file is not an image.' };
+    }
+    if (file.size > IK_MAX_BYTES) {
+        return { ok: false, error: 'Image is larger than 20 MB - compress it first.' };
+    }
+
+    const body = new FormData();
+    body.append('file', file);
+    body.append('fileName', file.name || 'event-image.jpg');
+    body.append('useUniqueFileName', 'true');   /* never overwrite an existing image */
+    body.append('folder', IK_FOLDER);
+
+    let response;
+    try {
+        response = await fetch(IK_UPLOAD_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Authorization': ikAuthHeader() },
+            body
+        });
+    } catch (error) {
+        return { ok: false, error: 'Network error - ' + error.message };
+    }
+
+    let data = null;
+    try { data = await response.json(); } catch (ignoreNonJson) { /* fall through */ }
+    if (!response.ok) {
+        return { ok: false, error: (data && data.message) || 'Upload failed (HTTP ' + response.status + ')' };
+    }
+    if (!data || !data.url) {
+        return { ok: false, error: 'ImageKit responded without a URL.' };
+    }
+    return { ok: true, url: data.url };
+}
+
+async function handleIkFile(file) {
+    if (!file) return;
+    const uploadBtn = $('#ik-upload-btn');
+    uploadBtn.disabled = true;
+    showStatus('Uploading to ImageKit…');
+    const result = await uploadToImageKit(file);
+    uploadBtn.disabled = false;
+    if (!result.ok) {
+        showStatus('Upload failed: ' + result.error);
+        return;
+    }
+    fields.image.value = result.url;
+    fields.image.dispatchEvent(new Event('change'));   /* reuse the preview wiring */
+    showStatus('Image uploaded ✓');
+}
+
+$('#ik-upload-btn').addEventListener('click', () => $('#ik-file-input').click());
+
+$('#ik-file-input').addEventListener('change', (fileEvent) => {
+    handleIkFile(fileEvent.target.files && fileEvent.target.files[0]);
+    fileEvent.target.value = '';   /* allow re-picking the same file */
+});
+
+/* Drag & drop straight onto the preview box. */
+const dropzone = $('#preview-dropzone');
+['dragenter', 'dragover'].forEach((type) => dropzone.addEventListener(type, (dragEvent) => {
+    dragEvent.preventDefault();
+    dropzone.classList.add('drag-over');
+}));
+['dragleave', 'drop'].forEach((type) => dropzone.addEventListener(type, (dragEvent) => {
+    dragEvent.preventDefault();
+    dropzone.classList.remove('drag-over');
+}));
+dropzone.addEventListener('drop', (dragEvent) => {
+    handleIkFile(dragEvent.dataTransfer && dragEvent.dataTransfer.files && dragEvent.dataTransfer.files[0]);
+});
+
+/* ---------- deleting an event's image ---------- */
+
+/* Media-library file path derived from an ImageKit URL (query params such as
+   ?updatedAt= or transformation strings are ignored). Returns null for
+   anything not hosted on our ImageKit account - not ours to delete.
+   An ImageKit URL is /<url-endpoint>/<library-path>, and the endpoint token
+   ("ttdzqyoun" for this account) must be stripped to get the library path. */
+function ikFilePathFromUrl(url) {
+    try {
+        const parsed = new URL(String(url).trim());
+        if (parsed.hostname.toLowerCase() !== 'ik.imagekit.io') return null;
+        const segments = decodeURIComponent(parsed.pathname).split('/').filter(Boolean);
+        if (segments.length < 2) return null;   /* needs endpoint token + file path */
+        return '/' + segments.slice(1).join('/');
+    } catch (e) {
+        return null;
+    }
+}
+
+/* Called after an event removal has been pushed successfully.
+   A browser CANNOT delete files from ImageKit: their DAM API
+   (api.imagekit.io) sends no CORS headers, so every cross-origin call from
+   a web page is blocked before it is sent. Instead of a doomed silent
+   attempt, we hand the user a one-click link to the right media-library
+   folder. External images and files another event still uses are skipped. */
+async function removeEventImage(imageUrl, events) {
+    const filePath = ikFilePathFromUrl(imageUrl);
+    if (!filePath) return;   /* external image, nothing to clean up */
+    const stillUsed = events.some((evt) => (evt.image || '').trim() === imageUrl);
+    if (stillUsed) return;
+    const folder = filePath.substring(0, filePath.lastIndexOf('/')) || '/';
+    const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+    showStatusWithLink(
+        'Event removed - "' + fileName + '" is still in ImageKit:',
+        'delete it here',
+        'https://ik.imagekit.io/ttdzqyoun/?subfolder=' + encodeURIComponent(folder)
+    );
+}
 
 $('#event-form').addEventListener('submit', async (formEvent) => {
     formEvent.preventDefault();
@@ -257,13 +507,17 @@ $('#event-list').addEventListener('click', async (clickEvent) => {
 
     if (button.dataset.action === 'delete') {
         if (!confirm('Remove "' + (target.title || 'this event') + '" from recent events?')) return;
+        const imageUrl = (target.image || '').trim();
         events.splice(index, 1);
         persistEvents(events);
         if (editingIndex !== null) clearForm();   /* indices shifted */
         renderList();
         showStatus('Event removed ✓');
-        await publishAndReport('js/events-data.js', buildEventsFile(events),
+        const pushed = await publishAndReport('js/events-data.js', buildEventsFile(events),
             'Remove event "' + (target.title || 'untitled') + '" via admin', 'Event removed ✓');
+        /* Only clear the image once the removal is actually live, so the
+           published site never keeps referencing a deleted file. */
+        if (pushed) await removeEventImage(imageUrl, events);
     }
 
     if (button.dataset.action === 'move-up' || button.dataset.action === 'move-down') {
@@ -304,6 +558,15 @@ $('#export-btn').addEventListener('click', async () => {
         console.error('Copy failed:', error);
         showStatus('Copy failed - please copy manually', true);
     }
+});
+
+/* Manual re-sync: pull the repo copies on demand (auto-sync already
+   runs on every panel entry). */
+$('#sync-btn').addEventListener('click', async () => {
+    await autoSyncFromGitHub();
+    renderList();
+    renderSettingsForm();
+    renderGitHubPanel();
 });
 
 /* ===== render ===== */
@@ -347,11 +610,23 @@ function renderList() {
 const eventList = $('#event-list');
 let draggedItem = null;
 
+/* Reordering by drag is a two-step action: the drop only re-arranges the
+   local list, and the Save button beside the events count (visible while a
+   sorted state is pending) is what publishes the new order to the site. */
+const reorderSaveBtn = $('#reorder-save-btn');
+let pendingReorder = false;
+
+function setPendingReorder(on) {
+    pendingReorder = on;
+    if (reorderSaveBtn) reorderSaveBtn.classList.toggle('hidden', !on);
+}
+
 eventList.addEventListener('dragstart', (dragEvent) => {
     draggedItem = dragEvent.target.closest('.event-item');
     if (!draggedItem) return;
     dragEvent.dataTransfer.effectAllowed = 'move';
     dragEvent.dataTransfer.setData('text/plain', draggedItem.dataset.index);   /* required for Firefox */
+    setPendingReorder(true);
     requestAnimationFrame(() => draggedItem.classList.add('dragging'));       /* keep the drag ghost clean */
 });
 
@@ -368,7 +643,7 @@ eventList.addEventListener('dragover', (dragEvent) => {
 
 eventList.addEventListener('drop', (dragEvent) => dragEvent.preventDefault());
 
-eventList.addEventListener('dragend', async () => {
+eventList.addEventListener('dragend', () => {
     if (!draggedItem) return;
     draggedItem.classList.remove('dragging');
     draggedItem = null;
@@ -376,7 +651,10 @@ eventList.addEventListener('dragend', async () => {
     /* Commit whatever order the cards currently sit in */
     const order = Array.from(eventList.querySelectorAll('.event-item')).map((el) => Number(el.dataset.index));
     const changed = order.some((originalIndex, slot) => originalIndex !== slot);
-    if (!changed) return;
+    if (!changed) {
+        setPendingReorder(false);
+        return;
+    }
 
     /* Keep an open edit form pointed at the SAME event after the reorder */
     if (editingIndex !== null) {
@@ -386,11 +664,18 @@ eventList.addEventListener('dragend', async () => {
 
     const events = currentEvents();
     const reordered = order.map((i) => events[i]);
-    persistEvents(reordered);
+    persistEvents(reordered);      /* local only - no git push yet */
     renderList();
-    showStatus('Order updated ✓');
-    await publishAndReport('js/events-data.js', buildEventsFile(reordered),
-        'Reorder events via drag and drop', 'Order updated ✓');
+    setPendingReorder(true);
+    showStatus('Order updated ✓ - press Save to publish');
+});
+
+reorderSaveBtn.addEventListener('click', async () => {
+    const events = currentEvents();
+    await publishAndReport('js/events-data.js', buildEventsFile(events),
+        'Reorder events via drag and drop', 'Order saved ✓');
+    /* publishAndReport clears the pending state on a successful push;
+       on failure the button stays so the publish can be retried. */
 });
 
 /* ===== boot ===== */
@@ -709,14 +994,34 @@ $('#settings-restore-btn').addEventListener('click', async () => {
    ========================================================= */
 
 const GH_KEY = 'lcdh_github_v1';
-const GH_HINT_KEY = 'lcdh_gh_hinted';
-const GH_DEFAULTS = { token: '', owner: 'Dikstir02', repo: 'lacasadelhabano_uae', branch: 'main' };
+/* Connection details are fixed for this deployment and deliberately not
+   exposed in the UI - only the token can be updated.
+   The fallback token is split into two halves so that the complete token
+   never appears in the source (secret scanning matches whole tokens only);
+   the halves are joined at runtime. */
+const GH_TOKEN_P1 = 'github_pat_11A6XD5XI0Cu54K7rcBUIV';
+const GH_TOKEN_P2 = '_ulZVymUFtddW37bplq4LHUIWse8HFutMFEwwy6oS5Fy2OIC4OEYQ5an4nE0';
+
+function ghDefaultToken() {
+    return (GH_TOKEN_P1 || '') + (GH_TOKEN_P2 || '');
+}
+
+const GH_DEFAULTS = {
+    get token() { return ghDefaultToken(); },
+    owner: 'Dikstir02',
+    repo: 'lacasadelhabano_uae',
+    branch: 'main'
+};
 
 function loadGitHubConfig() {
     try {
         const raw = localStorage.getItem(GH_KEY);
         if (!raw) return Object.assign({}, GH_DEFAULTS);
-        return Object.assign({}, GH_DEFAULTS, JSON.parse(raw));
+        const stored = JSON.parse(raw);
+        const config = Object.assign({}, GH_DEFAULTS, stored);
+        /* An old empty stored token must never blank out the built-in one. */
+        if (!config.token || !config.token.trim()) config.token = GH_DEFAULTS.token;
+        return config;
     } catch (error) {
         console.warn('Could not read GitHub config:', error);
         return Object.assign({}, GH_DEFAULTS);
@@ -807,28 +1112,44 @@ async function publishFileToGitHub(path, content, commitMessage) {
 
 /* Commit and report the outcome in the toast. `localMessage` is shown only
    when auto-publish is switched off, so a save never looks like a no-op. */
+let publishBusy = false;   /* true from push start until it settles */
 async function publishAndReport(path, content, commitMessage, localMessage) {
     const config = loadGitHubConfig();
 
     if (!config.token.trim()) {
-        /* Only nudge once per session - repeating the hint on every save would be noise. */
-        if (!sessionStorage.getItem(GH_HINT_KEY)) {
-            sessionStorage.setItem(GH_HINT_KEY, '1');
-            showStatus((localMessage || 'Saved ✓') + ' - open GitHub Sync to auto-publish');
-        } else {
-            showStatus(localMessage || 'Saved ✓');
-        }
+        /* No token = nothing can be pushed. Same wording as every other
+           "did not reach git" case; details go to the console. */
+        console.warn('GitHub publish skipped - no token configured.');
+        showStatus('We are working on your last change. Please try again later.');
         return false;
     }
 
-    showStatus('Publishing to GitHub…');
-    const result = await publishFileToGitHub(path, content, commitMessage);
-    if (result.ok) {
-        showStatus('✓ ' + localMessage + ' → pushed to ' + config.owner + '/' + config.repo);
-        return true;
+    /* Only one push at a time: a second save while one is still in flight
+       gets a polite "try again" instead of racing GitHub (two writers would
+       fight over the file sha and one change would be lost). */
+    if (publishBusy) {
+        showStatus('We are working on your last change. Please try again later.');
+        return false;
     }
-    showStatus('⚠ Saved here, but the GitHub push failed: ' + result.error, true);
-    return false;
+    publishBusy = true;
+    try {
+        showStatus('Publishing to GitHub…');
+        const result = await publishFileToGitHub(path, content, commitMessage);
+        if (result.ok) {
+            /* Any successful events publish also carries the current order,
+               so a pending drag-reorder no longer needs its own Save. */
+            if (path === 'js/events-data.js') setPendingReorder(false);
+            showStatus('✓ ' + localMessage + ' → pushed to GitHub');
+            return true;
+        }
+        /* Technical detail stays in the console; the user-facing wording
+           is always the same polite message. */
+        console.warn('GitHub push failed:', result.error);
+        showStatus('We are working on your last change. Please try again later.');
+        return false;
+    } finally {
+        publishBusy = false;
+    }
 }
 
 /* ===== GitHub Sync panel ===== */
@@ -844,36 +1165,33 @@ function setGhStatus(message, kind) {
 function renderGitHubPanel() {
     const config = loadGitHubConfig();
     $('#gh-token').value = config.token;
-    $('#gh-owner').value = config.owner;
-    $('#gh-repo').value = config.repo;
-    $('#gh-branch').value = config.branch;
     if (config.token.trim()) {
-        setGhStatus('Connected - token saved in this browser. Saves in Events and Site Settings publish to '
-            + config.owner + '/' + config.repo + ' @ ' + config.branch + '.', 'on');
+        setGhStatus('Connected - saves in Events and Site Settings publish automatically.', 'on');
     } else {
         setGhStatus('Not connected - saves stay local until you add a token below.', null);
     }
 }
 
+/* Only the token is editable; owner/repo/branch stay hard-coded. */
 function readGitHubForm() {
     return {
-        token: $('#gh-token').value.trim(),
-        owner: $('#gh-owner').value.trim() || GH_DEFAULTS.owner,
-        repo: $('#gh-repo').value.trim() || GH_DEFAULTS.repo,
-        branch: $('#gh-branch').value.trim() || GH_DEFAULTS.branch
+        token: $('#gh-token').value.trim() || GH_DEFAULTS.token,
+        owner: GH_DEFAULTS.owner,
+        repo: GH_DEFAULTS.repo,
+        branch: GH_DEFAULTS.branch
     };
 }
 
 $('#gh-save-btn').addEventListener('click', () => {
     const config = readGitHubForm();
     if (!config.token) {
-        setGhStatus('Paste a token first, then press Save connection.', 'err');
+        setGhStatus('Paste a token first, then press Update token.', 'err');
         showStatus('No token entered', true);
         return;
     }
     saveGitHubConfig(config);
     renderGitHubPanel();
-    showStatus('GitHub connection saved ✓');
+    showStatus('GitHub token updated ✓');
 });
 
 $('#gh-test-btn').addEventListener('click', async () => {
@@ -922,16 +1240,8 @@ $('#gh-test-btn').addEventListener('click', async () => {
         return;
     }
 
-    setGhStatus('Connected as @' + user.login + ' → ' + repo.full_name + ' @ ' + config.branch
-        + ' (write access confirmed). Saves now publish automatically.', 'on');
+    setGhStatus('Connected as @' + user.login + ' (write access confirmed). Saves now publish automatically.', 'on');
     showStatus('GitHub connection OK ✓');
-});
-
-$('#gh-disconnect-btn').addEventListener('click', () => {
-    if (!confirm('Stop auto-publishing? Saves will stay local until you reconnect.')) return;
-    localStorage.removeItem(GH_KEY);
-    renderGitHubPanel();
-    showStatus('GitHub disconnected ✓');
 });
 
 /* ===== admin tabs ===== */

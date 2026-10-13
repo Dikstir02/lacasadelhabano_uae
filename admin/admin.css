@@ -159,6 +159,8 @@ textarea { resize: vertical; }
 .topbar-brand span { color: var(--gold); font-size: 14px; letter-spacing: .18em; }
 
 .topbar-sub { font-size: 12px; opacity: .6; margin-top: 4px; }
+.events-count-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+.events-count-row .topbar-sub { margin-top: 0; }
 
 .topbar-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -189,6 +191,12 @@ textarea { resize: vertical; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .preview-box { margin-top: 10px; }
+
+/* ===== imagekit upload ===== */
+.upload-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.upload-hint { font-size: 11px; opacity: .55; }
+.preview-box.drag-over { outline: 2px dashed var(--gold); outline-offset: 2px; }
+.preview-box.drag-over img { opacity: .4; }
 
 .preview-box img {
     width: 100%;
@@ -281,6 +289,12 @@ textarea { resize: vertical; }
 }
 
 .status-toast.show { opacity: 1; transform: translate(-50%, 0); }
+.status-toast a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    white-space: nowrap;
+}
 
 /* ===== REORDERING ===== */
 .event-item[draggable="true"] { cursor: grab; }
