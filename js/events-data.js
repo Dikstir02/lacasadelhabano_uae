@@ -7,10 +7,10 @@ window.LCDH_EVENTS = [
     "date": "INTERCONTINENTAL - ABU DHABI - 11 SEPTEMBER 2026"
   },
   {
-    "image": "https://www.cubancigarwebsite.com/img/cigarpackaging/cohiba-ambar4.jpg",
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/cohiba-ambar.jpg",
     "category": "EXCLUSIVE NIGHT",
-    "title": "COHIBA AMBAR NIGHT",
-    "copy": "An exclusive tasting of the acclaimed Cohiba Ambar at Pair, complemented by a welcome drink and a specially curated cocktail. This year also marks Cohiba’s 60th anniversary, adding a special touch to the occasion.",
-    "date": "DUBAI - 1 OCTOBER - FRIDAY"
+    "title": "THE COHIBA AMBAR NIGHT",
+    "copy": "An exclusive evening celebrating the Cohiba Amba, a distinguished expression created to commemorate the legacy and evolution of the Cohiba name.",
+    "date": "PAIR LOUNGE - DUBAI - 1 OCTOBER 2026"
   }
 ];
