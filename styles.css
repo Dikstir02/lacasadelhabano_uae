@@ -266,6 +266,17 @@ select:focus-visible {
     color: var(--brand-red);
 }
 
+/* Gold CTA: bright brand gold ground + deep red copy — hero HERITAGE button */
+.btn-gold {
+    background: var(--gold-outline);
+    color: var(--brand-red-darkest);
+}
+
+.btn-gold:hover {
+    background: var(--cream);
+    color: var(--brand-red);
+}
+
 .btn-outline {
     background: none;
     border: 2px solid var(--cream);
@@ -550,13 +561,20 @@ select:focus-visible {
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 96px 24px 0;
+    padding: 96px 24px;
+    /* Center the title + buttons group in the full hero height —
+       top padding clears the fixed nav, matching bottom padding keeps
+       the group on the true vertical center. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    min-height: calc(var(--vh) * 100);
 }
 
 @media (min-width: 1024px) {
     .hero-content {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding: 96px 40px;
     }
 }
 
@@ -601,6 +619,15 @@ select:focus-visible {
     text-shadow: 2px 3px 0 rgba(46, 1, 9, .85), 0 14px 34px rgba(46, 1, 9, .45);
 }
 
+.hero-title-gold {
+    color: var(--gold-outline);
+}
+
+.hero-title-small {
+    font-size: .62em;
+    letter-spacing: .06em;
+}
+
 .hero-description {
     margin-top: 28px;
     max-width: 36rem;
@@ -616,9 +643,19 @@ select:focus-visible {
     gap: 12px;
 }
 
+.hero-actions .btn-casa {
+    box-sizing: border-box;
+    width: 100%;
+}
+
 @media (min-width: 640px) {
     .hero-actions {
         flex-direction: row;
+    }
+
+    .hero-actions .btn-casa {
+        flex: 0 0 150px;
+        width: 150px;
     }
 }
 
@@ -813,8 +850,18 @@ select:focus-visible {
     transition: transform .55s ease;
 }
 
+/* Hover zoom: quick pop (1 → 1.07 in ~0.5s) then a slow constant-speed
+   push-in that holds at full zoom — no reverse, no reset, so there is
+   nowhere for a pause to hide. If the pointer stays on the card past
+   12s the image simply rests at 1.18 (animation-fill-mode: forwards). */
 .experience-card:hover .experience-img img {
-    transform: scale(1.07);
+    animation: experience-slow-zoom 12s linear forwards;
+}
+
+@keyframes experience-slow-zoom {
+    0% { transform: scale(1); }
+    4% { transform: scale(1.07); }
+    100% { transform: scale(1.18); }
 }
 
 .experience-body {
@@ -994,6 +1041,9 @@ body.experience-modal-open { overflow: hidden; }
 .exp-modal-body { padding: 32px 40px 40px; }
 .exp-modal-number { color: var(--sand); font-size: 28px; }
 .exp-modal-title { font-size: clamp(26px, 5vw, 38px); line-height: 1.2; margin-top: 8px; }
+
+/* Heritage modal title in bright brand gold */
+#heritage-modal-title { color: var(--gold-outline); }
 .exp-modal-tagline { margin-top: 16px; font-size: 17px; line-height: 1.7; }
 .exp-modal-text h4 { margin-top: 24px; font-size: 17px; color: var(--sand); }
 .exp-modal-text p { margin-top: 8px; font-size: 15px; line-height: 1.8; }
@@ -1003,15 +1053,6 @@ body.experience-modal-open { overflow: hidden; }
     font-size: 15px;
     line-height: 1.8;
     color: var(--cream);
-}
-
-.story-content .story-title {
-    margin-top: 8px;
-    margin-bottom: 6px;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--sand);
 }
 
 .story-content h2 {
@@ -2986,6 +3027,7 @@ body.coming-soon-open .whatsapp-chatbot { display: none !important; }
     .location-link:hover,
     .about-card:hover,
     .whatsapp-float:hover { transform: none; }
+    .experience-card:hover .experience-img img { animation: none; }
 }
 
 /* Respect reduced-motion users */

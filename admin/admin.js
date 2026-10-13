@@ -436,7 +436,7 @@ const DEFAULT_SETTINGS = {
             title: 'City Walk',
             copy: 'A colourful, contemporary Casa in the heart of City Walk.',
             address: 'City Walk, Dubai, United Arab Emirates',
-            hours: 'Please contact the Casa for current opening hours.',
+            hours: '10:00 AM - 10:00 PM (MONDAY-SUNDAY)',
             mapsUrl: 'https://maps.app.goo.gl/KonTfdo48PyqwFJo8',
             lat: 25.2056,
             lng: 55.2570,
@@ -450,7 +450,7 @@ const DEFAULT_SETTINGS = {
             title: 'Jumeirah Beach Residences',
             copy: 'A relaxed cigar destination close to the vibrant JBR waterfront.',
             address: 'The Walk, Jumeirah Beach Residence, Dubai',
-            hours: 'Please contact the Casa for current opening hours.',
+            hours: '10:00 AM - 12:00 AM (MONDAY-SUNDAY)',
             mapsUrl: 'https://maps.app.goo.gl/SEFQf9YabRu11QU6A',
             lat: 25.0795,
             lng: 55.1400,
@@ -464,7 +464,7 @@ const DEFAULT_SETTINGS = {
             title: 'Abu Dhabi Mall',
             copy: 'A refined Casa for discovering Cuban tradition in the capital.',
             address: 'Abu Dhabi Mall, Abu Dhabi, United Arab Emirates',
-            hours: 'Please contact the Casa for current opening hours.',
+            hours: '10:00 AM - 10:00 PM (SUNDAY-THURSDAY)\n10:00 AM - 11:00 PM (FRIDAY-SATURDAY)',
             mapsUrl: 'https://maps.app.goo.gl/787X3kXX6VPw44zs8',
             lat: 24.5006,
             lng: 54.3961,
@@ -597,7 +597,7 @@ function settingsFormHtml(settings) {
         html += '<div>' + label('Title') + textIn('s-loc-' + i + '-title', loc.title) + '</div>';
         html += '<div class="field-span-2">' + label('Description') + textIn('s-loc-' + i + '-copy', loc.copy) + '</div>';
         html += '<div class="field-span-2">' + label('Address') + textIn('s-loc-' + i + '-address', loc.address) + '</div>';
-        html += '<div class="field-span-2">' + label('Opening hours') + textIn('s-loc-' + i + '-hours', loc.hours) + '</div>';
+        html += '<div class="field-span-2">' + label('Opening hours (one per line for multi-line schedules)') + textArea('s-loc-' + i + '-hours', loc.hours, 2) + '</div>';
         html += '<div class="field-span-2">' + label('Google Maps link') + urlIn('s-loc-' + i + '-mapsurl', loc.mapsUrl) + '</div>';
         html += '<div>' + label('Latitude') + textIn('s-loc-' + i + '-lat', loc.lat) + '</div>';
         html += '<div>' + label('Longitude') + textIn('s-loc-' + i + '-lng', loc.lng) + '</div>';

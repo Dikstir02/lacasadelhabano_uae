@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles.css?v=50">
+    <link rel="stylesheet" href="styles.css?v=54">
     <!-- Settings load in <head> so the Coming Soon switch below can read
          them before the body renders (no flash of the real site). -->
     <script src="js/site-settings.js?v=5"></script>
@@ -149,7 +149,7 @@
             <div class="hero-sun" aria-hidden="true"></div>
             <div class="hero-content">
                 <div class="hero-inner">
-                    <h1 class="hero-title display">THE HOME OF CUBAN CIGARS</h1>
+                    <h1 class="hero-title display"><span class="hero-title-small">THE HOME OF</span> <span class="hero-title-gold">CUBAN CIGARS</span></h1>
                     <div class="hero-actions">
                         <a href="#heritage" class="btn-casa btn-coral">HERITAGE</a>
                         <a href="#locations" class="btn-casa btn-outline">LOCATIONS</a>
@@ -184,7 +184,6 @@
                 <div class="exp-modal-body">
                     <h2 id="heritage-modal-title" class="exp-modal-title display">The Habano</h2>
                     <div class="story-content">
-                        <h2 class="story-title">The Legacy of the Habano</h2>
                         <h3>A Heritage Rooted in Cuba</h3>
                         <p>Long before the world came to know the Cuban cigar, the Taino people of Cuba were already cultivating and enjoying tobacco. In 1492, Christopher Columbus and his expedition encountered this ancient tradition for the first time, witnessing the burning and rolling of tobacco leaves known to the indigenous people as <em>Cohiba</em>.</p>
                         <p>What began as a discovery would become a legacy that travelled across continents. Yet, despite tobacco's journey around the world, the true character of the Cuban cigar remains inseparable from the land where it was born.</p>
@@ -220,7 +219,7 @@
                 </div>
                 <div class="experience-grid">
                     <article class="experience-card reveal">
-                        <div class="experience-img"><img src="https://ik.imagekit.io/ttdzqyoun/Authentic.jpg" width="600" height="600" decoding="async" alt="Authenticity guaranteed - genuine Habanos at La Casa del Habano UAE" loading="lazy"></div>
+                        <div class="experience-img"><img src="https://ik.imagekit.io/ttdzqyoun/auth.png" width="600" height="600" decoding="async" alt="Authenticity guaranteed - genuine Habanos at La Casa del Habano UAE" loading="lazy"></div>
                         <div class="experience-body">
                             <h3 class="experience-title display">AUTHENTICITY</h3>
                             <p class="experience-copy">Guaranteed</p>
@@ -234,7 +233,7 @@
                         </div>
                     </article>
                     <article class="experience-card reveal">
-                        <div class="experience-img"><img src="https://ik.imagekit.io/ttdzqyoun/New%20Folder/accessories.jpg" width="600" height="600" decoding="async" alt="Cigars beside a polished lighter - part of the Casa accessories collection" loading="lazy"></div>
+                        <div class="experience-img"><img src="https://ik.imagekit.io/ttdzqyoun/acc.jpg" width="600" height="600" decoding="async" alt="Cigars beside a polished lighter - part of the Casa accessories collection" loading="lazy"></div>
                         <div class="experience-body">
                             <h3 class="experience-title display">THE ACCESSORIES</h3>
                             <p class="experience-copy">Premium Global Brands</p>
@@ -407,10 +406,12 @@
                 <div class="about-grid">
                     <div class="reveal">
                         <p class="eyebrow eyebrow-gold">OUR STORY</p>
-                        <h2 class="section-title section-title-cream">Since 1976</h2>
-                        <p class="section-copy cream">For decades, the UAE has gathered the world's cultures - and among the traditions that found a lasting home here is the Habano. Our story grows from the passion of Baqer Mohebi Enterprises, whose love of Cuban cigars brought the world of premium Habanos closer to the region.</p>
-                        <p class="section-copy cream">The first La Casa del Habano opened in Dubai in 1998, evolving with the city before reaching Jumeirah Beach Residence in 2008 and City Walk in 2018 - with its private lockers and Habanos Terraza - then on to Abu Dhabi Mall and Dubai Duty Free.</p>
-                        <p class="section-copy cream">Yet the Casa has always been about more than cigars: the people, the craftsmanship, and the mastercraft behind every Habano. A Habano is more than a cigar. It is an experience with Cuba.</p>
+                        <h2 class="section-title section-title-cream">Since 1998</h2>
+                        <p class="section-copy cream">For decades, the UAE has brought cultures and traditions together, including the rich heritage of Cuban cigars. Baqer Mohebi Enterprises introduced Habanos to the region in the late 1980s, sharing Cuba's cigar-making tradition with a growing community of enthusiasts.</p>
+                        <p class="section-copy cream">In 1998, the first official La Casa del Habano opened in Dubai, marking the beginning of a legacy built on heritage, craftsmanship, and a passion for Habanos. From Deira to Jumeirah Beach Residence in 2008, the brand continued to grow, offering enthusiasts a dedicated space to discover and enjoy Cuban cigars.</p>
+                        <p class="section-copy cream">In 2018, La Casa del Habano celebrated its 20th anniversary in the UAE with the opening of its flagship store at City Walk Dubai, featuring private lockers and the Habanos Terraza. Today, our presence also reaches Abu Dhabi Mall and Dubai Duty Free.</p>
+                        <p class="section-copy cream">More than a destination for cigars, La Casa del Habano celebrates the people, artistry, and traditions behind every Habano.</p>
+                        <p class="section-copy cream">A Habano is more than a cigar. It is an experience with Cuba.</p>
                     </div>
                     <div class="reveal about-media">
                         <div class="about-frame" aria-hidden="true"></div>
@@ -451,7 +452,10 @@
             <nav class="footer-nav-section" aria-label="Contact">
                 <p class="footer-heading">CONNECT</p>
                 <ul class="footer-nav">
-                    <li><a id="footer-email" href="mailto:cdh.jbr@baqermohebi.com" class="footer-link">cdh.jbr@baqermohebi.com</a></li>
+                    <li><a id="footer-email" href="mailto:cdh.jbr@baqermohebi.com" class="footer-link social-link">
+                        <svg class="social-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span>cdh.jbr@baqermohebi.com</span>
+                    </a></li>
                 
                     <li><a id="footer-instagram" href="https://instagram.com/lacasadelhabano_uae" target="_blank" rel="noopener noreferrer" class="footer-link social-link">
                         <svg class="social-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
