@@ -26,5 +26,12 @@ window.LCDH_EVENTS = [
     "title": "WHERE THE FUTURE MEETS LEGACY",
     "copy": "An exclusive evening featuring the Diplomaticos Genios Exclusivo Phoenicia, one of the most anticipated Habanos releases in recent years.",
     "date": "WOOHOO RESTAURANT, KEMPINSKI THE BOULEVARD - DOWNTOWN DUBAI - 7 AUGUST 2026"
+  },
+  {
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/blindtasting.jpg?updatedAt=1791882864345",
+    "category": "BLIND TASTING NIGHT",
+    "title": "HABANOS BLIND TASTING NIGHT IN ABU DHABI",
+    "copy": "An exclusive evening designed for Habanos aficionados and connoisseurs to challenge their palate through a blind tasting of TWO Premium Cuban Habanos, followed by ONE freshly rolled cigar.",
+    "date": "LEXX CIGAR LOUNGE, GRAND HYATT - ABU DHABI - 31 JULY 2026"
   }
 ];
