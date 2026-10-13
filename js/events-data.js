@@ -17,8 +17,14 @@ window.LCDH_EVENTS = [
     "image": "https://ik.imagekit.io/ttdzqyoun/events/leyanda.jpg?updatedAt=1791883569114",
     "category": "EXCLUSIVE NIGHT",
     "title": "THE MONTECRISTO LEYANDA NIGHT",
-    "copy": "Two Habanos Blind Tasting Experience. NO LABELS. NO CLUES. Just your senses and your knowledge.",
+    "copy": "An exclusive evening featuring the Montecristo Linea 1935 Leyanda, one of the most prestigious Habanos in the Montecristo portfolio and the largest vitola of the exceptional Linea 1935",
     "date": "THE GUILD - THE AVIARY PRIVATE LOUNGE, DIFC - DUBAI - 14 AUGUST 2026"
   },
-
+ {
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/genios.jpg?updatedAt=1791884908763",
+    "category": "EXCLUSIVE NIGHT",
+    "title": "WHERE THE FUTURE MEETS LEGACY",
+    "copy": "An exclusive evening featuring the Diplomaticos Genios Exclusivo Phoenicia, one of the most anticipated Habanos releases in recent years.",
+    "date": "WOOHOO RESTAURANT, KEMPINSKI THE BOULEVARD - DOWNTOWN DUBAI - 7 AUGUST 2026"
+  },
 ];
