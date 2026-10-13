@@ -1,17 +1,17 @@
 window.LCDH_EVENTS = [
   {
-    "image": "https://ik.imagekit.io/ttdzqyoun/events/leyanda.jpg?updatedAt=1791883569114",
-    "category": "EXCLUSIVE NIGHT",
-    "title": "THE MONTECRISTO LEYANDA NIGHT",
-    "copy": "An exclusive evening featuring the Montecristo Linea 1935 Leyanda, one of the most prestigious Habanos in the Montecristo portfolio and the largest vitola of the exceptional Linea 1935",
-    "date": "THE GUILD - THE AVIARY PRIVATE LOUNGE, DIFC - DUBAI - 14 AUGUST 2026"
-  },
-  {
     "image": "https://ik.imagekit.io/ttdzqyoun/events/cohiba-ambar.jpg?updatedAt=1791882865312",
     "category": "EXCLUSIVE NIGHT",
     "title": "THE COHIBA AMBAR NIGHT",
     "copy": "An exclusive evening celebrating the Cohiba Ambar, a distinguished expression created to commemorate the legacy and evolution of the Cohiba name.",
     "date": "PAIR LOUNGE, JUMEIRAH TOWERS HOTEL - DUBAI - 1 OCTOBER 2026"
+  },
+  {
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/leyanda.jpg?updatedAt=1791883569114",
+    "category": "EXCLUSIVE NIGHT",
+    "title": "THE MONTECRISTO LEYANDA NIGHT",
+    "copy": "An exclusive evening featuring the Montecristo Linea 1935 Leyanda, one of the most prestigious Habanos in the Montecristo portfolio and the largest vitola of the exceptional Linea 1935",
+    "date": "THE GUILD - THE AVIARY PRIVATE LOUNGE, DIFC - DUBAI - 14 AUGUST 2026"
   },
   {
     "image": "https://ik.imagekit.io/ttdzqyoun/events/blindtasting.jpg?updatedAt=1791882864345",
