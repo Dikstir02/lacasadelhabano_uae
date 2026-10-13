@@ -33,5 +33,12 @@ window.LCDH_EVENTS = [
     "title": "THE COHIBA SIGLO V NIGHT",
     "copy": "An exclusive evening celebrating the Cohiba Siglo V, one of the rarest and most sought-after cigars in the Cohiba portfolio.",
     "date": "PEACOCK ALLEY - WALDORF ASTORIA, DIFC - DUBAI - 24 JULY 2026"
+  },
+  {
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/allmart_logo__1__EjxCV9hIK.png",
+    "category": "BLIND TASTING NIGHT",
+    "title": "test",
+    "copy": "",
+    "date": "ABU DHABI"
   }
 ];
