@@ -165,7 +165,7 @@ if (eventsData.length > 0) {
                 '<h3 class="event-title display">' + escapeHtml(item.title) + '</h3>' +
                 (item.copy ? '<p class="event-copy">' + escapeHtml(item.copy) + '</p>' : '') +
                 (item.date ? '<p class="event-date">' + escapeHtml(item.date) + '</p>' : '') +
-                '<a id="event-enquire-chat" href="https://wa.me/971542137706" class="event-link" data-open-chat="true" role="button" aria-haspopup="dialog" aria-controls="whatsapp-chatbot" aria-expanded="false">ENQUIRE ABOUT EVENTS &rarr;</a>' +
+                '<a id="event-enquire-chat" href="https://wa.me/971558002731" class="event-link" data-open-chat="true" role="button" aria-haspopup="dialog" aria-controls="whatsapp-chatbot" aria-expanded="false">ENQUIRE ABOUT EVENTS &rarr;</a>' +
             '</div>' +
         '</article>'
     )).join('');
@@ -1001,7 +1001,7 @@ document.querySelectorAll('.footer-location-link[data-location]').forEach(link =
 });
 
 /* ===== WHATSAPP CHATBOT WIDGET ===== */
-const WA_NUMBER = (SETTINGS.contact && SETTINGS.contact.whatsapp) ? SETTINGS.contact.whatsapp : '971542137706';
+const WA_NUMBER = (SETTINGS.contact && SETTINGS.contact.whatsapp) ? SETTINGS.contact.whatsapp : '971558002731';
 const chatWidget = document.getElementById('whatsapp-widget');
 const chatPanel = document.getElementById('whatsapp-chatbot');
 const chatClose = document.getElementById('chatbot-close');

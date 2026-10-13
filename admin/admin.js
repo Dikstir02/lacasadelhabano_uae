@@ -419,7 +419,7 @@ const DEFAULT_SETTINGS = {
     },
     contact: {
         email: 'info@lacasadelhabano.ae',
-        whatsapp: '971542137706',
+        whatsapp: '971558002731',
         whatsappBot: '9715066008888',
         instagram: 'https://instagram.com/lacasadelhabano_uae'
     },
