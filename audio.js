@@ -305,5 +305,33 @@
         }
     });
 
+    /* ===== Mobile view: music only while the page is on screen =====
+       In mobile view (<=767px, the site's breakpoint) leaving the page —
+       switching tabs or apps, locking the phone — turns the music off so
+       it never plays while nobody is looking at the page; coming back
+       turns it on again (one-shot flag, so music is never restarted for
+       a pause we did not cause ourselves). Desktop tabs keep the previous
+       behaviour (music may continue in a background tab), and muted or
+       not-yet-unlocked playback makes no sound anyway, so it is left
+       running for the autoplay-unlock machinery above. */
+    const mobileView = window.matchMedia('(max-width: 767px)');
+    let pausedForHidden = false;
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            if (!pausedForHidden) return;
+            pausedForHidden = false;
+            if (failed || audio.muted || userMuted) return;
+            audio.play().then(updateToggle).catch(updateToggle);
+            return;
+        }
+        if (!mobileView.matches || failed) return;
+        if (!audio.paused && !audio.muted) {
+            audio.pause();
+            pausedForHidden = true;
+            updateToggle();
+        }
+    });
+
     updateToggle();
 })();
