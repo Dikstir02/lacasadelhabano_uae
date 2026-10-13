@@ -1,10 +1,10 @@
 window.LCDH_EVENTS = [
   {
-    "image": "https://ik.imagekit.io/ttdzqyoun/events/Untitled.png?updatedAt=1789852984725",
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/blindtasting.jpg",
     "category": "BLIND TASTING NIGHT",
-    "title": "DUAL HABANOS BLIND TASTING",
-    "copy": "Our Habanos Double Blind Tasting in Abu Dhabi - two Habanos, one challenge, and an evening to remember.",
-    "date": "ABU DHABI"
+    "title": "HABANOS DUAL BLIND TASTING",
+    "copy": "Two Habanos Blind Tasting Experiences. NO LABELS. NO CLUES. Just your senses and your knowledge.",
+    "date": "INTERCONTINENTAL - ABU DHABI - 11 SEPTEMBER 2026"
   },
   {
     "image": "https://www.cubancigarwebsite.com/img/cigarpackaging/cohiba-ambar4.jpg",
