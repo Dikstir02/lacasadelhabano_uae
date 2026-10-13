@@ -7,7 +7,7 @@ window.LCDH_EVENTS = [
     "date": "ABU DHABI"
   },
   {
-    "image": "https://ik.imagekit.io/ttdzqyoun/events/cohiba%20ambar%20night",
+    "image": "https://www.cubancigarwebsite.com/img/cigarpackaging/cohiba-ambar4.jpg",
     "category": "EXCLUSIVE NIGHT",
     "title": "COHIBA AMBAR NIGHT",
     "copy": "An exclusive tasting of the acclaimed Cohiba Ambar at Pair, complemented by a welcome drink and a specially curated cocktail. This year also marks Cohiba’s 60th anniversary, adding a special touch to the occasion.",
