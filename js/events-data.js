@@ -1,6 +1,6 @@
 window.LCDH_EVENTS = [
   {
-    "image": "https://ik.imagekit.io/ttdzqyoun/events/Untitled.png?updatedAt=1789852984725",
+    "image": "https://ik.imagekit.io/ttdzqyoun/events/blindtasting.jpg?updatedAt=1791882864345",
     "category": "BLIND TASTING NIGHT",
     "title": "HABANOS DUAL BLIND TASTING",
     "copy": "Two Habanos Blind Tasting Experience. NO LABELS. NO CLUES. Just your senses and your knowledge.",
