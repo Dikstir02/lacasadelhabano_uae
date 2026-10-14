@@ -2546,11 +2546,23 @@ button.loc-inline-btn {
     .reveal,
     .eyebrow,
     .section-title,
-    .section-copy,
     .section-sub {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+    }
+
+    .section-copy {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: justify;
+        text-align-last: center;
+    }
+
+    /* Heritage copy stays justified on mobile */
+    #heritage .section-copy {
+        text-align: justify;
+        text-align-last: left;
     }
 
     .event-copy,
