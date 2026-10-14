@@ -710,6 +710,10 @@ select:focus-visible {
     color: #d6b46c;
 }
 
+#locations .section-title-cream {
+    color: #d6b46c;
+}
+
 .section-leaf {
     background: var(--habano-gradient);         /* Find Your Casa      */
 }
@@ -2119,6 +2123,7 @@ button.loc-inline-btn {
 
 .footer-nav-section {
     padding-top: 16px;
+    text-align: center;
 }
 
 .footer-nav {
@@ -2128,6 +2133,7 @@ button.loc-inline-btn {
     gap: 12px;
     list-style: none;
     padding: 0;
+    align-items: center;
 }
 
 .footer-nav li {
@@ -2621,6 +2627,49 @@ button.loc-inline-btn {
     .mobile-nav {
         align-items: center;
         text-align: center;
+    }
+}
+
+/* ===== MOBILE REFINEMENTS ===== */
+/* Hero: slightly larger title on phones/tablets */
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: clamp(44px, 11.5vw, 58px);
+    }
+}
+
+/* Hero: narrower stacked buttons on small phones */
+@media (max-width: 639px) {
+    .hero-actions .btn-casa {
+        width: 72%;
+        max-width: 260px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Our Story: justified copy with a centered last line on mobile */
+@media (max-width: 767px) {
+    #about .section-copy {
+        text-align: justify;
+        text-align-last: center;
+    }
+}
+
+/* Footer: headings + link lists explicitly centered on mobile */
+@media (max-width: 767px) {
+    .footer-nav-section,
+    .footer-heading {
+        text-align: center;
+    }
+
+    .footer-nav {
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-nav .footer-link {
+        justify-content: center;
     }
 }
 

@@ -160,6 +160,13 @@ function formatHours(value) {
     return escapeHtml(value).replace(/\r\n|\r|\n/g, '<br>');
 }
 
+/* Keep the "United Arab Emirates" country name on one line in location
+   addresses: escape first, then bind the three words with non-breaking
+   spaces so the line may only break before "United". */
+function formatAddress(value) {
+    return escapeHtml(value).replace(/United Arab Emirates/g, 'United&nbsp;Arab&nbsp;Emirates');
+}
+
 /* In-file event "database". Edit js/events-data.js to change events site-wide. */
 let eventsData = Array.isArray(window.LCDH_EVENTS) ? window.LCDH_EVENTS.slice() : [];
 
@@ -289,7 +296,7 @@ function applySiteSettings() {
                     '</div>' +
                     '<p class="location-copy">' + escapeHtml(loc.copy) + '</p>' +
                     '<hr class="location-rule" aria-hidden="true">' +
-                    '<p class="location-address">' + escapeHtml(loc.address) + '</p>' +
+                    '<p class="location-address">' + formatAddress(loc.address) + '</p>' +
                     '<p class="location-hours">' + formatHours(loc.hours) + '</p>' +
                     '<div class="loc-mobile-actions">' +
                         '<a href="https://wa.me/' + (loc.whatsapp || waNumbers[loc.label] || '') + '?text=' + encodeURIComponent('Hello ' + (loc.title || loc.name || loc.label) + '! I have a question.') + '" class="loc-mobile-btn loc-mobile-whatsapp" data-chat-store="true" data-location="' + escapeHtml(loc.label) + '" data-number="' + (loc.whatsapp || waNumbers[loc.label] || '') + '" data-store="' + escapeHtml(loc.title || loc.name || loc.label) + '" target="_blank" rel="noopener noreferrer">Contact Store ↗</a>' +
@@ -676,7 +683,7 @@ document.addEventListener('visibilitychange', refreshAutoplay);
             loc.marker.bindPopup(
                 '<span class="lp-kicker">' + loc.city + '</span>' +
                 '<span class="lp-title">' + loc.name + '</span>' +
-                '<span class="lp-address">' + loc.address + '</span>' +
+                '<span class="lp-address">' + formatAddress(loc.address) + '</span>' +
                 '<span class="lp-hours">' + formatHours(loc.hours) + '</span>' +
                 '<span class="lp-actions">' +
                     storeLink +
