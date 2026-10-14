@@ -2124,7 +2124,7 @@ button.loc-inline-btn {
 
 .footer-nav-section {
     padding-top: 16px;
-    text-align: center;
+    text-align: left;
 }
 
 .footer-nav {
@@ -2134,7 +2134,7 @@ button.loc-inline-btn {
     gap: 12px;
     list-style: none;
     padding: 0;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .footer-nav li {
