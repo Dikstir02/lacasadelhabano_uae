@@ -1753,6 +1753,7 @@ button.loc-inline-btn {
     font-size: 14px;
     line-height: 24px;
     color: var(--cream);
+    text-align: center;
 }
 
 .location-hours {
