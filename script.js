@@ -281,7 +281,7 @@ function applySiteSettings() {
     const pillNames = {
         'Abu Dhabi Mall - Abu Dhabi': 'Abu Dhabi Mall',
         'City Walk - Dubai': 'City Walk',
-        'JBR - Dubai': 'Jumeirah (JBR)'
+        'JBR - Dubai': 'Jumeirah Beach Residences'
     };
     if (pillsWrap && locs.length) {
         pillsWrap.innerHTML = locs.map((loc) => {

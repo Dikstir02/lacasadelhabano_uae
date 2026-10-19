@@ -152,7 +152,7 @@ select:focus-visible {
 
 .section {
     width: 100%;
-    padding-top: 96px;
+    padding-top: 56px;
     padding-bottom: 96px;
     position: relative;
 }
@@ -1229,6 +1229,12 @@ body.experience-modal-open { overflow: hidden; }
     }
 }
 
+@media (max-width: 1023.98px) {
+    #events .section-title {
+        margin-top: 8px;
+    }
+}
+
 .events-arrows button {
     display: flex;
     align-items: center;
@@ -1641,65 +1647,48 @@ body.experience-modal-open { overflow: hidden; }
 
     #locations .section-title {
         text-align: center;
+        margin-top: 8px;
     }
 }
 
-/* --- Mobile location cards as pill buttons above the map --- */
+/* --- Mobile location pills above the map: 2 across, 1 full-width bottom --- */
 @media (max-width: 1023.98px) {
     .location-pills {
-        display: none;
-    }
-    .locations-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 16px;
+        gap: 10px;
     }
-    .locations-grid .location-card:nth-child(3) {
+    .location-pills .location-pill:nth-child(3) {
         grid-column: 1 / -1;
     }
-    .locations-grid .location-card {
-        background: var(--navy-deep);
+    .location-pills .location-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 8px 10px;
         border: 1px solid rgba(254, 231, 198, .5);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        margin: 0;
+        border-radius: var(--radius-sm);
+        background: var(--navy-deep);
+        color: var(--gold-outline);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.2;
         transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        cursor: pointer;
     }
-    .locations-grid .location-card:hover {
+    .location-pills .location-pill:hover {
         transform: translateY(-4px);
         box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
         border-color: rgba(167, 153, 110, .8);
     }
-    .locations-grid .location-body {
-        padding: 16px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    .location-pills .location-pill.active {
+        border-color: var(--sand);
+        box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(0, 0, 0, .6);
     }
-    .locations-grid .loc-mobile-head {
-        align-items: center;
-        gap: 0;
-        margin-bottom: 0;
-        text-align: center;
-    }
-    .locations-grid .location-city {
-        display: none;
-    }
-    .locations-grid .location-title {
-        font-size: 18px;
-        font-weight: 700;
-        letter-spacing: .06em;
-        color: var(--gold-outline);
-        margin: 0;
-        line-height: 1.2;
-        text-transform: uppercase;
-    }
-    .locations-grid .location-copy,
-    .locations-grid .location-rule,
-    .locations-grid .location-address,
-    .locations-grid .location-hours,
-    .locations-grid .loc-mobile-actions {
+    .locations-grid {
         display: none;
     }
 }
@@ -1750,32 +1739,6 @@ body.experience-modal-open { overflow: hidden; }
     color: var(--cream);
     text-transform: uppercase;
     line-height: 1.25;
-}
-
-/* Phones/tablets: single-line pills — the city sub-label (ABU DHABI /
-   DUBAI) is removed from the markup, and the smaller non-wrapping type
-   keeps all three Casas in one row. */
-@media (max-width: 1023.98px) {
-    .location-pills {
-        flex-wrap: nowrap;
-    }
-    .location-pill {
-        flex: 1 1 0;
-        min-width: 0;
-        padding: 10px 6px;
-        gap: 0;
-    }
-    .pill-name {
-        font-size: 11px;
-        letter-spacing: .03em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-    }
-    .pill-city {
-        display: none;
-    }
 }
 
 /* Flash the pill reached via a footer deep-link (mobile) */
@@ -2093,7 +2056,7 @@ button.loc-inline-btn {
     height: 100%;
     min-height: 380px;
     border: 1px solid rgba(254, 231, 198, .45);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     overflow: hidden;
     background: var(--navy);
     box-shadow: 0 30px 60px -24px rgba(46, 1, 9, .6);
