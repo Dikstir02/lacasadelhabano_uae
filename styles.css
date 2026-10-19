@@ -796,28 +796,102 @@ select:focus-visible {
     }
 }
 
-/* Phones (<640px): 2x2 grid instead of the single stacked column, with
-   compact card bodies so the four half-width cards stay balanced. */
+/* Phones (<640px): 2x2 tappable image squares. The image fills the square;
+   the body becomes a gradient overlay, hidden until tap (JS toggles
+   .exp-touched), hover, or keyboard focus. Cards carry no data-experience
+   attribute, so taps here never trigger the detail modal. The margin reset
+   defeats the global "center everything" rule (.reveal { margin auto })
+   that otherwise makes grid items overlap on narrow iPhones. */
 @media (max-width: 639.98px) {
     .experience-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         margin-top: 40px;
     }
-    .experience-body {
+    .experience-grid > * {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .experience-grid .experience-card.reveal {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        aspect-ratio: 1 / 1;
         min-height: 0;
-        padding: 12px 10px 14px;
+        /* Belt-and-suspenders: the overlay gradient may end up wider than
+           the square on some engines — clip everything at the card edge
+           (and its rounded corners) so no title glyph can ever paint
+           outside the card. */
+        overflow: hidden;
     }
-    .experience-number {
-        font-size: 22px;
+    .experience-grid .experience-card:hover {
+        transform: none;
     }
-    .experience-title {
-        font-size: 14px;
+    .experience-grid .experience-img {
+        position: absolute;
+        inset: 0;
+        aspect-ratio: auto;
+        max-width: 100%;
     }
-    .experience-copy {
-        margin-top: 6px;
-        font-size: 12px;
-        line-height: 1.5;
+    .experience-grid .experience-body {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        text-align: left;
+        overflow: hidden;
+        background: linear-gradient(to top, rgba(26, 1, 6, .92) 0%, rgba(26, 1, 6, .55) 55%, rgba(26, 1, 6, 0) 100%);
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity .3s ease, transform .3s ease;
+        pointer-events: none;
+    }
+    .experience-grid .experience-card.exp-touched .experience-body,
+    .experience-grid .experience-card:hover .experience-body,
+    .experience-grid .experience-card:focus-within .experience-body {
+        opacity: 1;
+        transform: none;
+    }
+    .experience-grid .experience-number {
+        display: none;
+    }
+    .experience-grid .experience-title {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: .04em;
+        text-align: left;
+        /* Titles are split as THE<br>WORD in markup; keep the break clean
+           and never split inside a word. Card/body overflow:hidden clips
+           any stray glyph at the card edge. */
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+    /* Higher specificity than the base ".experience-title br" rule further
+       down the file, so the break always wins on phones regardless of
+       source order. display:inline restores the <br>'s natural line break. */
+    .experience-grid .experience-title br {
+        display: inline;
+    }
+    .experience-grid .experience-copy {
+        margin-top: 5px;
+        max-width: 100%;
+        font-size: 11px;
+        line-height: 1.45;
+        text-align: left;
+        color: var(--cream);
     }
 }
 
@@ -917,6 +991,12 @@ select:focus-visible {
     letter-spacing: .04em;
     text-align: center;
     color: #d6b46c;
+}
+
+/* Title line-breaks are phone-only (2-line square overlays); desktop keeps
+   the original single-line titles. */
+.experience-title br {
+    display: none;
 }
 
 .experience-copy {

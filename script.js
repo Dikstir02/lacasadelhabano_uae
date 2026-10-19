@@ -902,6 +902,29 @@ document.addEventListener('visibilitychange', refreshAutoplay);
     document.addEventListener('focusin', event => {
         if (modal.classList.contains('open') && !modal.contains(event.target)) closeButton.focus();
     });
+
+    /* Phones (<640px): cards are image squares with the text hidden in an
+       overlay — a touch toggles .exp-touched to reveal it. Only one card
+       open at a time; tapping elsewhere closes any open one. Harmless on
+       desktop (no data-experience-free cards change state visually). */
+    const expCards = Array.from(document.querySelectorAll('.experience-card:not([data-experience])'));
+    if (expCards.length) {
+        document.addEventListener('click', event => {
+            const tapped = event.target.closest ? event.target.closest('.experience-card') : null;
+            expCards.forEach(card => {
+                if (card === tapped) {
+                    card.classList.toggle('exp-touched');
+                } else {
+                    card.classList.remove('exp-touched');
+                }
+            });
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                expCards.forEach(card => card.classList.remove('exp-touched'));
+            }
+        });
+    }
 })();
 
 /* ===== HERITAGE STORY MODAL ===== */
