@@ -1628,7 +1628,7 @@ body.experience-modal-open { overflow: hidden; }
     }
 
     .locations-grid {
-        display: none;
+        display: grid;
     }
 
     .map-wrap {
@@ -1990,7 +1990,7 @@ button.loc-inline-btn {
     font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 30px;
     font-weight: 600;
-    color: var(--cream);
+    color: #fff;
 }
 
 .location-copy {
