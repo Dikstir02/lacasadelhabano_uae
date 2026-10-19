@@ -1353,15 +1353,36 @@ document.addEventListener('contextmenu', (event) => {
 });
 
 /* ===== SITE VISIT COUNTER =====
-   Each page load bumps a counter kept by the free Abacus API (the
-   CountAPI successor - keyless, CORS-enabled, no backend needed).
-   Purely best-effort: any failure is swallowed so the public site
-   never depends on it. The admin panel reads the same counter
-   through the read-only /get endpoint. */
+   Each page load bumps three counters kept by the free Abacus API (the
+   CountAPI successor - keyless, CORS-enabled, no backend needed):
+     home          - all-time total (the admin's topbar chip)
+     m-YYYY-MM     - visits segregated by month (the admin's month picker)
+     d-YYYY-MM-DD  - visits per day (the chart behind the chosen month)
+   The day rolls over at midnight UAE time (Asia/Dubai) so every bucket
+   matches the business day wherever the visitor lives. Purely
+   best-effort: any failure is swallowed so the public site never depends
+   on it. The admin panel reads the counters through the read-only /get
+   endpoint, so opening the panel never inflates them. */
 (function trackVisit() {
     try {
-        fetch('https://abacus.jasoncameron.dev/hit/lcdh-uae-visits-lcdh02/home', { cache: 'no-store' })
-            .catch(function () { /* offline or API down - ignore */ });
+        var NS = 'lcdh-uae-visits-lcdh02';
+        /* Build YYYY-MM-DD from Intl parts so the key format never depends
+           on the visitor's locale (formatToParts beats toISOString, which
+           would use UTC days instead of UAE days). */
+        var parts = new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Asia/Dubai', year: 'numeric', month: '2-digit', day: '2-digit'
+        }).formatToParts(new Date());
+        var part = function (type) {
+            for (var i = 0; i < parts.length; i++) {
+                if (parts[i].type === type) return parts[i].value;
+            }
+            return '';
+        };
+        var isoDay = part('year') + '-' + part('month') + '-' + part('day');
+        ['home', 'm-' + isoDay.slice(0, 7), 'd-' + isoDay].forEach(function (key) {
+            fetch('https://abacus.jasoncameron.dev/hit/' + NS + '/' + key, { cache: 'no-store' })
+                .catch(function () { /* offline or API down - ignore */ });
+        });
     } catch (error) { /* ignore */
     }
 })();

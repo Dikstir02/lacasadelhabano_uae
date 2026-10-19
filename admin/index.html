@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css?v=8">
+    <link rel="stylesheet" href="admin.css?v=9">
 </head>
 <body>
 
@@ -50,6 +50,7 @@
 
         <nav class="tabs" aria-label="Admin sections">
             <button type="button" class="tab-btn active" data-panel="events">Events</button>
+            <button type="button" class="tab-btn" data-panel="visits">Visits</button>
             <button type="button" class="tab-btn" data-panel="settings">Site Settings</button>
             <button type="button" class="tab-btn" data-panel="github">GitHub Sync</button>
         </nav>
@@ -101,6 +102,29 @@
         </main>
         </div>
 
+        <div id="panel-visits" class="hidden">
+        <main class="layout visits-layout">
+            <section class="card">
+                <h2 class="card-title">Site visits by month</h2>
+                <p class="settings-hint">Every page load of the public site bumps a month counter (<code>m-YYYY-MM</code>) and a day counter (<code>d-YYYY-MM-DD</code>) through the free Abacus API, using the UAE day - so visits are segregated by month automatically. Pick a month below and its daily chart is generated for you; the all-time chip up top still counts everything. Daily tracking starts with this release, so earlier months show no bars.</p>
+
+                <div class="visits-toolbar">
+                    <div class="visits-picker">
+                        <label class="field-label" for="visits-month">Month</label>
+                        <select id="visits-month" aria-label="Month to chart">
+                            <option value="">Loading months…</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-ghost" id="visits-refresh-btn">Refresh</button>
+                </div>
+
+                <div class="visits-stats" id="visits-stats"></div>
+                <p class="visits-chart-title" id="visits-chart-title"></p>
+                <div class="visits-chart" id="visits-chart" role="img" aria-label="Daily visit chart"></div>
+            </section>
+        </main>
+        </div>
+
         <div id="panel-settings" class="hidden">
         <main class="layout">
             <section class="card">
@@ -146,6 +170,6 @@
 
     <div class="status-toast" id="status-toast" role="status"></div>
 
-    <script src="admin.js?v=14"></script>
+    <script src="admin.js?v=15"></script>
 </body>
 </html>

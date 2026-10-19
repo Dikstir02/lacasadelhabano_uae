@@ -131,28 +131,240 @@ function showStatusWithLink(message, linkText, linkHref) {
     statusTimer = setTimeout(() => toast.classList.remove('show'), 15000);
 }
 
-/* ===== site visits (Abacus counter - read-only) ===== */
-/* The public site bumps this counter on every page load via the free
-   Abacus API (CountAPI successor - keyless, CORS-enabled). Here we only
-   READ it with the /get endpoint, so opening the admin panel never
-   inflates the number. */
-const VISITS_API = 'https://abacus.jasoncameron.dev/get/lcdh-uae-visits-lcdh02/home';
+/* ===== site visits (Abacus counters - read-only) ===== */
+/* The public site bumps three counters on every page load via the free
+   Abacus API (CountAPI successor - keyless, CORS-enabled):
+     home          - all-time total (the topbar chip)
+     m-YYYY-MM     - visits segregated by month
+     d-YYYY-MM-DD  - visits per day (the chart for the chosen month)
+   Here we only READ with the /get endpoint, so opening the admin panel
+   never inflates the numbers. Days roll over at midnight UAE time, so
+   every bucket matches the business day in Dubai - the same keys the
+   tracker in script.js writes. */
+const VISITS_NS = 'lcdh-uae-visits-lcdh02';
+const VISITS_GET = 'https://abacus.jasoncameron.dev/get/' + VISITS_NS + '/';
+/* How far back the month picker probes for months with visits. */
+const VISITS_MONTH_LOOKBACK = 24;
+
+/* Read one counter. Resolves to its number (404 = never hit = 0), or to
+   null when the API could not be reached at all. */
+async function visitsGet(key) {
+    try {
+        const resp = await fetch(VISITS_GET + key, { cache: 'no-store' });
+        if (resp.ok) {
+            const data = await resp.json();
+            return Number(data.value || 0);
+        }
+        return resp.status === 404 ? 0 : null;
+    } catch (error) {
+        return null;
+    }
+}
 
 async function loadVisitsCount() {
     const chip = $('#visits-count');
     if (!chip) return;
     chip.textContent = 'Visits: …';
-    try {
-        const resp = await fetch(VISITS_API, { cache: 'no-store' });
-        /* 404 = counter not created yet (no visits have been counted) */
-        const value = resp.ok ? (await resp.json()).value : 0;
-        chip.textContent = 'Visits: ' + Number(value || 0).toLocaleString('en-US');
-    } catch (error) {
-        chip.textContent = 'Visits: unavailable';
-    }
+    const value = await visitsGet('home');
+    chip.textContent = value === null
+        ? 'Visits: unavailable'
+        : 'Visits: ' + value.toLocaleString('en-US');
 }
 
 $('#visits-count').addEventListener('click', loadVisitsCount);
+
+/* ---- month segregation: picker + daily chart ---- */
+
+/* YYYY-MM-DD of "now" in the UAE - mirrors the tracker in script.js. */
+function uaeDateKey(date) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Dubai', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(date);
+    const get = (type) => (parts.find((p) => p.type === type) || {}).value || '';
+    return get('year') + '-' + get('month') + '-' + get('day');
+}
+
+function uaeTodayKey() { return uaeDateKey(new Date()); }
+
+/* "2026-10" -> "October 2026" (or "Oct" when longForm is false) */
+function monthLabel(monthKey, longForm) {
+    const [year, month] = monthKey.split('-').map(Number);
+    return new Date(year, month - 1, 1).toLocaleDateString('en-US',
+        longForm === false ? { month: 'short' } : { month: 'long', year: 'numeric' });
+}
+
+function visitStat(label, value, valueClass) {
+    return '<div class="visit-stat">'
+        + '<span class="visit-stat-label">' + escapeHtml(label) + '</span>'
+        + '<span class="visit-stat-value' + (valueClass ? ' ' + valueClass : '') + '">'
+        + escapeHtml(value) + '</span></div>';
+}
+
+const VISIT_MONTH_TOTALS = new Map();   /* 'YYYY-MM' -> its m- counter */
+let visitsReady = false;
+let visitsReqId = 0;   /* drops stale chart loads after a quick month switch */
+
+/* Fill the picker with the current month plus every month in the lookback
+   window that actually has visits. Returns the offered month keys. */
+async function populateMonthPicker(keep) {
+    const select = $('#visits-month');
+    const today = uaeTodayKey();
+    const keys = [];
+    let [year, month] = today.slice(0, 7).split('-').map(Number);
+    for (let i = 0; i < VISITS_MONTH_LOOKBACK; i++) {
+        keys.push(year + '-' + String(month).padStart(2, '0'));
+        month -= 1;
+        if (month === 0) { month = 12; year -= 1; }
+    }
+
+    const totals = await Promise.all(keys.map((key) => visitsGet('m-' + key)));
+    keys.forEach((key, i) => { if (totals[i] !== null) VISIT_MONTH_TOTALS.set(key, totals[i]); });
+
+    /* Index 0 is "now" - always offered so a fresh deploy shows its
+       (empty) chart instead of a blank picker. Past months only appear
+       when they recorded at least one visit. */
+    const offered = keys.filter((key, i) => i === 0 || (totals[i] || 0) > 0);
+    /* keep = the month the admin was on (captured before the loading
+       option blanked the select), so Refresh never jumps back to "now". */
+    const selected = keep || select.value;
+
+    select.innerHTML = offered.map((key) =>
+        '<option value="' + key + '">' + escapeHtml(monthLabel(key)) + '</option>').join('');
+    if (selected && offered.indexOf(selected) !== -1) select.value = selected;
+    return offered;
+}
+
+async function loadMonthChart(monthKey) {
+    const chart = $('#visits-chart');
+    const stats = $('#visits-stats');
+    const title = $('#visits-chart-title');
+    if (!chart || !monthKey) return;
+
+    const reqId = ++visitsReqId;
+    const [year, month] = monthKey.split('-').map(Number);
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const today = uaeTodayKey();
+    /* The current month charts only up to today (UAE time); finished
+       months chart every day. */
+    const lastDay = (monthKey >= today.slice(0, 7)) ? Number(today.slice(8, 10)) : daysInMonth;
+    const label = monthLabel(monthKey);
+
+    title.textContent = label + ' - visits per day';
+    stats.innerHTML = ['Total visits', 'Average / day', 'Busiest day', 'vs previous month']
+        .map((name) => visitStat(name, '…')).join('');
+    chart.innerHTML = '<p class="visits-empty">Loading ' + escapeHtml(label) + '…</p>';
+
+    const dayKeys = [];
+    for (let day = 1; day <= lastDay; day++) {
+        dayKeys.push('d-' + monthKey + '-' + String(day).padStart(2, '0'));
+    }
+    const values = await Promise.all(dayKeys.map((key) => visitsGet(key)));
+    if (reqId !== visitsReqId) return;   /* a newer month was picked meanwhile */
+
+    const dayValues = values.map((value) => value || 0);
+    renderVisitsChart(monthKey, dayValues, lastDay, values.every((value) => value === null));
+    renderVisitsStats(monthKey, dayValues, lastDay);
+}
+
+function renderVisitsChart(monthKey, values, lastDay, unreachable) {
+    const chart = $('#visits-chart');
+    const label = monthLabel(monthKey);
+    chart.setAttribute('aria-label', 'Daily visits for ' + label);
+
+    if (unreachable) {
+        chart.innerHTML = '<p class="visits-empty">The visit counters could not be reached.<br>'
+            + 'Check the connection and press Refresh.</p>';
+        return;
+    }
+
+    const max = Math.max.apply(null, values);
+    if (max <= 0) {
+        chart.innerHTML = '<p class="visits-empty">No visits recorded for ' + escapeHtml(label)
+            + ' yet.<br>The bars fill in as visitors open the public site.</p>';
+        return;
+    }
+
+    const abbr = monthLabel(monthKey, false);
+    let html = '';
+    values.forEach((value, index) => {
+        const day = index + 1;
+        /* Day numbers appear on day 1, every 5th day and the last charted
+           day - 31 labels side by side never fit on a phone. */
+        const showDay = day === 1 || day % 5 === 0 || day === lastDay;
+        const tip = abbr + ' ' + day + ' · ' + value + (value === 1 ? ' visit' : ' visits');
+        html += '<div class="chart-col" title="' + escapeHtml(tip) + '">'
+            + '<span class="chart-value">' + (value > 0 ? value : '') + '</span>'
+            + '<div class="chart-plot">'
+            + (value > 0
+                ? '<div class="chart-bar" style="height:' + Math.round((value / max) * 100) + '%"></div>'
+                : '<div class="chart-bar zero"></div>')
+            + '</div>'
+            + '<span class="chart-day' + (showDay ? '' : ' blank') + '">' + day + '</span>'
+            + '</div>';
+    });
+    chart.innerHTML = html;
+}
+
+function renderVisitsStats(monthKey, dayValues, lastDay) {
+    const stats = $('#visits-stats');
+    const daySum = dayValues.reduce((sum, value) => sum + value, 0);
+    /* The monthly counter is the authoritative total; the day counters
+       stand in until the m- key has been read. */
+    const total = VISIT_MONTH_TOTALS.has(monthKey) ? VISIT_MONTH_TOTALS.get(monthKey) : daySum;
+    const avg = lastDay > 0 ? Math.round((total / lastDay) * 10) / 10 : 0;
+
+    let peakIndex = -1;
+    let peakValue = -1;
+    dayValues.forEach((value, index) => {
+        if (value > peakValue) { peakValue = value; peakIndex = index; }
+    });
+    const peak = peakValue > 0
+        ? monthLabel(monthKey, false) + ' ' + (peakIndex + 1) + ' · ' + peakValue.toLocaleString('en-US')
+        : '—';
+
+    /* Month-over-month - both sides read from the same m- counters. */
+    const [year, month] = monthKey.split('-').map(Number);
+    const prevKey = month === 1
+        ? (year - 1) + '-12'
+        : year + '-' + String(month - 1).padStart(2, '0');
+    let momValue = '—';
+    let momClass = '';
+    if (VISIT_MONTH_TOTALS.has(prevKey) && VISIT_MONTH_TOTALS.get(prevKey) > 0) {
+        const prev = VISIT_MONTH_TOTALS.get(prevKey);
+        const delta = Math.round(((total - prev) / prev) * 100);
+        momValue = (delta >= 0 ? '+' : '') + delta + '%';
+        momClass = delta >= 0 ? 'up' : 'down';
+    }
+
+    stats.innerHTML =
+        visitStat('Total visits', total.toLocaleString('en-US')) +
+        visitStat('Average / day', avg.toLocaleString('en-US')) +
+        visitStat('Busiest day', peak) +
+        visitStat('vs previous month', momValue, momClass);
+}
+
+/* Opened lazily on the first visit to the Visits tab so logging in stays
+   instant - the month probe only fires when the admin asks for it. */
+async function initVisitsPanel(force) {
+    const select = $('#visits-month');
+    if (!select || (visitsReady && !force)) return;
+    const keep = select.value;
+    select.innerHTML = '<option value="">Loading months…</option>';
+    const offered = await populateMonthPicker(keep);
+    visitsReady = true;
+    if (!offered.length) {
+        $('#visits-chart').innerHTML = '<p class="visits-empty">No month counters found yet.</p>';
+        return;
+    }
+    await loadMonthChart(select.value);
+}
+
+$('#visits-month').addEventListener('change', (event) => loadMonthChart(event.target.value));
+
+$('#visits-refresh-btn').addEventListener('click', async () => {
+    await initVisitsPanel(true);
+    showStatus('Visit data refreshed ✓');
+});
 
 /* ===== login ===== */
 
@@ -1246,7 +1458,7 @@ $('#gh-test-btn').addEventListener('click', async () => {
 
 /* ===== admin tabs ===== */
 
-const PANEL_IDS = ['events', 'settings', 'github'];
+const PANEL_IDS = ['events', 'visits', 'settings', 'github'];
 
 document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -1255,6 +1467,7 @@ document.querySelectorAll('.tab-btn').forEach((btn) => {
             const panel = $('#panel-' + name);
             if (panel) panel.classList.toggle('hidden', btn.dataset.panel !== name);
         });
+        if (btn.dataset.panel === 'visits') initVisitsPanel();
         if (btn.dataset.panel === 'settings') renderSettingsForm();
         if (btn.dataset.panel === 'github') renderGitHubPanel();
     });

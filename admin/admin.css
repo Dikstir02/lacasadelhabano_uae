@@ -477,3 +477,162 @@ textarea { resize: vertical; }
 }
 
 .visits-chip:hover { border-color: var(--gold); }
+
+/* ===== SITE VISITS (month picker + daily chart) ===== */
+select {
+    width: 100%;
+    background: rgba(46, 1, 9, .55);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    font: inherit;
+    padding: 11px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color .2s ease;
+}
+
+select:focus { border-color: var(--gold); }
+select option { background: var(--brand-red-darkest); color: var(--cream); }
+
+.visits-layout { grid-template-columns: 1fr; }
+
+.visits-toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.visits-picker { flex: 1 1 240px; max-width: 320px; }
+.visits-toolbar .field-label { margin-top: 0; }
+
+.visits-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.visit-stat {
+    border: 1px solid var(--line);
+    background: rgba(254, 231, 198, .06);
+    padding: 10px 12px;
+    min-width: 0;
+}
+
+.visit-stat-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .65;
+}
+
+.visit-stat-value {
+    display: block;
+    margin-top: 4px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold);
+    overflow-wrap: anywhere;
+}
+
+.visit-stat-value.up { color: #a8e2b1; }
+.visit-stat-value.down { color: #f0b4b4; }
+
+.visits-chart-title {
+    margin-top: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .8;
+}
+
+/* Chart: each .chart-col stacks a fixed value row, a relative plot area
+   (bars are % of it - absolutes against a definite containing block, so
+   no browser disagreement) and a fixed day-label row. */
+.visits-chart {
+    display: flex;
+    align-items: stretch;
+    gap: 3px;
+    height: 240px;
+    margin-top: 10px;
+}
+
+.chart-col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-value {
+    height: 14px;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 14px;
+    opacity: .75;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.chart-plot {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.chart-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, var(--brand-red-dark), var(--brand-gold));
+    transition: filter .2s ease;
+}
+
+.chart-bar.zero { height: 2px; background: var(--cream); opacity: .3; }
+.chart-col:hover .chart-bar { filter: brightness(1.25); }
+
+.chart-day {
+    height: 16px;
+    margin-top: 5px;
+    font-size: 9px;
+    text-align: center;
+    line-height: 16px;
+    opacity: .55;
+    overflow: hidden;
+}
+
+.chart-day.blank { visibility: hidden; }
+
+.visits-empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    border: 1px dashed var(--line);
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: .75;
+}
+
+@media (max-width: 900px) {
+    .visits-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .visits-chart { height: 200px; gap: 2px; }
+    .chart-value { display: none; }   /* ~31 columns are far too narrow to label */
+}
+
+@media (max-width: 480px) {
+    .visits-chart { height: 170px; }
+    .visit-stat-value { font-size: 17px; }
+}
