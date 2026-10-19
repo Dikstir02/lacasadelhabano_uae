@@ -1628,7 +1628,7 @@ body.experience-modal-open { overflow: hidden; }
     }
 
     .locations-grid {
-        display: grid;
+        display: none;
     }
 
     .map-wrap {
