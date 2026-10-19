@@ -3009,6 +3009,28 @@ button.loc-inline-btn {
     .footer-nav .footer-link {
         justify-content: center;
     }
+
+    /* Compact vertical rhythm: categories 24px apart (16px grid gap + 8px
+       section padding, down from 40+16=56px originally); headings 10px
+       above their links (was 20px); link rows 10px apart (was 12px). */
+    .footer-grid {
+        gap: 16px;
+        padding-bottom: 32px;
+    }
+
+    .footer-nav-section {
+        padding-top: 8px;
+    }
+
+    .footer-nav-section .footer-nav {
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    .footer-bottom {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
 }
 
 /* ===== AGE GATE (21+) ===== */
