@@ -796,6 +796,31 @@ select:focus-visible {
     }
 }
 
+/* Phones (<640px): 2x2 grid instead of the single stacked column, with
+   compact card bodies so the four half-width cards stay balanced. */
+@media (max-width: 639.98px) {
+    .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 40px;
+    }
+    .experience-body {
+        min-height: 0;
+        padding: 12px 10px 14px;
+    }
+    .experience-number {
+        font-size: 22px;
+    }
+    .experience-title {
+        font-size: 14px;
+    }
+    .experience-copy {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
 @media (min-width: 1024px) {
     .experience-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -1458,24 +1483,137 @@ body.experience-modal-open { overflow: hidden; }
     }
 }
 
-/* --- Mobile: photo-card style (original look) --- */
+/* --- Mobile: Casa pills above the inline map (same Casa-pick + map
+   interaction as desktop, stacked in a single column) --- */
 .locations-grid {
     display: none;
     margin-top: 56px;
     gap: 24px;
 }
 
-/* --- Mobile: info cards only --- */
-/* Both the Casa list and the inline Leaflet map are desktop-only below
-   1024px: the map is heavy on a phone, so each card's View in Google Maps
-   button links straight to that Casa's Google Maps listing instead. */
+.location-pills {
+    display: none;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
 @media (max-width: 1023.98px) {
     .locations-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .location-link {
         display: none;
     }
 
+    .location-pills {
+        display: flex;
+    }
+
     .locations-grid {
-        display: grid;
+        display: none;
+    }
+
+    .map-wrap {
+        height: 420px;
+    }
+
+    .locations-map {
+        height: 420px;
+    }
+
+    #locations .section-title {
+        text-align: center;
+    }
+}
+
+/* --- Mobile Casa pills --- */
+.location-pill {
+    flex: 1 1 26%;
+    min-width: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 10px 12px;
+    border: 1px solid rgba(254, 231, 198, .5);
+    border-radius: var(--radius-lg);
+    background: var(--navy-deep);
+    cursor: pointer;
+    text-align: center;
+    font-family: inherit;
+    color: var(--cream);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.location-pill:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
+    border-color: rgba(167, 153, 110, .8);
+}
+
+.location-pill.active {
+    border-color: var(--sand);
+    box-shadow: 0 0 0 1px var(--sand), 0 22px 40px -18px rgba(0, 0, 0, .6);
+}
+
+.pill-name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--gold-outline);
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.pill-city {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: var(--cream);
+    text-transform: uppercase;
+    line-height: 1.25;
+}
+
+/* Phones/tablets: single-line pills — the city sub-label (ABU DHABI /
+   DUBAI) is removed from the markup, and the smaller non-wrapping type
+   keeps all three Casas in one row. */
+@media (max-width: 1023.98px) {
+    .location-pills {
+        flex-wrap: nowrap;
+    }
+    .location-pill {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 10px 6px;
+        gap: 0;
+    }
+    .pill-name {
+        font-size: 11px;
+        letter-spacing: .03em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    .pill-city {
+        display: none;
+    }
+}
+}
+
+/* Flash the pill reached via a footer deep-link (mobile) */
+.location-pill--flash {
+    animation: location-card-flash 1.6s ease;
+}
+
+/* Hide pills on desktop — desktop keeps its rows beside the map */
+@media (min-width: 1024px) {
+    .location-pills {
+        display: none;
     }
 }
 
@@ -1717,6 +1855,15 @@ button.loc-inline-btn {
     transform: translateX(4px);
 }
 
+/* Hide the desktop Casa rows (and their container) on phones. This must
+   live AFTER the base .location-link rules above so the cascade wins —
+   the pills replace these rows below 1024px. */
+@media (max-width: 1023.98px) {
+    .location-links {
+        display: none;
+    }
+}
+
 .location-city {
     font-size: 13px;
     font-weight: 700;
@@ -1777,6 +1924,36 @@ button.loc-inline-btn {
     overflow: hidden;
     background: var(--navy);
     box-shadow: 0 30px 60px -24px rgba(46, 1, 9, .6);
+    box-shadow: 0 30px 60px -24px rgba(46, 1, 9, .6);
+}
+
+/* Mobile (phones/tablets <1024px): give the map + its wrapper a definite
+   pixel height AFTER the base rules so the cascade can't fall back to the
+   fragile `height:100%` chain. Without this, Leaflet can initialize with a
+   zero/incorrect size on small screens and render no tiles. */
+@media (max-width: 1023.98px) {
+    .map-wrap {
+        height: 420px;
+        min-height: 420px;
+    }
+    /* The phone (<768px) centering pass gives every .reveal element
+       margin-left/right:auto — but .map-wrap carries .reveal, and in a
+       flex column auto side-margins override `stretch`, collapsing the
+       wrapper to ~zero width (blank Leaflet). This higher-specificity
+       reset keeps the map full-width on phones. */
+    .map-wrap.reveal {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        align-self: stretch;
+    }
+    .locations-map {
+        height: 420px;
+        min-height: 420px;
+    }
+}
+
+/* Leaflet map theming to match the site */
 }
 
 /* Leaflet map theming to match the site */

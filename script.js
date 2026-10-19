@@ -274,6 +274,24 @@ function applySiteSettings() {
         ).join('');
     }
 
+    /* Mobile Casa pills - shown above the inline map on phones. Tapping a
+       pill selects that Casa on the map (same as a desktop row) and
+       pre-selects it in the contact form. */
+    const pillsWrap = document.getElementById('location-pills');
+    const pillNames = {
+        'Abu Dhabi Mall - Abu Dhabi': 'Abu Dhabi Mall',
+        'City Walk - Dubai': 'City Walk',
+        'JBR - Dubai': 'Jumeirah (JBR)'
+    };
+    if (pillsWrap && locs.length) {
+        pillsWrap.innerHTML = locs.map((loc) => {
+            const name = (pillNames[loc.label] || loc.title || loc.name || loc.label).toUpperCase();
+            return '<button type="button" class="location-pill" data-location="' + escapeHtml(loc.label) + '">' +
+                '<span class="pill-name">' + escapeHtml(name) + '</span>' +
+                '</button>';
+        }).join('');
+    }
+
                 /* Mobile location cards - on mobile the locations-grid renders a
        compact, info-only card (no image), mirroring the desktop
        location-link row style. Each card carries its own tappable
@@ -636,16 +654,15 @@ document.addEventListener('visibilitychange', refreshAutoplay);
     });
 
 
-    /* The inline map is desktop-only: below 1024px the CSS hides
-       .locations-layout and the cards link straight to Google Maps.
-       Leaflet cannot measure a hidden container, so the map is mounted
-       only while the desktop layout is active - and mounted later if the
-       viewport grows back. */
+    /* The inline map container is visible on both breakpoints now
+       (pills stack above the map on phones), so mount it once and
+       re-measure whenever the viewport changes. */
     const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    const mobileQuery = window.matchMedia('(max-width: 1023.98px)');
     let map = null;
 
     function mountInlineMap() {
-        if (map || !desktopQuery.matches) return;
+        if (map) return;
 
         map = L.map(mapEl, {
             scrollWheelZoom: false,
@@ -705,20 +722,40 @@ document.addEventListener('visibilitychange', refreshAutoplay);
         setTimeout(() => map.invalidateSize(), 400);
     }
 
-    /* Mount now if the desktop layout is active, and again if it becomes
-       active later (rotate / resize back to desktop). */
+    /* Mount now, and re-measure on rotate / resize / breakpoint change. */
     mountInlineMap();
-    if (desktopQuery.addEventListener) {
-        desktopQuery.addEventListener('change', mountInlineMap);
-    } else if (desktopQuery.addListener) {
-        desktopQuery.addListener(mountInlineMap);
+
+    const refreshMap = function () {
+        if (map) map.invalidateSize();
+    };
+    window.addEventListener('load', refreshMap);
+    setTimeout(refreshMap, 400);
+    [desktopQuery, mobileQuery].forEach(function (q) {
+        if (q.addEventListener) {
+            q.addEventListener('change', refreshMap);
+        } else if (q.addListener) {
+            q.addListener(refreshMap);
+        }
+    });
+
+    /* Re-measure whenever the map's box actually changes size (reveal
+       animation settling, orientation change, DevTools resize). Leaflet
+       caches its size at init — without this it can render a blank tile
+       area on small screens even though the container has a valid height. */
+    if (window.ResizeObserver) {
+        const mapResizeObserver = new ResizeObserver(function () { refreshMap(); });
+        mapResizeObserver.observe(mapEl);
     }
+    window.addEventListener('orientationchange', function () { setTimeout(refreshMap, 250); });
 
     function activate(key, pan) {
         const loc = LOCATIONS[key];
         if (!loc || !map || !loc.marker) return;
         links.forEach(function (link) {
             link.classList.toggle('active', link.dataset.location === key);
+        });
+        document.querySelectorAll('.location-pill').forEach(function (pill) {
+            pill.classList.toggle('active', pill.dataset.location === key);
         });
         if (pan !== false) {
             /* Offset the center upward so the pin lands lower on screen,
@@ -740,22 +777,32 @@ document.addEventListener('visibilitychange', refreshAutoplay);
         });
     });
 
+    /* Mobile pills open the Casa on the map the same way desktop rows do. */
+    document.querySelectorAll('.location-pill').forEach(function (pill) {
+        pill.addEventListener('click', function () {
+            activate(this.dataset.location, true);
+            /* Also pre-select this Casa in the contact form */
+            const locationInput = document.getElementById('location');
+            if (locationInput) locationInput.value = this.dataset.location;
+        });
+    });
+
     /* Footer location links deep-link into #locations and select the Casa:
        on desktop this flies the map to the pin; on mobile it scrolls to
-       and flashes the matching card. Exposed globally for footer links. */
+       and flashes the matching pill. Exposed globally for footer links. */
     window.LCDH_showCasa = function (label) {
         if (!label) return;
         /* Desktop: the row click does everything (map fly + form select). */
         const row = links.filter(function (link) { return link.dataset.location === label; })[0];
         if (row) row.click();
-        /* Mobile: no map rows exist - scroll to the card and flash it. */
-        const card = document.querySelector('.location-card[data-location="' + label.replace(/"/g, '') + '"]');
-        if (card) {
+        /* Mobile: no map rows exist - scroll to the pill and flash it. */
+        const pill = document.querySelector('.location-pill[data-location="' + label.replace(/"/g, '') + '"]');
+        if (pill) {
             setTimeout(function () {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                card.classList.remove('location-card--flash');
-                void card.offsetWidth; /* restart the flash animation */
-                card.classList.add('location-card--flash');
+                pill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                pill.classList.remove('location-pill--flash');
+                void pill.offsetWidth; /* restart the flash animation */
+                pill.classList.add('location-pill--flash');
             }, 450);
         }
     };
