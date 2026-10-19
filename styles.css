@@ -1644,6 +1644,66 @@ body.experience-modal-open { overflow: hidden; }
     }
 }
 
+/* --- Mobile location cards as pill buttons above the map --- */
+@media (max-width: 1023.98px) {
+    .location-pills {
+        display: none;
+    }
+    .locations-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    .locations-grid .location-card:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+    .locations-grid .location-card {
+        background: var(--navy-deep);
+        border: 1px solid rgba(254, 231, 198, .5);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        margin: 0;
+        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .locations-grid .location-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 38px -18px rgba(46, 1, 9, .6);
+        border-color: rgba(167, 153, 110, .8);
+    }
+    .locations-grid .location-body {
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .locations-grid .loc-mobile-head {
+        align-items: center;
+        gap: 0;
+        margin-bottom: 0;
+        text-align: center;
+    }
+    .locations-grid .location-city {
+        display: none;
+    }
+    .locations-grid .location-title {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: .06em;
+        color: var(--gold-outline);
+        margin: 0;
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+    .locations-grid .location-copy,
+    .locations-grid .location-rule,
+    .locations-grid .location-address,
+    .locations-grid .location-hours,
+    .locations-grid .loc-mobile-actions {
+        display: none;
+    }
+}
+
 /* --- Mobile Casa pills --- */
 .location-pill {
     flex: 1 1 26%;
