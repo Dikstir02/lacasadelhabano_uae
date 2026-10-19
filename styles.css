@@ -1295,6 +1295,40 @@ body.experience-modal-open { overflow: hidden; }
     .event-slide img {
         height: 220px;
     }
+    /* Compact cards on phones — tighter image, smaller padding, much smaller text */
+    .event-slide img {
+        height: 160px;
+    }
+    .event-content {
+        padding: 16px;
+    }
+    .event-carousel {
+        margin-top: 24px;
+    }
+    .event-category {
+        font-size: 10px;
+        letter-spacing: .12em;
+    }
+    .event-title {
+        margin-top: 12px;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+    .event-copy {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    .event-date {
+        margin-top: 16px;
+        font-size: 10px;
+        letter-spacing: .12em;
+    }
+    .event-link {
+        margin-top: 16px;
+        font-size: 10px;
+        letter-spacing: .13em;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -1682,7 +1716,6 @@ body.experience-modal-open { overflow: hidden; }
     .pill-city {
         display: none;
     }
-}
 }
 
 /* Flash the pill reached via a footer deep-link (mobile) */
