@@ -5,7 +5,7 @@
 
 const EVENTS_KEY = 'lcdh_events_v1';
 const SESSION_KEY = 'lcdh_admin_ok';
-/* SHA-256 of the default password "habano-admin" */
+/* SHA-256 of the default admin password */
 const ADMIN_HASH = '03419798f23010136167aa9b8b74cbdde18099c101aa47f0fc3bb48f43e5e73c';
 
 /* Mirrors the three slides hardcoded in index.html */
